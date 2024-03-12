@@ -223,6 +223,11 @@
                 font-size: 14px;
             }
 
+            .btn.disabled{
+                opacity: 0.5;
+                cursor: unset;
+            }
+
             .desc{
                 color: #6f7882;
                 font-size: 14px;
@@ -359,10 +364,7 @@
                 font-weight: 700;
             }
 
-            .desc{
 
-
-            }
 
             .link{
                 color: #00b14f;
@@ -393,6 +395,13 @@
         margin-top: 60px;
         text-align: center;
     }
+}
+
+.desc{
+    .link{
+        color: #00b14f;
+    }
+
 }
 
 .banner{

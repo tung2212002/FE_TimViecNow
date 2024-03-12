@@ -1,12 +1,6 @@
-import { useState } from 'react';
 import classNames from 'classnames/bind';
-import PropTypes from 'prop-types';
-
-import { PiStarOfDavidDuotone } from 'react-icons/pi';
-import { HiOutlineChevronDown, HiCheck } from 'react-icons/hi';
 
 import styles from './JobSearchHeaderComponent.module.scss';
-import SelectionComponent from '../SelectionComponent/SelectionComponent';
 import SearchJobSearchHeaderComponent from './SearchJobSearchHeaderComponent/SearchJobSearchHeaderComponent';
 import SearchSalaryComponent from './SearchSalaryComponent/SearchSalaryComponent';
 import SearchExpComponent from './SearchExpComponent/SearchExpComponent';

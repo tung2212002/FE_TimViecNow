@@ -12,6 +12,27 @@
     top: 0;
     z-index: 5;
     }
+
+@media screen and (max-width: 1434px){
+    .wrapper{
+        position: relative;
+    }
+
+    .label{
+        margin: 13px 2px !important;
+        padding: 13px 5px !important;    }
+
+        .icon{
+            margin-left: -6px !important;
+            }
+}
+
+@media screen and (max-width: 1339px){
+    .navbar-mid, .navbar-right{
+        display: none !important;
+    }
+
+}
 .container{
     margin-left: auto;
     margin-right: auto;
@@ -167,6 +188,10 @@
         line-height: 22px;
         margin: 15px 6px;
         padding: 0 16px;
+
+        &:hover{
+            cursor: pointer;
+        }
          }
 
 .login-btn{

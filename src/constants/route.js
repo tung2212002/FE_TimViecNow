@@ -4,4 +4,5 @@ export default {
     MATCHING_JOBS: '/viec-lam-phu-hop',
     SUBPAGE: '/subpage',
     LOGIN: '/login',
+    REGISTER: '/register',
 };
