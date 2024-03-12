@@ -210,7 +210,7 @@ const HomePage = () => {
     ];
 
     useEffect(() => {
-        document.title = 'Homepage - FE_DATN';
+        document.title = 'TVNow - Trang chủ';
     }, []);
 
     return (

@@ -30,10 +30,17 @@ export const publicRoutes = [
         path: route.SUBPAGE,
         component: Subpage,
         isPrivate: false,
-        restricted: false,
+        restricted: true,
     },
     {
         path: route.LOGIN,
+        component: LoginPage,
+        isPrivate: false,
+        restricted: true,
+        layout: ContentOnlyLayout,
+    },
+    {
+        path: route.REGISTER,
         component: LoginPage,
         isPrivate: false,
         restricted: true,

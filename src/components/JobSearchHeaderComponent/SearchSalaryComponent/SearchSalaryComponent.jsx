@@ -130,9 +130,14 @@ const SearchSalaryComponent = () => {
                 });
             }
         };
-        startRef.current.addEventListener('paste', handlePaste);
+        if (startRef.current) {
+            startRef.current.addEventListener('paste', handlePaste);
+        }
+
         return () => {
-            startRef.current.removeEventListener('paste', handlePaste);
+            if (startRef.current) {
+                startRef.current.removeEventListener('paste', handlePaste);
+            }
         };
     }, [currentSearch.start]);
 
@@ -147,9 +152,13 @@ const SearchSalaryComponent = () => {
                 });
             }
         };
-        endRef.current.addEventListener('paste', handlePaste);
+        if (endRef.current) {
+            endRef.current.addEventListener('paste', handlePaste);
+        }
         return () => {
-            endRef.current.removeEventListener('paste', handlePaste);
+            if (endRef.current) {
+                endRef.current.removeEventListener('paste', handlePaste);
+            }
         };
     }, [currentSearch.end]);
 

@@ -6,10 +6,6 @@ import AppRouter from './routes';
 import GlobalStyles from './components/GlobalStyle/GlobalStyle';
 
 function App() {
-    useEffect(() => {
-        document.title = 'FE_DATN';
-    }, []);
-
     return (
         <Provider store={store}>
             <GlobalStyles>
