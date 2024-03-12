@@ -74,6 +74,8 @@ const images = {
     banner_r4: require('./images/banner_r4.jpg'),
     hotline_bg: require('./images/hotline_bg.png'),
     hotline: require('./images/hotline.png'),
+    tab: require('./images/tab.svg'),
+    tab_active: require('./images/tab_active.svg'),
 };
 
 const gifs = {
