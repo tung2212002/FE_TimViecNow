@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames/bind';
-import PropTypes from 'prop-types';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -8,7 +7,6 @@ import 'slick-carousel/slick/slick-theme.css';
 import { VscChevronRight, VscChevronLeft } from 'react-icons/vsc';
 
 import styles from './TopJobSlideComponent.module.scss';
-import { routes } from '../../routes/routes';
 import { icons } from '../../assets';
 
 const cx = classNames.bind(styles);
@@ -814,7 +812,7 @@ const TopJobSlideComponent = () => {
                     <div className={cx('title')}>
                         <h2 className={cx('title-text')}>Top ngành nghề nổi bật</h2>
                         <p>
-                            Bạn muốn tìm việc làm mới? Xem danh sách việc làm <p>&nbsp;</p>
+                            Bạn muốn tìm việc làm mới? Xem danh sách việc làm <span>&nbsp;</span>
                             <a href={'/'} className={cx('link')} target="_blank" rel="noreferrer">
                                 tại đây
                             </a>

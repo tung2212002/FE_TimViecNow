@@ -2,8 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import classNames from 'classnames/bind';
 
 import styles from './HomePage.module.scss';
-import { useSelector } from 'react-redux';
-import { selectToken, selectUser } from '../../redux/features/auth/authSlide';
 import SectionHeaderComponent from '../../components/SectionHeaderComponent/SectionHeaderComponent';
 import SectionFeatureJobComponent from '../../components/SectionFeatureJobComponent/SectionFeatureJobComponent';
 import TopCompanySlideComponent from '../../components/TopCompanySlideComponent/TopCompanySlideComponent';
@@ -17,13 +15,6 @@ const HomePage = () => {
 
     const handleScrollToDashBoard = () => {
         dashBoardRef.current.scrollIntoView({ behavior: 'smooth' });
-    };
-
-    const user = useSelector(selectUser);
-    const token = useSelector(selectToken);
-    const handleCheckRedux = () => {
-        console.log('user:', user);
-        console.log('token:', token);
     };
 
     const companies = [
@@ -221,7 +212,6 @@ const HomePage = () => {
                 <TopCompanySlideComponent companies={companies} number={3} autoplay={true} />
                 <DashBoardSectionComponent ref={dashBoardRef} />
                 <TopJobSlideComponent />
-                <button onClick={handleCheckRedux}>Check Redux</button>
             </div>
         </div>
     );

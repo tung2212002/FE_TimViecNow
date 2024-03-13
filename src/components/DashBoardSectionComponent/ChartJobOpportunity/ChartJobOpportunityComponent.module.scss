@@ -1,51 +1,46 @@
-
-.wrapper{
+.wrapper {
     display: flex;
     flex-direction: column;
     width: 100%;
 }
 
-
-.container{
+.container {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-left: auto;
     margin-right: auto;
     height: 100%;
-
 }
-.canvas{
+.canvas {
     display: block;
     // width: 450px!important;
     // height: 96px!important;
 }
 
-.footer{
+.footer {
     margin-top: 20px;
     min-height: 52px;
 }
 
-.item{
+.item {
     align-items: center;
     display: flex;
     float: left;
     margin-bottom: 10px;
     width: 33.33%;
-
 }
 
-.color{
+.color {
     background: #00b14f;
     border-radius: 2px;
     height: 4px;
     margin-right: 8px;
     width: 12px;
-
 }
 
-.text{
-    color: hsla(0,0%,100%,.7);
+.text {
+    color: hsla(0, 0%, 100%, 0.7);
     display: block;
 
     font-size: 12px;
@@ -56,5 +51,4 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     width: 80%;
-
 }

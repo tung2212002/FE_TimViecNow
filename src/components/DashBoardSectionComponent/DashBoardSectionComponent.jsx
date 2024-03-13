@@ -1,8 +1,7 @@
-import { forwardRef, useEffect, useState } from 'react';
+import { forwardRef, useState } from 'react';
 import classNames from 'classnames/bind';
 import TippyText from '@tippyjs/react';
 import styles from './DashBoardSectionComponent.module.scss';
-import PropTypes from 'prop-types';
 
 import { HiCheck, HiOutlineChevronDown, HiTrendingUp } from 'react-icons/hi';
 
@@ -15,7 +14,6 @@ import SelectionComponent from '../SelectionComponent/SelectionComponent';
 const cx = classNames.bind(styles);
 
 const DashBoardSectionComponent = (props, ref) => {
-    console.log('DashBoardSectionComponent', ref);
     const fakeData = {
         quantity_job_recruitment: 40396,
         quantity_job_recruitment_yesterday: 38069,
@@ -37,12 +35,6 @@ const DashBoardSectionComponent = (props, ref) => {
     const [newestJob, setNewestJob] = useState(fakeJob.slice(0, 3));
     const handleToLocaleString = (number) => {
         return number.toLocaleString('vi-VN', { minimumFractionDigits: 0 });
-    };
-
-    const handleAddNewJob = () => {
-        // add a new job to newestJob
-        const fakeNewJob = fakeJob[3];
-        setNewestJob([fakeNewJob, ...newestJob]);
     };
 
     const handleSetJob = (id) => {

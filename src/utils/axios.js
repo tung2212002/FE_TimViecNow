@@ -43,7 +43,7 @@ const instance = (config = {}, auth = false) => {
                         )
                         .then((res) => {
                             if (res.status === 200) {
-                                const token = res.data.access_token;
+                                const token = res.data.data.access_token;
                                 updateLocalAccessToken(token);
                                 originalRequest.headers.Authorization = `Bearer ${token}`;
                                 return axios(originalRequest);

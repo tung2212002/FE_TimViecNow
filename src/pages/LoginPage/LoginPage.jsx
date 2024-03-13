@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import classNames from 'classnames/bind';
 import { useDispatch } from 'react-redux';
 
@@ -14,9 +14,12 @@ import route from '../../constants/route';
 const cx = classNames.bind(styles);
 
 const LoginPage = () => {
-    const checkPath = window.location.pathname === route.REGISTER;
+    console.log(window.location.pathname);
+    console.log(route.REGISTER);
+    console.log(window.location.pathname === route.REGISTER);
     const dispatch = useDispatch();
-    const [isLogin, setIsLogin] = useState(!checkPath);
+    const isLogin = !(window.location.pathname === route.REGISTER);
+
     const [message, setMessage] = useState('');
     const [showPassword, setShowPassword] = useState({
         showPassword: false,
@@ -68,9 +71,11 @@ const LoginPage = () => {
         loginService(data)
             .then((res) => {
                 if (res.status === 200) {
-                    dispatch(login(res.data));
-                } else if (res.status === 401) {
+                    dispatch(login(res.data.data));
+                } else if (res.status === 400) {
                     setMessage('Email hoặc mật khẩu không hợp lệ');
+                } else if (res.status === 401) {
+                    setMessage('Mật khẩu không chính xác');
                 } else if (res.status === 404) {
                     setMessage('Tài khoản không tồn tại');
                 }
@@ -119,7 +124,7 @@ const LoginPage = () => {
         registerService(data)
             .then((res) => {
                 if (res.status === 201) {
-                    dispatch(login(res.data));
+                    dispatch(login(res.data.data));
                 } else if (res.status === 409) {
                     setMessage('Email đã tồn tại');
                 } else if (res.status === 400) {
@@ -131,10 +136,6 @@ const LoginPage = () => {
                 console.log(err);
             });
     };
-
-    useEffect(() => {
-        document.title = checkPath ? 'Đăng ký' : 'Đăng nhập';
-    }, [checkPath]);
 
     return (
         <div className={cx('wrapper')}>

@@ -13,7 +13,7 @@ const PublicRoute = ({ component: Component, layout: Layout, restricted, ...rest
         <Navigate to={route.HOMEPAGE} replace />
     ) : (
         <Layout>
-            <Component />
+            <Component {...rest} />
         </Layout>
     );
 };

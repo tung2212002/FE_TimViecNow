@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-import { testLogout } from '../../../services/authService';
+import { logoutService } from '../../../services/authService';
 import { setLocalToken, removeLocalToken, removeLocalUser, updateLocalToken, updateLocalUserInfo, setLocalUser } from '../../../utils/authLocalStorage';
 
 const initialState = {
@@ -13,8 +13,6 @@ const initialState = {
 
 export const login = createAsyncThunk('auth/login', async (data) => {
     const { user, access_token, refresh_token } = data;
-    console.log('user', user);
-    console.log('access_token', access_token);
     if (!user) {
         throw new Error('User not found');
     }
@@ -27,7 +25,7 @@ export const logout = createAsyncThunk('auth/logout', async () => {
     try {
         removeLocalToken();
         removeLocalUser();
-        await testLogout();
+        await logoutService();
     } catch (error) {
         console.log('Error:', error);
         return null;

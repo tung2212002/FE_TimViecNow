@@ -19,13 +19,3 @@ export const registerService = async (body) => {
   const response = await request.apiAttach.post('/auth/register', body);
   return response;
 };
-
-export const testLogin = async (body) => {
-  const response = await request.api.post('/auth/test_login', body);
-  return response;
-};
-
-export const testLogout = async (body) => {
-  const response = await request.apiAuth.post('/auth/test_logout', body);
-  return response;
-};

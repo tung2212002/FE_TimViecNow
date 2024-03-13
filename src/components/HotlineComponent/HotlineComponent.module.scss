@@ -1,119 +1,94 @@
-.wrapper{
+.wrapper {
     background-size: cover;
     min-height: 480px;
     padding-bottom: 64.5px;
     padding-top: 50px;
 }
 
-.wrapper *{
+.wrapper * {
     box-sizing: border-box;
 }
 
-@media screen and (min-width: 768px){
-
-    .candidate{
+@media screen and (min-width: 768px) {
+    .candidate {
         display: flex;
         flex-direction: row !important;
     }
 
-    .employer{
+    .employer {
         display: flex;
     }
-    .col{
+    .col {
         width: calc(100% / 3) !important;
         float: left !important;
     }
 }
 
-@media (min-width: 768px) and (max-width: 991px)
-{.container {
-    width: 750px !important;
-}
+@media (min-width: 768px) and (max-width: 991px) {
+    .container {
+        width: 750px !important;
+    }
 
-.employer{
-    flex-direction: row;
-    flex-wrap: wrap;
-}
-.service{
-    width: 100% !important;
-    flex-direction: row !important;
-    display: flex !important;
-    .service-email, .service-phone{
+    .employer {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .service {
+        width: 100% !important;
+        flex-direction: row !important;
+        display: flex !important;
+        .service-email,
+        .service-phone {
+            width: 50% !important;
+        }
+    }
+    .hotline-col {
         width: 50% !important;
     }
 }
-.hotline-col{
-    width: 50% !important;
-}
-}
 
-
-@media (min-width: 992px)
-{.container {
-    width: 970px;
-}}
-
-
-
-@media screen and (min-width: 768px ) and (max-width: 1200px) {
-
-    .tab-container{
-        // display: block !important;
+@media (min-width: 992px) {
+    .container {
+        width: 970px;
     }
-    .service{
-        // flex-direction: row !important;
-        // justify-content: space-between !important;
-        // margin-bottom: 40px;
-        // width: 100% !important;
+}
 
-        // &>div{
-        //     width: 50% !important;
-        // }
-        }
-
-    .tab-container .text-content{
-    
+@media screen and (min-width: 768px) and (max-width: 1200px) {
+    .tab-container .text-content {
         width: 100% !important;
     }
 
-    .text-title{
+    .text-title {
         margin-bottom: 24px !important;
         padding: 0;
         text-align: center !important;
         width: 100% !important;
     }
 
-    .box-phone-number{
+    .box-phone-number {
         margin: 0 auto !important;
     }
-    
-    .box-email{
-        justify-content: center !important;
-    }
 
-    .hotline-col{
-        // width: 50% !important;
-        // float: left !important;
+    .box-email {
+        justify-content: center !important;
     }
 }
 
 @media screen and (min-width: 1200px) {
-    
-    .tab-container .text-content{
-    
+    .tab-container .text-content {
         width: 45%;
     }
 
-    .tab-container img{
+    .tab-container img {
         display: flex;
         height: auto;
         margin: 0 auto;
-        max-width: 500px;   
-     }
+        max-width: 500px;
+    }
 }
 
-@media screen and (max-width: 767px){
-    .tab-item{
+@media screen and (max-width: 767px) {
+    .tab-item {
         font-size: 12px !important;
         font-weight: 500 !important;
         height: 32px !important;
@@ -121,7 +96,7 @@
         width: 174.5px !important;
     }
 
-    .tab-item a{
+    .tab-item a {
         background-size: 175px 32px;
         height: 32px;
         padding-left: 12px;
@@ -131,15 +106,15 @@
         text-overflow: ellipsis;
     }
 
-    .text-title{
+    .text-title {
         font-size: 16px !important;
-    font-weight: 600 !important;
-    line-height: 25px !important;
-    padding: 0 !important;
-    text-align: center !important;
+        font-weight: 600 !important;
+        line-height: 25px !important;
+        padding: 0 !important;
+        text-align: center !important;
     }
 
-    .box-phone-number{
+    .box-phone-number {
         align-items: center !important;
         display: flex !important;
         height: 50px !important;
@@ -149,31 +124,31 @@
         width: 100%;
     }
 
-    .phone-number, .phone-text{
+    .phone-number,
+    .phone-text {
         font-size: 14px !important;
         font-weight: 600 !important;
         line-height: 22px !important;
         padding: 14px 15px 14px 0 !important;
     }
 
-    .phone-text{
+    .phone-text {
         padding: 0 !important;
     }
 
-    .phone-link{
+    .phone-link {
         height: 38px !important;
         margin: 8px 0 !important;
         padding: 8px 15px !important;
         width: 120px !important;
     }
 
-    .box-email{
+    .box-email {
         justify-content: center !important;
     }
 }
 
-
-.tab-item{
+.tab-item {
     font-size: 12px;
     font-weight: 500;
     height: 32px;
@@ -188,11 +163,7 @@
     margin-left: auto;
 }
 
-.content{
-
-}
-
-.title{
+.title {
     color: #fff;
     font-size: 24px;
     font-weight: 700;
@@ -200,15 +171,15 @@
     margin: 0 0 10px 0;
 }
 
-.tab-list{
+.tab-list {
     display: flex;
 }
 
-.tab-item:not(:first-child) a{
+.tab-item:not(:first-child) a {
     left: -32px;
 }
 
-.tab-item{
+.tab-item {
     border-radius: 10px 3px 0 0;
     font-size: 16px;
     font-weight: 700;
@@ -218,7 +189,7 @@
     width: 300px;
 }
 
-.tab-link{
+.tab-link {
     position: relative;
     display: block;
     padding: 10px 15px;
@@ -234,119 +205,111 @@
     width: 315px;
 }
 
-.active .tab-link{
+.active .tab-link {
     color: #00b14f !important;
     background-image: url(../../assets//images/tab_active.svg);
     z-index: 2;
 }
 
-.tab-content{
+.tab-content {
     border-radius: 0 20px 20px 20px;
-
 }
 
-
-.tab-panel{
+.tab-panel {
     display: none;
     padding: 20px 0;
-    background: linear-gradient(90deg,#fff -9.59%,#fff 37.78%,#deffea);
+    background: linear-gradient(90deg, #fff -9.59%, #fff 37.78%, #deffea);
     border-radius: 0 20px 20px 20px;
     padding: 20px 40px;
 }
 
-
-
-.tab-panel.active{
+.tab-panel.active {
     display: block;
 }
 
-.employer{
-    // display: block;
-}
-
-.tab-container{
+.tab-container {
     margin-right: -15px;
     margin-left: -15px;
 
-    img{
+    img {
         height: 275px;
         margin-bottom: -20px;
         margin-left: 50px;
     }
 
-    .text-title{
+    .text-title {
         font-size: 28px;
         font-weight: 700;
         line-height: 36px;
         margin-bottom: 16px;
         padding: 2px 0 0;
 
-        .label{
+        .label {
             color: #212f3f;
         }
 
-        .highlight{
+        .highlight {
             color: #00b14f;
         }
     }
 
-    .box-phone-number{
+    .box-phone-number {
         align-items: center;
-    background: linear-gradient(90deg,#047e3c,#13c964);
-    border-radius: 32px;
-    box-shadow: 0 6px 20px rgba(0,0,0,.06);
-    display: flex;
-    height: 64px;
-    margin-top: 28px;
-    width: 400px;
-    justify-content: space-around;
-
-    .phone-number{
-        color: #f8fefa;
-        font-size: 20px;
-        font-weight: 600;
-        padding: 0 40px 0 24px;
-    }
-
-    .phone-link{
-        align-items: center;
-        background: #e9eaec;
-        border-radius: 24px;
+        background: linear-gradient(90deg, #047e3c, #13c964);
+        border-radius: 32px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
         display: flex;
-        height: 48px;
-        justify-items: center;
-        padding: 10px 28px 10px 29px;
-        transition: background .2s ease-out;
-        width: 167px;
+        height: 64px;
+        margin-top: 28px;
+        width: 400px;
+        justify-content: space-around;
+
+        .phone-number {
+            color: #f8fefa;
+            font-size: 20px;
+            font-weight: 600;
+            padding: 0 40px 0 24px;
+        }
+
+        .phone-link {
+            align-items: center;
+            background: #e9eaec;
+            border-radius: 24px;
+            display: flex;
+            height: 48px;
+            justify-items: center;
+            padding: 10px 28px 10px 29px;
+            transition: background 0.2s ease-out;
+            width: 167px;
+        }
+
+        .phone-link:hover {
+            background: #ffffff;
+        }
+
+        .phone-icon {
+            font-size: 16px;
+            align-items: center;
+            color: #00b14f;
+            display: flex;
+            text-align: center;
+        }
+
+        .phone-text {
+            color: #00b14f;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 24px;
+            padding-left: 14px;
+        }
     }
 
-    .phone-link:hover{
-        background: #ffffff;
-    }
-
-    .phone-icon{
-        font-size: 16px;
-        align-items: center;
-    color: #00b14f;
-    display: flex;
-    text-align: center;
-    }
-
-    .phone-text{
-        color: #00b14f;
-        font-size: 16px;
-        font-weight: 600;
-        line-height: 24px;
-        padding-left: 14px;
-    }
-    }
-
-    .box-email{
+    .box-email {
         align-items: center;
         display: flex;
         margin-top: 15px;
 
-        .email{
+        .email {
             color: #4d5965;
             font-size: 16px;
             font-style: normal;
@@ -355,37 +318,35 @@
             margin-right: 17px;
         }
 
-        .email-address{
+        .email-address {
             align-items: center;
             display: flex;
         }
 
-        .email-icon{
-            background: rgba(0,177,79,.07);
+        .email-icon {
+            background: rgba(0, 177, 79, 0.07);
             border-radius: 16px;
             height: 28px;
             margin-right: 8px;
             padding: 6px;
             width: 28px;
             color: #00b14f;
-
         }
 
-        .email-link{
+        .email-link {
             color: #00b14f;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 24px;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 24px;
         }
     }
 
-
-    .col{
+    .col {
         // display: flex;
         // flex-direction: column;
 
-        .title{
+        .title {
             color: #4d5965;
             font-size: 14px;
             font-weight: 700;
@@ -395,7 +356,7 @@
         }
     }
 
-    .service-email{
+    .service-email {
         display: inline-block;
-            }
+    }
 }

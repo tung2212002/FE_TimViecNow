@@ -1,14 +1,13 @@
-.wrapper{
-
+.wrapper {
     margin: 8px 0;
     min-width: 368px;
 
-    &:hover .control{
+    &:hover .control {
         display: block;
     }
 }
 
-.link{
+.link {
     align-items: center;
     color: #212f3f;
     display: flex;
@@ -16,56 +15,53 @@
     font-weight: 500;
     line-height: 20px;
     padding: 14px 8px;
-     background: #f4f5f5;
-     border-radius: 6px;
+    background: #f4f5f5;
+    border-radius: 6px;
 
-
-
-    &:hover{
-        background: hsla(0, 2%, 91%, 0.722)!important;
+    &:hover {
+        background: hsla(0, 2%, 91%, 0.722) !important;
         cursor: pointer;
         // border-radius: 6px;
     }
 
-    &:hover .text{
+    &:hover .text {
         color: #00b14f !important;
     }
-
 }
 
-.icon{
+.icon {
     color: #00b14f !important;
     font-size: 20px;
     padding-right: 8px;
     width: 30px;
 }
 
-.label{
+.label {
     align-items: center;
     color: #212f3f;
     display: flex;
     font-size: 14px;
     font-weight: 500;
     line-height: 20px;
-    .text{
+    .text {
         font-family: 'Roboto', sans-serif;
         font-size: 14px;
         font-weight: 500;
     }
 }
 
-.control{
-    display: none   ;
+.control {
+    display: none;
     position: absolute;
     right: 10px;
     margin-top: 4px;
 
-    .icon{
+    .icon {
         font-size: 16px;
     }
 }
 
-.badge{
+.badge {
     border-radius: 3px;
     color: #fff;
     display: inline-block;
@@ -76,32 +72,30 @@
     text-transform: uppercase;
 }
 
-.badge-1{
+.badge-1 {
     background: #dc2f2f;
 }
 
-.badge-2{
+.badge-2 {
     background: #f70;
 }
 
-.badge-3{
+.badge-3 {
     background: #00b14f;
 }
 
-.icon-lg{
+.icon-lg {
     font-size: 16px;
 }
 
-.add-hr{
+.add-hr {
     margin-bottom: 10px;
 }
 
-.add-hr::after{
+.add-hr::after {
     content: '';
     display: block;
     height: 1px;
-    background: #e9eaec;    
-    margin-top: 10px; 
-
-
+    background: #e9eaec;
+    margin-top: 10px;
 }

@@ -1,76 +1,68 @@
-@import "../../styles/size";
+@import '../../styles/size';
 
-.wrapper{
+.wrapper {
     background: #f2f2f2;
     box-sizing: border-box;
     padding: 8px 16px;
     position: relative;
 }
 
-.wrapper *{
+.wrapper * {
     box-sizing: border-box;
 }
-@media screen and (min-width: 1340px){
-    .wrapper{
+@media screen and (min-width: 1340px) {
+    .wrapper {
         display: none;
     }
-    
 }
 
-@media screen and (max-width: 1339px){
-    .wrapper{
+@media screen and (max-width: 1339px) {
+    .wrapper {
         display: block !important;
     }
 
-    .navbar-mobile{
+    .navbar-mobile {
         display: flex !important;
     }
-
 }
 
-.container{
+.container {
     max-height: 0;
-    transition: all .3s ease;
+    transition: all 0.3s ease;
     z-index: 0;
     overflow: hidden;
-
-
 }
 
-.down .container{
+.down .container {
     max-height: 150vh;
-
 }
 
-.navbar-mobile{
+.navbar-mobile {
     position: absolute;
     right: 10px;
     top: -60px;
     z-index: 99;
     box-sizing: content-box;
-    color: #00b14f!important;
+    color: #00b14f !important;
     border-radius: 50%;
-    background: rgba(33,47,63,.102)!important;
+    background: rgba(33, 47, 63, 0.102) !important;
     display: none;
     align-items: center;
     justify-content: center;
     width: 40px;
     height: 40px;
 
-    .icon-menu{
+    .icon-menu {
         display: block;
         font-size: 28px;
     }
 
-    .bars{
+    .bars {
         font-size: 20px;
-    }
-
-    .icon.active{
     }
 }
 
-.title{
+.title {
     color: #4d5965;
     font-size: 14px;
     font-weight: 400;
@@ -79,15 +71,14 @@
     margin-top: 8px;
 }
 
-.nav-item{
+.nav-item {
     margin-bottom: 8px;
     position: relative;
     // height: 48px;
     min-height: 48px;
-
 }
 
-.content{
+.content {
     background: #fff;
     border-radius: 6px;
     padding: 14px 16px;
@@ -96,41 +87,40 @@
     display: flex;
 }
 
-.container-nav{
+.container-nav {
     flex-grow: 1;
     height: 20px;
 }
 
-.link{
+.link {
     color: #00b14f;
     font-size: 14px;
     font-weight: 600;
     line-height: 20px;
 }
 
-.btn-expand{
+.btn-expand {
     font-size: 15px;
-    transition: all .3s ease;
+    transition: all 0.3s ease;
 }
 
-.btn-expand.active{
+.btn-expand.active {
     transform: rotate(180deg);
 }
 
-    .icon{
-        width: 28px;
-        height: 28px;
-        position: absolute;
-        transform: translate(10px, -10px);
-    }
+.icon {
+    width: 28px;
+    height: 28px;
+    position: absolute;
+    transform: translate(10px, -10px);
+}
 
-
-.show .menu{
+.show .menu {
     opacity: 1 !important;
     max-height: 88vh !important;
 }
 
-.menu{
+.menu {
     opacity: 0;
     display: block;
     z-index: 2;
@@ -140,56 +130,53 @@
     max-height: 0;
     overflow: hidden;
     transition: opacity 0.3s ease, max-height 0.6s ease;
-    box-shadow: 1px 2px 20px rgba(0,0,0,.06);
-
+    box-shadow: 1px 2px 20px rgba(0, 0, 0, 0.06);
 }
 
-
-.account-content{
+.account-content {
     margin-bottom: 10px;
-    .account-link{
+    .account-link {
         align-items: center;
         display: flex;
     }
-    .account{
+    .account {
         height: auto;
         // margin-bottom: 10px;
     }
 
-    .avatar{
+    .avatar {
         border-radius: 50%;
         height: 32px;
         margin-right: 20px;
         width: 32px;
     }
 
-    .info{
+    .info {
         display: flex;
         flex-direction: column;
         justify-content: center;
     }
 
-    .name{
+    .name {
         color: #00b14f;
         font-size: 14px;
         font-weight: 600;
         line-height: 20px;
     }
 
-    .detail{
+    .detail {
         color: #6f7882;
         font-size: 12px;
         font-weight: 400;
         line-height: 20px;
     }
 
-    .code
-    {
+    .code {
         color: #212f3f;
         font-weight: 500;
     }
 
-    .email{
+    .email {
         color: #6f7882;
         font-size: 12px;
         font-weight: 400;

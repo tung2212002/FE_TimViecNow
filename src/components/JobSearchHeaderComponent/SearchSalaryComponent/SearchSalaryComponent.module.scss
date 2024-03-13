@@ -1,43 +1,39 @@
-.wrapper{
+.wrapper {
     width: 100%;
 }
 
-@media screen and (min-width: 1200px)
-{.wrapper {
-    width: 233px;
-    height: 56px;
+@media screen and (min-width: 1200px) {
+    .wrapper {
+        width: 233px;
+        height: 56px;
+    }
 }
 
-
-
-}
-
-
-.header-select{
+.header-select {
     padding: 16px 19px 16px 2px;
     align-items: center;
     background: #fff 0 0 no-repeat padding-box;
     border: none;
-    border-radius: 6px!important;
-    box-shadow: 0 3px 20px rgba(0,0,0,.06);
+    border-radius: 6px !important;
+    box-shadow: 0 3px 20px rgba(0, 0, 0, 0.06);
     width: 100%;
 
-    .container-select{
+    .container-select {
         display: flex;
         align-items: center;
         justify-content: flex-start;
         width: 100%;
     }
 
-    .icon-dollar{
+    .icon-dollar {
         height: 24px;
         width: 24px;
         color: #6f7882;
         font-size: 24px;
-        margin:  0 10px;
-        }
+        margin: 0 10px;
+    }
 
-    .result{
+    .result {
         color: #172530;
         font-size: 14px;
         font-weight: 500;
@@ -47,19 +43,13 @@
         text-overflow: ellipsis;
         white-space: nowrap;
     }
-
 }
 
-.container-select{
-
-}
-
-.ul-select{
+.ul-select {
     overflow-y: auto;
-    max-height: 200px!important;
-    
+    max-height: 200px !important;
 
-    .item{
+    .item {
         color: #172530;
         font-size: 14px;
         font-weight: 500;
@@ -67,15 +57,13 @@
         padding: 12px 12px 12px 16px;
         position: relative;
         cursor: pointer;
-
     }
-    
-    .item.active{
+
+    .item.active {
         color: #00b14f;
-
     }
-    
-    .text{
+
+    .text {
         font-size: 14px;
         font-weight: 500;
         color: #172530;
@@ -84,7 +72,7 @@
         white-space: nowrap;
     }
 
-    .icon{
+    .icon {
         font-size: 20px;
         color: #00b14f;
         position: absolute;
@@ -100,27 +88,27 @@
     }
 }
 
-.icon-chevron{
+.icon-chevron {
     color: #6f7882;
     box-sizing: content-box;
-        font-size: 22px;
-        // padding-right: 10px;
-        padding-left: 18px;
-        // padding: 0 ;
-        margin-right: 20px;
+    font-size: 22px;
+    // padding-right: 10px;
+    padding-left: 18px;
+    // padding: 0 ;
+    margin-right: 20px;
 }
 
-.header-body{
+.header-body {
     border-bottom: 1px solid #f2f4f5;
     padding: 16px;
 
-    .input-filter{
+    .input-filter {
         align-items: center;
         display: flex;
         justify-content: space-between;
         margin-bottom: 10px;
 
-        .input{
+        .input {
             border: 1px solid #e9eaec;
             border-radius: 6px;
             font-weight: 600;
@@ -130,44 +118,43 @@
             font-size: 14px;
         }
 
-        .input::placeholder{
+        .input::placeholder {
             color: #6f7882;
             font-size: 14px;
             font-weight: 400;
             line-height: 20px;
         }
 
-        .input:focus{
-            border: 1px solid #d83324!important;
+        .input:focus {
+            border: 1px solid #d83324 !important;
         }
 
-        .line{
+        .line {
             color: #263a4d;
             font-size: 14px;
             font-style: normal;
             font-weight: 400;
-            letter-spacing: .14px;
+            letter-spacing: 0.14px;
             line-height: 22px;
         }
-
     }
 
-    .button-filter{
+    .button-filter {
         display: inline-block;
-    margin-bottom: 0;
-    font-weight: 400;
-    text-align: center;
-    cursor: pointer;
-    border: 1px solid transparent;
-    font-size: 14px;
-    font-weight: 600;
-    height: 32px;
-    padding: 0;
-    width: 100%;
-    border-radius: 4px;
+        margin-bottom: 0;
+        font-weight: 400;
+        text-align: center;
+        cursor: pointer;
+        border: 1px solid transparent;
+        font-size: 14px;
+        font-weight: 600;
+        height: 32px;
+        padding: 0;
+        width: 100%;
+        border-radius: 4px;
     }
 
-    .button-filter.active{
+    .button-filter.active {
         background-color: #00b14f;
         color: #fff;
     }

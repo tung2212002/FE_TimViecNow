@@ -1,36 +1,35 @@
-
-.wrapper{
+.wrapper {
     width: 100%;
     height: 100%;
     padding: 24px 0;
-}    
+}
 
-.wrapper *{
+.wrapper * {
     box-sizing: border-box;
 }
 
+@media screen and (min-width: 768px) {
+    .img {
+        height: 604px !important;
+    }
+}
+@media screen and (min-width: 1200px) {
+    .img {
+        height: 660px !important;
+    }
+}
 
-@media screen and (min-width: 768px)
-{.img {
-    height: 604px !important;
-}}
-@media screen and (min-width: 1200px)
-{.img {
-    height: 660px !important;
-}}
+.container > div > ul {
+    bottom: 20px !important;
 
-.container>div>ul{
-    bottom: 20px!important;
-
-    button::before{
+    button::before {
         font-size: 12px;
     }
 }
 
-.content{
+.content {
     display: block;
     padding: 0 10px;
-    
 }
 
 .img {

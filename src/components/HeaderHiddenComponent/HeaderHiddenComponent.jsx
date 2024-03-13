@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { FaBell, FaComments, FaChevronDown, FaRegHeart, FaLaptopCode, FaBars } from 'react-icons/fa';
+import { FaChevronDown, FaRegHeart, FaLaptopCode, FaBars } from 'react-icons/fa';
 import {
     FaMagnifyingGlass,
     FaListCheck,
@@ -25,7 +25,7 @@ import styles from './HeaderHiddenComponent.module.scss';
 import { gifs, images } from '../../assets';
 import { selectAuth } from '../../redux/features/auth/authSlide';
 import { logoutService } from '../../services/authService';
-import { login, logout } from '../../redux/features/auth/authSlide';
+import { logout } from '../../redux/features/auth/authSlide';
 import NavBarMenuComponent from '../NavBarMenuComponent/NavBarMenuComponent';
 import NavBarMenuItemComponent from '../NavBarMenuItemComponent/NavBarMenuItemComponent';
 import route from '../../constants/route';
@@ -315,7 +315,7 @@ const HeaderHiddenComponent = () => {
                                         alt="avatar"
                                     />
                                     <div className={cx('info')}>
-                                        <a className={cx('name')}>{auth.user.full_name}</a>
+                                        <span className={cx('name')}>{auth.user.full_name}</span>
                                         <span className={cx('detail')}>
                                             Mã ứng viên: #<span className={cx('code')}>{auth.user.id}</span>
                                         </span>
