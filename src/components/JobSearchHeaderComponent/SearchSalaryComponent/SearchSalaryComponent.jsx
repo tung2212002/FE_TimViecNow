@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames/bind';
-import PropTypes from 'prop-types';
 
 import { PiCurrencyCircleDollar } from 'react-icons/pi';
 import { HiCheck, HiOutlineChevronDown } from 'react-icons/hi';
@@ -105,10 +104,6 @@ const SearchSalaryComponent = () => {
             start: filterSalary.find((item) => item.id === id).start,
             end: filterSalary.find((item) => item.id === id).end,
         });
-    };
-
-    const handleFilter = () => {
-        // redirect to search page
     };
 
     useEffect(() => {

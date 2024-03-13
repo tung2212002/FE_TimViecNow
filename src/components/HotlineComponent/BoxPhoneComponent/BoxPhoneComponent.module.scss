@@ -1,4 +1,4 @@
-.wrapper{
+.wrapper {
     margin-bottom: 12px;
     align-items: center;
     cursor: pointer;
@@ -9,32 +9,27 @@
     font-weight: 600;
     line-height: 20px;
 
-    &:hover{
+    &:hover {
         background: #e5f7ed;
         border-radius: 100px;
-
     }
 
-    &:hover .icon-phone{
+    &:hover .icon-phone {
         background: #00b14f;
-        color: #fff;    }
+        color: #fff;
+    }
 
-    &:hover .full-name{
+    &:hover .full-name {
         color: #00b14f;
     }
 }
 
-.wrapper *{
+.wrapper * {
     box-sizing: border-box;
 }
 
-.phone-number{
-
-
-}
-
-.icon-phone{
-    background: rgba(0,177,79,.07);
+.icon-phone {
+    background: rgba(0, 177, 79, 0.07);
     border-radius: 16px;
     color: #4fc986;
     height: 28px;
@@ -43,12 +38,12 @@
     width: 28px;
 }
 
-.outer-dot{
+.outer-dot {
     align-items: center;
     display: flex;
 }
 
-.dot{
+.dot {
     background: #bcc1c5;
     border-radius: 100%;
     color: #bcc1c5;
@@ -58,7 +53,7 @@
     width: 2px;
 }
 
-.full-name{
+.full-name {
     color: #212f3f;
     font-weight: 600;
 }

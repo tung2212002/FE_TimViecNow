@@ -1,53 +1,53 @@
-.wrapper{
+.wrapper {
     display: flex;
     align-items: center;
     background-color: #fff;
 }
 
-.wrapper *{
+.wrapper * {
     box-sizing: border-box;
 }
 
 @media screen and (max-width: 1400px) {
-    .bg-right-arrow{
-    height: 547.77px !important;
-    width: 190px !important;
+    .bg-right-arrow {
+        height: 547.77px !important;
+        width: 190px !important;
     }
 }
 
 @media screen and (max-width: 1200px) {
-    .wrapper{
+    .wrapper {
         flex-direction: column-reverse !important;
     }
 
-    .banner{
+    .banner {
         background-image: url(../../assets/images/auth_bg_tb.png) !important;
         height: 250px !important;
         width: 100% !important;
     }
 
-    .banner-abs{
+    .banner-abs {
         display: none !important;
     }
 
-    .bg-right-arrow{
+    .bg-right-arrow {
         display: none !important;
     }
 }
 
-@media  screen and (max-width: 768px) {
-    .banner{
+@media screen and (max-width: 768px) {
+    .banner {
         height: 180px !important    ;
     }
 
-    .auth-form{
+    .auth-form {
         width: 100% !important;
         padding: 0 !important;
     }
 }
 
 @media screen and (max-width: 576px) {
-    .banner{
+    .banner {
         background-image: url(../../assets/images/auth_bg_mb.png) !important;
         height: 160px !important;
         width: 100% !important;
@@ -55,15 +55,13 @@
 }
 
 @media screen and (min-width: 768px) {
-    .alert{
-
-            margin-left: 0!important;
-            margin-right: 0!important;
+    .alert {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
     }
-    
 }
 
-.auth-container{
+.auth-container {
     display: flex;
     flex: 1;
     flex-direction: column;
@@ -72,22 +70,22 @@
     padding: 60px 16px 20px;
     position: relative;
 
-    .auth-inner{
+    .auth-inner {
         display: flex;
         align-items: center;
         justify-content: center;
         flex: 1;
     }
 
-    .auth-form{
+    .auth-form {
         width: 600px;
         background-color: #fff;
     }
 
-    .header{
+    .header {
         width: 100%;
         padding-bottom: 24px;
-        .title{
+        .title {
             color: #00b14f;
             font-size: 20px;
             font-weight: 600;
@@ -97,7 +95,7 @@
             margin-top: 0;
         }
 
-        .desc{
+        .desc {
             color: #6c757d;
             font-size: 14px;
             font-weight: 400;
@@ -107,45 +105,36 @@
         }
     }
 
-    .body{
+    .body {
         color: #4d5965;
         font-size: 14px;
         font-style: normal;
         font-weight: 400;
         line-height: 20px;
 
-        .alert{
-
-                align-items: center;
-                background-color: rgba(255,69,58,.05);
-                color: #ff453a;
-                font-size: 14px;
-                padding: 10px 15px;
-                width: 100%;
-                display: none;
+        .alert {
+            align-items: center;
+            background-color: rgba(255, 69, 58, 0.05);
+            color: #ff453a;
+            font-size: 14px;
+            padding: 10px 15px;
+            width: 100%;
+            display: none;
         }
 
-        .alert.show{
+        .alert.show {
             display: flex !important;
         }
 
-
-        .form{
-
-        }
-
-        .form-group{
+        .form-group {
             margin-bottom: 24px;
         }
 
-        .form-group-email{
-        }
-
-        .form-group-password{
+        .form-group-password {
             margin-bottom: 20px;
         }
 
-        .input-wrapper{
+        .input-wrapper {
             border: 1px solid #eee;
             border-radius: 3px;
             align-items: center;
@@ -154,66 +143,55 @@
             position: relative;
             width: 100%;
             margin-top: 4px;
-
         }
 
-        .forgot-group-email{
+        .forgot-group-email {
             margin-bottom: 24px;
-
         }
 
-        .label{
+        .label {
             margin-bottom: 4px !important;
-
         }
 
-        .input{
+        .input {
             background: #fff 0 0 no-repeat padding-box;
             font-size: 14px;
             padding: 7px 12px;
             flex: 1;
         }
 
-        .icon{
-            
-        }
-
-        .icon-eye{
+        .icon-eye {
             font-size: 20px;
             margin: 9px 10px;
         }
 
-        .eye-slash{
+        .eye-slash {
             color: #00b14f;
             opacity: 0.4;
         }
 
-        .eye{
+        .eye {
             color: #00b14f;
-
         }
 
-        .icon.email, .icon.password{
+        .icon.email,
+        .icon.password {
             color: #00b14f;
             font-size: 19px;
             margin: 10px;
         }
 
-        .forgot-password{
+        .forgot-password {
             text-align: right;
-            .link{
+            .link {
                 color: #00b14f;
             }
         }
 
-        .btn{
-
-        }
-
-        .login{
+        .login {
             margin-top: 16px;
             margin-bottom: 16px;
-            .btn{
+            .btn {
                 height: 40px;
                 background: #00b14f;
                 color: #fff;
@@ -223,12 +201,12 @@
                 font-size: 14px;
             }
 
-            .btn.disabled{
+            .btn.disabled {
                 opacity: 0.5;
                 cursor: unset;
             }
 
-            .desc{
+            .desc {
                 color: #6f7882;
                 font-size: 14px;
                 line-height: 22px;
@@ -236,16 +214,15 @@
                 margin-top: 16px;
                 text-align: center;
             }
-
         }
 
-        .social-login{
+        .social-login {
             display: flex;
             justify-content: space-between;
             align-items: center;
             gap: 16px;
             margin-bottom: 0;
-            .btn{
+            .btn {
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -256,124 +233,100 @@
                 width: 100%;
             }
 
-            .btn-google{
+            .btn-google {
                 background: #e73b2f;
                 border-color: #e73b2f;
             }
 
-            .btn-facebook{
+            .btn-facebook {
                 background: #1877f2;
                 border-color: #0d6efd;
             }
 
-            .btn-linkedin{
+            .btn-linkedin {
                 background: #0a66c2;
                 border-color: #056497;
-     
             }
 
-            .text{
-
+            .text {
                 font-size: 14px;
             }
 
-            .icon{
+            .icon {
                 font-size: 14px;
             }
         }
 
-        .disabled .btn{
-           opacity: 0.5;
+        .disabled .btn {
+            opacity: 0.5;
             cursor: unset;
         }
 
-        .policy{
+        .policy {
             margin-top: 16px;
             display: flex;
             align-items: flex-start;
             gap: 8px;
 
-            .checkbox-wrapper{
-
-            }
-
-            .checkbox{
+            .checkbox {
                 display: none !important;
             }
 
-            .label-checkbox::before{
+            .label-checkbox::before {
                 background: #fff;
                 border: 1px solid #646d79;
                 border-radius: 5px;
-                content: "";
+                content: '';
                 display: block;
                 height: 20px;
                 margin-right: 8px;
                 width: 20px;
             }
 
-            .checkbox:checked + .label-checkbox::before{
+            .checkbox:checked + .label-checkbox::before {
                 background: #00b14f;
                 border-color: #00b14f;
                 color: #fff;
-                content: "\2713";
+                content: '\2713';
                 font-weight: 500;
                 text-align: center;
             }
 
-            .desc{
-
-            }
-
-            .label{
-
-            }
-
-            .link{
+            .link {
                 color: #00b14f;
             }
         }
 
-        .options{
+        .options {
             font-size: 14px;
             margin-top: 16px;
             display: flex;
             justify-content: center;
-            .option{
 
-            }
-
-            .text{
-
-            }
-
-            .link{
-                color: #00b14f!important;
+            .link {
+                color: #00b14f !important;
                 font-size: 14px;
-
             }
         }
 
-        .support-center{
+        .support-center {
             margin-top: 16px;
             font-size: 14px;
             text-align: center;
             line-height: 20px;
-            .title{
+            .title {
                 margin: 0;
                 font-weight: 700;
             }
 
-
-
-            .link{
+            .link {
                 color: #00b14f;
                 font-weight: 600;
             }
 
-            &::before{
+            &::before {
                 border-top: 1px solid #eee;
-                content: "";
+                content: '';
                 display: block;
                 font-size: 14px;
                 font-weight: 600;
@@ -384,10 +337,9 @@
                 width: 100%;
             }
         }
-
     }
 
-    .copy-right{
+    .copy-right {
         color: #00b14f;
         font-size: 14px;
         font-weight: 400;
@@ -397,14 +349,13 @@
     }
 }
 
-.desc{
-    .link{
+.desc {
+    .link {
         color: #00b14f;
     }
-
 }
 
-.banner{
+.banner {
     background-image: url(../../assets/images/auth_bg_desktop.png);
     background-position: 0 0;
     background-repeat: no-repeat;
@@ -414,7 +365,7 @@
     position: relative;
     width: 500px;
 
-    .banner-abs{
+    .banner-abs {
         left: 35px;
         margin-top: -32px;
         max-width: 300px;
@@ -423,7 +374,7 @@
         transform: translateY(-50%);
     }
 
-    .title{
+    .title {
         color: #fff;
         font-size: 40px;
         font-weight: 700;
@@ -431,7 +382,7 @@
         margin: 24px 0 0 0;
     }
 
-    .desc{
+    .desc {
         color: #fff;
         font-size: 14px;
         font-weight: 400;
@@ -439,11 +390,7 @@
         margin-bottom: 16px;
     }
 
-    .banner-bg{
-
-    }
-
-    .bg-right-arrow{
+    .bg-right-arrow {
         background-image: url(../../assets/images/auth_arrow.png);
         background-position: 0 0;
         background-repeat: no-repeat;

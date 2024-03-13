@@ -11,16 +11,15 @@
     &:hover {
         background: #f6f6f6;
         outline: 1px solid #d3d5d9;
-    
-        .title-text{
-            color: #00b14f!important;
+
+        .title-text {
+            color: #00b14f !important;
         }
-        }
+    }
 }
 .wrapper.reponsive {
     padding: 12px 18.8px;
 }
-
 
 .cvo-flex {
     display: flex;
@@ -78,7 +77,7 @@
             white-space: nowrap;
         }
 
-        .title{
+        .title {
             margin: 0;
         }
     }
@@ -142,17 +141,16 @@
         width: 24px;
     }
 
-    .icon-like{
+    .icon-like {
         font-size: 20px;
     }
 
-    .icon-active{
+    .icon-active {
         color: #00b14f;
     }
 }
 
-
-.tooltip{
+.tooltip {
     white-space: pre-wrap;
     line-height: 1.5;
     text-align: center;

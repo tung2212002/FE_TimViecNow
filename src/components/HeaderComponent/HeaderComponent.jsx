@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames/bind';
-import { Link, NavLink, redirect } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { FaBell, FaComments, FaChevronDown, FaRegHeart, FaLaptopCode } from 'react-icons/fa';
@@ -35,7 +35,6 @@ const cx = classNames.bind(styles);
 const HeaderComponent = () => {
     const auth = useSelector(selectAuth);
     const dispatch = useDispatch();
-    console.log('auth', auth);
 
     const handleLogout = () => {
         logoutService().then(() => {
