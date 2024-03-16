@@ -1,9 +1,7 @@
 import classNames from 'classnames/bind';
 
 import styles from './JobSearchHeaderComponent.module.scss';
-import SearchJobSearchHeaderComponent from './SearchJobSearchHeaderComponent/SearchJobSearchHeaderComponent';
-import SearchSalaryComponent from './SearchSalaryComponent/SearchSalaryComponent';
-import SearchExpComponent from './SearchExpComponent/SearchExpComponent';
+import { SearchSalaryComponent, SearchExpComponent, SearchJobSearchHeaderComponent } from '../common';
 import JobSearchBannerSlide from './JobSearchBannerSlide/JobSearchBannerSlide';
 import { images } from '../../assets';
 

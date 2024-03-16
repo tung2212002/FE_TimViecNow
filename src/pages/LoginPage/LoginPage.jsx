@@ -10,15 +10,15 @@ import styles from './LoginPage.module.scss';
 import { loginService, registerService } from '../../services/authService';
 import { login } from '../../redux/features/auth/authSlide';
 import route from '../../constants/route';
+import useDocumentTitle from '../../hooks/useDocumentTitle';
 
 const cx = classNames.bind(styles);
 
 const LoginPage = () => {
-    console.log(window.location.pathname);
-    console.log(route.REGISTER);
-    console.log(window.location.pathname === route.REGISTER);
     const dispatch = useDispatch();
     const isLogin = !(window.location.pathname === route.REGISTER);
+
+    useDocumentTitle(isLogin ? 'Đăng nhập' : 'Đăng ký');
 
     const [message, setMessage] = useState('');
     const [showPassword, setShowPassword] = useState({

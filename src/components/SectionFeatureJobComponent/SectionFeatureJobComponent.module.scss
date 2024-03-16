@@ -2,6 +2,18 @@
     background: #f3f5f7 !important;
 }
 
+// @media (max-width: 767px) {
+
+//     .container {
+//         max-width: 100%;
+//     }
+
+//     .feature-job__item {
+//         width: 100% !important;
+//         float: none;
+//     }
+// }
+
 @media (min-width: 768px) and (max-width: 991px) {
     .container {
         max-width: 750px;

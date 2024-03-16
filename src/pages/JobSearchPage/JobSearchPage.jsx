@@ -7,10 +7,13 @@ import JobTripleBannerSlide from '../../components/JobTripleBannerSlide/JobTripl
 import VerticalBannerComponent from '../../components/VerticalBannerComponent/VerticalBannerComponent';
 import TopJobSlideComponent from '../../components/TopJobSlideComponent/TopJobSlideComponent';
 import HotlineComponent from '../../components/HotlineComponent/HotlineComponent';
+import useDocumentTitle from '../../hooks/useDocumentTitle';
 
 const cx = classNames.bind(styles);
 
 const JobSearchPage = () => {
+    useDocumentTitle('TVNow - Tìm kiếm việc làm ngay');
+
     return (
         <div className={cx('wrapper')}>
             <div className={cx('container')}>

@@ -76,6 +76,8 @@ const images = {
     hotline: require('./images/hotline.png'),
     tab: require('./images/tab.svg'),
     tab_active: require('./images/tab_active.svg'),
+    bg_search_right: require('./images/bg-search-right.png'),
+    bg_search_left_opacity: require('./images/bg-search-left-opacity.png'),
 };
 
 const gifs = {

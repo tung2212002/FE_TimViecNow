@@ -238,6 +238,23 @@ const ChartJobOpportunityComponent = () => {
         }
     }, [inputData]);
 
+    useEffect(() => {
+        const checkWidth = () => {
+            if (window.innerWidth < 768) {
+                chartRef.current.style.width = '320px';
+                chartRef.current.style.height = '220px';
+            } else {
+                chartRef.current.style.width = '352px';
+                chartRef.current.style.height = '220px';
+            }
+        };
+        checkWidth();
+        window.addEventListener('resize', checkWidth);
+        return () => {
+            window.removeEventListener('resize', checkWidth);
+        };
+    }, []);
+
     return (
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
