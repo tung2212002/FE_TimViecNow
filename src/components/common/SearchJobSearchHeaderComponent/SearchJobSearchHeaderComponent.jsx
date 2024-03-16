@@ -1,14 +1,15 @@
+import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
+import PropTypes from 'prop-types';
 
 import { HiMagnifyingGlass, HiOutlineChevronDown } from 'react-icons/hi2';
 import { HiOutlineLocationMarker, HiCheck, HiTrendingUp } from 'react-icons/hi';
 
 import styles from './SearchJobSearchHeaderComponent.module.scss';
-import { useEffect, useState } from 'react';
 
 const cx = classNames.bind(styles);
 
-const SearchJobSearchHeaderComponent = () => {
+const SearchJobSearchHeaderComponent = ({ paddingContainer, searchHeight, paddingInput }) => {
     const cityList = [
         { value: '0', name: 'Tất cả địa điểm' },
         { value: '1', name: 'Hà Nội' },
@@ -135,8 +136,8 @@ const SearchJobSearchHeaderComponent = () => {
     return (
         <div className={cx('wrapper')}>
             <form className={cx('form')}>
-                <div className={cx('container')}>
-                    <div className={cx('search')}>
+                <div className={cx('container')} style={{ padding: paddingContainer }}>
+                    <div className={cx('search')} style={{ height: searchHeight }}>
                         <HiMagnifyingGlass className={cx('icon-search')} />
                         <input
                             type="text"
@@ -146,12 +147,12 @@ const SearchJobSearchHeaderComponent = () => {
                             onFocus={() => setFocus(true)}
                             value={searchValue}
                             onChange={(event) => setSearchValue(event.target.value)}
+                            style={{ padding: paddingInput }}
                         />
                     </div>
                     <div className={cx('location')} onClick={() => setDisplayDropdown(!displayDropdown)}>
                         <div className={cx('selection')}>
                             <HiOutlineLocationMarker className={cx('icon-location')} />
-
                             <span className={cx('select-show')}>
                                 <span className={cx('selection')}>
                                     <span className={cx('select-2')}>
@@ -227,6 +228,12 @@ const SearchJobSearchHeaderComponent = () => {
             </form>
         </div>
     );
+};
+
+SearchJobSearchHeaderComponent.propTypes = {
+    paddingContainer: PropTypes.string,
+    searchHeight: PropTypes.string,
+    paddingInput: PropTypes.string,
 };
 
 export default SearchJobSearchHeaderComponent;

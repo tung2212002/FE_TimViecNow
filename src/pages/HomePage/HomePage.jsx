@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import classNames from 'classnames/bind';
 
 import styles from './HomePage.module.scss';
@@ -7,14 +7,17 @@ import SectionFeatureJobComponent from '../../components/SectionFeatureJobCompon
 import TopCompanySlideComponent from '../../components/TopCompanySlideComponent/TopCompanySlideComponent';
 import DashBoardSectionComponent from '../../components/DashBoardSectionComponent/DashBoardSectionComponent';
 import TopJobSlideComponent from '../../components/TopJobSlideComponent/TopJobSlideComponent';
+import useDocumentTitle from '../../hooks/useDocumentTitle';
 
 const cx = classNames.bind(styles);
 
 const HomePage = () => {
     const dashBoardRef = useRef(null);
 
+    useDocumentTitle('TVNow - Trang chủ');
+
     const handleScrollToDashBoard = () => {
-        dashBoardRef.current.scrollIntoView({ behavior: 'smooth' });
+        window.scrollTo({ top: dashBoardRef.current.offsetTop - dashBoardRef.current.clientHeight / 2 + 150, behavior: 'smooth' });
     };
 
     const companies = [
@@ -200,16 +203,12 @@ const HomePage = () => {
         },
     ];
 
-    useEffect(() => {
-        document.title = 'TVNow - Trang chủ';
-    }, []);
-
     return (
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
                 <SectionHeaderComponent handleScrollToDashBoard={handleScrollToDashBoard} />
                 <SectionFeatureJobComponent />
-                <TopCompanySlideComponent companies={companies} number={3} autoplay={true} />
+                <TopCompanySlideComponent companies={companies}  />
                 <DashBoardSectionComponent ref={dashBoardRef} />
                 <TopJobSlideComponent />
             </div>

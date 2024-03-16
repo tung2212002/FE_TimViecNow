@@ -5,8 +5,7 @@
 @media screen and (min-width: 768px) {
     
     .container-job-list{
-        width: 750px !important;
-        display: flex !important;
+        width: 750px;
     }
 
     .job-list{
@@ -14,14 +13,13 @@
     }
 
     .banner{
-        width: calc(100% * 5 / 12) !important;
+        width: calc(100% * 5 / 12);
     } 
 }
 
 @media screen and (min-width: 992px){
     .container-job-list{
-        width: 970px !important;
-        display: flex !important;
+        width: 970px;
     }
 
     .job-list{
@@ -29,14 +27,13 @@
     }
 
     .banner{
-        width: calc(100% / 3) !important;
+        width: calc(100% / 3);
     }
 }
 
 @media  screen and (min-width: 1200px){
     .container-job-list{
-        width: 1170px !important;
-        display: flex !important;
+        width: 1170px;
     }
 
     .job-list{
@@ -44,7 +41,7 @@
     }
 
     .banner{
-        width: calc(100% / 3) !important;
+        width: calc(100% / 3);
     }
 
 
@@ -63,12 +60,10 @@
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
-    // display: flex;
-    display: block;
+    display: flex;
 }
 
 .banner{
     float: left;
-    width: 100%;
 }
 

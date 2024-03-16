@@ -1,4 +1,4 @@
-import { HomePage, Subpage, JobSearchPage, LoginPage, MatchingJobsPage } from '../pages';
+import { HomePage, Subpage, JobSearchPage, LoginPage, MatchingJobsPage, JobSearchDetailPage } from '../pages';
 import route from '../constants/route';
 import { ContentOnlyLayout } from '../layouts';
 
@@ -45,6 +45,12 @@ export const publicRoutes = [
         isPrivate: false,
         restricted: true,
         layout: ContentOnlyLayout,
+    },
+    {
+        path: route.JOB_SEARCH_DETAIL,
+        component: JobSearchDetailPage,
+        isPrivate: false,
+        restricted: false,
     },
     // { path: routes.notfound, component: NotFound},
 ];

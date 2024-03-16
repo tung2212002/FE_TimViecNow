@@ -97,7 +97,8 @@ const ChartJobDemandComponent = ({ stateId }) => {
             data: inputData.slice(index, index + 1),
             backgroundColor: (context) => generateGradient(context, index),
             barPercentage: 40,
-            categoryPercentage: 0.1,        }));
+            categoryPercentage: 0.1,
+        }));
 
         const data = {
             labels: inputData.map((item) => item.x),
@@ -176,6 +177,23 @@ const ChartJobDemandComponent = ({ stateId }) => {
             setInputData(dataNumber2);
         }
     }, [stateId]);
+
+    useEffect(() => {
+        const checkWidth = () => {
+            if (window.innerWidth < 768) {
+                chartRef.current.style.width = '320px';
+                chartRef.current.style.height = '220px';
+            } else {
+                chartRef.current.style.width = '352px';
+                chartRef.current.style.height = '220px';
+            }
+        };
+        checkWidth();
+        window.addEventListener('resize', checkWidth);
+        return () => {
+            window.removeEventListener('resize', checkWidth);
+        };
+    }, []);
 
     return (
         <div className={cx('wrapper')}>

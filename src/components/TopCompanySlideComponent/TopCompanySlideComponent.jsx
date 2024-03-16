@@ -11,15 +11,40 @@ import styles from './TopCompanySlideComponent.module.scss';
 
 const cx = classNames.bind(styles);
 
-const TopCompanySlideComponent = ({ companies, dots, infinite, speed, slidesToShow, slidesToScroll, autoplay }) => {
+const TopCompanySlideComponent = ({ companies }) => {
     const ref = useRef(null);
     const settings = {
         dots: false,
         infinite: true,
-        speed: speed ? speed : 500,
+        speed: 500,
         slidesToShow: 4,
         slidesToScroll: 4,
-        autoplay: autoplay ? true : false,
+        rows: 1,
+
+        autoplay: true,
+        responsive: [
+            {
+                breakpoint: 1200,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                },
+            },
+            {
+                breakpoint: 992,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                },
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                },
+            },
+        ],
     };
 
     return (
@@ -53,12 +78,6 @@ const TopCompanySlideComponent = ({ companies, dots, infinite, speed, slidesToSh
 
 TopCompanySlideComponent.propTypes = {
     companies: PropTypes.array,
-    dots: PropTypes.bool,
-    infinite: PropTypes.bool,
-    speed: PropTypes.number,
-    slidesToShow: PropTypes.number,
-    slidesToScroll: PropTypes.number,
-    autoplay: PropTypes.bool,
 };
 
 export default TopCompanySlideComponent;

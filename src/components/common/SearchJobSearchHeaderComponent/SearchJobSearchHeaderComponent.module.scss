@@ -15,10 +15,23 @@
         width: 524px;
         margin-bottom: 0;
     }
+
+    .container{
+        padding: 8px 8px 8px 12px !important;
+        margin-bottom: 24px !important;
+    }
+
+    .search {
+        height: 40px !important;
+    }
+
+    .form {
+        margin-bottom: 17px !important;
+    }
 }
 
 .form {
-    margin-bottom: 17px;
+    margin-bottom: 8px;
 }
 
 .container {
@@ -26,17 +39,17 @@
     z-index: 4;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 24px;
+    margin-bottom: 12px;
     align-items: center;
     border-radius: 12px;
     box-shadow: 0 8px 16px 0 rgba(1, 18, 34, 0.04);
     gap: 4px;
-    padding: 8px 8px 8px 12px;
+    padding: 4px 8px 4px 12px;
     background-color: #fff;
 }
 
 .search {
-    height: 40px;
+    height: 32px;
     align-items: center;
     display: flex;
     position: relative;

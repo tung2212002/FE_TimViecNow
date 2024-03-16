@@ -145,7 +145,7 @@ const SectionFeatureJobComponent = ({ reponsive = false, number = 12 }) => {
                     featureJob.classList.remove(`${cx('medium')}`);
                     featureJob.classList.remove(`${cx('large')}`);
                     featureJob.classList.remove(`${cx('extra-small')}`);
-                } else {
+                } else if (ref.current.offsetWidth < 750) {
                     featureJob.classList.remove(`${cx('small')}`);
                     featureJob.classList.remove(`${cx('medium')}`);
                     featureJob.classList.remove(`${cx('large')}`);

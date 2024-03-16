@@ -10,7 +10,7 @@ import SelectionComponent from '../../SelectionComponent/SelectionComponent';
 
 const cx = classNames.bind(styles);
 
-const SearchExpComponent = () => {
+const SearchExpComponent = ({padding}) => {
     const filterExp = [
         {
             id: 1,
@@ -63,7 +63,7 @@ const SearchExpComponent = () => {
         <div className={cx('wrapper')}>
             <SelectionComponent
                 header={() => (
-                    <div className={cx('header-select')}>
+                    <div className={cx('header-select')} style={{ padding: padding }}>
                         <div className={cx('container-select')}>
                             <PiStarOfDavidBold className={cx('icon-star')} />
                             <span className={cx('result')}> {filterExp.find((item) => item.id === currentSearch.filter).name}</span>
@@ -90,6 +90,8 @@ const SearchExpComponent = () => {
     );
 };
 
-SearchExpComponent.propTypes = {};
+SearchExpComponent.propTypes = {
+    padding: PropTypes.string,
+};
 
 export default SearchExpComponent;

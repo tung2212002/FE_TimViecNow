@@ -46,10 +46,10 @@ const DashBoardSectionComponent = (props, ref) => {
             <div className={cx('container')}>
                 <div className={cx('dashboard-section')}>
                     <div className={cx('dashboard-section__header')}>
-                        <h3 className={cx('title')}>
+                        <p className={cx('title')}>
                             Thị trường việc làm hôm nay
                             <span className={cx('date')}> 22/01/2024</span>
-                        </h3>
+                        </p>
                     </div>
                     <div className={cx('dashboard-section__content')}>
                         <div className={cx('newest-job')}>

@@ -763,11 +763,40 @@ const TopJobSlideComponent = () => {
 
     const companies = fakeData.data.categories;
     const ref = useRef(null);
-    const [slidesToShow, setSlidesToShow] = useState(8);
+    const [settings, setSettings] = useState({
+        dots: false,
+        infinite: false,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: false,
+        rows: 2,
+        slidesPerRow: 4,
+        centerPadding: '20px',
+        responsive: [
+            {
+                breakpoint: 1200,
+                settings: {
+                    slidesPerRow: 3,
+                },
+            },
+            {
+                breakpoint: 992,
+                settings: {
+                    slidesPerRow: 2,
+                },
+            },
+            {
+                breakpoint: 750,
+                settings: {
+                    slidesPerRow: 1,
+                },
+            },
+        ],
+    });
     const [page, setPage] = useState(1);
 
     const handleNext = () => {
-        if (page >= Math.ceil(listIcon.length / slidesToShow)) return;
+        if (page >= Math.ceil(listIcon.length / settings.slidesToShow)) return;
         setPage(page + 1);
         ref.current.slickNext();
     };
@@ -776,33 +805,6 @@ const TopJobSlideComponent = () => {
         if (page <= 1) return;
         setPage(page - 1);
         ref.current.slickPrev();
-    };
-
-    useEffect(() => {
-        const handleResize = () => {
-            if (window.innerWidth > 750) {
-                setSlidesToShow(8);
-            } else {
-                setSlidesToShow(2);
-            }
-        };
-
-        window.addEventListener('resize', handleResize);
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
-
-    const settings = {
-        dots: false,
-        infinite: false,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        autoplay: false,
-        rows: 2,
-        slidesPerRow: slidesToShow / 2,
-        centerPadding: '20px',
     };
 
     return (
@@ -823,7 +825,7 @@ const TopJobSlideComponent = () => {
                             <VscChevronLeft className={cx('icon')} />
                         </span>
 
-                        <span className={cx('btn', { deactive: page >= Math.ceil(listIcon.length / slidesToShow) })} onClick={handleNext}>
+                        <span className={cx('btn', { deactive: page >= Math.ceil(listIcon.length / settings.slidesToShow) })} onClick={handleNext}>
                             <VscChevronRight className={cx('icon')} />
                         </span>
                     </div>

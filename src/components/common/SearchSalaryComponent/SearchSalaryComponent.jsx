@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames/bind';
+import PropTypes from 'prop-types';
 
 import { PiCurrencyCircleDollar } from 'react-icons/pi';
 import { HiCheck, HiOutlineChevronDown } from 'react-icons/hi';
@@ -9,7 +10,7 @@ import SelectionComponent from '../../SelectionComponent/SelectionComponent';
 
 const cx = classNames.bind(styles);
 
-const SearchSalaryComponent = () => {
+const SearchSalaryComponent = ({ padding }) => {
     const maxSalary = 999;
 
     const filterSalary = [
@@ -161,7 +162,7 @@ const SearchSalaryComponent = () => {
         <div className={cx('wrapper')}>
             <SelectionComponent
                 header={() => (
-                    <div className={cx('header-select')}>
+                    <div className={cx('header-select')} style={{ padding: padding }}>
                         <div className={cx('container-select')}>
                             <PiCurrencyCircleDollar className={cx('icon-dollar')} />
                             <span className={cx('result')}> {filterSalary.find((item) => item.id === currentSearch.filter).name}</span>
@@ -213,6 +214,8 @@ const SearchSalaryComponent = () => {
     );
 };
 
-SearchSalaryComponent.propTypes = {};
+SearchSalaryComponent.propTypes = {
+    padding: PropTypes.string,
+};
 
 export default SearchSalaryComponent;
