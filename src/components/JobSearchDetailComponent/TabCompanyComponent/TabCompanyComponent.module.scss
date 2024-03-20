@@ -1,0 +1,84 @@
+.wrapper {
+    display: block;
+    width: 100%;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 4;
+    margin: -20px 0;
+}
+
+.wrapper.show {
+    position: fixed !important;
+    margin: 0 !important;    
+    visibility: visible !important;
+}
+
+@media screen and (max-width: 767px) {
+    .wrapper {
+        // display: block !important;
+    }
+    
+}
+
+@media (min-width: 768px) {
+    .wrapper {
+        display: none !important;
+    }
+}
+
+.container {
+    padding: 16px;
+    background-image: url(../../../assets/images/job-detail-tab.png);
+    background-position-x: 25%;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    height: 72px;
+}
+
+.menu {
+
+}
+
+.menu-tabs {
+    display: flex;
+
+    
+    .menu-tab {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid hsla(0,0%,100%,.35);
+        border-radius: 20px;
+        margin-right: 12px;
+        padding: 0;
+
+    }
+    
+    
+    .btn{
+        border-radius: 15px;
+        color: #fff;
+        font-style: normal;
+        font-weight: 600;
+        letter-spacing: .175px;
+        line-height: 22px;
+        padding: 8px 16px;
+        font-size: 14px;
+         padding: 8px;
+
+         &:focus {
+            outline: none;
+         }
+
+        &:hover {
+            background: #00b14f;
+            border-color: #00b14f;           
+        }
+    }
+
+    .active {
+        background: #00b14f;
+        border-color: #00b14f;
+    }
+}

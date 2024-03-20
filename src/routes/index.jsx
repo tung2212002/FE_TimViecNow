@@ -40,7 +40,13 @@ const AppRouter = () => {
                 {publicRoutes.map((route, index) => {
                     const Layout = route.layout || DefaultLayout;
                     const Page = route.component;
-                    return <Route key={index} path={route.path} element={<PublicRoute component={Page} layout={Layout} restricted={route.restricted} />} />;
+                    return (
+                        <Route
+                            key={index}
+                            path={route.path}
+                            element={<PublicRoute component={Page} layout={Layout} restricted={route.restricted} positionHeader={route.positionHeader} />}
+                        />
+                    );
                 })}
                 {privateRoutes.map((route, index) => {
                     const Layout = route.layout || DefaultLayout;
@@ -49,7 +55,15 @@ const AppRouter = () => {
                         <Route
                             key={index}
                             path={route.path}
-                            element={<PrivateRoute component={Page} layout={Layout} isPrivate={route.isPrivate} restricted={route.restricted} />}
+                            element={
+                                <PrivateRoute
+                                    component={Page}
+                                    layout={Layout}
+                                    isPrivate={route.isPrivate}
+                                    restricted={route.restricted}
+                                    positionHeader={route.positionHeader}
+                                />
+                            }
                         />
                     );
                 })}

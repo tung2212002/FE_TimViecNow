@@ -9,7 +9,7 @@ import { TbChevronsDown } from 'react-icons/tb';
 import styles from './SectionHeaderComponent.module.scss';
 import { icons, images } from '../../assets';
 import SearchSectionHeaderComponent from './SearchSectionHeaderComponent/SearchSectionHeaderComponent';
-import SelectionComponent from '../SelectionComponent/SelectionComponent';
+import SelectionComponent from '../common/SelectionComponent/SelectionComponent';
 import ChartJobHeaderComponent from './ChartJobHeaderComponent/ChartJobHeaderComponent';
 
 const cx = classNames.bind(styles);

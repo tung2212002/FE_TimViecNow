@@ -51,6 +51,14 @@ const icons = {
     icon_tourism: require('./icons/icon_tourism.png'),
     icon_transport: require('./icons/icon_transport.png'),
     icon_tv: require('./icons/icon_tv.png'),
+    icon_money: require('./icons/icon_money.png'),
+    icon_location: require('./icons/icon_location.png'),
+    icon_time: require('./icons/icon_time.png'),
+    icon_flash: require('./icons/icon_flash.png'),
+    icon_bag: require('./icons/icon_bag.png'),
+    icon_user: require('./icons/icon_user.png'),
+    icon_user_group: require('./icons/icon_user_group.png'),
+    icon_award: require('./icons/icon_award.png'),
 };
 
 const images = {
@@ -78,6 +86,14 @@ const images = {
     tab_active: require('./images/tab_active.svg'),
     bg_search_right: require('./images/bg-search-right.png'),
     bg_search_left_opacity: require('./images/bg-search-left-opacity.png'),
+    cv: require('./images/cv.png'),
+    chart: require('./images/chart.png'),
+    report_1: require('./images/report_1.png'),
+    report_2: require('./images/report_2.png'),
+    report_3: require('./images/report_3.png'),
+    report_4: require('./images/report_4.png'),
+    report_5: require('./images/report_5.png'),
+    report_6: require('./images/report_6.png'),
 };
 
 const gifs = {

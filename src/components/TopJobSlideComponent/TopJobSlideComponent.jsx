@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import classNames from 'classnames/bind';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
@@ -763,7 +763,7 @@ const TopJobSlideComponent = () => {
 
     const companies = fakeData.data.categories;
     const ref = useRef(null);
-    const [settings, setSettings] = useState({
+    const settings = {
         dots: false,
         infinite: false,
         slidesToShow: 1,
@@ -792,7 +792,7 @@ const TopJobSlideComponent = () => {
                 },
             },
         ],
-    });
+    };
     const [page, setPage] = useState(1);
 
     const handleNext = () => {
@@ -841,9 +841,7 @@ const TopJobSlideComponent = () => {
                                     rel="noreferrer"
                                 >
                                     <img src={item.icon} className={cx('icon')} alt={companies.find((company) => company.id === item.id)?.name} />
-
                                     <label className={cx('label')}>{companies.find((company) => company.id === item.id)?.name}</label>
-
                                     <h3 className={cx('title')}>{companies.find((company) => company.id === item.id)?.job_category_count} việc làm</h3>
                                 </a>
                             </div>
