@@ -8,10 +8,10 @@ import BackTopComponent from '../../components/BackTopComponent/BackTopComponent
 
 const cx = classNames.bind(styles);
 
-function DefaultLayout({ children }) {
+function DefaultLayout({ children, positionHeader }) {
     return (
         <div className={cx('wrapper')}>
-            <HeaderComponent />
+            <HeaderComponent positionHeader={positionHeader} />
             <HeaderHiddenComponent />
             {children}
             <FooterComponent />
@@ -22,6 +22,7 @@ function DefaultLayout({ children }) {
 
 DefaultLayout.propTypes = {
     children: PropTypes.node.isRequired,
+    positionHeader: PropTypes.string,
 };
 
 export default DefaultLayout;

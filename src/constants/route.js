@@ -1,7 +1,7 @@
 export default {
     HOMEPAGE: '/',
     JOB_SEARCH: '/viec-lam',
-    JOB_SEARCH_DETAIL: '/viec-lam/:name/:id',
+    JOB_SEARCH_DETAIL: '/viec-lam/chi-tiet/:id/:slug',
     MATCHING_JOBS: '/viec-lam-phu-hop',
     SUBPAGE: '/subpage',
     LOGIN: '/login',

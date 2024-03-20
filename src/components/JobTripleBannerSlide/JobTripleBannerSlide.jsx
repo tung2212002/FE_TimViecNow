@@ -1,6 +1,5 @@
 import { useRef } from 'react';
 import classNames from 'classnames/bind';
-import PropTypes from 'prop-types';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';

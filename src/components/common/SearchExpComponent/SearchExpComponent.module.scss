@@ -2,17 +2,6 @@
     width: 100%;
 }
 
-@media screen and (min-width: 1200px) {
-    .wrapper {
-        width: 233px;
-        height: 56px;
-    }
-
-    .header-select{
-        padding: 16px 19px 16px 2px !important;
-    }
-}
-
 .header-select {
     padding: 12px 19px 12px 2px;
     align-items: center;
@@ -97,10 +86,21 @@
 
 .icon-chevron {
     color: #6f7882;
-    box-sizing: content-box;
+    box-sizing: content-box !important;
     font-size: 22px;
     // padding-right: 10px;
     padding-left: 18px;
     // padding: 0 ;
     margin-right: 20px;
+}
+
+@media screen and (min-width: 1200px) {
+    .wrapper {
+        width: 233px;
+        height: 56px;
+    }
+
+    .header-select{
+        padding: 16px 19px 16px 2px;
+    }
 }

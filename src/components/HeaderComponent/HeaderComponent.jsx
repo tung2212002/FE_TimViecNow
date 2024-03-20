@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames/bind';
 import { Link, NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import { FaBell, FaComments, FaChevronDown, FaRegHeart, FaLaptopCode } from 'react-icons/fa';
 import {
@@ -32,7 +33,7 @@ import route from '../../constants/route';
 
 const cx = classNames.bind(styles);
 
-const HeaderComponent = () => {
+const HeaderComponent = ({ positionHeader }) => {
     const auth = useSelector(selectAuth);
     const dispatch = useDispatch();
 
@@ -285,7 +286,7 @@ const HeaderComponent = () => {
     ];
 
     return (
-        <header className={cx('wrapper')}>
+        <header className={cx('wrapper')} style={{ position: positionHeader ? positionHeader : '' }}>
             <div className={cx('container')}>
                 <div className={cx('navbar-left')}>
                     <h1 className={cx('logo-wrapper')}>
@@ -379,6 +380,10 @@ const HeaderComponent = () => {
             </div>
         </header>
     );
+};
+
+HeaderComponent.propTypes = {
+    positionHeader: PropTypes.string,
 };
 
 export default HeaderComponent;

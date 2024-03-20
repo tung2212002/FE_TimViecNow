@@ -9,7 +9,7 @@ import { images } from '../../assets';
 import { fakeJob } from '../../assets/fakejob';
 import ChartJobOpportunityComponent from './ChartJobOpportunity/ChartJobOpportunityComponent';
 import ChartJobDemandComponent from './ChartJobDemandComponent/ChartJobDemandComponent';
-import SelectionComponent from '../SelectionComponent/SelectionComponent';
+import SelectionComponent from '../common/SelectionComponent/SelectionComponent';
 
 const cx = classNames.bind(styles);
 

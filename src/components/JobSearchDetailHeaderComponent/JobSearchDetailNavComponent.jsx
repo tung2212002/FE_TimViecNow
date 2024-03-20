@@ -1,11 +1,11 @@
 import classNames from 'classnames/bind';
 
-import styles from './JobSearchDetailHeaderComponent.module.scss';
+import styles from './JobSearchDetailNavComponent.module.scss';
 import { SearchSalaryComponent, SearchExpComponent, SearchJobSearchHeaderComponent } from '../common';
 
 const cx = classNames.bind(styles);
 
-const JobSearchDetailHeaderComponent = () => {
+const JobSearchDetailNavComponent = () => {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
@@ -24,4 +24,4 @@ const JobSearchDetailHeaderComponent = () => {
     );
 };
 
-export default JobSearchDetailHeaderComponent;
+export default JobSearchDetailNavComponent;

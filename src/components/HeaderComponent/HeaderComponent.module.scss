@@ -195,6 +195,10 @@
     background: #00b14f !important;
     border: 1px solid #00b14f;
     color: #fff;
+
+    &:hover{
+        background-color: #05aa4f !important;
+    }
 }
 
 .post-job-btn {
@@ -205,12 +209,21 @@
 
 .nav-item {
     position: relative;
+
+    &:hover .menu {
+        opacity: 1;
+        max-height: 88vh;
+    }
+
+    &:hover .label{
+        color: #00b14f;
+    }
 }
 
-.nav-item:hover .menu {
-    opacity: 1;
-    max-height: 88vh;
-}
+// .nav-item:hover .menu {
+//     opacity: 1;
+//     max-height: 88vh;
+// }
 
 .menu {
     opacity: 0;

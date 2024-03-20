@@ -2,17 +2,6 @@ import { HomePage, Subpage, JobSearchPage, LoginPage, MatchingJobsPage, JobSearc
 import route from '../constants/route';
 import { ContentOnlyLayout } from '../layouts';
 
-// export const routes = {
-//     home: '/',
-//     subpage: '/subpage',
-//     cvManagement: '/quan-ly-cv',
-//     company: '/cong-ty',
-//     jobSearch: '/viec-lam',
-//     matchingJobs: '/viec-lam-phu-hop',
-//     login: '/login',
-//     // notfound : '*',
-// };
-
 export const publicRoutes = [
     {
         path: route.HOMEPAGE,
@@ -51,6 +40,7 @@ export const publicRoutes = [
         component: JobSearchDetailPage,
         isPrivate: false,
         restricted: false,
+        positionHeader: 'relative',
     },
     // { path: routes.notfound, component: NotFound},
 ];

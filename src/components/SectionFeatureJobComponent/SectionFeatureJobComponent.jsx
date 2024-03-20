@@ -11,7 +11,7 @@ import { HiOutlineChevronDown } from 'react-icons/hi2';
 import styles from './SectionFeatureJobComponent.module.scss';
 import { fakeJob } from '../../assets/fakejob';
 import JobItemComponent from '../JobItemComponent/JobItemComponent';
-import SelectionComponent from '../SelectionComponent/SelectionComponent';
+import SelectionComponent from '../common/SelectionComponent/SelectionComponent';
 
 const cx = classNames.bind(styles);
 
@@ -135,7 +135,6 @@ const SectionFeatureJobComponent = ({ reponsive = false, number = 12 }) => {
                     featureJob.classList.remove(`${cx('small')}`);
                     featureJob.classList.remove(`${cx('extra-small')}`);
                 } else if (ref.current.offsetWidth < 1170 && ref.current.offsetWidth >= 970) {
-                    console.log(featureJob);
                     featureJob.classList.add(`${cx('medium')}`);
                     featureJob.classList.remove(`${cx('large')}`);
                     featureJob.classList.remove(`${cx('small')}`);

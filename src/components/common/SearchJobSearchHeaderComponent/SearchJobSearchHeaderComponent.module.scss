@@ -2,34 +2,6 @@
     box-sizing: content-box !important;
 }
 
-@media screen and (min-width: 768px) {
-    // .wrapper {
-    //     background: #fff;
-    //     border-radius: 6px;
-    //     flex-direction: row;
-    //     gap: 0;    }
-}
-
-@media screen and (min-width: 1200px) {
-    .wrapper {
-        width: 524px;
-        margin-bottom: 0;
-    }
-
-    .container{
-        padding: 8px 8px 8px 12px !important;
-        margin-bottom: 24px !important;
-    }
-
-    .search {
-        height: 40px !important;
-    }
-
-    .form {
-        margin-bottom: 17px !important;
-    }
-}
-
 .form {
     margin-bottom: 8px;
 }
@@ -367,4 +339,24 @@
 
 .search-job.display {
     display: flex;
+}
+
+@media screen and (min-width: 1200px) {
+    .wrapper {
+        width: 524px;
+        margin-bottom: 0;
+    }
+
+    .container{
+        padding: 8px 8px 8px 12px ;
+        margin-bottom: 24px ;
+    }
+
+    .search {
+        height: 40px ;
+    }
+
+    .form {
+        margin-bottom: 17px ;
+    }
 }

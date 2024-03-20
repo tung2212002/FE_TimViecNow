@@ -9,6 +9,7 @@ import { IoHeartOutline, IoHeartSharp } from 'react-icons/io5';
 
 import styles from './JobItemComponent.module.scss';
 import DetailCompanyTooltipComponent from '../DetailCompanyTooltipComponent/DetailCompanyTooltipComponent';
+import slugConvert from '../../utils/slugCovnert';
 
 const cx = classNames.bind(styles);
 
@@ -21,7 +22,7 @@ const JobItemComponent = ({ job, reponsive = false }) => {
     return (
         <div className={cx('wrapper', { reponsive })}>
             <div className={cx('cvo-flex')}>
-                <a href={job.url} target="_blank" rel="noreferrer" className={cx('box-logo')}>
+                <a href={`viec-lam/chi-tiet/${job.id}/${slugConvert(job.title)}`} target="_blank" rel="noreferrer" className={cx('box-logo')}>
                     <div className={cx('box-company-logo')}>
                         <div className={cx('avatar')}>
                             <img
@@ -48,13 +49,13 @@ const JobItemComponent = ({ job, reponsive = false }) => {
                             zIndex={9999}
                             appendTo={() => document.body}
                         >
-                            <a href={job.url} target="_blank" rel="noreferrer" className={cx('title-link')}>
+                            <a href={`viec-lam/chi-tiet/${job.id}/${slugConvert(job.title)}`} target="_blank" rel="noreferrer" className={cx('title-link')}>
                                 <strong className={cx('title-text')}>{job.title}</strong>
                             </a>
                         </Tippy>
                     </h3>
                     <TippyText content={job.company.name} maxWidth="200px">
-                        <a href={job.url} target="_blank" rel="noreferrer" className={cx('company-name')}>
+                        <a href={`viec-lam/chi-tiet/${job.id}/${slugConvert(job.title)}`} target="_blank" rel="noreferrer" className={cx('company-name')}>
                             {job.company.name}
                         </a>
                     </TippyText>
@@ -67,7 +68,7 @@ const JobItemComponent = ({ job, reponsive = false }) => {
                     </div>
                     <div className={cx('address')}>
                         <TippyText content={job.cities}>
-                            <a href={job.url} target="_blank" rel="noreferrer" className={cx('title-link')}>
+                            <a href={`viec-lam/chi-tiet/${job.id}/${slugConvert(job.title)}`} target="_blank" rel="noreferrer" className={cx('title-link')}>
                                 {job.short_cities}
                             </a>
                         </TippyText>
