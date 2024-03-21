@@ -1,3 +1,4 @@
+import { useDispatch } from 'react-redux';
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 import Tippy from '@tippyjs/react/headless';
@@ -13,10 +14,15 @@ import { FaClock } from 'react-icons/fa6';
 import styles from './JobSearchDetailHeaderComponent.module.scss';
 import { icons } from '../../../assets';
 import useDocumentTitle from '../../../hooks/useDocumentTitle';
+import Modal from '../../common/Modal/Modal';
+import ModalApplyComponent from '../../ModalApplyComponent/ModalApplyComponent';
+import { showModal } from '../../../redux/features/modal/modalSlice';
 
 const cx = classNames.bind(styles);
 
 const JobSearchDetailHeaderComponent = ({ job }) => {
+    const dispatch = useDispatch();
+
     const listCheck = [
         {
             id: 1,
@@ -61,9 +67,16 @@ const JobSearchDetailHeaderComponent = ({ job }) => {
         },
     ];
 
+    const showApply = () => {
+        dispatch(showModal());
+    };
+
     useDocumentTitle(`${job.title} - ${job.company.name}`);
     return (
         <div className={cx('wrapper')}>
+            <Modal>
+                <ModalApplyComponent job={job} />
+            </Modal>
             <div className={cx('container')}>
                 <h1 className={cx('title')}>
                     {job.title}
@@ -135,7 +148,7 @@ const JobSearchDetailHeaderComponent = ({ job }) => {
                     </div>
                 </div>
                 <div className={cx('save-job')}>
-                    <button className={cx('button-apply')}>
+                    <button className={cx('button-apply')} onClick={showApply}>
                         <span className={cx('icon-save')}>
                             <FaRegPaperPlane className={cx('icon')} />
                         </span>

@@ -9,6 +9,8 @@ const cx = classNames.bind(styles);
 
 const ChartJobHeaderComponent = ({ stateId }) => {
     const chartRef = useRef(null);
+    const [chartInstance, setChartInstance] = useState(null);
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
     const dataNumber1 = [
         {
@@ -146,8 +148,9 @@ const ChartJobHeaderComponent = ({ stateId }) => {
 
         if (chartRef && chartRef.current) {
             const chart = new Chart(chartRef.current, config);
+            setChartInstance(chart);
             return () => {
-                chart.destroy();
+                if (chartInstance) chartInstance.destroy();
             };
         }
     }, [inputData]);
@@ -162,10 +165,33 @@ const ChartJobHeaderComponent = ({ stateId }) => {
         }
     }, [stateId]);
 
+    useEffect(() => {
+        const resizeHandler = () => {
+            setWindowWidth(window.innerWidth);
+        };
+
+        window.addEventListener('resize', resizeHandler);
+
+        return () => {
+            window.removeEventListener('resize', resizeHandler);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (chartInstance) {
+            if (windowWidth <= 768) {
+                chartInstance.resize(240, 50);
+            } else if (windowWidth <= 1200 && windowWidth > 768) {
+                chartInstance.resize(360, 66);
+            } else {
+                chartInstance.resize(480, 100);
+            }
+        }
+    }, [chartInstance, windowWidth]);
     return (
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
-                <canvas ref={chartRef} height="100" width={'480'} className={cx('canvas')} style={{ width: '480px', height: '100px' }}></canvas>
+                <canvas ref={chartRef} height={'100'} width={'480'} className={cx('canvas')} style={{ width: '480px', height: '100px' }}></canvas>
             </div>
             <div className={cx('footer')}>
                 {listItem.map((item, index) => (

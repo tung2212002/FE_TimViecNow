@@ -8,6 +8,7 @@ import TopCompanySlideComponent from '../../components/TopCompanySlideComponent/
 import DashBoardSectionComponent from '../../components/DashBoardSectionComponent/DashBoardSectionComponent';
 import TopJobSlideComponent from '../../components/TopJobSlideComponent/TopJobSlideComponent';
 import useDocumentTitle from '../../hooks/useDocumentTitle';
+import SEOComponent from '../../components/SEOComponent/SEOComponent';
 
 const cx = classNames.bind(styles);
 
@@ -211,6 +212,7 @@ const HomePage = () => {
                 <TopCompanySlideComponent companies={companies}  />
                 <DashBoardSectionComponent ref={dashBoardRef} />
                 <TopJobSlideComponent />
+                <SEOComponent />
             </div>
         </div>
     );

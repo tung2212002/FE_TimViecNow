@@ -263,7 +263,7 @@ const SectionFeatureJobComponent = ({ reponsive = false, number = 12 }) => {
                         <div className={cx('text-guide')}>
                             <p>
                                 <HiLightBulb className={cx('icon')} />
-                                <b className={cx('text')}>Gợi ý</b>: Di chuột vào tiêu đề việc làm để xem thêm thông tin chi tiết
+                                <b className={cx('text')}>Gợi ý:</b> Di chuột vào tiêu đề việc làm để xem thêm thông tin chi tiết
                                 <IoIosClose className={cx('close-icon')} onClick={() => setShowGuide(false)} />
                             </p>
                         </div>

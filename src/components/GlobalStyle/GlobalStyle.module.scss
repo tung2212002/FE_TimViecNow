@@ -590,13 +590,20 @@
     list-style: none;
 }
 
+html{
+    font-family: sans-serif;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%
+}
+
 body {
     font-family: 'Inter', sans-serif;
     color: #464646;
     text-rendering: optimizeSpeed;
     margin: 0;
-
     font-weight: 500;
+    font-size: 14px;
+    line-height: 1.42857143;
 }
 
 a {
