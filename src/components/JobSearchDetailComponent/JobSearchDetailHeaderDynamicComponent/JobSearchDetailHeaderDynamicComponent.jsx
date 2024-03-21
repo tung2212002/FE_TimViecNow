@@ -1,14 +1,19 @@
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 
 import { FaRegPaperPlane } from 'react-icons/fa';
 
 import styles from './JobSearchDetailHeaderDynamicComponent.module.scss';
-import { useEffect, useState } from 'react';
+import { showModal } from '../../../redux/features/modal/modalSlice';
+import Modal from '../../common/Modal/Modal';
+import ModalApplyComponent from '../../ModalApplyComponent/ModalApplyComponent';
 
 const cx = classNames.bind(styles);
 
 const JobSearchDetailHeaderDynamicComponent = ({ job }) => {
+    const dispatch = useDispatch();
     const [state, setState] = useState('detail');
 
     const handleToDetail = () => {
@@ -21,6 +26,10 @@ const JobSearchDetailHeaderDynamicComponent = ({ job }) => {
         setState('company');
         const detailSuitable = document.getElementById('job-search-detail-similar');
         detailSuitable.scrollIntoView({ behavior: 'smooth' });
+    };
+
+    const showApply = () => {
+        dispatch(showModal());
     };
 
     useEffect(() => {
@@ -46,6 +55,9 @@ const JobSearchDetailHeaderDynamicComponent = ({ job }) => {
 
     return (
         <header className={cx('wrapper')} id="header-detail-dynamic">
+            <Modal>
+                <ModalApplyComponent job={job} />
+            </Modal>
             <div className={cx('container')}>
                 <div className={cx('menu')}>
                     <div className={cx('menu-tabs')}>
@@ -57,7 +69,7 @@ const JobSearchDetailHeaderDynamicComponent = ({ job }) => {
                         </div>
                     </div>
                     <div className={cx('menu-actions')}>
-                        <button className={cx('btn')}>
+                        <button className={cx('btn')} onClick={showApply}>
                             <span className={cx('icon')}>
                                 <FaRegPaperPlane className={cx('icon-plane')} />
                             </span>

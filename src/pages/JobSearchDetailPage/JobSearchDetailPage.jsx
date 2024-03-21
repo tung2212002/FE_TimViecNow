@@ -13,6 +13,7 @@ import JobSearchDetailCompanyComponent from '../../components/JobSearchDetailCom
 import { JobSearchDetailCategoryComponent, JobSearchDetailReportComponent, JobSearchDetailSuitableComponent } from '../../components/JobSearchDetailComponent';
 import JobSearchDetailSummaryComponent from '../../components/JobSearchDetailComponent/JobSearchDetailSummary/JobSearchDetailSummaryComponent';
 import TabCompanyComponent from '../../components/JobSearchDetailComponent/TabCompanyComponent/TabCompanyComponent';
+import SEOComponent from '../../components/SEOComponent/SEOComponent';
 
 const cx = classNames.bind(styles);
 
@@ -154,7 +155,12 @@ const JobSearchDetailPage = () => {
                     <div className={cx('job-detail-body')}>
                         <div className={cx('job-detail-left')}>
                             <JobSearchDetailHeaderComponent job={job} />
-                            <TabCompanyComponent handleToInfo={handleToInfo} handleToCompany={handleToCompany} handleToRelated={handleToRelated} state={state} />
+                            <TabCompanyComponent
+                                handleToInfo={handleToInfo}
+                                handleToCompany={handleToCompany}
+                                handleToRelated={handleToRelated}
+                                state={state}
+                            />
                             <JobSearchDetailBodyComponent job={job} state={state} />
                         </div>
                         <div className={cx('job-detail-right')}>
@@ -166,6 +172,9 @@ const JobSearchDetailPage = () => {
                         </div>
                     </div>
                 </div>
+            </div>
+            <div className={cx('seo')}>
+                <SEOComponent />
             </div>
         </div>
     );

@@ -59,6 +59,7 @@ const icons = {
     icon_user: require('./icons/icon_user.png'),
     icon_user_group: require('./icons/icon_user_group.png'),
     icon_award: require('./icons/icon_award.png'),
+    icon_upload_cloud: require('./icons/icon_upload_cloud.png'),
 };
 
 const images = {

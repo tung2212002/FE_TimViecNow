@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 
@@ -16,10 +17,14 @@ import JobSearchDetailSuitableComponent from '../JobSearchDetailSuitableComponen
 import JobSearchDetailCompanyComponent from '../JobSearchDetailCompanyComponent/JobSearchDetailCompanyComponent';
 import JobSearchDetailReportComponent from '../JobSearchDetailReportComponent/JobSearchDetailReportComponent';
 import SuggestCourseSlideComponent from './SuggestCourseSlideComponent/SuggestCourseSlideComponent';
+import { showModal } from '../../../redux/features/modal/modalSlice';
+import Modal from '../../common/Modal/Modal';
+import ModalApplyComponent from '../../ModalApplyComponent/ModalApplyComponent';
 
 const cx = classNames.bind(styles);
 
 const JobSearchDetailBodyComponent = ({ job, state }) => {
+    const dispatch = useDispatch();
     const [stateTab, setStateTab] = useState('detail');
 
     const listDescription = [
@@ -1760,8 +1765,15 @@ const JobSearchDetailBodyComponent = ({ job, state }) => {
         },
     ];
 
+    const showApply = () => {
+        dispatch(showModal());
+    };
+
     return (
         <div className={cx('wrapper')} id="job-search-detail-body">
+            <Modal>
+                <ModalApplyComponent job={job} />
+            </Modal>
             <JobSearchDetailHeaderDynamicComponent job={job} state={stateTab} />
             <div className={cx('container')}>
                 <div className={cx('tab', state !== 'company' ? 'off' : '')}>
@@ -1791,11 +1803,15 @@ const JobSearchDetailBodyComponent = ({ job, state }) => {
                 </div>
                 <div className={cx('action', state !== 'info' ? 'off' : '')}>
                     <div className={cx('action-item', 'apply')}>
-                        <button className={cx('action-button')}>Ứng tuyển ngay</button>
+                        <button className={cx('action-button')} onClick={showApply}>
+                            Ứng tuyển ngay
+                        </button>
                         <button className={cx('action-button')}>Lưu tin</button>
                     </div>
                     <div className={cx('action-item', 'applied', 'hidden')}>
-                        <button className={cx('action-button')}>Ứng tuyển ngay</button>
+                        <button className={cx('action-button')} onClick={showApply}>
+                            Ứng tuyển ngay
+                        </button>
                         <button className={cx('action-button')}>Lưu tin</button>
                     </div>
                     <div className={cx('deadline')}>Hạn nộp hồ sơ: {job.deadline}</div>
@@ -1859,7 +1875,7 @@ const JobSearchDetailBodyComponent = ({ job, state }) => {
 
 JobSearchDetailBodyComponent.propTypes = {
     job: PropTypes.object.isRequired,
-    state: PropTypes.object.isRequired,
+    state: PropTypes.string.isRequired,
 };
 
 export default JobSearchDetailBodyComponent;

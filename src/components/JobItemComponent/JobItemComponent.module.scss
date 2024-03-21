@@ -7,10 +7,11 @@
     position: relative;
     width: 100%;
     box-sizing: border-box;
+    border: 1px solid #fff;
 
     &:hover {
         background: #f6f6f6;
-        outline: 1px solid #d3d5d9;
+        border: 1px solid #d3d5d9;
 
         .title-text {
             color: #00b14f !important;
