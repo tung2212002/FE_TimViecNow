@@ -98,6 +98,7 @@
         padding: 16px;
         width: 270px;
         // margin: 0 10px;
+        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 
         &:hover {
             border: 1px solid #33c172;

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -11,11 +11,22 @@ import PublicRoute from './PublicRoute';
 import PrivateRoute from './PrivateRoute';
 
 const AppRouter = () => {
+    // const path = window.location.pathname;
+    // const [side, setSide] = useState(path.startsWith('/tuyen-dung/app') ? 'employer' : 'candidate');
     const dispatch = useDispatch();
 
     const token = useSelector(selectToken);
 
+    // useEffect(() => {
+    //     if (path.startsWith('/tuyen-dung/app')) {
+    //         setSide('employer');
+    //     } else {
+    //         setSide('candidate');
+    //     }
+    // }, [path]);
+
     useEffect(() => {
+        getInfoService();
         if (!token) {
             const tokenFromLocalStorage = getLocalAccessToken();
             if (tokenFromLocalStorage) {

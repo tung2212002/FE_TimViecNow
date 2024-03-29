@@ -4,6 +4,14 @@
     width: 100%;
 }
 
+@media screen and (max-width: 768px){
+    .container{
+        width: 100% !important;
+        height: 100px!important;
+        justify-content: center !important;
+    }
+}
+
 .container {
     display: flex;
     align-items: center;

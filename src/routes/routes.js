@@ -1,6 +1,17 @@
-import { HomePage, Subpage, JobSearchPage, LoginPage, MatchingJobsPage, JobSearchDetailPage } from '../pages';
+import {
+    HomePage,
+    Subpage,
+    JobSearchPage,
+    LoginPage,
+    MatchingJobsPage,
+    JobSearchDetailPage,
+    ManagerRegisterPage,
+    ManagerLoginPage,
+    DashboardAdminPage,
+} from '../pages';
 import route from '../constants/route';
-import { ContentOnlyLayout } from '../layouts';
+import { ContentOnlyLayout, DashboardLayout } from '../layouts';
+import { DashboardCardPage, DashboardSearchCVPage, DashboardPostPage } from '../pages/DashboardAdminPage';
 
 export const publicRoutes = [
     {
@@ -42,6 +53,49 @@ export const publicRoutes = [
         restricted: false,
         positionHeader: 'relative',
     },
+    {
+        path: route.MANAGER_REGISTER,
+        component: ManagerRegisterPage,
+        isPrivate: false,
+        restricted: true,
+        layout: ContentOnlyLayout,
+    },
+    {
+        path: route.MANAGER_LOGIN,
+        component: ManagerLoginPage,
+        isPrivate: false,
+        restricted: true,
+        layout: ContentOnlyLayout,
+    },
+    {
+        path: route.DASHBOARD_ADMIN,
+        component: DashboardAdminPage,
+        isPrivate: false,
+        restricted: true,
+        layout: DashboardLayout,
+    },
+    {
+        path: route.DASHBOARD_POST,
+        component: DashboardPostPage,
+        isPrivate: false,
+        restricted: true,
+        layout: DashboardLayout,
+    },
+    {
+        path: route.DASHBOARD_SEARCH,
+        component: DashboardSearchCVPage,
+        isPrivate: false,
+        restricted: true,
+        layout: DashboardLayout,
+    },
+    {
+        path: route.DASHBOARD_CART,
+        component: DashboardCardPage,
+        isPrivate: false,
+        restricted: true,
+        layout: DashboardLayout,
+    },
+
     // { path: routes.notfound, component: NotFound},
 ];
 

@@ -147,11 +147,9 @@ const ChartJobHeaderComponent = ({ stateId }) => {
         };
 
         if (chartRef && chartRef.current) {
+            if (chartInstance) chartInstance.destroy();
             const chart = new Chart(chartRef.current, config);
             setChartInstance(chart);
-            return () => {
-                if (chartInstance) chartInstance.destroy();
-            };
         }
     }, [inputData]);
 

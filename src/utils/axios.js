@@ -27,6 +27,7 @@ const instance = (config = {}, auth = false) => {
         async (error) => {
             const originalRequest = error.config;
             if (error.response && error.response.status === 401 && !originalRequest._retry) {
+                console.log(originalRequest);
                 originalRequest._retry = true;
                 const refreshToken = getLocalRefreshToken();
                 if (refreshToken) {

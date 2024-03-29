@@ -6,6 +6,7 @@
     margin: auto auto 16px;
     padding: 12px;
     background-color: #f2fbf6;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 
     &:hover{
         background-color: #f2fbf6;

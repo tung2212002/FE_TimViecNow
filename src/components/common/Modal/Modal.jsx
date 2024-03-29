@@ -9,13 +9,22 @@ import { selectModal, hideModal } from '../../../redux/features/modal/modalSlice
 
 const cx = classNames.bind(styles);
 
-const Modal = ({ children, animation = true }) => {
+const Modal = ({ children, animation = true, cancel = true }) => {
     const show = useSelector(selectModal);
     const dispatch = useDispatch();
 
     const close = () => {
-        dispatch(hideModal());
+        if (cancel) {
+            dispatch(hideModal());
+        } else {
+            const modal = document.getElementById('wrapper-modal');
+            modal.classList.add(`${cx('scale')}`);
+            setTimeout(() => {
+                modal.classList.remove(`${cx('scale')}`);
+            }, 250);
+        }
     };
+
     useEffect(() => {
         if (show) {
             document.body.style.overflow = 'hidden';
@@ -27,7 +36,7 @@ const Modal = ({ children, animation = true }) => {
     }, [show]);
 
     return createPortal(
-        <div className={cx('wrapper', show ? 'show' : '')} onClick={() => close()}>
+        <div className={cx('wrapper', show ? 'show' : '', !cancel && 'prevent-cancel')} onClick={() => close()} id="wrapper-modal">
             <div className={cx('container', animation && 'animation')} onClick={(e) => e.stopPropagation()}>
                 {children}
             </div>
@@ -39,6 +48,7 @@ const Modal = ({ children, animation = true }) => {
 Modal.propTypes = {
     children: PropTypes.node,
     animation: PropTypes.bool,
+    cancel: PropTypes.bool,
 };
 
 export default Modal;
