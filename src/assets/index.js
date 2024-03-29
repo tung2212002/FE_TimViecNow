@@ -60,6 +60,8 @@ const icons = {
     icon_user_group: require('./icons/icon_user_group.png'),
     icon_award: require('./icons/icon_award.png'),
     icon_upload_cloud: require('./icons/icon_upload_cloud.png'),
+    icon_ring: require('./icons/icon_ring.png'),
+    icon_logo_text: require('./icons/icon_logo_text.png'),
 };
 
 const images = {
@@ -95,6 +97,9 @@ const images = {
     report_4: require('./images/report_4.png'),
     report_5: require('./images/report_5.png'),
     report_6: require('./images/report_6.png'),
+    bussiness: require('./images/bussiness.png'),
+    student: require('./images/student.png'),
+    banner_manager_login: require('./images/banner_manager_login.png'),
 };
 
 const gifs = {

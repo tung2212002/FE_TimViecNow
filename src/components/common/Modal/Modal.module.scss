@@ -34,3 +34,12 @@
         transform: translateY(0);
     }
 }
+
+.wrapper.prevent-cancel .container{
+    transition: all 0.1s linear;
+}
+
+.wrapper.scale .container {
+    transform: scale(1.01) !important;
+    transition: all 0.1s linear;
+}

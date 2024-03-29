@@ -11,6 +11,7 @@ import { loginService, registerService } from '../../services/authService';
 import { login } from '../../redux/features/auth/authSlide';
 import route from '../../constants/route';
 import useDocumentTitle from '../../hooks/useDocumentTitle';
+import regexValidator from '../../utils/regexValidator';
 
 const cx = classNames.bind(styles);
 
@@ -39,12 +40,6 @@ const LoginPage = () => {
         confirm_password: '',
     });
 
-    const regex = {
-        email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-        password: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,16}$/,
-        full_name: /^[a-zA-ZÀ-Ỹà-ỹ]+([- ]?[a-zA-ZÀ-Ỹà-ỹ]+)?([ ]?[a-zA-ZÀ-Ỹà-ỹ]+)?$/,
-    };
-
     const handleLogin = (e) => {
         e.preventDefault();
 
@@ -53,12 +48,12 @@ const LoginPage = () => {
             return;
         }
 
-        if (!regex.email.test(account.email)) {
+        if (!regexValidator.EMAIL.test(account.email)) {
             setMessage('Email không hợp lệ');
             return;
         }
 
-        if (!regex.password.test(account.password)) {
+        if (!regexValidator.PASSWORD.test(account.password)) {
             setMessage('Mật khẩu không hợp lệ');
             return;
         }
@@ -94,12 +89,12 @@ const LoginPage = () => {
             return;
         }
 
-        if (!regex.email.test(accountRegister.email)) {
+        if (!regexValidator.EMAIL.test(accountRegister.email)) {
             setMessage('Email không hợp lệ');
             return;
         }
 
-        if (!regex.password.test(accountRegister.password)) {
+        if (!regexValidator.PASSWORD.test(accountRegister.password)) {
             setMessage('Mật khẩu không hợp lệ');
             return;
         }
@@ -109,7 +104,7 @@ const LoginPage = () => {
             return;
         }
 
-        if (!regex.full_name.test(accountRegister.full_name)) {
+        if (!regexValidator.FULLNAME.test(accountRegister.full_name)) {
             setMessage('Họ và tên không hợp lệ');
             return;
         }

@@ -9,6 +9,8 @@ const cx = classNames.bind(styles);
 
 const ChartJobDemandComponent = ({ stateId }) => {
     const chartRef = useRef(null);
+    const [chartInstance, setChartInstance] = useState(null);
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
     const dataNumber1 = [
         {
@@ -179,21 +181,27 @@ const ChartJobDemandComponent = ({ stateId }) => {
     }, [stateId]);
 
     useEffect(() => {
-        const checkWidth = () => {
-            if (window.innerWidth < 768) {
-                chartRef.current.style.width = '320px';
-                chartRef.current.style.height = '220px';
-            } else {
-                chartRef.current.style.width = '352px';
-                chartRef.current.style.height = '220px';
-            }
+        const resizeHandler = () => {
+            setWindowWidth(window.innerWidth);
         };
-        checkWidth();
-        window.addEventListener('resize', checkWidth);
+
+        window.addEventListener('resize', resizeHandler);
+
         return () => {
-            window.removeEventListener('resize', checkWidth);
+            window.removeEventListener('resize', resizeHandler);
         };
     }, []);
+
+    useEffect(() => {
+        if (chartInstance) {
+            if (windowWidth <= 768) {
+                chartInstance.resize(320, 220);
+            } else {
+                chartInstance.resize(352, 220);
+            }
+            chartInstance.update();
+        }
+    }, [windowWidth, chartInstance]);
 
     return (
         <div className={cx('wrapper')}>

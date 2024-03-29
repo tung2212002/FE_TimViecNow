@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import classNames from 'classnames/bind';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 
-import { FaChevronDown, FaRegHeart, FaLaptopCode, FaBars } from 'react-icons/fa';
+import { FaBell, FaComments, FaChevronDown, FaRegHeart, FaLaptopCode } from 'react-icons/fa';
 import {
     FaMagnifyingGlass,
     FaListCheck,
@@ -15,31 +16,26 @@ import {
     FaRegCircleUp,
     FaArrowRightFromBracket,
 } from 'react-icons/fa6';
-import { IoBriefcaseOutline, IoCloseSharp, IoShieldCheckmarkOutline } from 'react-icons/io5';
+import { IoBriefcaseOutline, IoShieldCheckmarkOutline } from 'react-icons/io5';
 import { LiaMedalSolid } from 'react-icons/lia';
 import { RiFileUserLine } from 'react-icons/ri';
 import { TbFilePencil, TbFileCheck, TbUserSquare, TbFileCertificate, TbCoins, TbPigMoney, TbGift, TbEye, TbSettings } from 'react-icons/tb';
 import { BiBuildings, BiShieldX, BiEnvelope, BiLockAlt } from 'react-icons/bi';
 
-import styles from './HeaderHiddenComponent.module.scss';
-import { gifs, images } from '../../assets';
-import { selectAuth } from '../../redux/features/auth/authSlide';
-import { logoutService } from '../../services/authService';
-import { logout } from '../../redux/features/auth/authSlide';
-import NavBarMenuComponent from '../NavBarMenuComponent/NavBarMenuComponent';
-import NavBarMenuItemComponent from '../NavBarMenuItemComponent/NavBarMenuItemComponent';
-import route from '../../constants/route';
+import styles from './HeaderComponent.module.scss';
+import { icons, gifs, images } from '../../../assets';
+import { selectAuth } from '../../../redux/features/auth/authSlide';
+import { logoutService } from '../../../services/authService';
+import { logout } from '../../../redux/features/auth/authSlide';
+import NavBarMenuComponent from '../../NavBarMenuComponent/NavBarMenuComponent';
+import NavBarMenuItemComponent from '../../NavBarMenuItemComponent/NavBarMenuItemComponent';
+import route from '../../../constants/route';
 
 const cx = classNames.bind(styles);
 
-const HeaderHiddenComponent = () => {
+const HeaderComponent = ({ positionHeader }) => {
     const auth = useSelector(selectAuth);
     const dispatch = useDispatch();
-
-    const [dropdownId, setDropdownId] = useState(null);
-    const [show, setShow] = useState(false);
-
-    const idItemAuth = 0;
 
     const handleLogout = () => {
         logoutService().then(() => {
@@ -49,7 +45,6 @@ const HeaderHiddenComponent = () => {
 
     const navItems = [
         {
-            id: 1,
             label: 'Việc làm',
             to: route.JOB_SEARCH,
             subItems: [
@@ -94,7 +89,6 @@ const HeaderHiddenComponent = () => {
             ],
         },
         {
-            id: 2,
             label: 'Hồ sơ & CV',
             to: route.SUBPAGE,
             subItems: [
@@ -147,7 +141,6 @@ const HeaderHiddenComponent = () => {
             ],
         },
         {
-            id: 3,
             label: 'Công ty',
             to: route.SUBPAGE,
             subItems: [
@@ -164,7 +157,6 @@ const HeaderHiddenComponent = () => {
             ],
         },
         {
-            id: 4,
             label: 'Phát triển sự nghiệp',
             to: '/',
             subItems: [
@@ -195,7 +187,6 @@ const HeaderHiddenComponent = () => {
             ],
         },
         {
-            id: 5,
             label: 'Công cụ',
             to: '/',
             subItems: [
@@ -235,7 +226,11 @@ const HeaderHiddenComponent = () => {
                 },
             ],
         },
-        { id: 6, label: 'Mở quà - Đón lợi thế', to: '/', icon: gifs.gift_menu },
+        {
+            label: 'Mở quà - Đón lợi thế',
+            to: '/',
+            icon: gifs.gift_menu,
+        },
     ];
 
     const accountItems = [
@@ -290,137 +285,105 @@ const HeaderHiddenComponent = () => {
         },
     ];
 
-    const handleDropdown = (id) => {
-        if (dropdownId === id) {
-            setDropdownId(null);
-        } else {
-            setDropdownId(id);
-        }
-    };
-
     return (
-        <div className={cx('wrapper', show && 'down')}>
-            <div className={cx('navbar-mobile')} onClick={() => setShow(!show)}>
-                {!show ? <FaBars className={cx('icon-menu', 'bars')} /> : <IoCloseSharp className={cx('icon-menu', 'close')} />}
-            </div>
+        <header className={cx('wrapper')} style={{ position: positionHeader ? positionHeader : '' }}>
             <div className={cx('container')}>
-                {auth.isAuth && (
-                    <div className={cx('nav-item', 'item', dropdownId === idItemAuth && 'show')} onClick={() => handleDropdown(idItemAuth)}>
-                        <div className={cx('content', 'account-content')}>
-                            <div className={cx('container-nav', 'account')}>
-                                <NavLink to={route.HOMEPAGE} className={cx('link', 'account-link')} activeclassname={cx('active')}>
-                                    <img
-                                        className={cx('avatar')}
-                                        src={auth.user.picture_path !== '-1' ? auth.user.picture_path : images.avatar_default}
-                                        alt="avatar"
-                                    />
-                                    <div className={cx('info')}>
-                                        <span className={cx('name')}>{auth.user.full_name}</span>
-                                        <span className={cx('detail')}>
-                                            Mã ứng viên: #<span className={cx('code')}>{auth.user.id}</span>
-                                        </span>
-                                        <span className={cx('email')}>{auth.user.email}</span>
-                                    </div>
-                                </NavLink>
-                            </div>
-
-                            <button className={cx('btn-expand', dropdownId === idItemAuth && 'active')}>
-                                <FaChevronDown className={cx('icon-expand')} />
-                            </button>
-                        </div>
-                        <div className={cx('menu')}>
-                            <NavBarMenuComponent styles={{ borderTopLeftRadius: '0', borderTopRightRadius: '0', paddingTop: '20px' }}>
-                                {accountItems.map((subItem, subIndex) => (
-                                    <NavBarMenuItemComponent
-                                        key={subIndex}
-                                        icon={subItem.icon}
-                                        label={subItem.label}
-                                        to={subItem.to}
-                                        badgeId={subItem.badgeId}
-                                        size={subItem.size}
-                                        addHr={subItem.addHr}
-                                        handleClick={subItem.onClick}
-                                    />
-                                ))}
-                            </NavBarMenuComponent>
-                        </div>
-                    </div>
-                )}
-                {!auth.isAuth && <h2 className={cx('title')}>Dành cho ứng viên</h2>}
-                {!auth.isAuth && (
-                    <div className={cx('nav-item', 'item')}>
-                        <div className={cx('content')}>
-                            <div className={cx('container-nav')}>
-                                <NavLink to={route.JOB_SEARCH} className={cx('link')} activeclassname={cx('active')}>
-                                    Đăng ký thành viên mới
-                                </NavLink>
-                            </div>
-                        </div>
-                    </div>
-                )}
-
-                {!auth.isAuth && (
-                    <div className={cx('nav-item', 'item')}>
-                        <div className={cx('content')}>
-                            <div className={cx('container-nav')}>
-                                <NavLink to={route.LOGIN} className={cx('link')} activeclassname={cx('active')}>
-                                    Đăng nhập
-                                </NavLink>
-                            </div>
-                        </div>
-                    </div>
-                )}
-
-                {navItems.map((item, index) => (
-                    <div className={cx('nav-item', 'item', dropdownId === item.id && 'show')} key={index} onClick={() => handleDropdown(item.id)}>
-                        <div className={cx('content')}>
-                            <div className={cx('container-nav')}>
-                                <NavLink to={item.to} className={cx('link')} activeclassname={cx('active')}>
-                                    {item.label}
-                                    {item.icon && <img className={cx('icon')} src={item.icon} alt="gift" />}
-                                </NavLink>
-                            </div>
+                <div className={cx('navbar-left')}>
+                    <h1 className={cx('logo-wrapper')}>
+                        <a className={cx('link', 'logo-link')} href={route.HOMEPAGE}>
+                            <img className={cx('logo-img')} src={icons.logo} alt="Tìm việc Now TVN" title="Tìm việc Now tuyển dụng tại Việt Nam" />
+                        </a>
+                    </h1>
+                </div>
+                <ul className={cx('navbar-mid')}>
+                    {navItems.map((item, index) => (
+                        <li key={index} className={cx('item', 'nav-item')}>
+                            <NavLink to={item.to} className={cx('link')} activeclassname={cx('active')}>
+                                <div className={cx('label')}>{item.label}</div>
+                                {item.icon && <img className={cx('icon')} src={item.icon} alt="gift" />}
+                            </NavLink>
                             {item.subItems && (
-                                <button className={cx('btn-expand', dropdownId === item.id && 'active')}>
-                                    <FaChevronDown className={cx('icon-expand')} />
-                                </button>
+                                <div className={cx('menu')}>
+                                    <NavBarMenuComponent key={index}>
+                                        {item.subItems.map((subItem, subIndex) => (
+                                            <NavBarMenuItemComponent
+                                                key={subIndex}
+                                                icon={subItem.icon}
+                                                label={subItem.label}
+                                                to={subItem.to}
+                                                badgeId={subItem.badgeId}
+                                                size={subItem.size}
+                                                addHr={subItem.addHr}
+                                            />
+                                        ))}
+                                    </NavBarMenuComponent>
+                                </div>
                             )}
-                        </div>
-                        {item.subItems && (
-                            <div className={cx('menu')}>
-                                <NavBarMenuComponent key={index} styles={{ borderTopLeftRadius: '0', borderTopRightRadius: '0', paddingTop: '20px' }}>
-                                    {item.subItems.map((subItem, subIndex) => (
+                        </li>
+                    ))}
+                </ul>
+                {auth.isAuth ? (
+                    <ul className={cx('navbar-right')}>
+                        <li className={cx('item')}>
+                            <a to="/login" className={cx('link')}>
+                                <FaBell className={cx('icon', 'bell')} />
+                            </a>
+                        </li>
+                        <li className={cx('item')}>
+                            <a to="/login" className={cx('link')}>
+                                <FaComments className={cx('icon', 'comments')} />
+                            </a>
+                        </li>
+                        <li className={cx('avatar-container')}>
+                            <div className={cx('avatar-bg')}>
+                                <a to="/login" className={cx('avatar-link')}>
+                                    <img className={cx('avatar')} src={images.avatar_default} alt="avatar" />
+                                    <span className={cx('text')}>{auth.user?.full_name}</span>
+                                    <FaChevronDown className={cx('icon', 'chevron-down')} />
+                                </a>
+                            </div>
+                            <div className={cx('account-menu')}>
+                                <NavBarMenuComponent>
+                                    {accountItems.map((item, index) => (
                                         <NavBarMenuItemComponent
-                                            key={subIndex}
-                                            icon={subItem.icon}
-                                            label={subItem.label}
-                                            to={subItem.to}
-                                            badgeId={subItem.badgeId}
-                                            size={subItem.size}
-                                            addHr={subItem.addHr}
+                                            key={index}
+                                            icon={item.icon}
+                                            label={item.label}
+                                            to={item.to}
+                                            addHr={item.addHr}
+                                            handleClick={item.onClick}
                                         />
                                     ))}
                                 </NavBarMenuComponent>
                             </div>
-                        )}
-                    </div>
-                ))}
-
-                {!auth.isAuth && <h2 className={cx('title')}>Dành cho nhà tuyển dụng</h2>}
-                {!auth.isAuth && (
-                    <div className={cx('nav-item', 'item')}>
-                        <div className={cx('content')}>
-                            <div className={cx('container-nav')}>
-                                <NavLink to={route.JOB_SEARCH} className={cx('link')} activeclassname={cx('active')}>
-                                    Đăng tuyển & tìm hồ sơ
-                                </NavLink>
-                            </div>
-                        </div>
-                    </div>
+                        </li>
+                    </ul>
+                ) : (
+                    <ul className={cx('navbar-right')}>
+                        <Link to={route.LOGIN}>
+                            <li className={cx('btn', 'login-btn')}>
+                                <span className={cx('text')}>Đăng nhập</span>
+                            </li>
+                        </Link>
+                        <Link to={route.REGISTER}>
+                            <li className={cx('btn', 'register-btn')}>
+                                <span className={cx('text')}>Đăng ký</span>
+                            </li>
+                        </Link>
+                        <Link to={route.MANAGER_REGISTER} target="_blank">
+                            <li className={cx('btn', 'post-job-btn')}>
+                                <span className={cx('text')}>Đăng tuyển và tìm hồ sơ</span>
+                            </li>
+                        </Link>
+                    </ul>
                 )}
             </div>
-        </div>
+        </header>
     );
 };
 
-export default HeaderHiddenComponent;
+HeaderComponent.propTypes = {
+    positionHeader: PropTypes.string,
+};
+
+export default HeaderComponent;
