@@ -7,12 +7,13 @@ import { PiLockOpenBold } from 'react-icons/pi';
 import { FaEye, FaEyeSlash, FaRegEnvelope } from 'react-icons/fa';
 
 import styles from './ManagerLoginPage.module.scss';
-import { loginService } from '../../services/authService';
-import { login } from '../../redux/features/auth/authSlide';
 import useDocumentTitle from '../../hooks/useDocumentTitle';
 import regexValidator from '../../utils/regexValidator';
 import path from '../../constants/path';
 import { icons } from '../../assets/index';
+import { loginBusinessService } from '../../services/businessAuthService';
+import { login } from '../../redux/features/authBusiness/authSlide';
+import { addToast, removeToast } from '../../redux/features/toast/toastSlice';
 
 const cx = classNames.bind(styles);
 
@@ -31,6 +32,19 @@ const ManagerLoginPage = () => {
         email: '',
         password: '',
     });
+
+    const handleAddToast = (title, message, type) => {
+        const newToast = {
+            id: Math.random().toString(36).slice(2),
+            title,
+            message,
+            type,
+        };
+        dispatch(addToast(newToast));
+        setTimeout(() => {
+            dispatch(removeToast(newToast.id));
+        }, 3000);
+    };
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -55,20 +69,24 @@ const ManagerLoginPage = () => {
             password: account.password,
         };
 
-        loginService(data)
+        loginBusinessService(data)
             .then((res) => {
                 if (res.status === 200) {
                     dispatch(login(res.data.data));
                 } else if (res.status === 400) {
-                    setMessage('Email hoặc mật khẩu không hợp lệ');
+                    handleAddToast('Cảnh báo', 'Email hoặc mật khẩu không hợp lệ', 'warning');
+                    // setMessage('Email hoặc mật khẩu không hợp lệ');
                 } else if (res.status === 401) {
-                    setMessage('Mật khẩu không chính xác');
+                    handleAddToast('Lỗi', 'Mật khẩu không chính xác', 'error');
+                    // setMessage('Mật khẩu không chính xác');
                 } else if (res.status === 404) {
-                    setMessage('Tài khoản không tồn tại');
+                    handleAddToast('Lỗi', 'Tài khoản không tồn tại', 'error');
+                    // setMessage('Tài khoản không tồn tại');
                 }
             })
             .catch((err) => {
-                setMessage('Lỗi không xác định');
+                handleAddToast('Lỗi', 'Lỗi không xác định', 'error');
+                // setMessage('Lỗi không xác định');
                 console.log(err);
             });
     };

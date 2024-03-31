@@ -62,6 +62,9 @@ const icons = {
     icon_upload_cloud: require('./icons/icon_upload_cloud.png'),
     icon_ring: require('./icons/icon_ring.png'),
     icon_logo_text: require('./icons/icon_logo_text.png'),
+    icon_point: require('./icons/icon_point.svg'),
+    icon_top_point: require('./icons/icon_top_point.png'),
+    icon_check_mark: require('./icons/icon_check_mark.png'),
 };
 
 const images = {
@@ -100,6 +103,15 @@ const images = {
     bussiness: require('./images/bussiness.png'),
     student: require('./images/student.png'),
     banner_manager_login: require('./images/banner_manager_login.png'),
+    banner_dash1: require('./images/banner_dash1.png'),
+    banner_dash2: require('./images/banner_dash2.png'),
+    banner_dash3: require('./images/banner_dash3.png'),
+    banner_dash4: require('./images/banner_dash4.png'),
+    banner_eKYC: require('./images/banner_eKYC.png'),
+    chart_recruitment: require('./images/chart_recruitment.png'),
+    member: require('./images/member.png'),
+    subtract: require('./images/subtract.svg'),
+    invoice_service_empty: require('./images/invoice_service_empty.png'),
 };
 
 const gifs = {

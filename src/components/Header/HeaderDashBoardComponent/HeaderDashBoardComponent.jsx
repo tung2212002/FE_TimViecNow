@@ -1,3 +1,4 @@
+import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import { Link, useLocation } from 'react-router-dom';
@@ -9,17 +10,39 @@ import styles from './HeaderDashBoardComponent.module.scss';
 import path from '../../../constants/path';
 import { FaBars } from 'react-icons/fa6';
 import { icons, images } from '../../../assets';
+import { logout } from '../../../redux/features/authBusiness/authSlide';
+import { logoutBusinessService } from '../../../services/businessAuthService';
 
 const cx = classNames.bind(styles);
 
 const HeaderDashBoardComponent = () => {
+    const dispatch = useDispatch();
+
     const location = useLocation();
     const [showMenu, setShowMenu] = useState(false);
     const [pathActive, setPathActive] = useState(location.pathname + (location.search ? location.search : ''));
+    const [process, setProcess] = useState({
+        process: 0,
+        isFinish: true,
+    });
+    const [canFinish, setCanFinish] = useState(false);
+    const [shouldSpeedUp, setShouldSpeedUp] = useState(false);
 
     const useDocumentTitle = (title) => {
         document.title = title;
     };
+
+    const handleLogout = () => {
+        logoutBusinessService().then(() => {
+            dispatch(logout());
+        });
+    };
+
+    useEffect(() => {
+        if (canFinish) {
+            setShouldSpeedUp(true); // Đặt biến trung gian để chỉ định muốn tăng tốc
+        }
+    }, [canFinish]);
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -37,25 +60,56 @@ const HeaderDashBoardComponent = () => {
     }, []);
 
     useEffect(() => {
-        setPathActive(location.pathname + (location.search ? location.search : ''));
+        if (process.isFinish) return;
+
+        let currentProgress = 0;
+        const interval = setInterval(() => {
+            currentProgress += shouldSpeedUp ? 5 : 1;
+            setProcess({
+                process: currentProgress,
+                isFinish: currentProgress >= 100,
+            });
+            if (currentProgress >= 100) {
+                clearInterval(interval);
+                setProcess({
+                    process: 0,
+                    isFinish: true,
+                });
+                setShouldSpeedUp(false);
+                setCanFinish(false);
+            }
+        }, 20);
+
+        return () => {
+            clearInterval(interval);
+        };
+    }, [process.isFinish, shouldSpeedUp]);
+
+    useEffect(() => {
         switch (location.pathname + (location.search ? location.search : '')) {
             case path.DASHBOARD_ADMIN:
                 useDocumentTitle('HR Insider');
+                setPathActive(path.DASHBOARD_ADMIN);
                 break;
             case path.DASHBOARD_POST:
                 useDocumentTitle('Đăng tin');
+                setPathActive(path.DASHBOARD_POST);
                 break;
             case path.DASHBOARD_SEARCH:
                 useDocumentTitle('Tìm CV');
+                setPathActive(path.DASHBOARD_SEARCH);
                 break;
             case path.DASHBOARD_CART:
                 useDocumentTitle('Giỏ hàng');
+                setPathActive(path.DASHBOARD_CART);
                 break;
             case path.DASHBOARD_HOME:
                 useDocumentTitle('Trang chủ');
+                setPathActive(path.DASHBOARD_HOME);
                 break;
             default:
                 useDocumentTitle('Trang chủ');
+                setPathActive(path.DASHBOARD_HOME);
                 break;
         }
     }, [location]);
@@ -63,6 +117,7 @@ const HeaderDashBoardComponent = () => {
     return (
         <div className={cx('wrapper')}>
             <nav className={cx('navbar')}>
+                {process.process > 0 && process.process < 100 && <div className={cx('process-bar')} style={{ width: `${process.process}%` }}></div>}
                 <button className={cx('btn-menu')}>
                     <FaBars className={cx('icon', 'icon-menu')} />
                 </button>
@@ -141,6 +196,7 @@ const HeaderDashBoardComponent = () => {
                                             onClick={(e) => {
                                                 e.stopPropagation();
                                                 e.preventDefault();
+                                                handleLogout();
                                                 setShowMenu(false);
                                             }}
                                         >

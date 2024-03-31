@@ -22,6 +22,17 @@
     align-items: center;
     height: 100%;
     flex-flow: row nowrap;
+    position: relative;
+
+    .process-bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background-color: #da4538;
+        z-index: 999;
+    }
 }
 
 .btn-menu {
@@ -66,19 +77,17 @@
     }
 
     .navbar__main-item {
-
     }
 
     .navbar__main-link {
         display: flex;
         align-items: center;
         height: 100%;
-
     }
     .navbar__main-wrapper {
-        height: 100%;
+        // height: 100%;
         border-radius: 30px;
-        padding: 5px 15px;
+        padding: 3px 15px;
         background-color: #3b546f;
         color: #fff;
         font-size: 14px;
@@ -86,14 +95,13 @@
         align-items: center;
         gap: 5px;
         line-height: 21px;
-        border: 2px solid transparent;
-
+        border: 3px solid transparent;
         transition: all 0.3s ease;
     }
 
     .isActive .navbar__main-wrapper {
         opacity: 0.8;
-        border: 2px solid #fff;
+        border: 3px solid rgba(255, 255, 255, 0.3);
     }
 
     .icon {
@@ -141,7 +149,7 @@
         right: -8px;
     }
 
-    .count{
+    .count {
         float: right;
         width: 22px;
         background: #da4538;
@@ -170,12 +178,11 @@
     .icon-down {
         margin-left: 4px;
         font-size: 18px;
-
     }
 
-    .menu-avatar{
+    .menu-avatar {
         position: relative;
-        padding: 5px 8px;;
+        padding: 2px 4px;
         margin-right: 10px;
         gap: 0;
     }
@@ -184,24 +191,28 @@
         position: absolute;
         right: 10px;
         bottom: -54px;
-        box-shadow: -3px 3px 6px rgba(0,0,0,.2);
+        box-shadow: -3px 3px 6px rgba(0, 0, 0, 0.2);
         background-color: #fff;
         border-radius: 4px;
         max-height: 0;
         opacity: 0;
         overflow: hidden;
         transition: all 0.3s ease;
-        
+
         &.show {
             max-height: 200px;
             opacity: 1;
         }
     }
-    
+
     .navbar__main-dropdown-item {
         font-size: 14px;
         padding: 8px 16px;
         width: 100px;
         height: 40px;
+
+        &:hover {
+            background-color: #f0f0f0;
+        }
     }
 }

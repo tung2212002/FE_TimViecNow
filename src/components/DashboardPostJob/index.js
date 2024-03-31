@@ -1,0 +1,3 @@
+import DashboardJpostJobSelectCampaignComponent from './DashboardJpostJobSelectCampaign/DashboardJpostJobSelectCampaignComponent';
+
+export { DashboardJpostJobSelectCampaignComponent };

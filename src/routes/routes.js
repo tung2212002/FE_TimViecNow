@@ -11,7 +11,14 @@ import {
 } from '../pages';
 import route from '../constants/route';
 import { ContentOnlyLayout, DashboardLayout } from '../layouts';
-import { DashboardCardPage, DashboardSearchCVPage, DashboardPostPage } from '../pages/DashboardAdminPage';
+import {
+    DashboardCardPage,
+    DashboardSearchCVPage,
+    DashboardPostPage,
+    DashboardInvoicePage,
+    DashboardPostCampaignPage,
+    DashboardPostJobPage,
+} from '../pages/DashboardAdminPage';
 
 export const publicRoutes = [
     {
@@ -67,34 +74,6 @@ export const publicRoutes = [
         restricted: true,
         layout: ContentOnlyLayout,
     },
-    {
-        path: route.DASHBOARD_ADMIN,
-        component: DashboardAdminPage,
-        isPrivate: false,
-        restricted: true,
-        layout: DashboardLayout,
-    },
-    {
-        path: route.DASHBOARD_POST,
-        component: DashboardPostPage,
-        isPrivate: false,
-        restricted: true,
-        layout: DashboardLayout,
-    },
-    {
-        path: route.DASHBOARD_SEARCH,
-        component: DashboardSearchCVPage,
-        isPrivate: false,
-        restricted: true,
-        layout: DashboardLayout,
-    },
-    {
-        path: route.DASHBOARD_CART,
-        component: DashboardCardPage,
-        isPrivate: false,
-        restricted: true,
-        layout: DashboardLayout,
-    },
 
     // { path: routes.notfound, component: NotFound},
 ];
@@ -105,6 +84,55 @@ export const privateRoutes = [
         component: MatchingJobsPage,
         isPrivate: true,
         restricted: true,
+    },
+    {
+        path: route.DASHBOARD_ADMIN,
+        component: DashboardAdminPage,
+        isPrivate: true,
+        restricted: true,
+        layout: DashboardLayout,
+    },
+    {
+        path: route.DASHBOARD_POST,
+        component: DashboardPostPage,
+        isPrivate: true,
+        restricted: true,
+        layout: DashboardLayout,
+    },
+    {
+        path: route.DASHBOARD_SEARCH,
+        component: DashboardSearchCVPage,
+        isPrivate: true,
+        restricted: true,
+        layout: DashboardLayout,
+    },
+    {
+        path: route.DASHBOARD_CART,
+        component: DashboardCardPage,
+        isPrivate: true,
+        restricted: true,
+        layout: DashboardLayout,
+    },
+    {
+        path: route.DASHBOARD_INVOICE,
+        component: DashboardInvoicePage,
+        isPrivate: true,
+        restricted: true,
+        layout: DashboardLayout,
+    },
+    {
+        path: route.DASHBOARD_POST_CAMPAIGN,
+        component: DashboardPostCampaignPage,
+        isPrivate: true,
+        restricted: true,
+        layout: DashboardLayout,
+    },
+    {
+        path: route.DASHBOARD_POST_JOB,
+        component: DashboardPostJobPage,
+        isPrivate: true,
+        restricted: true,
+        layout: DashboardLayout,
     },
     // { path: routes.notfound, component: NotFound},
 ];

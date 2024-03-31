@@ -1,3 +1,4 @@
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 
@@ -12,10 +13,15 @@ import { SelectionComponent } from '../../common';
 import path from '../../../constants/path';
 import regexValidator from '../../../utils/regexValidator';
 import { Link } from 'react-router-dom';
+import { getListDistrictService, getListProvinceService } from '../../../services/locationService';
+import { registerBusinessService } from '../../../services/businessAuthService';
+import { login, selectBusiness } from '../../../redux/features/authBusiness/authSlide';
+import { addToast, removeToast } from '../../../redux/features/toast/toastSlice';
 
 const cx = classNames.bind(styles);
 
 const RegisterFormManagerComponent = () => {
+    const dispatch = useDispatch();
     const [state, setState] = useState({
         isAgree: false,
         canSubmit: false,
@@ -24,31 +30,33 @@ const RegisterFormManagerComponent = () => {
         email: '',
         password: '',
         confirm_password: '',
-        fullname: '',
+        full_name: '',
         gender: '',
         phone_number: '',
         company: '',
         work_position: '',
-        work_location: '',
-        district: '',
-        location: '',
+        district_id: -1,
+        province_id: -1,
         account_skype: '',
+        work_location: '',
     });
-    const requiredFields = ['email', 'password', 'confirm_password', 'fullname', 'phone_number', 'company', 'work_position', 'work_location', 'gender'];
+    const requiredFields = ['email', 'password', 'confirm_password', 'full_name', 'phone_number', 'company', 'work_position', 'province_id', 'gender'];
     const [error, setError] = useState({
         email: '',
         password: '',
         confirm_password: '',
-        fullname: '',
+        full_name: '',
         phone_number: '',
         company: '',
         work_position: '',
-        work_location: '',
-        district: '',
-        location: '',
+        district_id: -1,
+        province_id: -1,
         gender: '.',
         isError: true,
     });
+
+    const [province, setProvince] = useState([]);
+    const [district, setDistrict] = useState([]);
 
     const positionList = [
         { value: '0', name: 'Nhân viên' },
@@ -59,137 +67,44 @@ const RegisterFormManagerComponent = () => {
         { value: '5', name: 'Giám đốc' },
         { value: '6', name: 'Tổng giám đốc' },
     ];
-    const provinceList = [
-        { value: '1', name: 'Hà Nội' },
-        { value: '2', name: 'Hồ Chí Minh' },
-        { value: '3', name: 'Bình Dương' },
-        { value: '4', name: 'Bắc Ninh' },
-        { value: '5', name: 'Đồng Nai' },
-        { value: '6', name: 'Hưng Yên' },
-        { value: '7', name: 'Hải Dương' },
-        { value: '8', name: 'Đà Nẵng' },
-        { value: '9', name: 'Hải Phòng' },
-        { value: '10', name: 'An Giang' },
-        { value: '11', name: 'Bà Rịa-Vũng Tàu' },
-        { value: '12', name: 'Bắc Giang' },
-        { value: '13', name: 'Bắc Kạn' },
-        { value: '14', name: 'Bạc Liêu' },
-        { value: '15', name: 'Bến Tre' },
-        { value: '16', name: 'Bình Định' },
-        { value: '17', name: 'Bình Phước' },
-        { value: '18', name: 'Bình Thuận' },
-        { value: '19', name: 'Cà Mau' },
-        { value: '20', name: 'Cần Thơ' },
-        { value: '21', name: 'Cao Bằng' },
-        { value: '22', name: 'Cửu Long' },
-        { value: '23', name: 'Đắk Lắk' },
-        { value: '24', name: 'Đắc Nông' },
-        { value: '25', name: 'Điện Biên' },
-        { value: '26', name: 'Đồng Tháp' },
-        { value: '27', name: 'Gia Lai' },
-        { value: '28', name: 'Hà Giang' },
-        { value: '29', name: 'Hà Nam' },
-        { value: '30', name: 'Hà Tĩnh' },
-        { value: '31', name: 'Hậu Giang' },
-        { value: '32', name: 'Hoà Bình' },
-        { value: '33', name: 'Khánh Hoà' },
-        { value: '34', name: 'Kiên Giang' },
-        { value: '35', name: 'Kon Tum' },
-        { value: '36', name: 'Lai Châu' },
-        { value: '37', name: 'Lâm Đồng' },
-        { value: '38', name: 'Lạng Sơn' },
-        { value: '39', name: 'Lào Cai' },
-        { value: '40', name: 'Long An' },
-        { value: '41', name: 'Miền Bắc' },
-        { value: '42', name: 'Miền Nam' },
-        { value: '43', name: 'Miền Trung' },
-        { value: '44', name: 'Nam Định' },
-        { value: '45', name: 'Nghệ An' },
-        { value: '46', name: 'Ninh Bình' },
-        { value: '47', name: 'Ninh Thuận' },
-        { value: '48', name: 'Phú Thọ' },
-        { value: '49', name: 'Phú Yên' },
-        { value: '50', name: 'Quảng Bình' },
-        { value: '51', name: 'Quảng Nam' },
-        { value: '52', name: 'Quảng Ngãi' },
-        { value: '53', name: 'Quảng Ninh' },
-        { value: '54', name: 'Quảng Trị' },
-        { value: '55', name: 'Sóc Trăng' },
-        { value: '56', name: 'Sơn La' },
-        { value: '57', name: 'Tây Ninh' },
-        { value: '58', name: 'Thái Bình' },
-        { value: '59', name: 'Thái Nguyên' },
-        { value: '60', name: 'Thanh Hoá' },
-        { value: '61', name: 'Thừa Thiên Huế' },
-        { value: '62', name: 'Tiền Giang' },
-        { value: '63', name: 'Toàn Quốc' },
-        { value: '64', name: 'Trà Vinh' },
-        { value: '65', name: 'Tuyên Quang' },
-        { value: '66', name: 'Vĩnh Long' },
-        { value: '67', name: 'Vĩnh Phúc' },
-        { value: '68', name: 'Yên Bái' },
-        { value: '100', name: 'Nước Ngoài' },
-    ];
 
-    const districtList = [
-        {
-            value: 301,
-            title: 'D\u1ea7u Ti\u1ebfng',
-            name: 'D\u1ea7u Ti\u1ebfng - B\u00ecnh D\u01b0\u01a1ng',
-            alias: 'dau-tieng-binh-duong',
-        },
-        {
-            value: 302,
-            title: 'Ph\u00fa Gi\u00e1o',
-            name: 'Ph\u00fa Gi\u00e1o - B\u00ecnh D\u01b0\u01a1ng',
-            alias: 'phu-giao-binh-duong',
-        },
-        {
-            value: 303,
-            title: 'D\u0129 An',
-            name: 'D\u0129 An - B\u00ecnh D\u01b0\u01a1ng',
-            alias: 'di-an-binh-duong',
-        },
-        {
-            value: 304,
-            title: 'Thu\u1eadn An',
-            name: 'Thu\u1eadn An - B\u00ecnh D\u01b0\u01a1ng',
-            alias: 'thuan-an-binh-duong',
-        },
-        {
-            value: 305,
-            title: 'T\u00e2n Uy\u00ean',
-            name: 'T\u00e2n Uy\u00ean - B\u00ecnh D\u01b0\u01a1ng',
-            alias: 'tan-uyen-binh-duong',
-        },
-        {
-            value: 306,
-            title: 'B\u1ebfn C\u00e1t',
-            name: 'B\u1ebfn C\u00e1t - B\u00ecnh D\u01b0\u01a1ng',
-            alias: 'ben-cat-binh-duong',
-        },
-        {
-            value: 307,
-            title: 'Th\u1ee7 D\u1ea7u M\u1ed9t',
-            name: 'Th\u1ee7 D\u1ea7u M\u1ed9t - B\u00ecnh D\u01b0\u01a1ng',
-            alias: 'thu-dau-1-binh-duong',
-        },
-        {
-            value: 6810,
-            title: 'B\u1eafc T\u00e2n Uy\u00ean',
-            name: 'B\u1eafc T\u00e2n Uy\u00ean - B\u00ecnh D\u01b0\u01a1ng',
-            alias: 'bac-tan-uyen-binh-duong',
-        },
-        {
-            value: 6811,
-            title: 'B\u00e0u B\u00e0ng',
-            name: 'B\u00e0u B\u00e0ng - B\u00ecnh D\u01b0\u01a1ng',
-            alias: 'bau-bang-binh-duong',
-        },
-    ];
+    const handleAddToast = (title, message, type) => {
+        const newToast = {
+            id: Math.random().toString(36).slice(2),
+            title,
+            message,
+            type,
+        };
+        dispatch(addToast(newToast));
+        setTimeout(() => {
+            dispatch(removeToast(newToast.id));
+        }, 3000);
+    };
 
     const handleSubmit = () => {
-        console.log('info', info);
+        const data = new FormData();
+        for (let key in info) {
+            if (key === 'district_id') {
+                data.append(key, info[key] === -1 ? '' : info[key]);
+                continue;
+            }
+            data.append(key, info[key]);
+        }
+
+        registerBusinessService(data)
+            .then((res) => {
+                if (res.status === 201) {
+                    dispatch(login(res.data.data));
+                } else if (res.status === 409) {
+                    handleAddToast('Cảnh báo', 'Email đã tồn tại', 'warning');
+                } else if (res.status === 400) {
+                    handleAddToast('Cảnh báo', 'Dữ liệu không hợp lệ', 'warning');
+                }
+            })
+            .catch((err) => {
+                handleAddToast('Lỗi', 'Lỗi không xác định', 'error');
+                console.log(err);
+            });
     };
 
     const [showPassword, setShowPassword] = useState({
@@ -233,7 +148,7 @@ const RegisterFormManagerComponent = () => {
                         ? 'Nhập lại mật khẩu không đúng'
                         : '';
                 break;
-            case 'fullname':
+            case 'full_name':
                 newError =
                     value.trim().length === 0
                         ? 'Họ và tên không được để trống'
@@ -257,8 +172,8 @@ const RegisterFormManagerComponent = () => {
             case 'work_position':
                 newError = value.length === 0 ? 'Vị trí công tác không được để trống' : '';
                 break;
-            case 'work_location':
-                newError = value.length === 0 ? 'Địa điểm làm việc không được để trống' : '';
+            case 'province_id':
+                newError = value === -1 ? 'Địa điểm làm việc không được để trống' : '';
                 break;
             default:
                 break;
@@ -282,7 +197,7 @@ const RegisterFormManagerComponent = () => {
                 );
             case 'confirm_password':
                 return value.trim().length !== 0 && value === info.password;
-            case 'fullname':
+            case 'full_name':
                 return value.trim().length !== 0 && value.trim().length >= 3 && value.trim().length <= 50 && value.match(regexValidator.FULLNAME);
             case 'phone_number':
                 return value.trim().length !== 0 && value.match(regexValidator.REGEX_PHONE_NUMBER);
@@ -290,8 +205,8 @@ const RegisterFormManagerComponent = () => {
                 return value.length !== 0;
             case 'work_position':
                 return value.length !== 0;
-            case 'work_location':
-                return value.length !== 0;
+            case 'province_id':
+                return value !== -1;
             case 'gender':
                 return value.length !== 0;
             default:
@@ -313,8 +228,43 @@ const RegisterFormManagerComponent = () => {
         }
     }, [state.canSubmit]);
 
+    useEffect(() => {
+        getListProvinceService()
+            .then((res) => {
+                if (res.status === 200) {
+                    setProvince(res.data.data);
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
+
+    useEffect(() => {
+        if (info.province_id === 100 || info.province_id === -1) return;
+        const params = {
+            province_id: info.province_id,
+        };
+        getListDistrictService(params)
+            .then((res) => {
+                if (res.status === 200) {
+                    setDistrict(res.data.data);
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, [info.province_id]);
+    const user = useSelector(selectBusiness);
+
+    const handle = () => {
+        console.log(user);
+    };
     return (
         <div className={cx('wrapper')}>
+            <button className={cx('btn-check-redux')} onClick={() => handle()}>
+                Check Redux
+            </button>
             <div className={cx('container')}>
                 <div className={cx('form')}>
                     <div className={cx('form-group')}>
@@ -419,7 +369,7 @@ const RegisterFormManagerComponent = () => {
                         </div>
                         <div className={cx('form-group-flex')}>
                             <div className={cx('form-group-input')}>
-                                <label className={cx('form-group-input-label')} htmlFor="fullname">
+                                <label className={cx('form-group-input-label')} htmlFor="full_name">
                                     Họ và tên
                                     <span className={cx('note')}>*</span>
                                 </label>
@@ -429,18 +379,18 @@ const RegisterFormManagerComponent = () => {
                                         <input
                                             className={cx('input')}
                                             type="text"
-                                            id="fullname"
-                                            name="fullname"
+                                            id="full_name"
+                                            name="full_name"
                                             placeholder="Họ và tên"
                                             autoComplete="off"
-                                            value={info.fullname}
+                                            value={info.full_name}
                                             onChange={handleChangeInput}
                                             onBlur={handleValidation}
                                         />
-                                        {error.fullname && <PiWarningCircle className={cx('icon-warning')} />}
+                                        {error.full_name && <PiWarningCircle className={cx('icon-warning')} />}
                                     </div>
                                     <div className={cx('invalid-feedback')}>
-                                        <div className={cx('invalid-feedback-text')}>{error.fullname}</div>
+                                        <div className={cx('invalid-feedback-text')}>{error.full_name}</div>
                                     </div>
                                 </div>
                             </div>
@@ -536,7 +486,7 @@ const RegisterFormManagerComponent = () => {
                                                 <div className={cx('container-select')}>
                                                     <PiUserGearBold className={cx('icon')} />
                                                     <span className={cx('result')}>
-                                                        {positionList.find((item) => item.value === info.work_position)?.name || 'Chọn vị trí công tác'}
+                                                        {(info.work_position !== '' && info.work_position) || 'Chọn vị trí công tác'}
                                                     </span>
                                                 </div>
                                             </div>
@@ -546,18 +496,18 @@ const RegisterFormManagerComponent = () => {
                                                 {positionList.map((item) => (
                                                     <li
                                                         key={item.value}
-                                                        className={cx('item', { active: item.value === info.work_position })}
-                                                        onClick={() => setInfo({ ...info, work_position: item.value })}
+                                                        className={cx('item', { active: item.name === info.work_position })}
+                                                        onClick={() => setInfo({ ...info, work_position: item.name })}
                                                     >
                                                         <span className={cx('text')}>{item.name}</span>
 
-                                                        {item.value === info.work_position && <HiCheck className={cx('icon-check')} />}
+                                                        {item.name === info.work_position && <HiCheck className={cx('icon-check')} />}
                                                     </li>
                                                 ))}
                                             </ul>
                                         )}
                                         icon={() => <FaCaretDown className={cx('icon-care')} />}
-                                        itemSelect={positionList.find((item) => item.value === info.work_position)?.name || 'Chọn vị trí công tác'}
+                                        itemSelect={(info.work_position !== '' && info.work_position) || 'Chọn vị trí công tác'}
                                         maxHeight={'230px'}
                                         styleDropdown={{ right: '0', left: 'auto', top: '72px' }}
                                     />
@@ -577,28 +527,28 @@ const RegisterFormManagerComponent = () => {
                                             <div className={cx('container-select')}>
                                                 <TbBuilding className={cx('icon')} />
                                                 <span className={cx('result')}>
-                                                    {provinceList.find((item) => item.value === info.work_location)?.name || 'Chọn tỉnh/thành phổ'}
+                                                    {province.find((item) => item.id === info.province_id)?.name || 'Chọn tỉnh/thành phổ'}
                                                 </span>
                                             </div>
                                         </div>
                                     )}
                                     body={() => (
                                         <ul className={cx('ul-select')}>
-                                            {provinceList.map((item) => (
+                                            {province.map((item) => (
                                                 <li
-                                                    key={item.value}
-                                                    className={cx('item', { active: item.value === info.work_location })}
-                                                    onClick={() => setInfo({ ...info, work_location: item.value })}
+                                                    key={item.id}
+                                                    className={cx('item', { active: item.id === info.province_id })}
+                                                    onClick={() => setInfo({ ...info, province_id: item.id })}
                                                 >
                                                     <span className={cx('text')}>{item.name}</span>
 
-                                                    {item.value === info.work_location && <HiCheck className={cx('icon-check')} />}
+                                                    {item.id === info.province_id && <HiCheck className={cx('icon-check')} />}
                                                 </li>
                                             ))}
                                         </ul>
                                     )}
                                     icon={() => <FaCaretDown className={cx('icon-care')} />}
-                                    itemSelect={provinceList.find((item) => item.value === info.work_location)?.name || 'Chọn tỉnh/thành phổ'}
+                                    itemSelect={province.find((item) => item.id === info.province_id)?.name || 'Chọn tỉnh/thành phổ'}
                                     maxHeight={'230px'}
                                     styleDropdown={{ right: '0', left: 'auto', top: '72px', borderTopLeftRadius: '0', borderTopRightRadius: '0' }}
                                 />
@@ -611,33 +561,33 @@ const RegisterFormManagerComponent = () => {
 
                                 <SelectionComponent
                                     header={() => (
-                                        <div className={cx('header-select', { disable: info.work_location === '100' || info.work_location === '' })}>
+                                        <div className={cx('header-select', { disable: info.province_id === 100 || info.province_id === -1 })}>
                                             <div className={cx('container-select')}>
                                                 <TbBuildingCommunity className={cx('icon')} />
                                                 <span className={cx('result')}>
-                                                    {districtList.find((item) => item.value === info.district)?.name || 'Chọn quận/huyện'}
+                                                    {district.find((item) => item.id === info.district_id)?.name || 'Chọn quận/huyện'}
                                                 </span>
                                             </div>
                                         </div>
                                     )}
                                     body={() =>
-                                        info.work_location === '100' || info.work_location === '' ? null : (
+                                        info.province_id === 100 || info.province_id === -1 || district.length === 0 ? null : (
                                             <ul className={cx('ul-select')}>
-                                                {districtList.map((item) => (
+                                                {district.map((item) => (
                                                     <li
-                                                        key={item.value}
-                                                        className={cx('item', { active: item.value === info.district })}
-                                                        onClick={() => setInfo({ ...info, district: item.value })}
+                                                        key={item.id}
+                                                        className={cx('item', { active: item.id === info.district_id })}
+                                                        onClick={() => setInfo({ ...info, district_id: item.id })}
                                                     >
                                                         <span className={cx('text')}>{item.name}</span>
-                                                        {item.value === info.district && <HiCheck className={cx('icon-check')} />}
+                                                        {item.id === info.district_id && <HiCheck className={cx('icon-check')} />}
                                                     </li>
                                                 ))}
                                             </ul>
                                         )
                                     }
                                     icon={() => <FaCaretDown className={cx('icon-care')} />}
-                                    itemSelect={districtList.find((item) => item.value === info.district)?.name || 'Chọn quận/huyện'}
+                                    itemSelect={district.find((item) => item.id === info.district_id)?.name || 'Chọn quận/huyện'}
                                     maxHeight={'230px'}
                                     styleDropdown={{ right: '0', left: 'auto', top: '72px' }}
                                 />

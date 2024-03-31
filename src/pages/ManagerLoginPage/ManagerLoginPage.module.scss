@@ -169,11 +169,12 @@
             line-height: 1.5;
             font-weight: 400;
             margin-top: 4px;
-            border: 1px solid #e8edf2;
             text-overflow: ellipsis!important;
             border-radius: 0.25rem;
-            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
             background: rgb(232, 240, 254), ;
+            border: 1px solid #e8edf2;
+            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+            
             &:focus-within {
                 border-color: #00b14f;
                 box-shadow: 0 0 0 0.1rem rgba(0,177,79,.25);
@@ -194,9 +195,10 @@
 
         .input {
             font-size: 14px;
-            padding: 7px 12px;
+            padding: 7px 44px;
             flex: 1;
-
+            height: 100%;
+            width: 100%;
         }
 
         .icon-eye {
@@ -213,11 +215,17 @@
             color: #00b14f;
         }
 
+        .icon-show{
+            position: absolute;
+            right: 2px;
+        }
+
         .icon.email,
         .icon.password {
             color: #00b14f;
             font-size: 19px;
             margin: 10px;
+            position: absolute;
         }
 
         .forgot-password {
