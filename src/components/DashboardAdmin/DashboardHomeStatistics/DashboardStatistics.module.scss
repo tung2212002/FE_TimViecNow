@@ -1,0 +1,124 @@
+.wrapper{
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
+    border-radius: 3px;
+    background-color: #fff;
+
+
+}
+.container{
+    hr{
+        border: 0;
+        border-top: 1px solid #e8edf2;
+    }
+}
+.header{
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    line-height: 21px;
+
+    .title{
+        font-size: 16px;
+        line-height: 19px;
+        color: #303235;
+        font-weight: 500;
+    }
+
+    .icon{
+        margin-left: auto;
+
+    }
+
+    .icon-info{
+        color: rgb(215, 222, 228);
+        font-size: 14px;
+
+    }
+}
+.tooltip-content{
+    box-sizing: border-box;
+    background: #f5f8fa;
+    color: #000;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 5px 30px rgba(0,0,0,.1);
+    width: 200px;
+
+    .tooltip-title{
+        color: rgb(94, 99, 104);
+    font-size: 14px;
+    padding: 8px;
+    line-height: 16px;
+    font-weight: 500;
+    }
+}
+
+.content{
+    padding: 0 16px;
+    display: flex;
+    flex-wrap: wrap;
+
+    .content-item{
+        max-width: calc(50% - 7.5px);
+        flex: 0 0 50%;
+        margin-bottom: 15px;
+        border-radius: 5px;
+
+    }
+
+    .content-item:nth-child(odd){
+        margin-right: 15px;
+    }
+
+    
+}
+.chart-recruitment{
+    width: 300px;
+    height: 214px;
+    margin: auto;
+
+    .img{
+        max-width: 100%;
+        height: auto;
+    }
+
+    .chart-recruitment-info{
+        margin: 23px 0;
+        text-align: center;
+
+        .info-title{
+            font-size: 12px;
+            line-height: 1.5;
+            color: #5e6368;
+            font-weight: 400;
+        }
+    }
+
+
+}
+
+.view-all{
+
+    .view-all-content{
+        padding: 8px 16px;
+
+        
+        .view-all-text{
+            display: flex;
+            align-items: center;
+            padding: 5px 10px 5px 0;     
+            color: #00b14f;
+            text-align: left;
+            font-weight: 400;
+            line-height: 1.5;
+            font-size: 14px;
+            .icon{
+                margin-right: 8px;
+            }
+
+            &:hover{
+                color: #00652d;
+            }
+        }
+    }
+}

@@ -9,7 +9,7 @@ const cx = classNames.bind(styles);
 
 const DashboardLayout = ({ children }) => {
     return (
-        <div className={cx('dashboard-layout')}>
+        <div className={cx('wrapper')}>
             <HeaderDashBoardComponent />
             <SideBarDashboardComponent />
             {children}

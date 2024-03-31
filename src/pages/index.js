@@ -8,6 +8,19 @@ import MatchingJobsPage from './MatchingJobPage/MatchingJobsPage';
 // Page for Manager
 import ManagerRegisterPage from './ManagerRegisterPage/ManagerRegisterPage';
 import ManagerLoginPage from './ManagerLoginPage/ManagerLoginPage';
-import DashboardAdminPage from './DashboardAdminPage/DashboardAdminPage';
+import { DashboardAdminPage, DashboardCardPage, DashboardSearchCVPage, DashboardPostPage } from './DashboardAdminPage';
 
-export { HomePage, Subpage, JobSearchPage, LoginPage, MatchingJobsPage, JobSearchDetailPage, ManagerRegisterPage, ManagerLoginPage, DashboardAdminPage };
+export {
+    HomePage,
+    Subpage,
+    JobSearchPage,
+    LoginPage,
+    MatchingJobsPage,
+    JobSearchDetailPage,
+    ManagerRegisterPage,
+    ManagerLoginPage,
+    DashboardAdminPage,
+    DashboardCardPage,
+    DashboardSearchCVPage,
+    DashboardPostPage,
+};

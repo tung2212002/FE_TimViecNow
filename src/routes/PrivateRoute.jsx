@@ -4,16 +4,29 @@ import PropTypes from 'prop-types';
 
 import route from '../constants/route';
 import { selectToken } from '../redux/features/auth/authSlide';
+import { selectBusinessToken } from '../redux/features/authBusiness/authSlide';
+import useSide from '../hooks/useSIde';
 
 const PrivateRoute = ({ component: Component, layout: Layout, positionHeader, ...rest }) => {
-    const token = useSelector(selectToken);
-    return token ? (
-        <Layout positionHeader={positionHeader}>
-            <Component {...rest} />
-        </Layout>
-    ) : (
-        <Navigate to={route.LOGIN} />
-    );
+    const side = useSide();
+    const token = side === 'candidate' ? useSelector(selectToken) : useSelector(selectBusinessToken);
+    if (side === 'candidate') {
+        return token ? (
+            <Layout positionHeader={positionHeader}>
+                <Component {...rest} />
+            </Layout>
+        ) : (
+            <Navigate to={route.LOGIN} />
+        );
+    } else if (side === 'employer') {
+        return token ? (
+            <Layout positionHeader={positionHeader}>
+                <Component {...rest} />
+            </Layout>
+        ) : (
+            <Navigate to={route.MANAGER_LOGIN} />
+        );
+    }
 };
 
 PrivateRoute.propTypes = {

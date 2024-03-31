@@ -9,41 +9,54 @@ import { getInfoService } from '../services/userService';
 import { privateRoutes, publicRoutes } from './routes';
 import PublicRoute from './PublicRoute';
 import PrivateRoute from './PrivateRoute';
+import { getInfoBusinessService } from '../services/businessService';
+import { selectBusinessToken, updateBusinessInfo } from '../redux/features/authBusiness/authSlide';
+import { getLocalBusinessAccessToken, getLocalBusinessToken, setLocalBusiness } from '../utils/authBusinessStorage';
+import useSide from '../hooks/useSIde';
 
 const AppRouter = () => {
-    // const path = window.location.pathname;
-    // const [side, setSide] = useState(path.startsWith('/tuyen-dung/app') ? 'employer' : 'candidate');
+    const side = useSide();
     const dispatch = useDispatch();
 
-    const token = useSelector(selectToken);
-
-    // useEffect(() => {
-    //     if (path.startsWith('/tuyen-dung/app')) {
-    //         setSide('employer');
-    //     } else {
-    //         setSide('candidate');
-    //     }
-    // }, [path]);
+    const token = side === 'candidate' ? useSelector(selectToken) : useSelector(selectBusinessToken);
 
     useEffect(() => {
-        getInfoService();
-        if (!token) {
-            const tokenFromLocalStorage = getLocalAccessToken();
-            if (tokenFromLocalStorage) {
-                getInfoService()
-                    .then((response) => {
-                        if (response.status === 200) {
-                            setLocalUser(response.data.data);
-                            let token = getLocalToken();
-                            dispatch(updateUserInfo({ token, user: response.data.data }));
-                        }
-                    })
-                    .catch((error) => {
-                        console.error(error);
-                    });
+        if (side === 'candidate') {
+            if (!token) {
+                const tokenFromLocalStorage = getLocalAccessToken();
+                if (tokenFromLocalStorage) {
+                    getInfoService()
+                        .then((response) => {
+                            if (response.status === 200) {
+                                setLocalUser(response.data.data);
+                                let token = getLocalToken();
+                                dispatch(updateUserInfo({ token, user: response.data.data }));
+                            }
+                        })
+                        .catch((error) => {
+                            console.error(error);
+                        });
+                }
+            }
+        } else if (side === 'employer') {
+            if (!token) {
+                const tokenFromLocalStorage = getLocalBusinessAccessToken();
+                if (tokenFromLocalStorage) {
+                    getInfoBusinessService()
+                        .then((response) => {
+                            if (response.status === 200) {
+                                setLocalBusiness(response.data.data);
+                                let token = getLocalBusinessToken();
+                                dispatch(updateBusinessInfo({ token, user: response.data.data }));
+                            }
+                        })
+                        .catch((error) => {
+                            console.error(error);
+                        });
+                }
             }
         }
-    }, []);
+    }, [token, side, dispatch]);
 
     return (
         <BrowserRouter>
