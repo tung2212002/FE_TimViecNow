@@ -65,7 +65,6 @@ const InputSelectorMultiComponent = ({ placeholder, options, isRequired = true, 
         const input = refInput.current;
 
         const handleFocusInput = () => {
-            console.log(value?.length, maxOption);
             if (value?.length < maxOption) setIsFocus(true);
             else {
                 console.log('error');

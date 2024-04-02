@@ -7,10 +7,13 @@ import { selectToken } from '../redux/features/auth/authSlide';
 import route from '../constants/route';
 import useSide from '../hooks/useSIde';
 import { selectBusinessToken } from '../redux/features/authBusiness/authSlide';
+import { getLocalAccessToken } from '../utils/authLocalStorage';
+import { getLocalBusinessAccessToken } from '../utils/authBusinessStorage';
 
 const PublicRoute = ({ component: Component, layout: Layout, restricted, positionHeader, ...rest }) => {
     const side = useSide();
-    const accessToken = side === 'candidate' ? useSelector(selectToken) : useSelector(selectBusinessToken);
+    const accessToken = side === 'candidate' ? getLocalAccessToken() : getLocalBusinessAccessToken();
+    // const accessToken = side === 'candidate' ? useSelector(selectToken) : useSelector(selectBusinessToken);
     if (side === 'candidate') {
         return accessToken && restricted ? (
             <Navigate to={route.HOMEPAGE} replace />

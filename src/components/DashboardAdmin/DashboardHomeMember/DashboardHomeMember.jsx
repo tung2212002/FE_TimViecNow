@@ -51,7 +51,7 @@ const DashboardHomeMember = () => {
                         <div className={cx('info')}>
                             <div className={cx('avatar-info')}>
                                 <div className={cx('avatar')}>
-                                    <img src={employer.avatar ? employer.avatar : images.avatar_default} alt="avatar" className={cx('avatar-img')} />
+                                    <img src={employer?.avatar ? employer.avatar : images.avatar_default} alt="avatar" className={cx('avatar-img')} />
                                 </div>
                             </div>
                             <div className={cx('employer-info')}>

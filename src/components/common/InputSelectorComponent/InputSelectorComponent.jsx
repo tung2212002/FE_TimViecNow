@@ -4,13 +4,14 @@ import PropTypes from 'prop-types';
 import { FaCaretDown } from 'react-icons/fa';
 
 import styles from './InputSelectorComponent.module.scss';
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const cx = classNames.bind(styles);
 
-const InputSelectorComponent = ({ placeholder, options, isRequired = false, value, setValue, styleInput }) => {
+const InputSelectorComponent = ({ disabled = false, placeholder, options, isRequired = false, value, setValue, keepValue = false, styleInput }) => {
     const refInput = useRef(null);
     const refOptions = useRef(null);
+    const refWrapper = useRef(null);
 
     const [valueOption, setValueOption] = useState('');
     const [fillterOptions, setFillterOptions] = useState(options);
@@ -23,7 +24,7 @@ const InputSelectorComponent = ({ placeholder, options, isRequired = false, valu
             setFillterOptions(options);
             return;
         }
-        const fillterOptions = options.filter((option) => option.value.toLowerCase().includes(value.toLowerCase()));
+        const fillterOptions = options.filter((option) => (option?.name ? option.name : option.value).toLowerCase().includes(value.toLowerCase()));
         setFillterOptions(fillterOptions);
         if (!isRequired) {
             setValue(value);
@@ -37,26 +38,53 @@ const InputSelectorComponent = ({ placeholder, options, isRequired = false, valu
         } else {
             setValue(option?.name ? option.name : option?.value);
         }
-        setIsFocus(false);
+        // setIsFocus(false);
+        const optionsCurrent = refOptions.current;
+        const currentWrapper = refWrapper.current;
+        // optionsCurrent.classList.remove(`${cx('active')}`);
+        // currentWrapper.classList.remove(`${cx('active')}`);
+        currentWrapper.classList.remove(`${cx('active')}`);
     };
 
     useEffect(() => {
         const input = refInput.current;
         const optionsCurrent = refOptions.current;
+        const currentWrapper = refWrapper.current;
         const handleClickOutside = (event) => {
             if (
                 isRequired &&
-                valueOption?.length > 0 &&
                 optionsCurrent &&
                 !optionsCurrent.contains(event.target) &&
                 !options?.some((option) => option?.value === valueOption || option?.name === valueOption)
             ) {
-                setValueOption('');
+                if (keepValue) {
+                    if (value !== -1 && value !== '' && value !== null) {
+                        const option = options.find((option) => option.id === value);
+                        setValueOption(!option ? '' : option?.name ? option.name : option.value);
+                        setFillterOptions(options);
+                        // if (focus) setIsFocus(false);
+                        // optionsCurrent.classList.remove(`${cx('active')}`);
+                        // currentWrapper.classList.remove(`${cx('active')}`);
+                        currentWrapper.classList.remove(`${cx('active')}`);
+                        return;
+                    }
+                    setValueOption('');
+                    setValue(-1);
+                } else {
+                    setValueOption('');
+                    setValue(-1);
+                }
                 setFillterOptions(options);
-                setIsFocus(false);
-                setValue(-1);
+                // if (focus) setIsFocus(false);
+                // optionsCurrent.classList.remove(`${cx('active')}`);
+                // currentWrapper.classList.remove(`${cx('active')}`);
+                currentWrapper.classList.remove(`${cx('active')}`);
             } else if (input && !input.contains(event.target) && optionsCurrent && !optionsCurrent.contains(event.target)) {
-                setIsFocus(false);
+                // console.log('isFocus', isFocus);
+                // if (focus) setIsFocus(false);
+                // optionsCurrent.classList.remove(`${cx('active')}`);
+                // currentWrapper.classList.remove(`${cx('active')}`);
+                currentWrapper.classList.remove(`${cx('active')}`);
             }
         };
 
@@ -65,13 +93,20 @@ const InputSelectorComponent = ({ placeholder, options, isRequired = false, valu
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
-    }, [valueOption, value, options]);
+        // }, [valueOption, value, options, isRequired, keepValue, placeholder]);
+    }, [valueOption, value, placeholder]);
 
     useEffect(() => {
         const input = refInput.current;
 
         const handleFocusInput = () => {
-            setIsFocus(true);
+            // setIsFocus(true);
+            const currentOption = refOptions.current;
+            const currentWrapper = refWrapper.current;
+            // currentOption.classList.add(`${cx('active')}`);
+            // currentWrapper.classList.add(`${cx('active')}`);
+            const currentCareDown = refWrapper.current;
+            currentCareDown.classList.add(`${cx('active')}`);
         };
 
         input.addEventListener('focus', handleFocusInput);
@@ -82,7 +117,7 @@ const InputSelectorComponent = ({ placeholder, options, isRequired = false, valu
     }, []);
 
     return (
-        <div className={cx('wrapper')}>
+        <div className={cx('wrapper')} ref={refWrapper}>
             <div className={cx('input-selector')}>
                 <input
                     type="text"
@@ -92,6 +127,7 @@ const InputSelectorComponent = ({ placeholder, options, isRequired = false, valu
                     onChange={handleFillterOptions}
                     ref={refInput}
                     style={styleInput}
+                    disabled={disabled}
                 />
                 <FaCaretDown className={cx('icon', { active: isFocus })} />
             </div>
@@ -100,7 +136,7 @@ const InputSelectorComponent = ({ placeholder, options, isRequired = false, valu
                     fillterOptions.map((option, index) => (
                         <div
                             key={index}
-                            className={cx('option', { active: value === option.id || value === option?.name || value === option?.value })}
+                            className={cx('option', { active: value && (value === option.id || value === option?.name || value === option?.value) })}
                             onClick={(e) => {
                                 e.stopPropagation();
                                 handleSelectOption(option);
@@ -126,6 +162,8 @@ InputSelectorComponent.propTypes = {
     value: PropTypes.any,
     setValue: PropTypes.func,
     styleInput: PropTypes.object,
+    keepValue: PropTypes.bool,
+    disabled: PropTypes.bool,
 };
 
 export default InputSelectorComponent;

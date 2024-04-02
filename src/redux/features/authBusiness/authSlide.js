@@ -20,7 +20,6 @@ const initialState = {
 
 export const login = createAsyncThunk('authBusiness/login', async (data) => {
     const { user, access_token, refresh_token } = data;
-    console.log('data', data);
     if (!user) {
         throw new Error('User not found');
     }

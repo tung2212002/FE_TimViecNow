@@ -19,7 +19,6 @@ const AppRouter = () => {
     const dispatch = useDispatch();
 
     const token = side === 'candidate' ? useSelector(selectToken) : useSelector(selectBusinessToken);
-
     useEffect(() => {
         if (side === 'candidate') {
             if (!token) {
@@ -56,6 +55,33 @@ const AppRouter = () => {
                 }
             }
         }
+        // if (token) {
+        //     if (side === 'candidate') {
+        //         getInfoService()
+        //             .then((response) => {
+        //                 if (response.status === 200) {
+        //                     setLocalUser(response.data.data);
+        //                     let token = getLocalToken();
+        //                     dispatch(updateUserInfo({ token, user: response.data.data }));
+        //                 }
+        //             })
+        //             .catch((error) => {
+        //                 console.error(error);
+        //             });
+        //     } else if (side === 'employer') {
+        //         getInfoBusinessService()
+        //             .then((response) => {
+        //                 if (response.status === 200) {
+        //                     setLocalBusiness(response.data.data);
+        //                     let token = getLocalBusinessToken();
+        //                     dispatch(updateBusinessInfo({ token, user: response.data.data }));
+        //                 }
+        //             })
+        //             .catch((error) => {
+        //                 console.error(error);
+        //             });
+        //     }
+        // }
     }, [token, side, dispatch]);
 
     return (

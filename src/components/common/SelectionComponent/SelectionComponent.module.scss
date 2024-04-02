@@ -23,6 +23,20 @@
     }
 }
 
+.active{ 
+    .icon {
+    transform: rotate(180deg);
+    }
+
+    .select-dropdown-container {
+    display: block;
+    }
+
+    .button {
+    transform: rotate(180deg);
+    }
+}
+
 .header {
     display: flex;
     align-items: center;

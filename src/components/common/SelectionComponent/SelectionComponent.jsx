@@ -20,24 +20,34 @@ const SelectionComponent = ({
     const [dropdown, setDropdown] = useState(false);
 
     const handleDropDown = () => {
-        if (dropdown) {
-            setDropdown(false);
-        }
-        if (!dropdown) {
-            setDropdown(true);
-        }
+        const selection = ulRef.current;
+        // if (dropdown) {
+        //     // setDropdown(false);
+        //     selection.classList.remove(`${cx('active')}`);
+        // }
+        // if (!dropdown) {
+        //     // setDropdown(true);
+        //     selection.classList.add(`${cx('active')}`);
+        // }
+        selection.classList.toggle(`${cx('active')}`);
     };
 
     useEffect(() => {
-        setDropdown(false);
+        // setDropdown(false);
+        const selection = ulRef.current;
+        if (itemSelect) {
+            selection.classList.remove(`${cx('active')}`);
+        }
     }, [itemSelect]);
 
     useEffect(() => {
         const handleClickOutside = (event) => {
+            const selection = ulRef.current;
             const headerBody = ulRef.current.querySelector(`.${cx('header-body-component')}`);
             const header = ulRef.current.querySelector(`.${cx('header')}`);
             if ((!headerBody && !header.contains(event.target)) || (headerBody && !headerBody.contains(event.target) && !header.contains(event.target))) {
-                setDropdown(false);
+                // setDropdown(false);
+                selection.classList.remove(`${cx('active')}`);
             }
         };
 
@@ -50,7 +60,8 @@ const SelectionComponent = ({
     return (
         <div className={cx('wrapper')}>
             <div className={cx('selection')} ref={ulRef}>
-                <div className={cx('header')} onClick={handleDropDown}>
+                <div className={cx('header')} onMouseUp={handleDropDown}>
+                    {/* <div className={cx('header')} onClick={() => console.log('click')}> */}
                     <HeaderComponent />
                     <button className={cx('button', { rotate: dropdown })} type="button">
                         {Icon && <Icon className={cx('icon', 'icon-chevron-down', { rotate: dropdown })} />}
@@ -58,7 +69,7 @@ const SelectionComponent = ({
                 </div>
                 <div
                     className={cx('select-dropdown-container', dropdown ? 'display' : 'hidden')}
-                    onClick={(event) => event.stopPropagation()}
+                    onMouseDown={(event) => event.stopPropagation()}
                     style={{ maxHeight: maxHeight, ...styleDropdown }}
                 >
                     {CustomeHeaderBodyComponent && (

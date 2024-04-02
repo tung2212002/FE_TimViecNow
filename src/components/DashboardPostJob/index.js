@@ -1,3 +1,4 @@
 import DashboardJpostJobSelectCampaignComponent from './DashboardJpostJobSelectCampaign/DashboardJpostJobSelectCampaignComponent';
-
-export { DashboardJpostJobSelectCampaignComponent };
+import DashboradPostJobLocationCampaign from './DashboradPostJobLocationCampaign/DashboradPostJobLocationCampaign';
+import DashboardPostJobGeneralRequirementsCampaign from './DashboardPostJobGeneralRequirementsCampaign/DashboardPostJobGeneralRequirementsCampaign';
+export { DashboardJpostJobSelectCampaignComponent, DashboradPostJobLocationCampaign, DashboardPostJobGeneralRequirementsCampaign };
