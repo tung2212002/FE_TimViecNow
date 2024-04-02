@@ -4,6 +4,7 @@ import authReducer from './features/auth/authSlide';
 import modalSlice from './features/modal/modalSlice';
 import authBusinessSlice from './features/authBusiness/authSlide';
 import toastSlice from './features/toast/toastSlice';
+import postJobSlide from './features/postJob/postJobSlide';
 
 const store = configureStore({
     reducer: {
@@ -11,6 +12,7 @@ const store = configureStore({
         modal: modalSlice,
         authBusiness: authBusinessSlice,
         toast: toastSlice,
+        postJob: postJobSlide,
     },
 });
 

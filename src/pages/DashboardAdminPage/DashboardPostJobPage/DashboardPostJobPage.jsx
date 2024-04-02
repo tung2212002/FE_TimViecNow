@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Tippy from '@tippyjs/react/headless';
 import TippyText from '@tippyjs/react';
 import 'tippy.js/dist/backdrop.css';
@@ -12,24 +12,27 @@ import { PiWarningCircle } from 'react-icons/pi';
 import { FaRegCalendar } from 'react-icons/fa';
 
 import styles from './DashboardPostJobPage.module.scss';
-import { icons, images } from '../../../assets';
+import { icons } from '../../../assets';
 import path from '../../../constants/path';
-import { DashboardJpostJobSelectCampaignComponent } from '../../../components/DashboardPostJob';
 import InputSelectorComponent from '../../../components/common/InputSelectorComponent/InputSelectorComponent';
 import InputSelectorMultiComponent from '../../../components/common/InputSelectorMultiComponent/InputSelectorMultiComponent';
-
+import { useDispatch, useSelector } from 'react-redux';
+import {
+    addLocation,
+    selectPostJob,
+    setDeadline,
+    setJobDescription,
+    setQuantity,
+    setRecruitmentPositionTitle,
+    setTypesJob,
+} from '../../../redux/features/postJob/postJobSlide';
+import DashboradPostJobLocationCampaign from '../../../components/DashboardPostJob/DashboradPostJobLocationCampaign/DashboradPostJobLocationCampaign';
+import { DashboardPostJobGeneralRequirementsCampaign } from '../../../components/DashboardPostJob';
 const cx = classNames.bind(styles);
 
 const DashboardPostJobPage = () => {
-    const [info, setInfo] = useState({
-        title: '',
-        titleShow: '',
-        campaign: -1,
-        position: '',
-        type: [],
-        deadline: '',
-        quantity: 1,
-    });
+    const dispatch = useDispatch();
+    const info = useSelector(selectPostJob);
 
     const fakeData = [
         {
@@ -50,22 +53,35 @@ const DashboardPostJobPage = () => {
         },
     ];
 
-    const [job, setJob] = useState({
-        position: '',
-        campaign: -1,
-    });
-
-    const handleCheck = () => {
-        console.log('check', job, typeJob, campaign);
+    const job = useSelector(selectPostJob);
+    const setPosision = (value) => {
+        dispatch(setRecruitmentPositionTitle(value));
     };
+
     const [campaign, setCampaign] = useState(-1);
     const [typeJob, setTypeJob] = useState([]);
 
+    const handleSetQuantity = (value) => {
+        if (!isNaN(value) && value >= 1) {
+            dispatch(setQuantity(value));
+        }
+    };
+
+    const handleAddLocation = () => {
+        dispatch(addLocation());
+    };
+
+    const handleSetPosition = (value) => {
+        dispatch(setRecruitmentPositionTitle(value));
+    };
+
+    const handleSetDescription = (value) => {
+        dispatch(setJobDescription(value));
+    };
+
     return (
         <div className={cx('wrapper')}>
-            <button className={cx('button-check')} onClick={handleCheck}>
-                Kiểm tra
-            </button>
+            <button onClick={() => console.log(job)}>click</button>
             <div className={cx('auth-modal')}></div>
             <div className={cx('container')}>
                 <div className={cx('breadcrumb-box')}>
@@ -101,7 +117,17 @@ const DashboardPostJobPage = () => {
                                             <span className={cx('required')}>*</span>
                                             <div className={cx('input-box')}>
                                                 <div className={cx('input-box-item')}>
-                                                    <input type="text" id="job-title" name="job-title" className={cx('input')} placeholder="Nhập tiêu đề tin" />
+                                                    <input
+                                                        type="text"
+                                                        id="job-title"
+                                                        name="job-title"
+                                                        className={cx('input')}
+                                                        placeholder="Nhập tiêu đề tin"
+                                                        value={job.job_description}
+                                                        onChange={(e) => {
+                                                            handleSetDescription(e.target.value);
+                                                        }}
+                                                    />
                                                     <span className={cx('input-box-right')}>
                                                         <span className={cx('input-box-right-icon')}>
                                                             <FaCircleXmark className={cx('icon-circle-xmark')} />
@@ -129,7 +155,7 @@ const DashboardPostJobPage = () => {
                                                         <div className={cx('job-type-title')}>Tin cơ bản</div>
                                                         <div className={cx('job-type-text')}>
                                                             <label className={cx('label')} htmlFor="normal">
-                                                                <span className={cx('text')}>Test input checkbox</span>
+                                                                <span className={cx('text')}>{job.job_description}</span>
                                                             </label>
                                                         </div>
                                                     </div>
@@ -154,7 +180,7 @@ const DashboardPostJobPage = () => {
                                                         </div>
                                                         <div className={cx('job-type-text')}>
                                                             <label className={cx('label')} htmlFor="nơ-job">
-                                                                <span className={cx('text', 'highlight')}>Test input checkbox</span>
+                                                                <span className={cx('text', 'highlight')}>{job.job_description}</span>
                                                             </label>
                                                         </div>
                                                     </div>
@@ -214,7 +240,7 @@ const DashboardPostJobPage = () => {
                                                     placeholder={'VD: Nhân viên Marketing, Designer, ...'}
                                                     options={fakeData}
                                                     value={job.position}
-                                                    setValue={(value) => setJob({ ...job, position: value })}
+                                                    setValue={handleSetPosition}
                                                     styleInput={{ paddingTop: '7px', paddingBottom: '7px' }}
                                                 />
                                                 <div className={cx('input-box-feedback')}>
@@ -256,10 +282,9 @@ const DashboardPostJobPage = () => {
                                                         name="deadline"
                                                         className={cx('date')}
                                                         onChange={(e) => {
-                                                            setInfo({ ...info, deadline: e.target.value });
+                                                            dispatch(setDeadline(e.target.value));
                                                         }}
                                                         value={info.deadline}
-                                                        // mindate is today
                                                         min={new Date().toISOString().split('T')[0]}
                                                     />
                                                 </div>
@@ -275,9 +300,9 @@ const DashboardPostJobPage = () => {
                                             </label>
                                             <div className={cx('input-box')}>
                                                 <div className={cx('input-box-item', 'input-quantity')}>
-                                                    <div className={cx('action', 'action-sub')}>
+                                                    <button className={cx('action', 'action-sub')} onClick={() => handleSetQuantity(info.quantity - 1)}>
                                                         <FaMinus className={cx('icon-action', 'icon-minus')} />
-                                                    </div>
+                                                    </button>
                                                     <input
                                                         type="text"
                                                         id="job-title"
@@ -285,16 +310,13 @@ const DashboardPostJobPage = () => {
                                                         className={cx('input')}
                                                         maxLength={4}
                                                         onChange={(e) => {
-                                                            const inputValue = e.target.value;
-                                                            if (!isNaN(inputValue) && inputValue >= 1) {
-                                                                setInfo({ ...info, quantity: inputValue });
-                                                            }
+                                                            handleSetQuantity(e.target.value);
                                                         }}
                                                         value={info.quantity}
                                                     />
-                                                    <div className={cx('action', 'action-add')}>
+                                                    <button className={cx('action', 'action-add')} onClick={() => handleSetQuantity(info.quantity + 1)}>
                                                         <FaPlus className={cx('icon-action', 'icon-plus')} />
-                                                    </div>
+                                                    </button>
                                                 </div>
 
                                                 <div className={cx('input-box-feedback')}>
@@ -310,15 +332,10 @@ const DashboardPostJobPage = () => {
                                         </label>
                                         <div className={cx('select-box')}>
                                             <div>
-                                                <div className={cx('select-box-item')}>
-                                                    <div className={cx('location-box')}>
-                                                        <div className={cx('location-box__province')}>
-                                                            <div className={cx('location-box__province-title')}>Tỉnh/Thành phố</div>
-                                                        </div>
-                                                    </div>
-                                                    <div className={cx('address-box')}></div>
-                                                </div>
-                                                <button className={cx('select-button')}>
+                                                {job.location.map((item) => (
+                                                    <DashboradPostJobLocationCampaign key={item.id} location_id={item.id} />
+                                                ))}
+                                                <button className={cx('select-button')} onClick={handleAddLocation}>
                                                     <FaPlus className={cx('icon-plus')} />
                                                     Thêm khu vực
                                                 </button>
@@ -327,7 +344,9 @@ const DashboardPostJobPage = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className={cx('box-content-item')}></div>
+                            <div className={cx('box-content-item')}>
+                                <DashboardPostJobGeneralRequirementsCampaign />
+                            </div>
                             <div className={cx('box-content-item')}></div>
                             <div className={cx('box-content-item')}></div>
                         </div>

@@ -6,10 +6,12 @@ import route from '../constants/route';
 import { selectToken } from '../redux/features/auth/authSlide';
 import { selectBusinessToken } from '../redux/features/authBusiness/authSlide';
 import useSide from '../hooks/useSIde';
+import { getLocalAccessToken } from '../utils/authLocalStorage';
+import { getLocalBusinessAccessToken } from '../utils/authBusinessStorage';
 
 const PrivateRoute = ({ component: Component, layout: Layout, positionHeader, ...rest }) => {
     const side = useSide();
-    const token = side === 'candidate' ? useSelector(selectToken) : useSelector(selectBusinessToken);
+    const token = side === 'candidate' ? getLocalAccessToken() : getLocalBusinessAccessToken();
     if (side === 'candidate') {
         return token ? (
             <Layout positionHeader={positionHeader}>
