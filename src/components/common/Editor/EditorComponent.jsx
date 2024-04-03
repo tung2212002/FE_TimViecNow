@@ -1,9 +1,8 @@
-import classNames from 'classnames/bind';
-import Editor from 'ckeditor5-custom-build/build/ckeditor';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
+import Editor from 'ckeditor5-custom-build/build/ckeditor';
 import PropTypes from 'prop-types';
 
-import './test.css';
+import './Editor.css';
 
 const editorConfiguration = {
     placeholder: 'Nhập nội dung',
