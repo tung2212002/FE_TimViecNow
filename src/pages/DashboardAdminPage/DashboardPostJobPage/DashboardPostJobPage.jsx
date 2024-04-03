@@ -1,6 +1,5 @@
 import classNames from 'classnames/bind';
-import { useEffect, useState } from 'react';
-import Tippy from '@tippyjs/react/headless';
+import { useState } from 'react';
 import TippyText from '@tippyjs/react';
 import 'tippy.js/dist/backdrop.css';
 import 'tippy.js/dist/svg-arrow.css';
@@ -19,7 +18,9 @@ import InputSelectorMultiComponent from '../../../components/common/InputSelecto
 import { useDispatch, useSelector } from 'react-redux';
 import {
     addLocation,
+    selectError,
     selectPostJob,
+    setCampaignId,
     setDeadline,
     setJobDescription,
     setQuantity,
@@ -27,12 +28,14 @@ import {
     setTypesJob,
 } from '../../../redux/features/postJob/postJobSlide';
 import DashboradPostJobLocationCampaign from '../../../components/DashboardPostJob/DashboradPostJobLocationCampaign/DashboradPostJobLocationCampaign';
-import { DashboardPostJobGeneralRequirementsCampaign } from '../../../components/DashboardPostJob';
+import { DashboardPostJobGeneralRequirementsCampaign, DashboardPostJobInfoContact } from '../../../components/DashboardPostJob';
+import DashboardPostJobDetailRequirementsCampaign from '../../../components/DashboardPostJob/DashboardPostJobDetailRequirementsCampaign/DashboardPostJobDetailRequirementsCampaign';
 const cx = classNames.bind(styles);
 
 const DashboardPostJobPage = () => {
     const dispatch = useDispatch();
     const info = useSelector(selectPostJob);
+    const error = useSelector(selectError);
 
     const fakeData = [
         {
@@ -54,12 +57,10 @@ const DashboardPostJobPage = () => {
     ];
 
     const job = useSelector(selectPostJob);
-    const setPosision = (value) => {
-        dispatch(setRecruitmentPositionTitle(value));
-    };
 
-    const [campaign, setCampaign] = useState(-1);
-    const [typeJob, setTypeJob] = useState([]);
+    const handleStCampaign = (value) => {
+        dispatch(setCampaignId(value));
+    };
 
     const handleSetQuantity = (value) => {
         if (!isNaN(value) && value >= 1) {
@@ -76,12 +77,14 @@ const DashboardPostJobPage = () => {
     };
 
     const handleSetDescription = (value) => {
-        dispatch(setJobDescription(value));
+        if (value.length <= 50) dispatch(setJobDescription(value));
     };
 
+    const handleSetTypeJob = (value) => {
+        dispatch(setTypesJob(value));
+    };
     return (
         <div className={cx('wrapper')}>
-            <button onClick={() => console.log(job)}>click</button>
             <div className={cx('auth-modal')}></div>
             <div className={cx('container')}>
                 <div className={cx('breadcrumb-box')}>
@@ -96,7 +99,14 @@ const DashboardPostJobPage = () => {
                     </div>
                     <div className={cx('breadcrumb-box-button')}>
                         <div className={cx('button-list')}>
-                            <button className={cx('button', 'button-save-draft')}>Lưu nháp</button>
+                            <button
+                                className={cx('button', 'button-save-draft')}
+                                onClick={() => {
+                                    console.log(job);
+                                }}
+                            >
+                                Lưu nháp
+                            </button>
                             <button className={cx('button', 'button-post')}>Lưu & Đăng tin</button>
                         </div>
                     </div>
@@ -131,14 +141,16 @@ const DashboardPostJobPage = () => {
                                                     <span className={cx('input-box-right')}>
                                                         <span className={cx('input-box-right-icon')}>
                                                             <FaCircleXmark className={cx('icon-circle-xmark')} />
-                                                            <span className={cx('input-box-right-text')}>0/50</span>
+                                                            <span className={cx('input-box-right-text')}>{job.job_description?.length || 0}/50</span>
                                                         </span>
                                                         <PiWarningCircle className={cx('icon-warning')} />
                                                     </span>
                                                 </div>
-                                                <div className={cx('input-box-feedback')}>
-                                                    <div className={cx('feedback-text')}>Tiêu đề tin từ 6 đến 50 ký tự</div>
-                                                </div>
+                                                {error.job_description && (
+                                                    <div className={cx('input-box-feedback')}>
+                                                        <div className={cx('feedback-text')}>Tiêu đề tin từ 6 đến 50 ký tự</div>
+                                                    </div>
+                                                )}
                                             </div>
                                         </div>
                                         <div className={cx('box-content-group')}>
@@ -155,7 +167,7 @@ const DashboardPostJobPage = () => {
                                                         <div className={cx('job-type-title')}>Tin cơ bản</div>
                                                         <div className={cx('job-type-text')}>
                                                             <label className={cx('label')} htmlFor="normal">
-                                                                <span className={cx('text')}>{job.job_description}</span>
+                                                                <span className={cx('text')}>{job.job_description.substring(0, 50)}</span>
                                                             </label>
                                                         </div>
                                                     </div>
@@ -198,7 +210,7 @@ const DashboardPostJobPage = () => {
                                         </div>
                                     </div>
                                     <div className={cx('box-content-group')}>
-                                        <label className={cx('label')} htmlFor="job-title">
+                                        <label className={cx('label')} htmlFor="job-campaign">
                                             Chiến dịch
                                             <TippyText
                                                 maxWidth={200}
@@ -216,8 +228,10 @@ const DashboardPostJobPage = () => {
                                                 <InputSelectorComponent
                                                     placeholder={'Chọn chiến dịch'}
                                                     options={fakeData}
-                                                    value={campaign}
-                                                    setValue={(value) => setCampaign(value)}
+                                                    value={job.campaign_id}
+                                                    setValue={handleStCampaign}
+                                                    // value={campaign}
+                                                    // setValue={(value) => setCampaign(value)}
                                                     isRequired={true}
                                                     styleInput={{ width: '100%' }}
                                                 />
@@ -226,7 +240,7 @@ const DashboardPostJobPage = () => {
                                     </div>
                                     <div className={cx('box-content-flex')}>
                                         <div className={cx('box-content-group')}>
-                                            <label className={cx('label')} htmlFor="job-title">
+                                            <label className={cx('label')} htmlFor="job-position">
                                                 Vị trí tuyển dụng
                                                 <span className={cx('required')}>*</span>
                                                 <TippyText content="Thông tin này sẽ giúp gợi ý ứng viên phù hợp chính xác hơn" placement="top">
@@ -243,13 +257,15 @@ const DashboardPostJobPage = () => {
                                                     setValue={handleSetPosition}
                                                     styleInput={{ paddingTop: '7px', paddingBottom: '7px' }}
                                                 />
-                                                <div className={cx('input-box-feedback')}>
-                                                    <div className={cx('feedback-text')}>Vị trí tuyển dụng không được để trống</div>
-                                                </div>
+                                                {error.position && (
+                                                    <div className={cx('input-box-feedback')}>
+                                                        <div className={cx('feedback-text')}>Vị trí tuyển dụng không được để trống</div>
+                                                    </div>
+                                                )}
                                             </div>
                                         </div>
                                         <div className={cx('box-content-group')}>
-                                            <label className={cx('label')} htmlFor="job-title">
+                                            <label className={cx('label')} htmlFor="job-type">
                                                 Ngành nghề
                                                 <span className={cx('required')}>*</span>
                                             </label>
@@ -257,13 +273,15 @@ const DashboardPostJobPage = () => {
                                                 <InputSelectorMultiComponent
                                                     placeholder={'Chọn ngành nghề'}
                                                     options={fakeData}
-                                                    value={typeJob}
-                                                    setValue={(value) => setTypeJob(value)}
+                                                    value={job.type_job}
+                                                    setValue={handleSetTypeJob}
                                                     styleInput={{ paddingTop: '7px', paddingBottom: '7px' }}
                                                 />
-                                                <div className={cx('input-box-feedback')}>
-                                                    <div className={cx('feedback-text')}>Ngành nghề không được để trống</div>
-                                                </div>
+                                                {error.type_job && (
+                                                    <div className={cx('input-box-feedback')}>
+                                                        <div className={cx('feedback-text')}>Ngành nghề không được để trống</div>
+                                                    </div>
+                                                )}
                                             </div>
                                         </div>
                                     </div>
@@ -288,13 +306,15 @@ const DashboardPostJobPage = () => {
                                                         min={new Date().toISOString().split('T')[0]}
                                                     />
                                                 </div>
-                                                <div className={cx('input-box-feedback')}>
-                                                    <div className={cx('feedback-text')}>Vị trí tuyển dụng không được để trống</div>
-                                                </div>
+                                                {error.deadline && (
+                                                    <div className={cx('input-box-feedback')}>
+                                                        <div className={cx('feedback-text')}>Vị trí tuyển dụng không được để trống</div>
+                                                    </div>
+                                                )}
                                             </div>
                                         </div>
                                         <div className={cx('box-content-group')}>
-                                            <label className={cx('label')} htmlFor="job-title">
+                                            <label className={cx('label')} htmlFor="job-quantity">
                                                 Số lượng tuyển
                                                 <span className={cx('required')}>*</span>
                                             </label>
@@ -305,8 +325,8 @@ const DashboardPostJobPage = () => {
                                                     </button>
                                                     <input
                                                         type="text"
-                                                        id="job-title"
-                                                        name="job-title"
+                                                        id="job-quantity"
+                                                        name="job-quantity"
                                                         className={cx('input')}
                                                         maxLength={4}
                                                         onChange={(e) => {
@@ -319,9 +339,11 @@ const DashboardPostJobPage = () => {
                                                     </button>
                                                 </div>
 
-                                                <div className={cx('input-box-feedback')}>
-                                                    <div className={cx('feedback-text')}>Ngành nghề không được để trống</div>
-                                                </div>
+                                                {error.quantity && (
+                                                    <div className={cx('input-box-feedback')}>
+                                                        <div className={cx('feedback-text')}>Ngành nghề không được để trống</div>
+                                                    </div>
+                                                )}
                                             </div>
                                         </div>
                                     </div>
@@ -347,12 +369,12 @@ const DashboardPostJobPage = () => {
                             <div className={cx('box-content-item')}>
                                 <DashboardPostJobGeneralRequirementsCampaign />
                             </div>
-                            <div className={cx('box-content-item')}></div>
-                            <div className={cx('box-content-item')}></div>
-                        </div>
-
-                        <div className={cx('box-content')}>
-                            <div className={cx('box-content-item')}></div>
+                            <div className={cx('box-content-item')}>
+                                <DashboardPostJobDetailRequirementsCampaign />
+                            </div>
+                            <div className={cx('box-content-item')}>
+                                <DashboardPostJobInfoContact />
+                            </div>
                         </div>
                     </div>
                 </div>

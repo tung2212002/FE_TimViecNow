@@ -17,72 +17,77 @@ import useSide from '../hooks/useSIde';
 const AppRouter = () => {
     const side = useSide();
     const dispatch = useDispatch();
+    const [isLoading, setIsLoading] = useState(true);
 
-    const token = side === 'candidate' ? useSelector(selectToken) : useSelector(selectBusinessToken);
-    useEffect(() => {
-        if (side === 'candidate') {
-            if (!token) {
-                const tokenFromLocalStorage = getLocalAccessToken();
-                if (tokenFromLocalStorage) {
-                    getInfoService()
-                        .then((response) => {
-                            if (response.status === 200) {
-                                setLocalUser(response.data.data);
-                                let token = getLocalToken();
-                                dispatch(updateUserInfo({ token, user: response.data.data }));
-                            }
-                        })
-                        .catch((error) => {
-                            console.error(error);
-                        });
-                }
-            }
-        } else if (side === 'employer') {
-            if (!token) {
-                const tokenFromLocalStorage = getLocalBusinessAccessToken();
-                if (tokenFromLocalStorage) {
-                    getInfoBusinessService()
-                        .then((response) => {
-                            if (response.status === 200) {
-                                setLocalBusiness(response.data.data);
-                                let token = getLocalBusinessToken();
-                                dispatch(updateBusinessInfo({ token, user: response.data.data }));
-                            }
-                        })
-                        .catch((error) => {
-                            console.error(error);
-                        });
-                }
-            }
-        }
-        // if (token) {
-        //     if (side === 'candidate') {
-        //         getInfoService()
-        //             .then((response) => {
-        //                 if (response.status === 200) {
-        //                     setLocalUser(response.data.data);
-        //                     let token = getLocalToken();
-        //                     dispatch(updateUserInfo({ token, user: response.data.data }));
-        //                 }
-        //             })
-        //             .catch((error) => {
-        //                 console.error(error);
-        //             });
-        //     } else if (side === 'employer') {
-        //         getInfoBusinessService()
-        //             .then((response) => {
-        //                 if (response.status === 200) {
-        //                     setLocalBusiness(response.data.data);
-        //                     let token = getLocalBusinessToken();
-        //                     dispatch(updateBusinessInfo({ token, user: response.data.data }));
-        //                 }
-        //             })
-        //             .catch((error) => {
-        //                 console.error(error);
-        //             });
-        //     }
-        // }
-    }, [token, side, dispatch]);
+    // const token = side === 'candidate' ? useSelector(selectToken) : useSelector(selectBusinessToken);
+    // const token = side === 'candidate' ? getLocalAccessToken() : getLocalBusinessAccessToken();
+    // useEffect(() => {
+    //     if (side === 'candidate') {
+    //         if (!token) {
+    //             const tokenFromLocalStorage = getLocalAccessToken();
+    //             if (tokenFromLocalStorage) {
+    //                 getInfoService()
+    //                     .then((response) => {
+    //                         if (response.status === 200) {
+    //                             setLocalUser(response.data.data);
+    //                             let token = getLocalToken();
+    //                             dispatch(updateUserInfo({ token, user: response.data.data }));
+    //                         }
+    //                     })
+    //                     .catch((error) => {
+    //                         console.error(error);
+    //                     });
+    //             }
+    //         }
+    //     } else if (side === 'employer') {
+    //         if (!token) {
+    //             const tokenFromLocalStorage = getLocalBusinessAccessToken();
+    //             if (tokenFromLocalStorage) {
+    //                 getInfoBusinessService()
+    //                     .then((response) => {
+    //                         if (response.status === 200) {
+    //                             setLocalBusiness(response.data.data);
+    //                             let token = getLocalBusinessToken();
+    //                             dispatch(updateBusinessInfo({ token, user: response.data.data }));
+    //                         }
+    //                     })
+    //                     .catch((error) => {
+    //                         console.error(error);
+    //                     });
+    //             }
+    //         }
+    //     }
+    //////
+    // if (token) {
+    //     if (side === 'candidate') {
+    //         getInfoService()
+    //             .then((response) => {
+    //                 if (response.status === 200) {
+    //                     setLocalUser(response.data.data);
+    //                     let token = getLocalToken();
+    //                     dispatch(updateUserInfo({ token, user: response.data.data }));
+    //                 }
+    //             })
+    //             .catch((error) => {
+    //                 console.error(error);
+    //             });
+    //     } else if (side === 'employer') {
+    //         getInfoBusinessService()
+    //             .then((response) => {
+    //                 if (response.status === 200) {
+    //                     setLocalBusiness(response.data.data);
+    //                     let token = getLocalBusinessToken();
+    //                     dispatch(updateBusinessInfo({ token, user: response.data.data }));
+    //                 }
+    //             })
+    //             .catch((error) => {
+    //                 console.error(error);
+    //             });
+    //     }
+    // }
+
+    ///////
+    // }, [token, side, dispatch]);
 
     return (
         <BrowserRouter>
