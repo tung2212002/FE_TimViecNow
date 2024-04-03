@@ -54,6 +54,11 @@ const removeLocalBusiness = () => {
     localStorage.removeItem('business');
 };
 
+const removeAllBusiness = () => {
+    removeLocalBusinessToken();
+    removeLocalBusiness();
+};
+
 export {
     getLocalBusinessToken,
     getLocalBusinessRefreshToken,
@@ -66,4 +71,5 @@ export {
     setLocalBusiness,
     removeLocalBusinessToken,
     removeLocalBusiness,
+    removeAllBusiness,
 };

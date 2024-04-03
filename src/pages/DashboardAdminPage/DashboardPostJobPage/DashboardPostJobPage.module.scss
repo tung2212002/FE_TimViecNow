@@ -414,7 +414,11 @@
                 color: #00b14f!important;
                 font-size: 16px;
                 font-weight: 600;
+                overflow: scroll;
+                scrollbar-width:thin;
             }
+
+
 
             .highlight{
                 color: #343a40 !important;

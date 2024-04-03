@@ -25,7 +25,7 @@ const InputSelectorMultiComponent = ({ placeholder, options, isRequired = true, 
             setFillterOptions(options);
             return;
         }
-        const fillterOptions = options.filter((option) => (option.name ? option.name : option.value).toLowerCase().includes(inputValue.toLowerCase()));
+        const fillterOptions = options.filter((option) => (option.name ? option.name : option.value)?.toLowerCase()?.includes(inputValue?.toLowerCase()));
         setFillterOptions(fillterOptions);
     };
 
@@ -67,7 +67,6 @@ const InputSelectorMultiComponent = ({ placeholder, options, isRequired = true, 
         const handleFocusInput = () => {
             if (value?.length < maxOption) setIsFocus(true);
             else {
-                console.log('error');
                 refInput.current.blur();
                 setIsError(true);
             }

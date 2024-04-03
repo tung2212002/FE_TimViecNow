@@ -1,9 +1,8 @@
 import axios from 'axios';
 
 import { API_URL } from '../configs';
-import { getLocalAccessToken, getLocalRefreshToken, updateLocalAccessToken } from './authLocalStorage';
-import useSide from '../hooks/useSIde';
-import { getLocalBusinessAccessToken, getLocalBusinessRefreshToken, updateLocalBusinessAccessToken } from './authBusinessStorage';
+import { getLocalAccessToken, getLocalRefreshToken, removeAll, updateLocalAccessToken } from './authLocalStorage';
+import { getLocalBusinessAccessToken, getLocalBusinessRefreshToken, removeAllBusiness, updateLocalBusinessAccessToken } from './authBusinessStorage';
 
 const getAuthHeader = () => {
     const path = window.location.pathname;
@@ -66,6 +65,7 @@ const instance = (config = {}, auth = false, side = 'candidate') => {
                                 }
                             })
                             .catch((error) => {
+                                removeAll();
                                 return Promise.resolve({ status: error.response.status, data: error.response.data });
                             });
                     } else if (side === 'business') {
@@ -89,6 +89,7 @@ const instance = (config = {}, auth = false, side = 'candidate') => {
                                 }
                             })
                             .catch((error) => {
+                                removeAllBusiness();
                                 return Promise.resolve({ status: error.response.status, data: error.response.data });
                             });
                     }

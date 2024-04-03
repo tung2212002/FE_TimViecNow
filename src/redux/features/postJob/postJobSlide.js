@@ -1,14 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import randomId from '../../../utils/randomId';
+import { getLocalBusiness } from '../../../utils/authBusinessStorage';
 
 const initialState = {
     postJob: {
         title: '',
         job_description: '',
-        min_salary: '',
-        max_salary: '',
-        salary_type: '',
+        min_salary: 0,
+        max_salary: 0,
+        salary_type: 'VND',
         location: [
             {
                 id: randomId(),
@@ -27,20 +28,13 @@ const initialState = {
         job_benefit: '',
         employment_type: 'fulltime',
         deadline: '',
-        full_name_contact: '',
-        phone_number_contact: '',
+        full_name_contact: [getLocalBusiness()?.full_name],
+        phone_number_contact: [getLocalBusiness()?.phone_number],
+        email_contact: [getLocalBusiness()?.email],
         campaign_id: '',
         quantity: 1,
         categories: '',
-        working_time: [
-            {
-                id: randomId(),
-                date_from: -1,
-                date_to: -1,
-                start_time: '',
-                end_time: '',
-            },
-        ],
+        working_time: [],
         working_time_text: '',
         must_have_skills: [],
         should_have_skills: [],
@@ -50,7 +44,31 @@ const initialState = {
         position_level: -1,
     },
     loading: false,
-    error: null,
+    error: {
+        title: false,
+        job_description: false,
+        min_salary: false,
+        max_salary: false,
+        location: false,
+        job_requirement: false,
+        job_benefit: false,
+        employment_type: false,
+        deadline: false,
+        full_name_contact: false,
+        phone_number_contact: false,
+        email_contact: false,
+        campaign_id: false,
+        quantity: false,
+        categories: false,
+        working_time: false,
+        working_time_text: false,
+        must_have_skills: false,
+        should_have_skills: false,
+        recruitment_position_title: false,
+        type_job: false,
+        job_experience: false,
+        position_level: false,
+    },
 };
 
 const postJobSlice = createSlice({
@@ -74,6 +92,9 @@ const postJobSlice = createSlice({
         },
         setSalaryType: (state, action) => {
             state.postJob.salary_type = action.payload;
+        },
+        setGenderRequirement: (state, action) => {
+            state.postJob.gender_requirement = action.payload;
         },
         addLocation: (state) => {
             state.postJob.location.push({
@@ -181,14 +202,17 @@ const postJobSlice = createSlice({
         setPhoneNumberContact: (state, action) => {
             state.postJob.phone_number_contact = action.payload;
         },
+        setEmailContact: (state, action) => {
+            state.postJob.email_contact = action.payload;
+        },
         setWorkingTime: (state, action) => {
             state.postJob.working_time = state.postJob.working_time.map((time) => (time.id === action.payload.id ? { ...time, ...action.payload } : time));
         },
         addWorkingTime: (state) => {
             state.postJob.working_time.push({
                 id: randomId(),
-                date_from: -1,
-                date_to: -1,
+                date_from: 1,
+                date_to: 5,
                 start_time: '',
                 end_time: '',
             });
@@ -205,17 +229,26 @@ const postJobSlice = createSlice({
         setPostionLevel: (state, action) => {
             state.postJob.position_level = action.payload;
         },
+        setMustHaveSkills: (state, action) => {
+            state.postJob.must_have_skills = action.payload;
+        },
         addMustHaveSkills: (state, action) => {
             state.postJob.must_have_skills.push(action.payload);
         },
         removeMustHaveSkills: (state, action) => {
             state.postJob.must_have_skills = state.postJob.must_have_skills.filter((item) => item !== action.payload);
         },
+        setShouldHaveSkills: (state, action) => {
+            state.postJob.should_have_skills = action.payload;
+        },
         setLoading: (state, action) => {
             state.loading = action.payload;
         },
         setError: (state, action) => {
-            state.error = action.payload;
+            state.error = {
+                ...state.error,
+                ...action.payload,
+            };
         },
     },
 });
@@ -244,6 +277,7 @@ export const {
     setJobBenefit,
     setFullNameContact,
     setPhoneNumberContact,
+    setEmailContact,
     setWorkingTime,
     setWorkingTimeText,
     setJobExperience,
@@ -252,6 +286,9 @@ export const {
     removeMustHaveSkills,
     addWorkingTime,
     removeWorkingTime,
+    setGenderRequirement,
+    setShouldHaveSkills,
+    setMustHaveSkills,
     setLoading,
     setError,
 } = postJobSlice.actions;
@@ -259,3 +296,7 @@ export const {
 export default postJobSlice.reducer;
 
 export const selectPostJob = (state) => state.postJob.postJob;
+
+export const selectLoading = (state) => state.postJob.loading;
+
+export const selectError = (state) => state.postJob.error;

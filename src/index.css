@@ -108,3 +108,7 @@ ul {
     padding: 0;
     margin: 0;
 }
+
+.ck-balloon-panel_position_border-side_right {
+    display: none !important;
+}
