@@ -1,0 +1,134 @@
+.wrapper {
+}
+
+.container {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
+    height: fit-content;
+    position: relative;
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    width: 100%;
+}
+
+.company-info {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    .info {
+        align-items: flex-start;
+        display: flex;
+        gap: 16px;
+        margin-bottom: 12px;
+        .company-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+            border: 1px solid #e9eaec;
+            border-radius: 8px;
+            height: 88px;
+            padding: 7px;
+            width: 88px;
+        }
+
+        .logo {
+            border-radius: 5px;
+            flex-shrink: 0;
+            height: 74px;
+            object-fit: contain;
+            width: 74px;
+            max-width: 100%;
+        }
+
+        .company-name {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin: 0;
+            width: calc(100% - 106px);
+            font-size: 30px;
+        }
+
+        .name {
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+            align-self: stretch;
+            color: #212f3f;
+            display: -webkit-box;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 24px;
+            max-height: 70px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+        }
+    }
+
+    .company-scale {
+        align-items: flex-start;
+        display: flex;
+        gap: 16px;
+        margin-bottom: 8px;
+        .scale-title {
+            align-items: center;
+            color: #7f878f;
+            display: flex;
+            font-size: 14px;
+            font-weight: 400;
+            gap: 8px;
+            line-height: 22px;
+            width: 88px;
+        }
+
+        .icon-container {
+            align-items: center;
+            display: flex;
+        }
+
+        .icon {
+            font-size: 16px;
+        }
+
+        .scale-value {
+            color: #212f3f;
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 22px;
+            width: calc(100% - 104px);
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            display: -webkit-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+}
+
+.company-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+
+    .link {
+        color: #00b14f;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 22px;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .icon {
+        color: #00b14f;
+        font-size: 15px;
+    }
+}

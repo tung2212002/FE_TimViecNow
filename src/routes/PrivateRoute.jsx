@@ -21,23 +21,6 @@ const PrivateRoute = ({ component: Component, layout: Layout, positionHeader, ..
     });
     const token = side === 'candidate' ? getLocalAccessToken() : getLocalBusinessAccessToken();
     const user = side === 'candidate' ? useSelector(selectUser) : useSelector(selectBusiness);
-    // if (side === 'candidate') {
-    //     return token ? (
-    //         <Layout positionHeader={positionHeader}>
-    //             <Component {...rest} />
-    //         </Layout>
-    //     ) : (
-    //         <Navigate to={route.LOGIN} />
-    //     );
-    // } else if (side === 'employer') {
-    //     return token ? (
-    //         <Layout positionHeader={positionHeader}>
-    //             <Component {...rest} />
-    //         </Layout>
-    //     ) : (
-    //         <Navigate to={route.MANAGER_LOGIN} />
-    //     );
-    // }
 
     useEffect(() => {
         if (user) {
@@ -82,15 +65,6 @@ const PrivateRoute = ({ component: Component, layout: Layout, positionHeader, ..
         }
     }, [side, token]);
 
-    // return isLoading.loading ? (
-    //     <div className="loading">Loading...</div>
-    // ) : isLoading.valid ? (
-    //     <Layout positionHeader={positionHeader}>
-    //         <Component {...rest} />
-    //     </Layout>
-    // ) : (
-    //     <Navigate to={side === 'candidate' ? route.LOGIN : route.MANAGER_LOGIN} />
-    // );
     return (
         <>
             {!user && isLoading.loading && <div className="loading">...</div>}

@@ -1,68 +1,67 @@
-.wrapper{
+.wrapper {
     width: 100%;
     position: relative;
 }
 
-.wrapper *{
+.wrapper * {
     box-sizing: border-box;
 }
 
-.input-selector{
+.input-selector {
     position: relative;
     color: #303235;
     box-sizing: content-box;
     display: flex;
     align-items: center;
     width: 100%;
-    .input{
+    .input {
         width: 100%;
         min-height: 33.5px;
         height: auto;
         font-size: 14px;
         line-height: 1.5;
-        color: #303235!important;
+        color: #303235 !important;
         font-weight: 500;
         padding: 5px 40px 5px 10px;
         border-radius: 5px;
         border: 1px solid #e8edf2;
         background: #fff;
-        transition: all .3s ease-in-out;
+        transition: all 0.3s ease-in-out;
 
-        &:focus{
+        &:focus {
             border-color: #a8a8a8;
             outline: none;
-    }
-        &::placeholder{
+        }
+        &::placeholder {
             color: #868d94;
         }
     }
 
-    .icon{
+    .icon {
         display: inline-block;
         margin-left: -24px;
-        transition: all .3s ease-in-out;
-        &.active{
+        transition: all 0.3s ease-in-out;
+        &.active {
             transform: rotate(180deg);
         }
     }
-
 }
-.active .icon{
+.active .icon {
     transform: rotate(180deg);
 }
 
-.active .options{
+.active .options {
     display: block;
 }
 
-.options{
+.options {
     position: absolute;
     top: 100%;
     left: 0;
     right: 0;
     background: #fff;
     border: 1px solid #e8edf2;
-    box-shadow: 0 10px 20px rgba(0,0,0,.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     border-radius: 3px;
     z-index: 9999;
     max-height: 200px;
@@ -72,39 +71,37 @@
     display: none;
 }
 
-.options.active{
+.options.active {
     display: block !important;
 }
 
-.option{
+.option {
     padding: 10px 20px;
     cursor: pointer;
-    transition: all .3s ease-in-out;
+    transition: all 0.3s ease-in-out;
     display: flex;
     align-items: center;
 
-    .text{
+    .text {
         font-size: 14px;
         font-weight: 500;
         line-height: 17px;
         color: #303235;
-    
     }
 
-    &:hover{
+    &:hover {
         background: #f5f7f9;
     }
 
-    &.active{
+    &.active {
         background: #a9ffbb;
-    
     }
 
-    &.selected{
+    &.selected {
         background: #f5f7f9;
     }
 
-    .icon{
+    .icon {
         margin-right: 10px;
     }
 }

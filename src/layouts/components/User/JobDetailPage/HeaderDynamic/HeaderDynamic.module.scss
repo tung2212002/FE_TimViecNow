@@ -1,0 +1,123 @@
+.wrapper {
+    display: none;
+    width: 100%;
+    left: 0;
+    top: 0;
+    background: #fff;
+    border-top: 1px solid #e9eaec;
+    box-shadow: 0 8px 16px 0 rgba(1, 18, 34, 0.04);
+    height: 54px;
+    position: fixed;
+    width: 100%;
+    z-index: 4;
+}
+
+.wrapper.show {
+    display: block;
+    visibility: visible !important;
+}
+
+@media screen and (max-width: 767px) {
+    .wrapper {
+        display: none !important;
+    }
+}
+
+@media (min-width: 768px) {
+    .container {
+        width: 750px !important;
+    }
+}
+@media (min-width: 992px) {
+    .container {
+        width: 970px !important;
+    }
+}
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px !important;
+    }
+}
+
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    height: 51px;
+    justify-content: space-between;
+    width: 67%;
+}
+
+.menu-tabs {
+    align-items: center;
+    display: flex;
+    .menu-tab {
+        cursor: pointer;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 600;
+        letter-spacing: 0.175px;
+        line-height: 22px;
+        padding: 16px 20px;
+        text-align: center;
+        border-bottom: 2px solid transparent;
+        transition: all 0.5s ease;
+
+        &:hover {
+            color: #00b14f;
+            border-bottom: 2px solid #00b14f;
+        }
+    }
+
+    .active {
+        border-bottom: 2px solid #00b14f;
+        color: #00b14f;
+    }
+}
+
+.menu-actions {
+    align-items: center;
+    display: flex;
+    padding-right: 20px;
+    .btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        background: #00b14f;
+        border-radius: 4px;
+        height: 32px;
+        padding: 6px 12px;
+        color: #fff;
+
+        &:hover {
+            background: #019b46;
+        }
+    }
+
+    .btn-icon {
+        align-items: center;
+        display: flex;
+        height: 24px;
+        justify-content: center;
+        padding: 4px;
+        width: 24px;
+    }
+
+    .icon-plane {
+        font-size: 15px;
+        font-weight: 400;
+    }
+
+    .text {
+        font-size: 12px;
+        font-weight: 600;
+    }
+}

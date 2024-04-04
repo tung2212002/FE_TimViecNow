@@ -10,7 +10,7 @@ import SelectionComponent from '../../common/SelectionComponent/SelectionCompone
 
 const cx = classNames.bind(styles);
 
-const SearchExpComponent = ({padding}) => {
+const SearchExpComponent = ({ padding }) => {
     const filterExp = [
         {
             id: 1,

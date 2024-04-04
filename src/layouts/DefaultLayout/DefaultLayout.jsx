@@ -2,19 +2,18 @@ import styles from './DefaultLayout.module.scss';
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 
-import FooterComponent from '../../components/FooterComponent/FooterComponent';
-import BackTopComponent from '../../components/BackTopComponent/BackTopComponent';
-import { HeaderComponent, HeaderHiddenComponent } from '../../components/Header';
+import { BackTopComponent } from '../../components';
+import { Footer, Header, HeaderHidden } from '../components/User';
 
 const cx = classNames.bind(styles);
 
 function DefaultLayout({ children, positionHeader = '' }) {
     return (
         <div className={cx('wrapper')}>
-            <HeaderComponent positionHeader={positionHeader} />
-            <HeaderHiddenComponent />
+            <Header positionHeader={positionHeader} />
+            <HeaderHidden />
             {children}
-            <FooterComponent />
+            <Footer />
             <BackTopComponent />
         </div>
     );

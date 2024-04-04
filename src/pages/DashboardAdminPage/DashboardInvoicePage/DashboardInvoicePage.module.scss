@@ -1,40 +1,38 @@
-.wrapper{
+.wrapper {
     min-width: 1076px;
     min-height: calc(100vh + 1px);
     padding-left: 0;
     padding-top: 64px;
     margin-left: 260px;
     height: 100%;
-    transition: all .3s ease-in-out;
+    transition: all 0.3s ease-in-out;
     background-color: #e8edf2;
 }
 
-.wrapper *{
+.wrapper * {
     box-sizing: border-box;
 }
 
-.auth-modal{
+.auth-modal {
     left: 3%;
     top: 10%;
     max-width: 450px;
     position: fixed;
     background: #fff;
     border: 1px solid #e8edf2;
-    box-shadow: 0 10px 20px rgba(0,0,0,.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     border-radius: 3px;
     z-index: 9999;
 }
 
-.container{
-    // max-width: 1296px;
-    // padding: 20px 20px 80px;
+.container {
     width: 100%;
     margin-right: auto;
     margin-left: auto;
 }
 
-.breadcrumb-box{
-    transition: all .3s ease-in-out;
+.breadcrumb-box {
+    transition: all 0.3s ease-in-out;
     position: sticky;
     top: 64px;
     z-index: 999;
@@ -46,7 +44,7 @@
     padding-right: 20px;
     border-bottom: 1px solid #e8edf2;
 
-    .breadcrumb{
+    .breadcrumb {
         font-size: 16px;
         font-weight: 500;
         line-height: 19px;
@@ -54,10 +52,9 @@
         margin-bottom: 0;
         text-align: left;
     }
-
 }
 
-.content{
+.content {
     max-width: 1296px;
     padding: 20px 20px 80px;
     width: 100%;
@@ -65,34 +62,33 @@
     margin-left: auto;
 }
 
-.content-list{
+.content-list {
     height: calc(100vh - 307px);
     display: flex;
     justify-content: center;
     align-items: center;
 
-    .box-image{
+    .box-image {
         width: 36%;
     }
 
-    .image{
+    .image {
         max-width: 100%;
         height: auto;
     }
 
-    .text{
+    .text {
         color: #5e6368;
         font-size: 14px;
         line-height: 1.5;
         margin: 4px 0 14px 0;
         text-align: center;
-
     }
 
-    .button{
+    .button {
         text-align: center;
 
-        .button-link{
+        .button-link {
             display: inline-block;
             color: #fff;
             background-color: #00b14f;
@@ -104,9 +100,6 @@
             line-height: 1.5;
             padding: 5px 10px;
             border: 1px solid transparent;
-
         }
-
     }
-
 }

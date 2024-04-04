@@ -22,24 +22,6 @@ const PublicRoute = ({ component: Component, layout: Layout, restricted, positio
     const token = side === 'candidate' ? getLocalAccessToken() : getLocalBusinessAccessToken();
     const user = side === 'candidate' ? useSelector(selectUser) : useSelector(selectBusiness);
 
-    // if (side === 'candidate') {
-    //     return accessToken && restricted ? (
-    //         <Navigate to={route.HOMEPAGE} replace />
-    //     ) : (
-    //         <Layout positionHeader={positionHeader}>
-    //             <Component {...rest} />
-    //         </Layout>
-    //     );
-    // } else if (side === 'employer') {
-    //     return accessToken && restricted ? (
-    //         <Navigate to={route.DASHBOARD_ADMIN} replace />
-    //     ) : (
-    //         <Layout positionHeader={positionHeader}>
-    //             <Component {...rest} />
-    //         </Layout>
-    //     );
-    // }
-
     useEffect(() => {
         if (user) {
             setIsLoading({ loading: false, valid: true });

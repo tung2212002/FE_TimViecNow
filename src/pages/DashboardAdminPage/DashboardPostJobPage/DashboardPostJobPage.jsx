@@ -1,5 +1,5 @@
+import { useDispatch, useSelector } from 'react-redux';
 import classNames from 'classnames/bind';
-import { useState } from 'react';
 import TippyText from '@tippyjs/react';
 import 'tippy.js/dist/backdrop.css';
 import 'tippy.js/dist/svg-arrow.css';
@@ -13,9 +13,7 @@ import { FaRegCalendar } from 'react-icons/fa';
 import styles from './DashboardPostJobPage.module.scss';
 import { icons } from '../../../assets';
 import path from '../../../constants/path';
-import InputSelectorComponent from '../../../components/common/InputSelectorComponent/InputSelectorComponent';
-import InputSelectorMultiComponent from '../../../components/common/InputSelectorMultiComponent/InputSelectorMultiComponent';
-import { useDispatch, useSelector } from 'react-redux';
+import { InputSelectorComponent, InputSelectorMultiComponent } from '../../../components/common';
 import {
     addLocation,
     selectError,
@@ -27,9 +25,8 @@ import {
     setRecruitmentPositionTitle,
     setTypesJob,
 } from '../../../redux/features/postJob/postJobSlide';
-import DashboradPostJobLocationCampaign from '../../../components/DashboardPostJob/DashboradPostJobLocationCampaign/DashboradPostJobLocationCampaign';
-import { DashboardPostJobGeneralRequirementsCampaign, DashboardPostJobInfoContact } from '../../../components/DashboardPostJob';
-import DashboardPostJobDetailRequirementsCampaign from '../../../components/DashboardPostJob/DashboardPostJobDetailRequirementsCampaign/DashboardPostJobDetailRequirementsCampaign';
+import { JobLocation, JobGeneralRequirements, JobDetailRequirements, JobInfoContact } from '../../../layouts/components/Business/PostJobPage';
+
 const cx = classNames.bind(styles);
 
 const DashboardPostJobPage = () => {
@@ -355,7 +352,7 @@ const DashboardPostJobPage = () => {
                                         <div className={cx('select-box')}>
                                             <div>
                                                 {job.location.map((item) => (
-                                                    <DashboradPostJobLocationCampaign key={item.id} location_id={item.id} />
+                                                    <JobLocation key={item.id} location_id={item.id} />
                                                 ))}
                                                 <button className={cx('select-button')} onClick={handleAddLocation}>
                                                     <FaPlus className={cx('icon-plus')} />
@@ -367,13 +364,13 @@ const DashboardPostJobPage = () => {
                                 </div>
                             </div>
                             <div className={cx('box-content-item')}>
-                                <DashboardPostJobGeneralRequirementsCampaign />
+                                <JobGeneralRequirements />
                             </div>
                             <div className={cx('box-content-item')}>
-                                <DashboardPostJobDetailRequirementsCampaign />
+                                <JobDetailRequirements />
                             </div>
                             <div className={cx('box-content-item')}>
-                                <DashboardPostJobInfoContact />
+                                <JobInfoContact />
                             </div>
                         </div>
                     </div>

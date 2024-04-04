@@ -1,0 +1,253 @@
+@import '../../../../styles/size';
+
+.wrapper {
+    width: 100%;
+    height: $header-height;
+    min-height: 50px;
+    background: #fff;
+    border-bottom: 1px solid #e9eaec;
+    border-radius: inherit;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+}
+
+@media screen and (max-width: 1434px) {
+    .wrapper {
+        position: relative;
+    }
+
+    .label {
+        margin: 13px 2px !important;
+        padding: 13px 5px !important;
+    }
+
+    .icon {
+        margin-left: -6px !important;
+    }
+}
+
+@media screen and (max-width: 1339px) {
+    .navbar-mid,
+    .navbar-right {
+        display: none !important;
+    }
+}
+.container {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    height: 100%;
+    padding: 0 20px;
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+    .item {
+        position: relative;
+    }
+}
+
+.logo-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.logo-link {
+    padding: 0 20px 0 0;
+    height: $header-height;
+}
+.logo-img {
+    height: $header-height;
+    width: auto;
+}
+.navbar-mid {
+    display: flex;
+    .icon {
+        width: 28px;
+        height: 28px;
+        margin-bottom: 10px;
+        margin-left: -20px;
+    }
+
+    .link {
+        display: flex;
+        align-items: center;
+    }
+}
+
+.label {
+    color: #212f3f;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.235px;
+    line-height: 20px;
+    margin: 14px 5px;
+    padding: 12px 15px;
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+    // position: absolute;
+    // right: 0;
+    margin-left: auto;
+
+    .item {
+        background: rgba(0, 177, 79, 0.102);
+        border-radius: 50%;
+        margin: 15px 5px;
+    }
+
+    .link {
+        display: block;
+        color: #00b14f;
+        height: 40px;
+        width: 40px;
+        text-align: center;
+        line-height: 40px;
+        .icon {
+            font-size: 18px;
+            height: 40px;
+        }
+        .comments {
+            font-size: 24px;
+        }
+    }
+
+    .text {
+        display: block;
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .avatar-container {
+        position: relative;
+        .avatar-link {
+            display: flex;
+            align-items: center;
+            margin: 0 10px;
+        }
+
+        .chevron-down {
+            font-size: 12px;
+            margin-left: 5px;
+            color: #00b14f;
+            transition: all 0.3s ease;
+        }
+        .avatar-bg {
+            background: #fafafa;
+            border-radius: 20px;
+            margin: 13px 0 17px 5px;
+            padding-right: 22px;
+
+            .avatar {
+                border-radius: 50%;
+                height: 32px;
+                margin: 5px 10px 5px 0;
+                max-width: 100%;
+                vertical-align: middle;
+                width: 32px;
+                border: 1px solid #00b14f;
+            }
+        }
+
+        &:hover .account-menu {
+            opacity: 1;
+            max-height: 88vh;
+        }
+
+        &:hover .chevron-down {
+            transform: rotate(180deg);
+        }
+    }
+}
+
+.btn {
+    align-items: center;
+    border-radius: 8px;
+    border-radius: 4px;
+    display: flex;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    gap: 8px;
+    height: 40px;
+    justify-content: center;
+    letter-spacing: 0.175px;
+    line-height: 22px;
+    margin: 15px 6px;
+    padding: 0 16px;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.login-btn {
+    border: 1px solid #00b14f;
+    color: #00b14f;
+}
+
+.register-btn {
+    background: #00b14f !important;
+    border: 1px solid #00b14f;
+    color: #fff;
+
+    &:hover {
+        background-color: #05aa4f !important;
+    }
+}
+
+.post-job-btn {
+    background: #212f3f 0 0 no-repeat padding-box;
+    border: 1px solid #eee;
+    color: #fff;
+}
+
+.nav-item {
+    position: relative;
+
+    &:hover .menu {
+        opacity: 1;
+        max-height: 88vh;
+    }
+
+    &:hover .label {
+        color: #00b14f;
+    }
+}
+
+// .nav-item:hover .menu {
+//     opacity: 1;
+//     max-height: 88vh;
+// }
+
+.menu {
+    opacity: 0;
+    display: block;
+    z-index: 2;
+    margin-top: -9px;
+    position: absolute;
+    top: 100%;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.4s ease, max-height 0.6s ease;
+    box-shadow: 1px 2px 20px rgba(0, 0, 0, 0.06);
+}
+
+.account-menu {
+    opacity: 0;
+    display: block;
+    z-index: 2;
+    margin-top: -9px;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.4s ease, max-height 0.6s ease;
+    box-shadow: 1px 2px 20px rgba(0, 0, 0, 0.06);
+}

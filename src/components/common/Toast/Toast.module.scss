@@ -11,7 +11,7 @@
     max-width: 400px;
     height: 40px;
     pointer-events: none;
-    box-shadow: 0 0 9px rgba(0,0,0,.25);
+    box-shadow: 0 0 9px rgba(0, 0, 0, 0.25);
     transition: all linear 0.3s;
     animation: all 0.3s ease-in-out;
     animation: slideInLeft 0.3s ease-in-out, fadeOut 0.5s ease-in-out 2.5s forwards;
@@ -55,7 +55,6 @@
 .progress {
     transition: all 0.3s ease;
 }
-
 
 .wrapper-success {
     border-left: 4px solid #71be34;
@@ -108,4 +107,3 @@
         display: none;
     }
 }
-
