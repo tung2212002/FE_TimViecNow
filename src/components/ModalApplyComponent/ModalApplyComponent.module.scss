@@ -19,25 +19,26 @@
         top: -60px !important;
         width: calc(100% - 20px) !important;
         border-radius: 4px !important;
-
     }
 
-    .header, .body, .footer {
+    .header,
+    .body,
+    .footer {
         padding: 10px 10px !important;
     }
 
-    .cv{
+    .cv {
         border: 1px dashed #00b14f !important;
         border-radius: 6px !important;
         cursor: pointer !important;
         padding: 16px !important;
 
-        .cv-icon-label{
-           display: none !important;
+        .cv-icon-label {
+            display: none !important;
         }
     }
 
-    .cover-letter{
+    .cover-letter {
         width: 100% !important;
 
         .label {
@@ -45,21 +46,20 @@
         }
     }
 
-    .upload-container{
-
+    .upload-container {
         flex-direction: column !important;
     }
 
-    .file-name{
+    .file-name {
         max-width: 100% !important;
     }
 
-    .form-info-header{
+    .form-info-header {
         flex-direction: column !important;
         align-items: flex-start !important;
     }
 
-    .info{
+    .info {
         border: 1px solid #00b14f !important;
 
         .form-info-item {
@@ -67,10 +67,10 @@
             width: 100% !important;
         }
 
-        .input{
+        .input {
             font-size: 12px !important;
             font-weight: 300 !important;
-            transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
         }
 
         .input::placeholder {
@@ -86,33 +86,32 @@
         line-height: 20px !important;
         font-weight: 300 !important;
         border-radius: 4px !important;
-        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
     }
 
-    .btn-cancel{
+    .btn-cancel {
         display: none !important;
     }
 
-    .header-dialog{
+    .header-dialog {
         min-height: 16px;
         border-bottom: 1px solid #e5e5e5;
         padding: 0 10px 10px 10px !important;
     }
 
-
-    .footer-dialog{
-        padding: 10px 0 0  0 !important;
+    .footer-dialog {
+        padding: 10px 0 0 0 !important;
         text-align: right;
         border-top: 1px solid #e5e5e5;
     }
 
-    .title-dialog{
+    .title-dialog {
         min-height: 16px !important;
         padding: 0 !important;
         color: #a94442 !important;
     }
 
-    .content-dialog{
+    .content-dialog {
         font-size: 14px !important;
         line-height: 1.42857143 !important;
         color: #333 !important;
@@ -121,7 +120,7 @@
         text-align: start !important;
     }
 
-    .btn-cancel-dialog{
+    .btn-cancel-dialog {
         border: 1px solid #ccc !important;
         padding: 5px 10px !important;
         font-size: 12px !important;
@@ -131,8 +130,6 @@
         background-color: #fff !important;
         height: unset !important;
     }
-
-    
 }
 
 @media screen and (min-width: 992px) and (max-width: 1199px) {
@@ -149,9 +146,6 @@
     .wrapper {
         width: 650px !important;
     }
-}
-
-.container {
 }
 
 .header {
@@ -464,7 +458,7 @@
                     letter-spacing: 0.175px;
                     max-height: 40px;
                     padding: 9px 8px 9px 12px;
-                    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+                    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
                     &::placeholder {
                         color: #c9c9c9;
                         font-size: 14px;

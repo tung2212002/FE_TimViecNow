@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import classNames from 'classnames/bind';
 
@@ -5,15 +6,18 @@ import { FaChevronRight } from 'react-icons/fa6';
 
 import styles from './JobSearchDetailPage.module.scss';
 import useDocumentTitle from '../../hooks/useDocumentTitle';
-import { Link } from 'react-router-dom';
-import JobSearchDetailBodyComponent from '../../components/JobSearchDetailComponent/JobSearchDetailBodyComponent/JobSearchDetailBodyComponent';
-import JobSearchDetailNavComponent from '../../components/JobSearchDetailHeaderComponent/JobSearchDetailNavComponent';
-import JobSearchDetailHeaderComponent from '../../components/JobSearchDetailComponent/JobSearchDetailHeaderComponent/JobSearchDetailHeaderComponent';
-import JobSearchDetailCompanyComponent from '../../components/JobSearchDetailComponent/JobSearchDetailCompanyComponent/JobSearchDetailCompanyComponent';
-import { JobSearchDetailCategoryComponent, JobSearchDetailReportComponent, JobSearchDetailSuitableComponent } from '../../components/JobSearchDetailComponent';
-import JobSearchDetailSummaryComponent from '../../components/JobSearchDetailComponent/JobSearchDetailSummary/JobSearchDetailSummaryComponent';
-import TabCompanyComponent from '../../components/JobSearchDetailComponent/TabCompanyComponent/TabCompanyComponent';
-import SEOComponent from '../../components/SEOComponent/SEOComponent';
+import {
+    JobDetailBody,
+    JobDetailHeader,
+    JobHeader,
+    CompanySummary,
+    JobCategory,
+    JobReport,
+    JobSuitable,
+    TabCompany,
+    JobSummary,
+} from '../../layouts/components/User/JobDetailPage';
+import { SEO } from '../../layouts/components/User';
 
 const cx = classNames.bind(styles);
 
@@ -138,7 +142,7 @@ const JobSearchDetailPage = () => {
 
     return (
         <div className={cx('wrapper')}>
-            <JobSearchDetailNavComponent />
+            <JobDetailHeader />
             <div className={cx('container')}>
                 <div className={cx('job-path')}>
                     <Link to="/">
@@ -154,27 +158,22 @@ const JobSearchDetailPage = () => {
                 <div className={cx('job-detail')}>
                     <div className={cx('job-detail-body')}>
                         <div className={cx('job-detail-left')}>
-                            <JobSearchDetailHeaderComponent job={job} />
-                            <TabCompanyComponent
-                                handleToInfo={handleToInfo}
-                                handleToCompany={handleToCompany}
-                                handleToRelated={handleToRelated}
-                                state={state}
-                            />
-                            <JobSearchDetailBodyComponent job={job} state={state} />
+                            <JobHeader job={job} />
+                            <TabCompany handleToInfo={handleToInfo} handleToCompany={handleToCompany} handleToRelated={handleToRelated} state={state} />
+                            <JobDetailBody job={job} state={state} />
                         </div>
                         <div className={cx('job-detail-right')}>
-                            <JobSearchDetailCompanyComponent company={job.company} id="job-detail-company" />
-                            <JobSearchDetailSummaryComponent job={job} />
-                            <JobSearchDetailCategoryComponent job={job} />
-                            <JobSearchDetailSuitableComponent job={job} />
-                            <JobSearchDetailReportComponent />
+                            <CompanySummary company={job.company} />
+                            <JobSummary job={job} />
+                            <JobCategory job={job} />
+                            <JobSuitable job={job} />
+                            <JobReport />
                         </div>
                     </div>
                 </div>
             </div>
             <div className={cx('seo')}>
-                <SEOComponent />
+                <SEO />
             </div>
         </div>
     );

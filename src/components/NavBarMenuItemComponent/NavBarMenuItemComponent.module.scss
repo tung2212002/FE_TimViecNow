@@ -11,8 +11,6 @@
     .wrapper {
         min-width: 300px !important;
     }
-
-
 }
 
 .link {
@@ -29,7 +27,6 @@
     &:hover {
         background: hsla(0, 2%, 91%, 0.722) !important;
         cursor: pointer;
-        // border-radius: 6px;
     }
 
     &:hover .text {

@@ -2,16 +2,15 @@ import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 
 import styles from './DashboardLayout.module.scss';
-import { HeaderDashBoardComponent } from '../../components/Header';
-import SideBarDashboardComponent from '../../components/SideBar/SideBarDashboardComponent/SideBarDashboardComponent';
+import { Header, SideBar } from '../components/Business';
 
 const cx = classNames.bind(styles);
 
 const DashboardLayout = ({ children }) => {
     return (
         <div className={cx('wrapper')}>
-            <HeaderDashBoardComponent />
-            <SideBarDashboardComponent />
+            <Header />
+            <SideBar />
             {children}
         </div>
     );

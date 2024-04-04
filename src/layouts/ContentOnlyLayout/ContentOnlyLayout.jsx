@@ -1,10 +1,10 @@
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 
 import styles from './ContentOnlyLayout.module.scss';
-import Toast from '../../components/common/Toast/Toast';
+import { Toast } from '../../components/common';
 import { selectToastList } from '../../redux/features/toast/toastSlice';
-import { useSelector } from 'react-redux';
 
 const cx = classNames.bind(styles);
 

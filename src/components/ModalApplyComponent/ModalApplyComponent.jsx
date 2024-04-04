@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
@@ -158,7 +158,7 @@ const ModalApplyComponent = ({ job }) => {
                                 <div className={cx('info')}>
                                     <div className={cx('cv')} onClick={handleClickFile}>
                                         <input type="file" accept="doc, docx, pdf" className={cx('input-file')} ref={ref} hidden onChange={handleChangeFile} />
-                                        
+
                                         <div className={cx('cv-icon-label')}>
                                             <img src={icons.icon_upload_cloud} alt="upload" className={cx('icon-upload')} />
                                             Tải lên CV từ máy tính, chọn hoặc kéo thả

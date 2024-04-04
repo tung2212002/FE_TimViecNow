@@ -10,7 +10,7 @@ const Modal2 = ({ header, body, footer, animation = true, show, handleHidden }) 
     const close = () => {
         handleHidden();
     };
-    
+
     return createPortal(
         <div className={cx('wrapper', show ? 'show' : '')} onClick={() => close()}>
             <div className={cx('container', animation && 'animation')} onClick={(e) => e.stopPropagation()}>

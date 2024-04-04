@@ -5,7 +5,6 @@ import DashboardAdminPage from './DashboardAdminPage/DashboardAdminPage';
 import DashboardInvoicePage from './DashboardInvoicePage/DashboardInvoicePage';
 import DashboardPostCampaignPage from './DashboardPostCampaignPage/DashboardPostCampaignPage';
 import DashboardPostJobPage from './DashboardPostJobPage/DashboardPostJobPage';
-import DashboardPostJobDetailRequirementsCampaign from '../../components/DashboardPostJob/DashboardPostJobDetailRequirementsCampaign/DashboardPostJobDetailRequirementsCampaign';
 export {
     DashboardCardPage,
     DashboardAdminPage,
@@ -14,5 +13,4 @@ export {
     DashboardInvoicePage,
     DashboardPostCampaignPage,
     DashboardPostJobPage,
-    DashboardPostJobDetailRequirementsCampaign,
 };

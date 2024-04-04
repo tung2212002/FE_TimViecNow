@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 
-import styles from './Toast.module.scss';
 import { FaCircleCheck, FaCircleXmark } from 'react-icons/fa6';
 import { FaInfoCircle, FaExclamationCircle } from 'react-icons/fa';
+
+import styles from './Toast.module.scss';
 
 const cx = classNames.bind(styles);
 

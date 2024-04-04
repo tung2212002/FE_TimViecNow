@@ -2,13 +2,9 @@ import React, { useRef } from 'react';
 import classNames from 'classnames/bind';
 
 import styles from './HomePage.module.scss';
-import SectionHeaderComponent from '../../components/SectionHeaderComponent/SectionHeaderComponent';
-import SectionFeatureJobComponent from '../../components/SectionFeatureJobComponent/SectionFeatureJobComponent';
-import TopCompanySlideComponent from '../../components/TopCompanySlideComponent/TopCompanySlideComponent';
-import DashBoardSectionComponent from '../../components/DashBoardSectionComponent/DashBoardSectionComponent';
-import TopJobSlideComponent from '../../components/TopJobSlideComponent/TopJobSlideComponent';
 import useDocumentTitle from '../../hooks/useDocumentTitle';
-import SEOComponent from '../../components/SEOComponent/SEOComponent';
+import { HomeHeader } from '../../layouts/components/User/HomePage';
+import { FeatureJob, TopCompanySlide, DashBoard, TopJobSlide, SEO } from '../../layouts/components/User';
 
 const cx = classNames.bind(styles);
 
@@ -207,12 +203,12 @@ const HomePage = () => {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
-                <SectionHeaderComponent handleScrollToDashBoard={handleScrollToDashBoard} />
-                <SectionFeatureJobComponent />
-                <TopCompanySlideComponent companies={companies}  />
-                <DashBoardSectionComponent ref={dashBoardRef} />
-                <TopJobSlideComponent />
-                <SEOComponent />
+                <HomeHeader handleScrollToDashBoard={handleScrollToDashBoard} />
+                <FeatureJob />
+                <TopCompanySlide companies={companies} />
+                <DashBoard ref={dashBoardRef} />
+                <TopJobSlide />
+                <SEO />
             </div>
         </div>
     );

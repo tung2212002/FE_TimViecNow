@@ -6,8 +6,8 @@ import Modal from '../../components/common/Modal/Modal';
 import { icons, images } from '../../assets';
 import path from '../../constants/path';
 import { hideModal, showModal } from '../../redux/features/modal/modalSlice';
-import PolicyManagerComponent from '../../components/ManagerLoginComponent/PolicyManagerComponent/PolicyManagerComponent';
-import RegisterFormManagerComponent from '../../components/ManagerLoginComponent/RegisterFormManagerComponent/RegisterFormManagerComponent';
+import { Policy, RegisterForm } from '../../layouts/components/Business/AuthenticationPage';
+
 const cx = classNames.bind(styles);
 
 const ManagerRegisterPage = () => {
@@ -65,10 +65,10 @@ const ManagerRegisterPage = () => {
                         <span className={cx('content-header-subtitle')}>Cùng tạo dựng lợi thế cho doanh nghiệp!.</span>
                     </div>
                     <div className={cx('content-body-policy')}>
-                        <PolicyManagerComponent />
+                        <Policy />
                     </div>
                     <div className={cx('content-form')}>
-                        <RegisterFormManagerComponent />
+                        <RegisterForm />
                     </div>
                     <div className={cx('content-footer')}></div>
                 </div>

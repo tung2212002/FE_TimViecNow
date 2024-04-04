@@ -7,25 +7,7 @@ import './Editor.css';
 const editorConfiguration = {
     placeholder: 'Nhập nội dung',
 
-    toolbar: {
-        // items: [
-        //     'undo',
-        //     'redo',
-        //     'removeFormat',
-        //     '|',
-        //     'bold',
-        //     'italic',
-        //     'underline',
-        //     '|',
-        //     'specialCharacters',
-        //     '|',
-        //     'increaseIndent',
-        //     'decreaseIndent',
-        //     '|',
-        //     'bulletedList',
-        //     'numberedList',
-        // ],
-    },
+    toolbar: {},
     language: 'en',
 };
 
