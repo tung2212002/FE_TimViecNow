@@ -21,7 +21,7 @@ export const creatBusinessService = async (body) => {
 };
 
 export const updateBusinessService = async (id, body) => {
-    const response = await request.apiAuth.put(`/business/${id}`, body);
+    const response = await request.apiAuthAttach.put(`/business/${id}`, body);
     return response;
 };
 

@@ -1036,9 +1036,9 @@ const JobDetailRequirements = () => {
                 </label>
                 <span className={cx('required')}>*</span>
                 <div className={cx('input-box')}>
-                    <EditorComponent contentHTML={job.description} setContentHTML={handleSetJobDescription} />
+                    <EditorComponent contentHTML={job.job_description} setContentHTML={handleSetJobDescription} />
                 </div>
-                {error.description && (
+                {error.job_description && (
                     <div className={cx('input-box-feedback')}>
                         <div className={cx('feedback-text')}>Mô tả công việc không được để trống</div>
                     </div>

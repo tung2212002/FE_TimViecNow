@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import { Link, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import { FaQuestionCircle, FaShieldAlt, FaRegFileAlt, FaRegUserCircle, FaUserCircle, FaChartBar, FaShoppingCart } from 'react-icons/fa';
 import { FaAnglesRight, FaRegGem, FaGem, FaClockRotateLeft, FaFileInvoice, FaGear } from 'react-icons/fa6';
@@ -16,11 +17,13 @@ import { BiSolidBadgeDollar } from 'react-icons/bi';
 import styles from './SideBar.module.scss';
 import path from '../../../../constants/path';
 import { images } from '../../../../assets';
+import { selectBusiness } from '../../../../redux/features/authBusiness/authSlide';
 
 const cx = classNames.bind(styles);
 
 const SideBar = () => {
     const location = useLocation();
+    const user = useSelector(selectBusiness);
 
     const mathPath = () => {
         return location.pathname + (location.search ? location.search : '');
@@ -72,7 +75,7 @@ const SideBar = () => {
         {
             id: 6,
             name: 'Chiến dịch tuyển dụng',
-            path: path.DASHBOARD_ACCOUNT_SETTING,
+            path: path.DASHBOARD_RECRUIREMENT_CAMPAIGNS,
             icon: IoBriefcaseOutline,
             iconActive: IoBriefcase,
         },
@@ -143,7 +146,7 @@ const SideBar = () => {
         {
             id: 17,
             name: 'Cài đặt tài khoản',
-            path: path.DASHBOARD_ACCOUNT_SETTING,
+            path: path.DASHBOARD_SETTING_INFO,
             icon: GoGear,
             iconActive: FaGear,
         },
@@ -188,14 +191,14 @@ const SideBar = () => {
                         <div className={cx('sidebar__header-content-info')}>
                             <div className={cx('user-avatar')}>
                                 <Link to={path.DASHBOARD_ACCOUNT_SETTING} className={cx('user-info-name')}>
-                                    <img src={images.avatar_default} alt="avatar" className={cx('user-avatar-img')} />
+                                    <img src={user?.avatar || images.avatar_default} alt="avatar" className={cx('user-avatar-img')} />
                                 </Link>
                             </div>
                             <div className={cx('user-info')}>
                                 <Link to={path.DASHBOARD_ACCOUNT_SETTING} className={cx('user-info-name')}>
-                                    <span className={cx('user-name')}>Admin</span>
+                                    <span className={cx('user-name')}>{user?.full_name}</span>
                                 </Link>
-                                <span className={cx('user-role')}>Employer</span>
+                                <span className={cx('user-role')}>{user?.role === 'business' ? 'Employer' : user?.role === 'admin' ? 'Admin' : 'User'}</span>
                                 <div className={cx('user-verify')}>
                                     Tài khoản xác thực: <span className={cx('user-verify-level')}>Cấp 1/5</span>{' '}
                                     <span className={cx('user-verify-icon')}>

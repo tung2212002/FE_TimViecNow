@@ -5,6 +5,11 @@ export const loginService = async (body) => {
     return response;
 };
 
+export const loginGoogleService = async (body) => {
+    const response = await request.api.post('/user/login_google', body);
+    return response;
+};
+
 export const refreshTokenService = async (body) => {
     const response = await request.apiAuth.post('/user/refresh_token', body);
     return response;

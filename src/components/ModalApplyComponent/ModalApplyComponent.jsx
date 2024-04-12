@@ -157,7 +157,14 @@ const ModalApplyComponent = ({ job }) => {
                             <div className={cx('tab-content-info')}>
                                 <div className={cx('info')}>
                                     <div className={cx('cv')} onClick={handleClickFile}>
-                                        <input type="file" accept="doc, docx, pdf" className={cx('input-file')} ref={ref} hidden onChange={handleChangeFile} />
+                                        <input
+                                            type="file"
+                                            accept=".doc, .docx, .pdf"
+                                            className={cx('input-file')}
+                                            ref={ref}
+                                            hidden
+                                            onChange={handleChangeFile}
+                                        />
 
                                         <div className={cx('cv-icon-label')}>
                                             <img src={icons.icon_upload_cloud} alt="upload" className={cx('icon-upload')} />

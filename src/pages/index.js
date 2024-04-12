@@ -4,6 +4,7 @@ import JobSearchPage from './JobSearchPage/JobSearchPage';
 import JobSearchDetailPage from './JobSearchDetailPage/JobSearchDetailPage';
 import LoginPage from './LoginPage/LoginPage';
 import MatchingJobsPage from './MatchingJobPage/MatchingJobsPage';
+import NotFoundPage from './NotFoundPage/NotFoundPage';
 
 // Page for Manager
 import ManagerRegisterPage from './ManagerRegisterPage/ManagerRegisterPage';
@@ -17,6 +18,7 @@ export {
     LoginPage,
     MatchingJobsPage,
     JobSearchDetailPage,
+    NotFoundPage,
     ManagerRegisterPage,
     ManagerLoginPage,
     DashboardAdminPage,

@@ -65,6 +65,8 @@ const icons = {
     icon_point: require('./icons/icon_point.svg'),
     icon_top_point: require('./icons/icon_top_point.png'),
     icon_check_mark: require('./icons/icon_check_mark.png'),
+    icon_heart: require('./icons/icon_heart.png'),
+    icon_star: require('./icons/icon_star.png'),
 };
 
 const images = {
@@ -112,6 +114,9 @@ const images = {
     member: require('./images/member.png'),
     subtract: require('./images/subtract.svg'),
     invoice_service_empty: require('./images/invoice_service_empty.png'),
+    banner_campaign: require('./images/banner-campaign.png'),
+    not_found: require('./images/not_found.png'),
+    verify_email: require('./images/verify_email.png'),
 };
 
 const gifs = {

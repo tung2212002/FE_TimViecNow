@@ -1,0 +1,45 @@
+.wrapper{
+    background-color: #fff !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.not-found{
+    height: 300px;
+    overflow: clip;
+}
+
+.description{
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+
+.back-home{
+    color: #fff;
+    background-color: #00b14f;
+    border: 1px solid transparent;
+    border-color: #00b14f;
+    white-space: nowrap;
+    border-radius: 5px;
+    font-size: 14px;
+    line-height: 1.5;
+    padding: 9px 14px;
+    transition: all 0.15s ease-in-out;
+
+
+    &:hover{
+        background-color: #00652d;
+        border-color: #00652d;
+    }
+}

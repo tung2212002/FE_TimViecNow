@@ -1,0 +1,319 @@
+.wrapper{
+
+}
+
+.form{
+    border: 1px solid #e8edf2;
+    padding: 18px;
+    margin: 16px 18px 18px 18px;
+    color: #303235;
+
+    input[type="text"]{
+        color: #000;
+        display: block;
+        width: 100%;
+        height: 33.5px;
+        padding: 5px 10px;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #e8edf2;
+        border-radius: 4px;
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        padding-right: 30px;
+        text-overflow: ellipsis;
+
+        &:disabled{
+            color: #52759b !important;
+            border: 1px solid #d7dee4 !important;
+            background: #e8edf2 !important;
+        }
+    }
+}
+
+.form-title{
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+
+.form-group{
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+
+    .form-col{
+        width: 100%;
+        max-width: 50%;
+        margin-bottom: 14px;
+        padding: 0 15px;
+    }
+
+    .label{
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 1.5;
+        color: #5e6368;
+        padding: 6px 0;
+        margin-right: 8px;
+    }
+
+
+    .avatar{
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-right: 8px;
+        border: 1px solid #e8edf2;
+
+        .avatar-img{
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+    }
+
+
+    .form-col-avatar{
+        display: flex;
+        align-items: center;
+
+        .button{
+            font-size: 14px;
+            line-height: 1.5;
+            color: #212529;
+            background-color: #f8f9fa;
+            border-color: #f8f9fa;
+            display: inline-block;
+            font-weight: 400;
+            padding: 5px 10px;
+            border: 1px solid transparent;
+            border-radius: 5px;
+            transition: all 0.15s ease-in-out;
+
+            &:hover{
+                background-color: #e2e6ea;
+                border-color: #dae0e5;
+            }
+        }
+    }
+    .form-col-item{
+        display: flex!important;
+        flex-direction: column;
+        
+        .input-name{
+            
+            &:focus{
+                border-color: #00b14f;
+            }
+        }
+
+        .error-text{
+            display: none;
+            width: 100%;
+            margin-top: 4px;
+            font-size: 12px;
+            line-height: 1.5;
+            color: #dc3545;
+        }
+
+
+    }
+    
+    .input-box{
+        margin-top: 8px;
+    }
+
+    .error{
+        .error-text{
+            display: block !important;
+        }
+
+        .input-name{
+
+            &:focus{
+                box-shadow: 0 0 0 0.2rem rgba(220,53,69,.25);
+            }
+        }
+    }
+}
+hr{
+    border: 0;
+    border-top: 1px solid #e8edf2;
+    margin: 16px 0;
+}
+
+.title-group{
+    margin-bottom: 16px;
+
+    b{
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 1.5;
+    }
+}
+
+.form-row{
+    margin-bottom: 14px;
+
+    .label{
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 1.5;
+        color: #5e6368;
+        padding: 6px 0;
+        margin-right: 8px;
+    }
+
+    .input{
+        margin-top: 8px;
+    }
+}
+
+.form-button{
+    text-align: right;
+
+    .button-cancel{
+        display: inline-block;
+        font-size: 14px;
+        line-height: 1.5;
+        font-weight: 400;
+        color: #303235;
+        background: #f5f8fa;
+        border-color: #e8edf2;
+        padding: 8px 14px;
+        min-width: 100px;
+        height: 40px;
+        border-radius: 5px;
+        text-align: center;
+        border: 1px solid transparent;
+        border-color: #e8edf2;
+        transition: all 0.15s ease-in-out;
+        margin-right: 10px;
+        &:hover{
+            background-color: #d0dae4;   
+        }
+    }
+
+    .button-save{
+        font-size: 14px;
+        line-height: 1.5;
+        font-weight: 400;
+        min-width: 100px;
+        height: 40px;
+        color: #fff;
+        background-color: #00b14f;
+        border-color: #00b14f;
+        border-radius: 5px;
+
+        &.disabled{
+            opacity: 0.7;
+            background-color: #f5f8fa;
+            border-color: #e8edf2;
+            color: #303235;
+            cursor: none !important;
+        }
+
+        &:hover{
+            background-color: #00652d;
+            border-color: #00652d;
+        }
+    }
+}
+
+.header-select {
+    padding: 6px 12px;
+    padding-left: 10px;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #e8edf2;
+    border-radius: 0.25rem !important;
+    width: 100%;
+    line-height: 1.5;
+    color: #000;
+    font-size: 14px;
+    position: relative;
+    cursor: pointer;
+
+    .container-select {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        width: 100%;
+    }
+
+    .icon {
+        top: unset !important;
+        transform: unset !important;
+        left: 14px;
+        color: #00b14f;
+        font-size: 16px;
+    }
+
+    .result {
+        color: #172530;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 20px;
+        padding-left: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
+.ul-select {
+    overflow-y: auto;
+    max-height: 230px !important;
+
+    .item {
+        color: #172530;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 20px;
+        padding: 8px 12px 8px 16px;
+        position: relative;
+        cursor: pointer;
+    }
+
+    .text {
+        font-size: 14px;
+        font-weight: 500;
+        color: #172530;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .icon-check {
+        font-size: 20px;
+        color: #00b14f;
+        position: absolute;
+        right: 12px;
+    }
+    .item:hover {
+        background: #f4f5f5;
+    }
+
+    .item.active {
+        background: #00b14f;
+    }
+
+    .item.active .text {
+        color: #fff !important;
+        font-weight: 600;
+    }
+}
+
+.icon-care {
+    box-sizing: content-box !important;
+    margin-right: 0;
+    padding-left: 0;
+}

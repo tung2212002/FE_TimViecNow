@@ -51,6 +51,7 @@ const JobInfoContact = () => {
                                 type="text"
                                 className={cx('input')}
                                 id="job-title"
+                                value={job.full_name_contact}
                                 placeholder="Nhập tên người nhận CV"
                                 onChange={handleSetFullNameContact}
                             />
@@ -73,6 +74,7 @@ const JobInfoContact = () => {
                                 type="text"
                                 className={cx('input')}
                                 id="job-phone"
+                                value={job.phone_number_contact}
                                 placeholder="Nhập số điện thoại người nhận CV"
                                 onChange={handleSetPhoneNumberContact}
                             />

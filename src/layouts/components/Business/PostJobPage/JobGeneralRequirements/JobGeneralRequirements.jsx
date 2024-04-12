@@ -419,7 +419,7 @@ const JobGeneralRequirements = () => {
                                     />
                                 </div>
                             </div>
-                            {(error.min_salary || error.max_salary || error.salary_type) && (
+                            {error.salary && (
                                 <div className={cx('input-box-feedback')}>
                                     <div className={cx('feedback-text')}>Mức lương không được để trống</div>
                                 </div>

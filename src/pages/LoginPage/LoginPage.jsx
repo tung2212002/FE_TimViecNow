@@ -1,17 +1,19 @@
 import { useState } from 'react';
 import classNames from 'classnames/bind';
 import { useDispatch } from 'react-redux';
+import { useGoogleLogin } from '@react-oauth/google';
 
 import { MdEmail } from 'react-icons/md';
 import { BsShieldLockFill } from 'react-icons/bs';
 import { FaEye, FaEyeSlash, FaGoogle, FaFacebook, FaLinkedin, FaUser } from 'react-icons/fa';
 
 import styles from './LoginPage.module.scss';
-import { loginService, registerService } from '../../services/authService';
+import { loginGoogleService, loginService, registerService } from '../../services/authService';
 import { login } from '../../redux/features/auth/authSlide';
 import route from '../../constants/route';
 import useDocumentTitle from '../../hooks/useDocumentTitle';
 import regexValidator from '../../utils/regexValidator';
+import { addToast, removeToast } from '../../redux/features/toast/toastSlice';
 
 const cx = classNames.bind(styles);
 
@@ -39,6 +41,19 @@ const LoginPage = () => {
         password: '',
         confirm_password: '',
     });
+
+    const handleAddToast = (title, message, type) => {
+        const newToast = {
+            id: Math.random().toString(36).slice(2),
+            title,
+            message,
+            type,
+        };
+        dispatch(addToast(newToast));
+        setTimeout(() => {
+            dispatch(removeToast(newToast.id));
+        }, 3000);
+    };
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -132,6 +147,30 @@ const LoginPage = () => {
             });
     };
 
+    const handleLoginGoogle = useGoogleLogin({
+        onSuccess: (tokenResponse) => {
+            const body = {
+                access_token: tokenResponse.access_token,
+            };
+            loginGoogleService(body)
+                .then((res) => {
+                    if (res.status === 200) {
+                        dispatch(login(res.data.data));
+                    } else if (res.status === 400) {
+                        handleAddToast('Thông báo', 'Đã có lỗi xảy ra', 'error');
+                    } else if (res.status === 401) {
+                        handleAddToast('Thông báo', 'Mã token không hợp lệ', 'error');
+                    } else if (res.status === 404) {
+                        handleAddToast('Thông báo', 'Tài khoản không tồn tại', 'error');
+                    }
+                })
+                .catch((err) => {
+                    handleAddToast('Thông báo', 'Lỗi không xác định', 'error');
+                    console.log(err);
+                });
+        },
+    });
+
     return (
         <div className={cx('wrapper')}>
             <div className={cx('auth-container')}>
@@ -211,7 +250,7 @@ const LoginPage = () => {
                                         <p className={cx('desc')}>Hoặc đăng nhập bằng</p>
                                     </div>
                                     <div className={cx('form-group', 'social-login', { disabled: !isAcceptPolicy })}>
-                                        <button type="button" className={cx('btn', 'btn-google')} disabled={!isAcceptPolicy}>
+                                        <button type="button" className={cx('btn', 'btn-google')} disabled={!isAcceptPolicy} onClick={handleLoginGoogle}>
                                             <FaGoogle className={cx('icon', 'google')} />
                                             <span className={cx('text')}>Google</span>
                                         </button>
@@ -389,7 +428,7 @@ const LoginPage = () => {
                                         <p className={cx('desc')}>Hoặc đăng nhập bằng</p>
                                     </div>
                                     <div className={cx('form-group', 'social-login', { disabled: !isAcceptPolicy })}>
-                                        <button type="button" className={cx('btn', 'btn-google')} disabled={!isAcceptPolicy}>
+                                        <button type="button" className={cx('btn', 'btn-google')} disabled={!isAcceptPolicy} onClick={handleLoginGoogle}>
                                             <FaGoogle className={cx('icon', 'google')} />
                                             <span className={cx('text')}>Google</span>
                                         </button>

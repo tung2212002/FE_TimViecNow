@@ -1,3 +1,5 @@
+import { URL_OAUTH2 } from '../configs';
+
 export default {
     HOMEPAGE: '/',
     JOB_SEARCH: '/viec-lam',
@@ -23,4 +25,14 @@ export default {
     DASHBOARD_EKYC: '/tuyen-dung/app/ekyc/notification',
     DASHBOARD_POST_CAMPAIGN: '/tuyen-dung/app/jobs/create-campaign',
     DASHBOARD_POST_JOB: '/tuyen-dung/app/jobs/create-job',
+    DASHBOARD_POST_JOB_EDIT: '/tuyen-dung/app/jobs',
+    DASHBOARD_RECRUIREMENT_CAMPAIGNS: '/tuyen-dung/app/recruitment-campaigns',
+    DASHBOARD_RECRUIREMENT_CAMPAIGNS_CREATE: '/tuyen-dung/app/recruitment-campaigns/create',
+    DASHBOARD_SUGGESTION: '/tuyen-dung/app/suggestions',
+    DASHBOARD_SETTING_PASSWORD: '/tuyen-dung/app/account/settings/password',
+    DASHBOARD_SETTING_INFO: '/tuyen-dung/app/account/settings/info',
+    DASHBOARD_SETTING_BUSINESS_LICENSE: '/tuyen-dung/app/account/settings/business-license',
+    DASHBOARD_SETTING_COMPANY: '/tuyen-dung/app/account/settings/company',
+    DASHBOARD_VERIFFY: '/tuyen-dung/app/account/verify',
+    URL_OAUTH2: URL_OAUTH2,
 };
