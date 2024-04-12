@@ -12,7 +12,7 @@ import { selectUser, updateUserInfo } from '../redux/features/auth/authSlide';
 import { getInfoBusinessService } from '../services/businessService';
 import { selectBusiness, updateBusinessInfo } from '../redux/features/authBusiness/authSlide';
 
-const PrivateRoute = ({ component: Component, layout: Layout, positionHeader, ...rest }) => {
+const PrivateRoute = ({ component: Component, layout: Layout, positionHeader, verifyBusinessEmail, ...rest }) => {
     const dispatch = useDispatch();
     const side = useSide();
     const [isLoading, setIsLoading] = useState({
@@ -24,6 +24,7 @@ const PrivateRoute = ({ component: Component, layout: Layout, positionHeader, ..
 
     useEffect(() => {
         if (user) {
+            console.log('user', verifyBusinessEmail && !user.is_verified_email);
             setIsLoading({ loading: false, valid: true });
         }
         if (token) {
@@ -69,11 +70,16 @@ const PrivateRoute = ({ component: Component, layout: Layout, positionHeader, ..
         <>
             {!user && isLoading.loading && <div className="loading">...</div>}
 
-            {user && !isLoading.loading && isLoading.valid && (
-                <Layout positionHeader={positionHeader}>
-                    <Component {...rest} />
-                </Layout>
-            )}
+            {user &&
+                !isLoading.loading &&
+                isLoading.valid &&
+                (verifyBusinessEmail && !user.is_verified_email && user.role === 'business' ? (
+                    <Navigate to={route.DASHBOARD_VERIFFY} />
+                ) : (
+                    <Layout positionHeader={positionHeader}>
+                        <Component {...rest} />
+                    </Layout>
+                ))}
             {!user && !isLoading.loading && !isLoading.valid && <Navigate to={side === 'candidate' ? route.LOGIN : route.MANAGER_LOGIN} />}
         </>
     );
@@ -83,6 +89,7 @@ PrivateRoute.propTypes = {
     component: PropTypes.elementType.isRequired,
     layout: PropTypes.elementType.isRequired,
     positionHeader: PropTypes.string,
+    verifyBusinessEmail: PropTypes.bool,
 };
 
 export default PrivateRoute;

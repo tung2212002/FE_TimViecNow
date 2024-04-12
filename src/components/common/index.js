@@ -6,4 +6,15 @@ import Modal from './Modal/Modal';
 import Modal2 from './Modal2/Modal2';
 import EditorComponent from './Editor/EditorComponent';
 import Toast from './Toast/Toast';
-export { SelectionComponent, Modal, Modal2, EditorComponent, InputSelectorComponent, InputSelectorMultiComponent, InputSelectorMultiOptionComponent, Toast };
+import Spinner from './Spinner/Spinner';
+export {
+    Spinner,
+    SelectionComponent,
+    Modal,
+    Modal2,
+    EditorComponent,
+    InputSelectorComponent,
+    InputSelectorMultiComponent,
+    InputSelectorMultiOptionComponent,
+    Toast,
+};

@@ -33,21 +33,21 @@ const RegisterForm = () => {
         full_name: '',
         gender: '',
         phone_number: '',
-        company: '',
+        company_name: '',
         work_position: '',
         district_id: -1,
         province_id: -1,
         account_skype: '',
         work_location: '',
     });
-    const requiredFields = ['email', 'password', 'confirm_password', 'full_name', 'phone_number', 'company', 'work_position', 'province_id', 'gender'];
+    const requiredFields = ['email', 'password', 'confirm_password', 'full_name', 'phone_number', 'company_name', 'work_position', 'province_id', 'gender'];
     const [error, setError] = useState({
         email: '',
         password: '',
         confirm_password: '',
         full_name: '',
         phone_number: '',
-        company: '',
+        company_name: '',
         work_position: '',
         district_id: -1,
         province_id: -1,
@@ -126,11 +126,11 @@ const RegisterForm = () => {
         let newError = '';
         switch (name) {
             case 'email':
-                newError = value.trim().length === 0 ? 'Email không được để trống' : !value.match(regexValidator.EMAIL) ? 'Email không hợp lệ' : '';
+                newError = value?.trim().length === 0 ? 'Email không được để trống' : !value.match(regexValidator.EMAIL) ? 'Email không hợp lệ' : '';
                 break;
             case 'password':
                 newError =
-                    value.trim().length === 0
+                    value?.trim().length === 0
                         ? 'Mật khẩu không được để trống'
                         : value.length < 8 || value.length > 16
                         ? 'Mật khẩu từ 8 đến 16 ký tự'
@@ -140,7 +140,7 @@ const RegisterForm = () => {
                 break;
             case 'confirm_password':
                 newError =
-                    value.trim().length === 0
+                    value?.trim().length === 0
                         ? 'Mật khẩu không được để trống'
                         : value.length < 8 || value.length > 16
                         ? 'Mật khẩu từ 8 đến 16 ký tự'
@@ -150,9 +150,9 @@ const RegisterForm = () => {
                 break;
             case 'full_name':
                 newError =
-                    value.trim().length === 0
+                    value?.trim().length === 0
                         ? 'Họ và tên không được để trống'
-                        : value.trim().length < 3 || value.trim().length > 50
+                        : value?.trim().length < 3 || value?.trim().length > 50
                         ? 'Họ và tên từ 3 đến 50 ký tự'
                         : !value.match(regexValidator.FULLNAME)
                         ? 'Họ và tên không hợp lệ'
@@ -160,13 +160,13 @@ const RegisterForm = () => {
                 break;
             case 'phone_number':
                 newError =
-                    value.trim().length === 0
+                    value?.trim().length === 0
                         ? 'Số điện thoại không được để trống'
                         : !value.match(regexValidator.REGEX_PHONE_NUMBER)
                         ? 'Số điện thoại không hợp lệ'
                         : '';
                 break;
-            case 'company':
+            case 'company_name':
                 newError = value.length === 0 ? 'Tên công ty không được để trống' : '';
                 break;
             case 'work_position':
@@ -186,22 +186,22 @@ const RegisterForm = () => {
     const handleValidationOnChange = (name, value) => {
         switch (name) {
             case 'email':
-                return value.trim().length !== 0 && value.match(regexValidator.EMAIL);
+                return value?.trim().length !== 0 && value.match(regexValidator.EMAIL);
             case 'password':
                 return (
-                    value.trim().length !== 0 &&
+                    value?.trim().length !== 0 &&
                     value.length >= 8 &&
                     value.length <= 16 &&
                     value.match(regexValidator.PASSWORD) &&
                     value === info.confirm_password
                 );
             case 'confirm_password':
-                return value.trim().length !== 0 && value === info.password;
+                return value?.trim().length !== 0 && value === info.password;
             case 'full_name':
-                return value.trim().length !== 0 && value.trim().length >= 3 && value.trim().length <= 50 && value.match(regexValidator.FULLNAME);
+                return value?.trim().length !== 0 && value?.trim().length >= 3 && value?.trim().length <= 50 && value.match(regexValidator.FULLNAME);
             case 'phone_number':
-                return value.trim().length !== 0 && value.match(regexValidator.REGEX_PHONE_NUMBER);
-            case 'company':
+                return value?.trim().length !== 0 && value.match(regexValidator.REGEX_PHONE_NUMBER);
+            case 'company_name':
                 return value.length !== 0;
             case 'work_position':
                 return value.length !== 0;
@@ -255,16 +255,9 @@ const RegisterForm = () => {
                 console.log(err);
             });
     }, [info.province_id]);
-    const user = useSelector(selectBusiness);
 
-    const handle = () => {
-        console.log(user);
-    };
     return (
         <div className={cx('wrapper')}>
-            <button className={cx('btn-check-redux')} onClick={() => handle()}>
-                Check Redux
-            </button>
             <div className={cx('container')}>
                 <div className={cx('form')}>
                     <div className={cx('form-group')}>
@@ -450,7 +443,7 @@ const RegisterForm = () => {
                         </div>
                         <div className={cx('form-group-flex')}>
                             <div className={cx('form-group-input')}>
-                                <label className={cx('form-group-input-label')} htmlFor="company">
+                                <label className={cx('form-group-input-label')} htmlFor="company_name">
                                     Tên công ty
                                     <span className={cx('note')}>*</span>
                                 </label>
@@ -460,17 +453,17 @@ const RegisterForm = () => {
                                         <input
                                             className={cx('input')}
                                             type="text"
-                                            id="company"
-                                            name="company"
+                                            id="company_name"
+                                            name="company_name"
                                             placeholder="Tên công ty"
-                                            value={info.company}
+                                            value={info.company_name}
                                             onChange={handleChangeInput}
                                             onBlur={handleValidation}
                                         />
-                                        {error.company && <PiWarningCircle className={cx('icon-warning')} />}
+                                        {error.company_name && <PiWarningCircle className={cx('icon-warning')} />}
                                     </div>
                                     <div className={cx('invalid-feedback')}>
-                                        <div className={cx('invalid-feedback-text')}>{error.company}</div>
+                                        <div className={cx('invalid-feedback-text')}>{error.company_name}</div>
                                     </div>
                                 </div>
                             </div>

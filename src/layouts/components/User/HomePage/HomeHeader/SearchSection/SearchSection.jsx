@@ -104,7 +104,7 @@ const SearchSection = () => {
     const changeValue = (value) => {
         setInputValue(value);
 
-        const listFilter = cityList.filter((city) => city?.name.toLowerCase().includes(value.toLowerCase().trim()));
+        const listFilter = cityList.filter((city) => city?.name.toLowerCase().includes(value.toLowerCase()?.trim()));
         if (listFilter.length > 0) {
             setCity(listFilter);
         } else {

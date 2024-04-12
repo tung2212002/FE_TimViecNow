@@ -24,7 +24,13 @@ const InputSelectorComponent = ({
     const refOptions = useRef(null);
     const refWrapper = useRef(null);
 
-    const [valueOption, setValueOption] = useState(defaultValue ? defaultValue : '');
+    const getValue = (optionValue) => {
+        return optionValue?.name ? optionValue.name : optionValue?.value ? optionValue.value : optionValue?.title;
+    };
+
+    const [valueOption, setValueOption] = useState(
+        defaultValue ? defaultValue : value !== '-1' && value ? getValue(options.find((option) => option.id == value)) : '',
+    );
     const [fillterOptions, setFillterOptions] = useState(options);
 
     const handleFillterOptions = (event) => {
@@ -34,7 +40,7 @@ const InputSelectorComponent = ({
             setFillterOptions(options);
             return;
         }
-        const fillterOptions = options.filter((option) => (option?.name ? option.name : option.value).toLowerCase().includes(value.toLowerCase()));
+        const fillterOptions = options.filter((option) => getValue(option).toLowerCase().includes(value.toLowerCase()));
         setFillterOptions(fillterOptions);
         if (!isRequired) {
             setValue(value);
@@ -42,11 +48,11 @@ const InputSelectorComponent = ({
     };
 
     const handleSelectOption = (option) => {
-        setValueOption(option?.name ? option.name : option?.value);
+        setValueOption(getValue(option));
         if (isRequired) {
             setValue(option.id);
         } else {
-            setValue(option?.name ? option.name : option?.value);
+            setValue(getValue(option));
         }
         const currentWrapper = refWrapper.current;
         currentWrapper.classList.remove(`${cx('active')}`);
@@ -61,12 +67,12 @@ const InputSelectorComponent = ({
                 isRequired &&
                 optionsCurrent &&
                 !optionsCurrent.contains(event.target) &&
-                !options?.some((option) => option?.value === valueOption || option?.name === valueOption)
+                !options?.some((option) => option?.value === valueOption || option?.name === valueOption || option?.title === valueOption)
             ) {
                 if (keepValue) {
                     if (value !== -1 && value !== '' && value !== null) {
                         const option = options.find((option) => option.id === value);
-                        setValueOption(!option ? '' : option?.name ? option.name : option.value);
+                        setValueOption(!option ? '' : getValue(option));
                         setFillterOptions(options);
                         currentWrapper.classList.remove(`${cx('active')}`);
                         return;
@@ -126,13 +132,15 @@ const InputSelectorComponent = ({
                     fillterOptions.map((option, index) => (
                         <div
                             key={index}
-                            className={cx('option', { active: value && (value === option.id || value === option?.name || value === option?.value) })}
+                            className={cx('option', {
+                                active: value && (value === option.id || value === option?.name || value === option?.value || value === option?.title),
+                            })}
                             onClick={(e) => {
                                 e.stopPropagation();
                                 handleSelectOption(option);
                             }}
                         >
-                            <div className={cx('text')}>{option?.name ? option.name : option?.value}</div>
+                            <div className={cx('text')}>{getValue(option)}</div>
                         </div>
                     ))
                 ) : (

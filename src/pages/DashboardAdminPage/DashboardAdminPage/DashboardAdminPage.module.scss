@@ -9,6 +9,14 @@
     background-color: #e8edf2;
 }
 
+
+@media screen and (max-width: 1360px) {
+    .wrapper {
+        margin-left: 64px !important;
+    }
+}
+
+
 .wrapper * {
     box-sizing: border-box;
 }

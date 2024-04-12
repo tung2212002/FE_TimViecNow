@@ -83,7 +83,7 @@ const instance = (config = {}, auth = false, side = 'candidate') => {
                             .then((res) => {
                                 if (res.status === 200) {
                                     const token = res.data.data.access_token;
-                                    updateLocalBusinessAccessToken(token, 'business');
+                                    updateLocalBusinessAccessToken(token);
                                     originalRequest.headers.Authorization = `Bearer ${token}`;
                                     return axios(originalRequest);
                                 }
@@ -97,7 +97,7 @@ const instance = (config = {}, auth = false, side = 'candidate') => {
                     return Promise.resolve({ status: error.response.status, data: error.response.data });
                 }
             }
-            return Promise.resolve({ status: error.response.status, data: error.response.data });
+            return Promise.resolve({ status: error.response?.status || 500, data: error.response?.data || {} });
         },
     );
 

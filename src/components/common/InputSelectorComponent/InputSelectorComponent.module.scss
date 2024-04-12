@@ -1,10 +1,12 @@
 .wrapper {
     width: 100%;
     position: relative;
+
 }
 
 .wrapper * {
     box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
 }
 
 .input-selector {

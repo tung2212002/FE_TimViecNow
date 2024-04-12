@@ -20,7 +20,7 @@ const setLocalToken = (token) => {
 const updateLocalAccessToken = (token) => {
     const localToken = getLocalToken();
     if (localToken) {
-        localToken.accessToken = token;
+        localToken.access_token = token;
         localStorage.setItem('token', JSON.stringify(localToken));
     } else {
         localStorage.setItem('token', JSON.stringify({ access_token: token }));

@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import classNames from 'classnames/bind';
 import TippyText from '@tippyjs/react';
@@ -20,12 +22,17 @@ import {
     selectPostJob,
     setCampaignId,
     setDeadline,
-    setJobDescription,
+    setError,
+    setJobPosition,
     setQuantity,
-    setRecruitmentPositionTitle,
-    setTypesJob,
+    setTitleJob,
+    setCategories,
 } from '../../../redux/features/postJob/postJobSlide';
 import { JobLocation, JobGeneralRequirements, JobDetailRequirements, JobInfoContact } from '../../../layouts/components/Business/PostJobPage';
+import { getCampaignByIdService, getListCampaignService } from '../../../services/campaignService';
+import { getListJobPositionService } from '../../../services/positionService';
+import { getListCategoryService } from '../../../services/categoryService';
+import regexValidator from '../../../utils/regexValidator';
 
 const cx = classNames.bind(styles);
 
@@ -33,29 +40,20 @@ const DashboardPostJobPage = () => {
     const dispatch = useDispatch();
     const info = useSelector(selectPostJob);
     const error = useSelector(selectError);
+    const location = useLocation();
+    const query = new URLSearchParams(location.search);
+    const campaign_id = query.get('campaign_id');
 
-    const fakeData = [
-        {
-            id: 1,
-            value: 'Nhân viên kinh doanh',
-        },
-        {
-            id: 2,
-            value: 'Kỹ sư phần mềm',
-        },
-        {
-            id: 3,
-            value: 'Kỹ sư phần cứng',
-        },
-        {
-            id: 4,
-            value: 'Kế toán',
-        },
-    ];
+    const [campaigns, setCampaigns] = useState([]);
+    const [jobPositions, setJobPositions] = useState([]);
+    const [jobCategories, setJobCategories] = useState([]);
+    const [isLoadPosition, setIsLoadPosition] = useState(true);
+    const [isLoadCampaign, setIsLoadCampaign] = useState(true);
+    const [isLoadCategories, setIsLoadCategories] = useState(true);
 
     const job = useSelector(selectPostJob);
 
-    const handleStCampaign = (value) => {
+    const handleSetCampaign = (value) => {
         dispatch(setCampaignId(value));
     };
 
@@ -70,16 +68,143 @@ const DashboardPostJobPage = () => {
     };
 
     const handleSetPosition = (value) => {
-        dispatch(setRecruitmentPositionTitle(value));
+        dispatch(setJobPosition(value));
     };
 
-    const handleSetDescription = (value) => {
-        if (value.length <= 50) dispatch(setJobDescription(value));
+    const handleSetTitle = (value) => {
+        if (error.title) {
+            dispatch(setError({ ...error, title: false }));
+        }
+        if (value.length <= 50) dispatch(setTitleJob(value));
     };
 
-    const handleSetTypeJob = (value) => {
-        dispatch(setTypesJob(value));
+    const handleSetCategories = (value) => {
+        dispatch(setCategories(value));
     };
+
+    const validateEmail = (email) => {
+        return regexValidator.EMAIL.test(email);
+    };
+
+    const handleValidate = () => {
+        if (job.title.length < 6 || job.title.length > 50) {
+            dispatch(setError({ ...error, title: true }));
+            return;
+        } else if (job.job_description?.trim() === '') {
+            dispatch(setError({ ...error, job_description: true }));
+        } else if (job.salary_type !== 'deal' && job.salary_to === 0) {
+            dispatch(setError({ ...error, salary_to: true }));
+            return;
+        } else if (job.location.length === 0) {
+            dispatch(setError({ ...error, location: true }));
+            return;
+        } else if (job.job_requirement?.trim() === '') {
+            dispatch(setError({ ...error, job_requirement: true }));
+            return;
+        } else if (job.job_benefit?.trim() === '') {
+            dispatch(setError({ ...error, job_benefit: true }));
+            return;
+        } else if (job.deadline === '') {
+            dispatch(setError({ ...error, deadline: true }));
+            return;
+        } else if (job.full_name_contact?.trim() === '') {
+            dispatch(setError({ ...error, full_name_contact: true }));
+            return;
+        } else if (job.phone_contact?.trim() === '') {
+            dispatch(setError({ ...error, phone_contact: true }));
+            return;
+        } else if (job.email_contact.length === 0) {
+            dispatch(setError({ ...error, email_contact: true }));
+            return;
+        } else if (job.categories.length === 0) {
+            dispatch(setError({ ...error, categories: true }));
+            return;
+        } else if (job.job_experience === -1) {
+            dispatch(setError({ ...error, job_experience: true }));
+            return;
+        }
+
+        job.email_contact.forEach((email) => {
+            if (!validateEmail(email)) {
+                dispatch(setError({ ...error, email_contact: true }));
+                return;
+            }
+        });
+
+        return true;
+    };
+
+    const handleSubmit = () => {
+        console.log(job);
+        if (handleValidate()) {
+            const locations = [];
+            job.location.forEach((loc) => {
+                const province_id = loc?.province_id;
+
+                loc?.districts?.forEach((dis) => {
+                    const district_id = dis.district_id;
+                    const description = dis.description;
+
+                    locations.push({
+                        province_id: province_id,
+                        district_id: district_id,
+                        description: description,
+                    });
+                });
+            });
+            const body = Object.assign({}, job, { location: locations });
+        }
+    };
+
+    useEffect(() => {
+        if (campaign_id) {
+            getCampaignByIdService(campaign_id)
+                .then((res) => {
+                    if (res.status === 200) {
+                        dispatch(setCampaignId(res.data.data.id));
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        }
+    }, [campaign_id]);
+
+    useEffect(() => {
+        getListCampaignService()
+            .then((res) => {
+                if (res.status === 200) {
+                    const listCampaignNullJob = res.data.data.filter((item) => item.job === null);
+                    setCampaigns(listCampaignNullJob);
+                    setIsLoadCampaign(false);
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        getListJobPositionService()
+            .then((res) => {
+                if (res.status === 200) {
+                    setJobPositions(res.data.data);
+                    setIsLoadPosition(false);
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+
+        getListCategoryService()
+            .then((res) => {
+                if (res.status === 200) {
+                    setJobCategories(res.data.data);
+                    setIsLoadCategories(false);
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
+
     return (
         <div className={cx('wrapper')}>
             <div className={cx('auth-modal')}></div>
@@ -104,7 +229,9 @@ const DashboardPostJobPage = () => {
                             >
                                 Lưu nháp
                             </button>
-                            <button className={cx('button', 'button-post')}>Lưu & Đăng tin</button>
+                            <button className={cx('button', 'button-post')} onClick={handleSubmit}>
+                                Lưu & Đăng tin
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -130,20 +257,23 @@ const DashboardPostJobPage = () => {
                                                         name="job-title"
                                                         className={cx('input')}
                                                         placeholder="Nhập tiêu đề tin"
-                                                        value={job.job_description}
+                                                        value={job.title}
                                                         onChange={(e) => {
-                                                            handleSetDescription(e.target.value);
+                                                            handleSetTitle(e.target.value);
                                                         }}
                                                     />
                                                     <span className={cx('input-box-right')}>
                                                         <span className={cx('input-box-right-icon')}>
-                                                            <FaCircleXmark className={cx('icon-circle-xmark')} />
-                                                            <span className={cx('input-box-right-text')}>{job.job_description?.length || 0}/50</span>
+                                                            <FaCircleXmark
+                                                                className={cx('icon-circle-xmark', { active: job.title.length > 0 })}
+                                                                onClick={() => handleSetTitle('')}
+                                                            />
+                                                            <span className={cx('input-box-right-text')}>{job.title?.length || 0}/50</span>
                                                         </span>
                                                         <PiWarningCircle className={cx('icon-warning')} />
                                                     </span>
                                                 </div>
-                                                {error.job_description && (
+                                                {error.title && (
                                                     <div className={cx('input-box-feedback')}>
                                                         <div className={cx('feedback-text')}>Tiêu đề tin từ 6 đến 50 ký tự</div>
                                                     </div>
@@ -164,7 +294,7 @@ const DashboardPostJobPage = () => {
                                                         <div className={cx('job-type-title')}>Tin cơ bản</div>
                                                         <div className={cx('job-type-text')}>
                                                             <label className={cx('label')} htmlFor="normal">
-                                                                <span className={cx('text')}>{job.job_description.substring(0, 50)}</span>
+                                                                <span className={cx('text')}>{job.title.substring(0, 50)}</span>
                                                             </label>
                                                         </div>
                                                     </div>
@@ -189,7 +319,7 @@ const DashboardPostJobPage = () => {
                                                         </div>
                                                         <div className={cx('job-type-text')}>
                                                             <label className={cx('label')} htmlFor="nơ-job">
-                                                                <span className={cx('text', 'highlight')}>{job.job_description}</span>
+                                                                <span className={cx('text', 'highlight')}>{job.title}</span>
                                                             </label>
                                                         </div>
                                                     </div>
@@ -222,16 +352,18 @@ const DashboardPostJobPage = () => {
                                         </label>
                                         <div className={cx('select-box')}>
                                             <div className={cx('select-box-item')}>
-                                                <InputSelectorComponent
-                                                    placeholder={'Chọn chiến dịch'}
-                                                    options={fakeData}
-                                                    value={job.campaign_id}
-                                                    setValue={handleStCampaign}
-                                                    // value={campaign}
-                                                    // setValue={(value) => setCampaign(value)}
-                                                    isRequired={true}
-                                                    styleInput={{ width: '100%' }}
-                                                />
+                                                {!isLoadCampaign ? (
+                                                    <InputSelectorComponent
+                                                        placeholder={'Chọn chiến dịch'}
+                                                        options={campaigns}
+                                                        value={job.campaign_id}
+                                                        setValue={handleSetCampaign}
+                                                        isRequired={true}
+                                                        styleInput={{ width: '100%' }}
+                                                    />
+                                                ) : (
+                                                    <div>Loading...</div>
+                                                )}
                                             </div>
                                         </div>
                                     </div>
@@ -247,13 +379,17 @@ const DashboardPostJobPage = () => {
                                                 </TippyText>
                                             </label>
                                             <div className={cx('input-box')}>
-                                                <InputSelectorComponent
-                                                    placeholder={'VD: Nhân viên Marketing, Designer, ...'}
-                                                    options={fakeData}
-                                                    value={job.position}
-                                                    setValue={handleSetPosition}
-                                                    styleInput={{ paddingTop: '7px', paddingBottom: '7px' }}
-                                                />
+                                                {!isLoadPosition ? (
+                                                    <InputSelectorComponent
+                                                        placeholder={'VD: Nhân viên Marketing, Designer, ...'}
+                                                        options={jobPositions}
+                                                        value={job.job_position}
+                                                        setValue={handleSetPosition}
+                                                        styleInput={{ paddingTop: '7px', paddingBottom: '7px' }}
+                                                    />
+                                                ) : (
+                                                    <div>Loading...</div>
+                                                )}
                                                 {error.position && (
                                                     <div className={cx('input-box-feedback')}>
                                                         <div className={cx('feedback-text')}>Vị trí tuyển dụng không được để trống</div>
@@ -267,14 +403,18 @@ const DashboardPostJobPage = () => {
                                                 <span className={cx('required')}>*</span>
                                             </label>
                                             <div className={cx('input-box')}>
-                                                <InputSelectorMultiComponent
-                                                    placeholder={'Chọn ngành nghề'}
-                                                    options={fakeData}
-                                                    value={job.type_job}
-                                                    setValue={handleSetTypeJob}
-                                                    styleInput={{ paddingTop: '7px', paddingBottom: '7px' }}
-                                                />
-                                                {error.type_job && (
+                                                {!isLoadCategories ? (
+                                                    <InputSelectorMultiComponent
+                                                        placeholder={'Chọn ngành nghề'}
+                                                        options={jobCategories}
+                                                        value={job.categories}
+                                                        setValue={handleSetCategories}
+                                                        styleInput={{ paddingTop: '7px', paddingBottom: '7px' }}
+                                                    />
+                                                ) : (
+                                                    <div>Loading...</div>
+                                                )}
+                                                {error.categories && (
                                                     <div className={cx('input-box-feedback')}>
                                                         <div className={cx('feedback-text')}>Ngành nghề không được để trống</div>
                                                     </div>

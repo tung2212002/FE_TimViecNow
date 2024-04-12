@@ -34,6 +34,7 @@ const AppRouter = () => {
                                     isPrivate={route.isPrivate}
                                     restricted={route.restricted}
                                     positionHeader={route.positionHeader}
+                                    verifyBusinessEmail={route.verifyBusinessEmail}
                                 />
                             }
                         />

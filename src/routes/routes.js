@@ -8,9 +8,10 @@ import {
     ManagerRegisterPage,
     ManagerLoginPage,
     DashboardAdminPage,
+    NotFoundPage,
 } from '../pages';
 import route from '../constants/route';
-import { ContentOnlyLayout, DashboardLayout } from '../layouts';
+import { ContentOnlyLayout, DashboardHeader, DashboardLayout } from '../layouts';
 import {
     DashboardCardPage,
     DashboardSearchCVPage,
@@ -18,6 +19,10 @@ import {
     DashboardInvoicePage,
     DashboardPostCampaignPage,
     DashboardPostJobPage,
+    RecruitmentCampaignPage,
+    DashboardSettingPage,
+    DashboardVerifyPage,
+    DashboardNotFound,
 } from '../pages/DashboardAdminPage';
 
 export const publicRoutes = [
@@ -74,8 +79,12 @@ export const publicRoutes = [
         restricted: true,
         layout: ContentOnlyLayout,
     },
-
-    // { path: routes.notfound, component: NotFound},
+    {
+        path: route.NOT_FOUND,
+        component: NotFoundPage,
+        isPrivate: false,
+        restricted: true,
+    },
 ];
 
 export const privateRoutes = [
@@ -91,6 +100,7 @@ export const privateRoutes = [
         isPrivate: true,
         restricted: true,
         layout: DashboardLayout,
+        verifyBusinessEmail: true,
     },
     {
         path: route.DASHBOARD_POST,
@@ -98,6 +108,7 @@ export const privateRoutes = [
         isPrivate: true,
         restricted: true,
         layout: DashboardLayout,
+        verifyBusinessEmail: true,
     },
     {
         path: route.DASHBOARD_SEARCH,
@@ -105,6 +116,7 @@ export const privateRoutes = [
         isPrivate: true,
         restricted: true,
         layout: DashboardLayout,
+        verifyBusinessEmail: true,
     },
     {
         path: route.DASHBOARD_CART,
@@ -112,6 +124,7 @@ export const privateRoutes = [
         isPrivate: true,
         restricted: true,
         layout: DashboardLayout,
+        verifyBusinessEmail: true,
     },
     {
         path: route.DASHBOARD_INVOICE,
@@ -119,13 +132,15 @@ export const privateRoutes = [
         isPrivate: true,
         restricted: true,
         layout: DashboardLayout,
+        verifyBusinessEmail: true,
     },
     {
-        path: route.DASHBOARD_POST_CAMPAIGN,
+        path: route.DASHBOARD_RECRUIREMENT_CAMPAIGNS_CREATE,
         component: DashboardPostCampaignPage,
         isPrivate: true,
         restricted: true,
         layout: DashboardLayout,
+        verifyBusinessEmail: true,
     },
     {
         path: route.DASHBOARD_POST_JOB,
@@ -133,6 +148,53 @@ export const privateRoutes = [
         isPrivate: true,
         restricted: true,
         layout: DashboardLayout,
+        verifyBusinessEmail: true,
     },
-    // { path: routes.notfound, component: NotFound},
+    {
+        path: route.DASHBOARD_SETTING_PASSWORD,
+        component: DashboardSettingPage,
+        isPrivate: true,
+        restricted: true,
+        layout: DashboardLayout,
+        verifyBusinessEmail: true,
+    },
+    {
+        path: route.DASHBOARD_SETTING_INFO,
+        component: DashboardSettingPage,
+        isPrivate: true,
+        restricted: true,
+        layout: DashboardLayout,
+        verifyBusinessEmail: true,
+    },
+    {
+        path: route.DASHBOARD_SETTING_COMPANY,
+        component: DashboardSettingPage,
+        isPrivate: true,
+        restricted: true,
+        layout: DashboardLayout,
+        verifyBusinessEmail: true,
+    },
+    {
+        path: route.DASHBOARD_SETTING_BUSINESS_LICENSE,
+        component: DashboardSettingPage,
+        isPrivate: true,
+        restricted: true,
+        layout: DashboardLayout,
+        verifyBusinessEmail: true,
+    },
+    {
+        path: route.DASHBOARD_VERIFFY,
+        component: DashboardVerifyPage,
+        isPrivate: true,
+        restricted: true,
+        layout: DashboardHeader,
+    },
+    {
+        path: route.DASHBOARD_NOT_FOUND,
+        component: DashboardNotFound,
+        isPrivate: true,
+        restricted: true,
+        layout: DashboardHeader,
+        verifyBusinessEmail: true,
+    },
 ];

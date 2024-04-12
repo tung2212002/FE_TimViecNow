@@ -20,7 +20,7 @@ const setLocalBusinessToken = (token) => {
 const updateLocalBusinessAccessToken = (token) => {
     const localToken = getLocalBusinessToken();
     if (localToken) {
-        localToken.accessToken = token;
+        localToken.access_token = token;
         localStorage.setItem('business_token', JSON.stringify(localToken));
     } else {
         localStorage.setItem('business_token', JSON.stringify({ access_token: token }));

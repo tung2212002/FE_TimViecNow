@@ -5,6 +5,11 @@ import DashboardAdminPage from './DashboardAdminPage/DashboardAdminPage';
 import DashboardInvoicePage from './DashboardInvoicePage/DashboardInvoicePage';
 import DashboardPostCampaignPage from './DashboardPostCampaignPage/DashboardPostCampaignPage';
 import DashboardPostJobPage from './DashboardPostJobPage/DashboardPostJobPage';
+import RecruitmentCampaignPage from './RecruitmentCampaignPage/RecruitmentCampaignPage';
+import DashboardSettingPage from './DashboardSettingPage/DashboardSettingPage';
+import DashboardVerifyPage from './DashboardVerifyPage/DashboardVerifyPage';
+import DashboardNotFound from './DashboardNotFound/DashboardNotFound';
+
 export {
     DashboardCardPage,
     DashboardAdminPage,
@@ -13,4 +18,8 @@ export {
     DashboardInvoicePage,
     DashboardPostCampaignPage,
     DashboardPostJobPage,
+    RecruitmentCampaignPage,
+    DashboardSettingPage,
+    DashboardVerifyPage,
+    DashboardNotFound,
 };

@@ -6,7 +6,6 @@ import { getLocalBusiness } from '../../../utils/authBusinessStorage';
 const initialState = {
     postJob: {
         title: '',
-        job_description: '',
         min_salary: 0,
         max_salary: 0,
         salary_type: 'VND',
@@ -24,21 +23,22 @@ const initialState = {
             },
         ],
         gender_requirement: 'other',
+        job_description: '',
         job_requirement: '',
         job_benefit: '',
         employment_type: 'fulltime',
         deadline: '',
-        full_name_contact: [getLocalBusiness()?.full_name],
-        phone_number_contact: [getLocalBusiness()?.phone_number],
+        full_name_contact: getLocalBusiness()?.full_name,
+        phone_number_contact: getLocalBusiness()?.phone_number,
         email_contact: [getLocalBusiness()?.email],
         campaign_id: '',
         quantity: 1,
-        categories: '',
+        categories: [],
         working_time: [],
         working_time_text: '',
         must_have_skills: [],
         should_have_skills: [],
-        recruitment_position_title: '',
+        job_position: '',
         type_job: [],
         job_experience: -1,
         position_level: -1,
@@ -47,12 +47,10 @@ const initialState = {
     error: {
         title: false,
         job_description: false,
-        min_salary: false,
-        max_salary: false,
+        salary: false,
         location: false,
         job_requirement: false,
         job_benefit: false,
-        employment_type: false,
         deadline: false,
         full_name_contact: false,
         phone_number_contact: false,
@@ -175,6 +173,9 @@ const postJobSlice = createSlice({
         setTypesJob: (state, action) => {
             state.postJob.type_job = action.payload;
         },
+        setCategories: (state, action) => {
+            state.postJob.categories = action.payload;
+        },
         setCampaignId: (state, action) => {
             state.postJob.campaign_id = action.payload;
         },
@@ -184,8 +185,8 @@ const postJobSlice = createSlice({
         setDeadline: (state, action) => {
             state.postJob.deadline = action.payload;
         },
-        setRecruitmentPositionTitle: (state, action) => {
-            state.postJob.recruitment_position_title = action.payload;
+        setJobPosition: (state, action) => {
+            state.postJob.job_position = action.payload;
         },
         setEmploymentType: (state, action) => {
             state.postJob.employment_type = action.payload;
@@ -271,7 +272,7 @@ export const {
     setCampaignId,
     setQuantity,
     setDeadline,
-    setRecruitmentPositionTitle,
+    setJobPosition,
     setEmploymentType,
     setJobRequirement,
     setJobBenefit,
@@ -289,6 +290,7 @@ export const {
     setGenderRequirement,
     setShouldHaveSkills,
     setMustHaveSkills,
+    setCategories,
     setLoading,
     setError,
 } = postJobSlice.actions;
