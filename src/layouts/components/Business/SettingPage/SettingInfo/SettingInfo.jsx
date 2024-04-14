@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames/bind';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -24,6 +24,8 @@ const SettingInfo = () => {
 
     const { handleAddToast } = useToast();
 
+    const [avatar, setAvatar] = useState(user?.avatar || images.avatar_default);
+
     const [data, setData] = useState({
         avatar: null,
         full_name: user?.full_name || '',
@@ -47,7 +49,7 @@ const SettingInfo = () => {
             handleAddToast('Error', 'File ảnh quá lớn', 'error');
             return;
         }
-        setData({ ...data, cv: file });
+        setData({ ...data, avatar: file });
     };
 
     const handleSetName = (e) => {
@@ -104,6 +106,7 @@ const SettingInfo = () => {
                 if (res.status === 200) {
                     dispatch(updateBusinessInfo({ user: res.data.data }));
                     handleAddToast('Success', 'Cập nhật thông tin thành công', 'success');
+                    setAvatar(res.data.data.avatar);
                 } else if (res.status === 400) {
                     handleAddToast('Error', 'Dữ liệu không hợp lệ', 'error');
                 } else {
@@ -117,6 +120,16 @@ const SettingInfo = () => {
         return;
     };
 
+    useEffect(() => {
+        if (data.avatar) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                setAvatar(reader.result);
+            };
+            reader.readAsDataURL(data.avatar);
+        }
+    }, [data.avatar]);
+
     return (
         <div className={cx('wrapper')}>
             <form className={cx('form')}>
@@ -126,10 +139,10 @@ const SettingInfo = () => {
                         <div className={cx('form-col-avatar')}>
                             <label className={cx('label')}>Avatar</label>
                             <div className={cx('avatar')}>
-                                <img src={user?.avatar || images.avatar_default} alt="avatar" className={cx('avatar-img')} />
+                                <img src={avatar || user?.avatar} alt="avatar" className={cx('avatar-img')} />
                             </div>
                             <input type="file" className={cx('input-file')} accept="image/*" hidden ref={ref} onChange={handleChangeFile} />
-                            <button className={cx('button')} onClick={handleClickFile}>
+                            <button type="button" className={cx('button')} onClick={handleClickFile}>
                                 Đổi avatar
                             </button>
                         </div>

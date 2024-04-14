@@ -24,7 +24,6 @@ const PrivateRoute = ({ component: Component, layout: Layout, positionHeader, ve
 
     useEffect(() => {
         if (user) {
-            console.log('user', verifyBusinessEmail && !user.is_verified_email);
             setIsLoading({ loading: false, valid: true });
         }
         if (token) {

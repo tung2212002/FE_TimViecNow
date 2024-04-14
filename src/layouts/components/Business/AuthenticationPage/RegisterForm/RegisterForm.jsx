@@ -15,7 +15,7 @@ import path from '../../../../../constants/path';
 import regexValidator from '../../../../../utils/regexValidator';
 import { getListDistrictService, getListProvinceService } from '../../../../../services/locationService';
 import { registerBusinessService } from '../../../../../services/businessAuthService';
-import { login, selectBusiness } from '../../../../../redux/features/authBusiness/authSlide';
+import { login } from '../../../../../redux/features/authBusiness/authSlide';
 import { addToast, removeToast } from '../../../../../redux/features/toast/toastSlice';
 
 const cx = classNames.bind(styles);

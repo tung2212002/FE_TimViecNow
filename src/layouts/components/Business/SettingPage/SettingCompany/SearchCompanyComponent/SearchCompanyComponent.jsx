@@ -26,14 +26,14 @@ const SearchCompanyComponent = ({ company }) => {
                             {company?.address} | {company.size} nhân sự
                         </p>
                     </div>
-                    <p className={cx('company-field')}>
+                    <div className={cx('company-field')}>
                         {company?.fields &&
                             company?.fields.map((field, index) => (
                                 <p key={index} className={cx('field')}>
                                     {field.name}
                                 </p>
                             ))}
-                    </p>
+                    </div>
                 </div>
                 <div className={cx('company-action')}>
                     <button className={cx('btn')}>Chọn</button>

@@ -67,6 +67,7 @@ const icons = {
     icon_check_mark: require('./icons/icon_check_mark.png'),
     icon_heart: require('./icons/icon_heart.png'),
     icon_star: require('./icons/icon_star.png'),
+    icon_default_logo_company: require('./icons/icon_default_logo_company.png'),
 };
 
 const images = {

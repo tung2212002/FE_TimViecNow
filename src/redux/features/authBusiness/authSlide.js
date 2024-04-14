@@ -51,6 +51,10 @@ export const updateBusinessInfo = createAsyncThunk('authBusiness/updateBusinessI
     return { user, token };
 });
 
+export const updateBusinessSubInfo = createAsyncThunk('authBusiness/updateBusinessSubInfo', async (data) => {
+    return data;
+});
+
 export const setLoading = createAsyncThunk('authBusiness/loading', async (loading) => {
     return loading;
 });
@@ -111,6 +115,13 @@ const authBusinessSlice = createSlice({
             })
             .addCase(updateBusinessInfo.rejected, (state) => {
                 state.loading = false;
+            })
+            .addCase(updateBusinessSubInfo.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(updateBusinessSubInfo.fulfilled, (state, action) => {
+                state.loading = false;
+                state.user = { ...state.user, ...action.payload };
             });
     },
 });

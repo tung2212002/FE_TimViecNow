@@ -12,10 +12,10 @@ const useToast = () => {
             message,
             type,
         };
-        dispatch(addToast(newToast));
         setTimeout(() => {
-            removeToast(newToast.id);
+            dispatch(removeToast(newToast.id));
         }, 3000);
+        dispatch(addToast(newToast));
     };
 
     return {

@@ -94,7 +94,7 @@ const InputSelectorMultiComponent = ({ placeholder, options, isRequired = true, 
                 {value?.length > 0 && (
                     <div className={cx('tags')}>
                         {value?.map((id, index) => {
-                            const option = options.find((option) => option.id === id);
+                            const option = options.find((option) => option.id === id || option.id === id?.id);
                             return (
                                 <div key={index} className={cx('tag')}>
                                     <div className={cx('text')}>{option?.name ? option.name : option?.value}</div>
@@ -120,7 +120,11 @@ const InputSelectorMultiComponent = ({ placeholder, options, isRequired = true, 
             <div className={cx('options', { active: isFocus })} ref={refOptions}>
                 {fillterOptions?.length > 0 ? (
                     fillterOptions.map((option, index) => (
-                        <div key={index} className={cx('option', { active: value.includes(option.id) })} onClick={() => handleSelectOption(option)}>
+                        <div
+                            key={index}
+                            className={cx('option', { active: value.includes(option.id) || value?.some((item) => item?.id === option.id) })}
+                            onClick={() => handleSelectOption(option)}
+                        >
                             <div className={cx('text')}>{option?.name ? option.name : option?.value}</div>
                         </div>
                     ))
