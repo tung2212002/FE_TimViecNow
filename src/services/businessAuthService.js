@@ -24,3 +24,8 @@ export const verifyTokenBusinessService = async () => {
     const response = await request.apiAuth.post('/business/verify_token');
     return response;
 };
+
+export const changePasswordBusinessService = async (body) => {
+    const response = await request.apiAuth.post('/business/change_password', body);
+    return response;
+};

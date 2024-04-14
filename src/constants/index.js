@@ -53,3 +53,5 @@ export const listWorkPosition = [
     { value: '5', name: 'Giám đốc' },
     { value: '6', name: 'Tổng giám đốc' },
 ];
+
+export const listScale = ['1-9', '10-24', '25-99', '100-499', '500-1000', '1000+', '3000+', '5000+', '10000+'];

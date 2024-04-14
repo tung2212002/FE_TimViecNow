@@ -143,6 +143,14 @@ export const privateRoutes = [
         verifyBusinessEmail: true,
     },
     {
+        path: route.DASHBOARD_RECRUIREMENT_CAMPAIGNS,
+        component: RecruitmentCampaignPage,
+        isPrivate: true,
+        restricted: true,
+        layout: DashboardLayout,
+        verifyBusinessEmail: true,
+    },
+    {
         path: route.DASHBOARD_POST_JOB,
         component: DashboardPostJobPage,
         isPrivate: true,
