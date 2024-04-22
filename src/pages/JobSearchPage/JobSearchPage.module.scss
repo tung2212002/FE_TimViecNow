@@ -1,8 +1,7 @@
-.wrapper {
-}
-
 @media screen and (min-width: 768px) {
     .container-job-list {
+        padding-right: 15px;
+        padding-left: 15px;
         width: 750px !important;
         display: flex !important;
     }
@@ -53,8 +52,8 @@
 
 .container-job-list {
     box-sizing: border-box;
-    padding-right: 15px;
-    padding-left: 15px;
+    // padding-right: 15px;
+    // padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
     // display: flex;

@@ -4,11 +4,13 @@
     padding: 24px 0;
 }
 
-.wrapper * {
-    box-sizing: border-box;
-}
+ 
 
 @media screen and (min-width: 768px) {
+    .content{
+        padding: 0 10px;
+    }
+
     .img {
         height: 604px !important;
     }
@@ -29,7 +31,6 @@
 
 .content {
     display: block;
-    padding: 0 10px;
 }
 
 .img {

@@ -96,6 +96,8 @@ const SettingInfo = () => {
                 if (value !== user.work_position) {
                     formData.append(key, listWorkPosition.find((item) => item.value === data[key])?.name);
                 }
+            } else if (key === 'avatar' && data[key]) {
+                formData.append(key, data[key]);
             } else {
                 if (data[key] !== user[key]) formData.append(key, data[key]);
             }

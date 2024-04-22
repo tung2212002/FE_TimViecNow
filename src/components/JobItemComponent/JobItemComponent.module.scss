@@ -29,6 +29,9 @@
 .wrapper.reponsive {
     padding: 12px 18.8px;
 }
+.cvo-flex *{
+    box-sizing: content-box;
+}
 
 .cvo-flex {
     display: flex;
@@ -50,6 +53,7 @@
     }
 
     .box-title {
+        box-sizing: content-box;
         min-height: 44px;
         overflow: hidden !important;
         padding-left: 12px;

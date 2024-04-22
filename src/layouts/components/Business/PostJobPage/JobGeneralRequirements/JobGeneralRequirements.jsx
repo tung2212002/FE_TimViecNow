@@ -175,20 +175,23 @@ const JobGeneralRequirements = () => {
     };
 
     const handleSetMaxSalary = (value) => {
-        if (!isNaN(value) && (value > 0 || value === 0) && value >= job.min_salary) {
-            if (value.length > 1 && value[0] === 0) {
+        const numberValue = Number(value);
+        if (!isNaN(numberValue) && (numberValue > 0 || numberValue === 0) && numberValue >= job.min_salary) {
+            if (numberValue.length > 1 && numberValue[0] === 0) {
                 return;
             }
-            dispatch(setMaxSalary(value));
+            dispatch(setMaxSalary(numberValue));
         }
     };
 
     const handleSetMinSalary = (value) => {
-        if (!isNaN(value) && (value > 0 || value === 0) && value <= job.max_salary) {
-            if (value.length > 1 && value[0] === 0) {
+        const numberValue = Number(value);
+        if (!isNaN(numberValue) && (numberValue > 0 || numberValue === 0) && numberValue <= job.max_salary) {
+            if (numberValue.length > 1 && numberValue[0] === 0) {
                 return;
             }
-            dispatch(setMinSalary(value));
+
+            dispatch(setMinSalary(numberValue));
         }
     };
 

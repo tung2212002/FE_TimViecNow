@@ -33,7 +33,7 @@ const InputSelectorMultiOptionComponent = ({ placeholder, options, defaultOption
 
     const handleSelectOption = (option) => {
         setValueOption('');
-        if (!value.includes(option)) {
+        if (!value.includes(option) && !value.includes(option?.value)) {
             if (value.length < maxOption) {
                 setValue([...value, option.id || option]);
             } else setIsError(true);
@@ -101,7 +101,6 @@ const InputSelectorMultiOptionComponent = ({ placeholder, options, defaultOption
     useEffect(() => {
         if (value?.length < maxOption) setIsError(false);
     }, [value]);
-
     return (
         <div className={cx('wrapper')}>
             <div className={cx('input-selector')}>
@@ -140,7 +139,11 @@ const InputSelectorMultiOptionComponent = ({ placeholder, options, defaultOption
             <div className={cx('options', { active: isFocus })} ref={refOptions}>
                 {fillterOptions?.length > 0 ? (
                     fillterOptions.map((option, index) => (
-                        <div key={index} className={cx('option', { active: value.includes(option.id) })} onClick={() => handleSelectOption(option)}>
+                        <div
+                            key={index}
+                            className={cx('option', { active: value.includes(option.id) || value.includes(option?.value) || value.includes(option) })}
+                            onClick={() => handleSelectOption(option)}
+                        >
                             <div className={cx('text')}>{option?.name ? option.name : option?.value ? option.value : option}</div>
                         </div>
                     ))
