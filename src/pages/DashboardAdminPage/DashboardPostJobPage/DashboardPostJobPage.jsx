@@ -33,6 +33,7 @@ import { getCampaignByIdService, getListCampaignService } from '../../../service
 import { getListJobPositionService } from '../../../services/positionService';
 import { getListCategoryService } from '../../../services/categoryService';
 import regexValidator from '../../../utils/regexValidator';
+import useToast from '../../../hooks/useToast';
 
 const cx = classNames.bind(styles);
 
@@ -50,6 +51,7 @@ const DashboardPostJobPage = () => {
     const [isLoadPosition, setIsLoadPosition] = useState(true);
     const [isLoadCampaign, setIsLoadCampaign] = useState(true);
     const [isLoadCategories, setIsLoadCategories] = useState(true);
+    const { handleAddToast } = useToast();
 
     const job = useSelector(selectPostJob);
 
@@ -89,44 +91,58 @@ const DashboardPostJobPage = () => {
     const handleValidate = () => {
         if (job.title.length < 6 || job.title.length > 50) {
             dispatch(setError({ ...error, title: true }));
+            handleAddToast('Cảnh báo', 'Tiêu đề tin từ 6 đến 50 ký tự', 'warning');
             return;
         } else if (job.job_description?.trim() === '') {
             dispatch(setError({ ...error, job_description: true }));
+            handleAddToast('Cảnh báo', 'Mô tả công việc không được để trống', 'warning');
+            return;
         } else if (job.salary_type !== 'deal' && job.salary_to === 0) {
             dispatch(setError({ ...error, salary_to: true }));
+            handleAddToast('Cảnh báo', 'Mức lương không được để trống', 'warning');
             return;
         } else if (job.location.length === 0) {
             dispatch(setError({ ...error, location: true }));
+            handleAddToast('Cảnh báo', 'Khu vực làm việc không được để trống', 'warning');
             return;
         } else if (job.job_requirement?.trim() === '') {
             dispatch(setError({ ...error, job_requirement: true }));
+            handleAddToast('Cảnh báo', 'Yêu cầu công việc không được để trống', 'warning');
             return;
         } else if (job.job_benefit?.trim() === '') {
             dispatch(setError({ ...error, job_benefit: true }));
+            handleAddToast('Cảnh báo', 'Quyền lợi được hưởng không được để trống', 'warning');
             return;
         } else if (job.deadline === '') {
             dispatch(setError({ ...error, deadline: true }));
+            handleAddToast('Cảnh báo', 'Hạn nộp hồ sơ không được để trống', 'warning');
             return;
         } else if (job.full_name_contact?.trim() === '') {
             dispatch(setError({ ...error, full_name_contact: true }));
+            handleAddToast('Cảnh báo', 'Tên người nhận CV không được để trống', 'warning');
             return;
         } else if (job.phone_contact?.trim() === '') {
             dispatch(setError({ ...error, phone_contact: true }));
+            handleAddToast('Cảnh báo', 'Số điện thoại người nhận CV không được để trống', 'warning');
             return;
         } else if (job.email_contact.length === 0) {
             dispatch(setError({ ...error, email_contact: true }));
+            handleAddToast('Cảnh báo', 'Email nhận hồ sơ không được để trống', 'warning');
             return;
         } else if (job.categories.length === 0) {
             dispatch(setError({ ...error, categories: true }));
+            handleAddToast('Cảnh báo', 'Ngành nghề không được để trống', 'warning');
             return;
         } else if (job.job_experience === -1) {
             dispatch(setError({ ...error, job_experience: true }));
+            handleAddToast('Cảnh báo', 'Kinh nghiệm không được để trống', 'warning');
             return;
         }
 
         job.email_contact.forEach((email) => {
             if (!validateEmail(email)) {
                 dispatch(setError({ ...error, email_contact: true }));
+                handleAddToast('Cảnh báo', 'Email liên hệ không hợp lệ', 'warning');
                 return;
             }
         });
@@ -135,14 +151,13 @@ const DashboardPostJobPage = () => {
     };
 
     const handleSubmit = () => {
-        console.log(job);
         if (handleValidate()) {
             const locations = [];
             job.location.forEach((loc) => {
-                const province_id = loc?.province_id;
+                const province_id = loc?.province !== -1 ? loc.province : null;
 
-                loc?.districts?.forEach((dis) => {
-                    const district_id = dis.district_id;
+                loc?.district?.forEach((dis) => {
+                    const district_id = dis.district !== -1 ? dis.district : null;
                     const description = dis.description;
 
                     locations.push({

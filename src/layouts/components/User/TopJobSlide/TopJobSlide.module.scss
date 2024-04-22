@@ -20,6 +20,8 @@
 @media (min-width: 768px) and (max-width: 991px) {
     .container {
         width: 750px !important;
+        padding-right: 15px;
+        padding-left: 15px;
     }
 
     .slider {
@@ -34,6 +36,8 @@
 @media (min-width: 992px) and (max-width: 1199px) {
     .container {
         width: 970px !important;
+        padding-right: 15px;
+        padding-left: 15px;
     }
     .slider {
         width: calc(970px - 15px) !important;
@@ -42,6 +46,8 @@
 @media (min-width: 1200px) {
     .container {
         width: 1170px !important;
+        padding-right: 15px;
+        padding-left: 15px;
     }
 
     .slider {
@@ -50,8 +56,7 @@
 }
 
 .container {
-    padding-right: 15px;
-    padding-left: 15px;
+
     margin-right: auto;
     margin-left: auto;
     // width: 100%;

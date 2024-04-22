@@ -101,7 +101,7 @@ const JobInfoContact = () => {
                         value={job.email_contact}
                         setValue={handleSetEmailContact}
                         styleInput={{ paddingTop: '7px', paddingBottom: '7px' }}
-                        maxOption={2}
+                        maxOption={3}
                     />
                 </div>
                 {error.email_contact && (

@@ -312,8 +312,8 @@
         display: flex !important;
         height: 100% !important;
         padding: 8px 12px;
-        padding-right: 30px;
-        width: 90px;
+        // padding-right: 30px;
+        width: 132px;
     }
 
     .text {
@@ -321,11 +321,13 @@
     }
 
     .icon-chevron {
-        font-size: 20px;
+        box-sizing: content-box !important;
+        font-size: 30px;
         color: #11d769;
-        // padding-left: 8px;
-        padding-right: 3px;
-        padding-left: 3px;
+        padding-left: 8px;
+        // padding-right: 3px;
+        // padding-left: 3px;
+        margin-right: 8px;
     }
 
     .icon-chevron.rotate {

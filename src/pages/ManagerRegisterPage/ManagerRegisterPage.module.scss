@@ -5,10 +5,6 @@
     background-size: 1320px;
 }
 
-.wrapper * {
-    box-sizing: border-box;
-}
-
 @media screen and (max-width: 414px) {
     .modal-content {
         min-width: 300px !important;

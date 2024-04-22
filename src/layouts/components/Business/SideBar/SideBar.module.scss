@@ -10,9 +10,7 @@
     width: 260px;
 }
 
-.wrapper * {
-    box-sizing: border-box;
-}
+ 
 
 @media screen and (max-width: 1360px) {
     .wrapper {
@@ -338,6 +336,7 @@
         font-size: 12px;
         font-weight: 400;
         color: #5e6368;
+        white-space: nowrap;
     }
 }
 
