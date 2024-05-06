@@ -1,7 +1,9 @@
 export default {
     HOMEPAGE: '/',
     JOB_SEARCH: '/viec-lam',
+    JOB_FILTER: '/tim-viec-lam-moi-nhat',
     JOB_SEARCH_DETAIL: '/viec-lam/chi-tiet/:id/:slug',
+    COMPANY_DETAIL: '/cong-ty/:id/:slug',
     MATCHING_JOBS: '/viec-lam-phu-hop',
     MANAGER_REGISTER: '/tuyen-dung/app/register',
     MANAGER_LOGIN: '/tuyen-dung/app/login',

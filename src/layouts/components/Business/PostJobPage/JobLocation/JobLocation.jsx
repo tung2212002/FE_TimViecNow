@@ -11,18 +11,19 @@ import { InputSelectorComponent } from '../../../../../components/common';
 import { getListDistrictService, getListProvinceService } from '../../../../../services/locationService';
 import JobDistrict from '../JobDistrict/JobDistrict';
 import { addDistrict, refreshProvince, removeLocation, selectPostJob, setProvince } from '../../../../../redux/features/postJob/postJobSlide';
-
+import { selectProvince } from '../../../../../redux/features/config/configSilde';
+import { setProvince as setProvinceConfig } from '../../../../../redux/features/config/configSilde';
 const cx = classNames.bind(styles);
 
 const JobLocation = ({ location_id }) => {
     const dispatch = useDispatch();
     const job = useSelector(selectPostJob);
-    const listLocation = job?.location;
+    const listLocation = job?.locations;
     const location = listLocation?.find((item) => item.id === location_id);
     const province = location?.province;
     const district = location?.district;
 
-    const [listProvince, setListProvince] = useState([]);
+    const listProvince = useSelector(selectProvince);
     const [listDistrict, setListDistrict] = useState([]);
 
     const handleSetProvince = (value) => {
@@ -40,18 +41,6 @@ const JobLocation = ({ location_id }) => {
     const handleRemoveLocation = () => {
         dispatch(removeLocation(location_id));
     };
-
-    useEffect(() => {
-        getListProvinceService()
-            .then((res) => {
-                if (res.status === 200) {
-                    setListProvince(res.data.data);
-                }
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    }, []);
 
     useEffect(() => {
         if (province !== -1) {
@@ -81,7 +70,7 @@ const JobLocation = ({ location_id }) => {
                             <span className={cx('title-text')}>Khu vực:</span>
                         </div>
                         <div className={cx('location-box__province-content')}>
-                            {listProvince.length > 0 && (
+                            {listProvince?.length > 0 && (
                                 <InputSelectorComponent
                                     isRequired={true}
                                     options={listProvince}

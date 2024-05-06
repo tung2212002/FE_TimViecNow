@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 
 import { FaChevronDown, FaEye, FaPlus } from 'react-icons/fa6';
@@ -9,10 +9,18 @@ import { SelectionComponent } from '../../../components/common';
 import { IoSearchOutline } from 'react-icons/io5';
 import path from '../../../constants/path';
 import { Link } from 'react-router-dom';
+import { getListCampaignService } from '../../../services/campaignService';
+import { JobStatus, JobApprovalStatus } from '../../../constants';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectCampaign, setCampaign } from '../../../redux/features/campaign/campaignSilde';
 
 const cx = classNames.bind(styles);
 
 const RecruitmentCampaignPage = () => {
+    const dispatch = useDispatch();
+
+    const campaigns = useSelector(selectCampaign);
+
     const [filterCampaign, setFilterCampaign] = useState('all');
 
     const listFilterCampaign = [
@@ -58,148 +66,31 @@ const RecruitmentCampaignPage = () => {
         },
     ];
 
-    const listCampaign = [
-        {
-            id: 1535337,
-            title: 'Test 12',
-            created_at: '2024-03-31T19:40:19.000000Z',
-            status: 0,
-            experience: '0-0',
-            salary_currency: null,
-            employee_level: null,
-            salary_level: null,
-            salary_from: null,
-            salary_to: null,
-            job_type: null,
-            locations: [],
-            job: {
-                id: 1284467,
-                title: 'Test 12',
-                recruitment_campaign_id: 1535337,
-                url: 'https://www.topcv.vn/viec-lam/test-12/1284467.html',
-                status: -1,
-                status_str: 'Không công khai',
-                reject_reason: null,
-                is_fast_manual_up_top: false,
-                can_fast_manual_up_top: false,
-                restriction_level: null,
-                is_pro_x_job: false,
-                verified: false,
-                raw_title: 'Test 12',
-                deadline: '2024-04-29T17:00:00.000000Z',
-                categories: [
-                    {
-                        id: 10006,
-                        name: 'Bảo hiểm',
-                        alias: 'bao-hiem',
-                        is_main: 1,
-                    },
-                    {
-                        id: 10007,
-                        name: 'Bất động sản',
-                        alias: 'bat-dong-san',
-                        is_main: 0,
-                    },
-                    {
-                        id: 10008,
-                        name: 'Chứng khoán / Vàng / Ngoại tệ',
-                        alias: 'chung-khoan-vang-ngoai-te',
-                        is_main: 0,
-                    },
-                ],
-                job_status: {
-                    str_status: 'Không hiển thị',
-                    name_status: 'not-publish',
-                },
-                job_approve_status: {
-                    str_status: 'Chưa yêu cầu duyệt',
-                    name_status: 'not-request',
-                },
-                recruitment_position_title: 'Aasasa',
-            },
-            services_scout_ai: [],
-            services: [],
-            cv_scout_position: null,
-            optimal_score: 36,
-            is_need_confirm_stop: false,
-            recruitment_position_title: null,
-            statistic: {
-                used_credit_for_cv_scout_count: 0,
-                used_prepaid_for_cv_scout_count: 0,
-                used_credit_for_cv_search_count: 0,
-                used_prepaid_for_cv_search_count: 0,
-                evaluate_cv_apply: null,
-                opened_cv_applies: 0,
-            },
-            is_flash: false,
-            cv_records: {
-                data: [],
-                total: 0,
-            },
-            cv_applies: {
-                data: [],
-                total: 0,
-            },
-            suggested_data_cvs: {
-                data: [],
-                total: 0,
-            },
-            up_sale: {
-                tooltip_up_sale: '',
-                restriction_level: null,
-            },
-            is_ssp: 0,
-            cv_recommend_in_day: 0,
-        },
-        {
-            id: 1535252,
-            title: 'Intern tháng 4',
-            created_at: '2024-03-31T05:20:23.000000Z',
-            status: 0,
-            experience: '0-0',
-            salary_currency: null,
-            employee_level: null,
-            salary_level: null,
-            salary_from: null,
-            salary_to: null,
-            job_type: null,
-            locations: [],
-            job: null,
-            services_scout_ai: [],
-            services: [],
-            cv_scout_position: null,
-            optimal_score: 24,
-            is_need_confirm_stop: false,
-            recruitment_position_title: null,
-            statistic: {
-                used_credit_for_cv_scout_count: 0,
-                used_prepaid_for_cv_scout_count: 0,
-                used_credit_for_cv_search_count: 0,
-                used_prepaid_for_cv_search_count: 0,
-                evaluate_cv_apply: null,
-                opened_cv_applies: null,
-            },
-            is_flash: false,
-            cv_records: {
-                data: [],
-                total: 0,
-            },
-            cv_applies: {
-                data: [],
-                total: 0,
-            },
-            suggested_data_cvs: {
-                data: [],
-                total: 0,
-            },
-            up_sale: {
-                tooltip_up_sale: '',
-                restriction_level: null,
-            },
-            is_ssp: 0,
-            cv_recommend_in_day: 0,
-        },
-    ];
+    const requestSetStatusCampaign = (id, status) => {
+        console.log(id, status);
+    };
+
+    useEffect(() => {
+        const body = {
+            skip: 0,
+            limit: 10,
+            sort_by: 'id',
+            order_by: 'asc',
+            business_id: null,
+            status: 'all',
+        };
+        !campaigns &&
+            getListCampaignService(body)
+                .then((res) => {
+                    if (res.status === 200) {
+                        dispatch(setCampaign(res.data.data));
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+    }, []);
+
     return (
         <div className={cx('wrapper')}>
             <div className={cx('auth-modal')}></div>
@@ -278,113 +169,131 @@ const RecruitmentCampaignPage = () => {
                                 </tr>
                             </thead>
                             <tbody className={cx('table-body')}>
-                                {listCampaign.map((item) => (
-                                    <tr key={item.id} className={cx('table-body-row')}>
-                                        <td className={cx('table-body-item')}>
-                                            <div className={cx('item-campaign')}>
-                                                <label className={cx('item-switch')}>
-                                                    <input type="checkbox" className={cx('switch-input')} />
-                                                    <span className={cx('switch-slider')}></span>
-                                                </label>
-                                                <div className={cx('item-content')}>
-                                                    <div className={cx('item-content-id')}>
-                                                        <span className={cx('id')}>#{item.id}</span>
-                                                    </div>
-                                                    <a href={`${path.DASHBOARD_RECRUIREMENT_CAMPAIGNS}/${item.id}`} className={cx('item-content-title')}>
-                                                        {item.title}
-                                                    </a>
-                                                    <br />
-                                                    <div className={cx('item-content-cv')}>
-                                                        {item.cv_applies.total > 0 ? `Có ${item.cv_applies.total} CV` : 'Chưa có CV nào'}
-                                                    </div>
-                                                    <div className={cx('item-content-action', 'item-content-absolute')}>
-                                                        <a href={`${path.DASHBOARD_RECRUIREMENT_CAMPAIGNS}/${item.id}`} className={cx('item-content-link')}>
-                                                            Xem báo cáo
-                                                        </a>
-                                                    </div>
-                                                    <div className={cx('item-content-action', 'item-content-absolute')}>
-                                                        <a
-                                                            href={`${path.DASHBOARD_RECRUIREMENT_CAMPAIGNS}/${item.id}?active_tab=apply_cv`}
-                                                            className={cx('item-content-link')}
-                                                        >
-                                                            Xem CV ứng tuyển
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td className={cx('table-body-item')}>
-                                            <div className={cx('item-optimal')}>
-                                                <span className={cx('optimal-percentage')}>
-                                                    <a href={path.DASHBOARD_SUGGESTION} className={cx('optimal-percentage-link')}>
-                                                        {item.optimal_score > 0 ? `${item.optimal_score}%` : 'Chưa tối ưu'}
-                                                    </a>
-                                                </span>
-                                            </div>
-                                        </td>
-                                        <td className={cx('table-body-item')}>
-                                            <div className={cx('table-body-item-info')}>
-                                                <div className={cx('info-job')}>
-                                                    <div className={cx('job-position')}>
-                                                        <span className={cx('id')}>{item.job?.id ? `ID: ${item.job.id}` : 'Chiến dịch đang tắt'}</span>
-                                                        {item.job ? <div className={cx('item-content-title')}>{item.job?.title}</div> : null}
-                                                        {item.job ? (
-                                                            <div
-                                                                className={cx('job-status', {
-                                                                    'job-status-publish': item.job?.job_status?.name_status === 'publish',
-                                                                })}
-                                                            >
-                                                                <span className={cx('job-status-text')}>
-                                                                    {item.job?.job_status?.name_status === 'publish' ? 'Đang hiển thị' : 'Không hiển thị'}
-                                                                </span>
-                                                                <span className={cx('job-status-text')}>
-                                                                    {item.job?.job_approve_status?.name_status === 'request'
-                                                                        ? 'Đang xét duyệt'
-                                                                        : 'Chưa yêu cầu duyệt'}
-                                                                </span>
+                                {campaigns &&
+                                    (campaigns?.length > 0 ? (
+                                        campaigns.map((item) => (
+                                            <tr key={item.id} className={cx('table-body-row')}>
+                                                <td className={cx('table-body-item')}>
+                                                    <div className={cx('item-campaign')}>
+                                                        <label className={cx('item-switch')}>
+                                                            <input
+                                                                type="checkbox"
+                                                                className={cx('switch-input')}
+                                                                value={item.status === 'open'}
+                                                                checked={item.status === 'open'}
+                                                                onChange={() => requestSetStatusCampaign(item.id, item.status === 'open' ? 'close' : 'open')}
+                                                            />
+                                                            <span className={cx('switch-slider')}></span>
+                                                        </label>
+                                                        <div className={cx('item-content')}>
+                                                            <div className={cx('item-content-id')}>
+                                                                <span className={cx('id')}>#{item.id}</span>
                                                             </div>
-                                                        ) : null}
+                                                            <a
+                                                                href={`${path.DASHBOARD_RECRUIREMENT_CAMPAIGNS}/${item.id}`}
+                                                                className={cx('item-content-title')}
+                                                            >
+                                                                {item.title}
+                                                            </a>
+                                                            <br />
+                                                            <div className={cx('item-content-cv')}>
+                                                                {item?.cv_applies?.total > 0 ? `Có ${item.cv_applies.total} CV` : 'Chưa có CV nào'}
+                                                            </div>
+                                                            <div className={cx('item-content-action', 'item-content-absolute')}>
+                                                                <a
+                                                                    href={`${path.DASHBOARD_RECRUIREMENT_CAMPAIGNS}/${item.id}`}
+                                                                    className={cx('item-content-link')}
+                                                                >
+                                                                    Xem báo cáo
+                                                                </a>
+                                                            </div>
+                                                            <div className={cx('item-content-action', 'item-content-absolute')}>
+                                                                <a
+                                                                    href={`${path.DASHBOARD_RECRUIREMENT_CAMPAIGNS}/${item.id}?active_tab=apply_cv`}
+                                                                    className={cx('item-content-link')}
+                                                                >
+                                                                    Xem CV ứng tuyển
+                                                                </a>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div className={cx('item-content-absolute', 'info-job-action')}>
-                                                        <FaPen className={cx('icon-edit')} />
-                                                        <a href={`${path.DASHBOARD_POST_JOB_EDIT}/${item.job?.id}/edit`} className={cx('item-content-link')}>
-                                                            Chỉnh sửa
-                                                        </a>
+                                                </td>
+                                                <td className={cx('table-body-item')}>
+                                                    <div className={cx('item-optimal')}>
+                                                        <span className={cx('optimal-percentage')}>
+                                                            <a href={path.DASHBOARD_SUGGESTION} className={cx('optimal-percentage-link')}>
+                                                                {item.optimal_score > 0 ? `${item.optimal_score}%` : 'Chưa tối ưu'}
+                                                            </a>
+                                                        </span>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td className={cx('table-body-item')}>
-                                            <div className={cx('table-body-item-cv')}>
-                                                <div className={cx('cv-apply')}>
-                                                    CV đề xuất
-                                                    <br />
-                                                    <p className={cx('cv-apply-number')}>
-                                                        {item.statistic.opened_cv_applies ? item.statistic.opened_cv_applies : 'Chiến dịch đang tắt'}
-                                                    </p>
-                                                    <div className={cx('cv-apply-view')}>
-                                                        <a href={path.DASHBOARD_SEARCH} className={cx('cv-apply-view-link')}>
-                                                            <FaEye className={cx('cv-apply-view-icon')} />
-                                                            Xem chi tiết
-                                                        </a>
+                                                </td>
+                                                <td className={cx('table-body-item')}>
+                                                    <div className={cx('table-body-item-info')}>
+                                                        <div className={cx('info-job')}>
+                                                            <div className={cx('job-position')}>
+                                                                <span className={cx('id')}>{item.job?.id ? `ID: ${item.job.id}` : 'Chiến dịch đang tắt'}</span>
+                                                                {item.job ? <div className={cx('item-content-title')}>{item.job?.title}</div> : null}
+                                                                {item.job ? (
+                                                                    <div className={cx('job-status', `job-status-${item.job?.status}`)}>
+                                                                        {/* <span className={cx('job-status-text')}>
+                                                                        {item.job?.status !== 'published' ? 'Không hiển thị' : 'Đang hiển thị'}
+                                                                    </span> */}
+                                                                        <span className={cx('job-status-text')}>
+                                                                            {JobStatus.find((status) => status.value === item.job?.status)?.name}
+                                                                        </span>
+                                                                    </div>
+                                                                ) : null}
+                                                            </div>
+                                                            <div className={cx('item-content-absolute', 'info-job-action')}>
+                                                                <FaPen className={cx('icon-edit')} />
+                                                                <a
+                                                                    href={`${path.DASHBOARD_POST_JOB_EDIT}/${item.job?.id}/edit`}
+                                                                    className={cx('item-content-link')}
+                                                                >
+                                                                    Chỉnh sửa
+                                                                </a>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td className={cx('table-body-item')}>
-                                            <div className={cx('table-body-item-title')}></div>
-                                        </td>
-                                        <td className={cx('table-body-item')}>
-                                            <div className={cx('table-body-item-title')}>
-                                                {item.status === 0 ? (
-                                                    <div className={cx('item-status')}>Chiến dịch đang tắt</div>
-                                                ) : (
-                                                    <div className={cx('item-status', 'item-status-active')}>Chiến dịch đang mở</div>
-                                                )}
-                                            </div>
-                                        </td>
-                                    </tr>
-                                ))}
+                                                </td>
+                                                <td className={cx('table-body-item')}>
+                                                    <div className={cx('table-body-item-cv')}>
+                                                        <div className={cx('cv-apply')}>
+                                                            CV đề xuất
+                                                            <br />
+                                                            <p className={cx('cv-apply-number')}>
+                                                                {item?.statistic?.opened_cv_applies ? item.statistic.opened_cv_applies : 'Chiến dịch đang tắt'}
+                                                            </p>
+                                                            <div className={cx('cv-apply-view')}>
+                                                                <a href={path.DASHBOARD_SEARCH} className={cx('cv-apply-view-link')}>
+                                                                    <FaEye className={cx('cv-apply-view-icon')} />
+                                                                    Xem chi tiết
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td className={cx('table-body-item')}>
+                                                    <div className={cx('table-body-item-title')}></div>
+                                                </td>
+                                                <td className={cx('table-body-item')}>
+                                                    <div className={cx('table-body-item-title')}>
+                                                        {item.status === 'open' ? (
+                                                            <div className={cx('item-status', 'item-status-active')}>Chiến dịch đang mở</div>
+                                                        ) : (
+                                                            <div className={cx('item-status')}>Chiến dịch đang tắt</div>
+                                                        )}
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        ))
+                                    ) : (
+                                        <tr>
+                                            <td colSpan="6" className={cx('table-body-empty')}>
+                                                Không có dữ liệu
+                                            </td>
+                                        </tr>
+                                    ))}
                             </tbody>
                         </table>
                     </div>

@@ -7,57 +7,21 @@ import { HiCheck, HiOutlineChevronDown } from 'react-icons/hi';
 
 import styles from './SearchExpComponent.module.scss';
 import { SelectionComponent } from '../common';
+import { Experience } from '../../constants';
 
 const cx = classNames.bind(styles);
 
-const SearchExpComponent = ({ padding }) => {
-    const filterExp = [
-        {
-            id: 1,
-            name: 'Tất cả kinh nghiệm',
-        },
-        {
-            id: 2,
-            name: 'Chưa có kinh nghiệm',
-        },
-        {
-            id: 3,
-            name: 'Dưới 1 năm',
-        },
-        {
-            id: 4,
-            name: '1 năm',
-        },
-        {
-            id: 5,
-            name: '2 năm',
-        },
-        {
-            id: 6,
-            name: '3 năm',
-        },
-        {
-            id: 7,
-            name: '4 năm',
-        },
-        {
-            id: 8,
-            name: '5 năm',
-        },
-        {
-            id: 9,
-            name: 'Trên 5 năm',
-        },
-    ];
-
+const SearchExpComponent = ({ padding, handleSelectExperience, experienceValue = 1 }) => {
     const [currentSearch, setCurrentSearch] = useState({
-        filter: 1,
+        filter: experienceValue,
     });
 
     const handleSetFilter = (id) => {
         setCurrentSearch({
             filter: id,
         });
+
+        handleSelectExperience && handleSelectExperience(id);
     };
     return (
         <div className={cx('wrapper')}>
@@ -66,13 +30,13 @@ const SearchExpComponent = ({ padding }) => {
                     <div className={cx('header-select')} style={{ padding: padding }}>
                         <div className={cx('container-select')}>
                             <PiStarOfDavidBold className={cx('icon-star')} />
-                            <span className={cx('result')}> {filterExp.find((item) => item.id === currentSearch.filter).name}</span>
+                            <span className={cx('result')}> {Experience.find((item) => item.id === currentSearch.filter)?.name}</span>
                         </div>
                     </div>
                 )}
                 body={() => (
                     <ul className={cx('ul-select')}>
-                        {filterExp.map((item) => (
+                        {Experience.map((item) => (
                             <li key={item.id} className={cx('item', { active: item.id === currentSearch.filter })} onClick={() => handleSetFilter(item.id)}>
                                 <span className={cx('text')}>{item.name}</span>
 
@@ -92,6 +56,8 @@ const SearchExpComponent = ({ padding }) => {
 
 SearchExpComponent.propTypes = {
     padding: PropTypes.string,
+    handleSelectExperience: PropTypes.func,
+    experienceValue: PropTypes.number,
 };
 
 export default SearchExpComponent;

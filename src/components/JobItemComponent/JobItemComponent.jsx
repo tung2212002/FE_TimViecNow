@@ -10,6 +10,7 @@ import { IoHeartOutline, IoHeartSharp } from 'react-icons/io5';
 import styles from './JobItemComponent.module.scss';
 import DetailCompanyTooltipComponent from '../DetailCompanyTooltipComponent/DetailCompanyTooltipComponent';
 import slugConvert from '../../utils/slugCovnert';
+import { convertSalary } from '../../utils/convertSalary';
 
 const cx = classNames.bind(styles);
 
@@ -19,6 +20,16 @@ const JobItemComponent = ({ job, reponsive = false }) => {
     const handleLikeJob = () => {
         setIsLiked(!isLiked);
     };
+
+    const setProvince = [];
+    const displayLocation = {};
+
+    job.locations?.forEach((location) => {
+        if (!setProvince.includes(location.province.name)) {
+            setProvince.push(location.province.name);
+        }
+    });
+
     return (
         <div className={cx('wrapper', { reponsive })}>
             <div className={cx('cvo-flex')}>
@@ -27,7 +38,7 @@ const JobItemComponent = ({ job, reponsive = false }) => {
                         <div className={cx('avatar')}>
                             <img
                                 className={cx('img')}
-                                src={job.company.logo_url}
+                                src={job.company.logo}
                                 alt={`${job.company.name} tuyển dụng tại Tìm Việc Now`}
                                 title={`${job.company.name} tuyển dụng tại Tìm Việc Now`}
                             />
@@ -59,25 +70,47 @@ const JobItemComponent = ({ job, reponsive = false }) => {
                             {job.company.name}
                         </a>
                     </TippyText>
-                </div>
-            </div>
-            <div className={cx('box-footer')}>
-                <div className={cx('job-info')}>
-                    <div className={cx('salary')}>
-                        <span className={cx('text-salary')}>{job.salary}</span>
+                    <div className={cx('box-footer')}>
+                        <div className={cx('job-info')}>
+                            <div className={cx('salary')}>
+                                <span className={cx('text-salary')}>{convertSalary(job.salary_type, job.min_salary, job.max_salary)} </span>
+                            </div>
+                            {setProvince.length > 0 && (
+                                <div className={cx('address')}>
+                                    <TippyText
+                                        content={job?.locations?.map((location, index) => {
+                                            const shouldHide = displayLocation[location.province.name] && !location.description;
+                                            displayLocation[location.province.name] = true;
+
+                                            return (
+                                                !shouldHide && (
+                                                    <div key={index} className={cx('text')}>
+                                                        - {location.province.name} {location.description && ` : ${location.description}`}{' '}
+                                                        {location.district && ` - ${location.district.name}`}
+                                                    </div>
+                                                )
+                                            );
+                                        })}
+                                        maxWidth="200px"
+                                    >
+                                        <a
+                                            href={`viec-lam/chi-tiet/${job.id}/${slugConvert(job.title)}`}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            className={cx('title-link')}
+                                        >
+                                            {setProvince.length <= 2 ? setProvince.join(', ') : `${setProvince[0]} & ${setProvince.length - 1} nơi khác`}
+                                        </a>
+                                    </TippyText>
+                                </div>
+                            )}
+                        </div>
+                        <div className={cx('like-job')}>
+                            <button className={cx('btn-like')} onClick={handleLikeJob}>
+                                {isLiked ? <IoHeartSharp className={cx('icon-like', 'icon-active')} /> : <IoHeartOutline className={cx('icon-like')} />}
+                            </button>
+                        </div>
                     </div>
-                    <div className={cx('address')}>
-                        <TippyText content={job.cities}>
-                            <a href={`viec-lam/chi-tiet/${job.id}/${slugConvert(job.title)}`} target="_blank" rel="noreferrer" className={cx('title-link')}>
-                                {job.short_cities}
-                            </a>
-                        </TippyText>
-                    </div>
-                </div>
-                <div className={cx('like-job')}>
-                    <button className={cx('btn-like')} onClick={handleLikeJob}>
-                        {isLiked ? <IoHeartSharp className={cx('icon-like', 'icon-active')} /> : <IoHeartOutline className={cx('icon-like')} />}
-                    </button>
                 </div>
             </div>
         </div>

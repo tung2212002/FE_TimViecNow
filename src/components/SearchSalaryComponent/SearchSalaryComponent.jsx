@@ -7,73 +7,33 @@ import { HiCheck, HiOutlineChevronDown } from 'react-icons/hi';
 
 import styles from './SearchSalaryComponent.module.scss';
 import { SelectionComponent } from '../common';
+import { filterSalary } from '../../constants';
 
 const cx = classNames.bind(styles);
 
-const SearchSalaryComponent = ({ padding }) => {
+const SearchSalaryComponent = ({ padding, handleSetSalary, maxSalaryValue = '', minSalaryValue = '', salaryTypeValue = '' }) => {
+    const million = 1000000;
     const maxSalary = 999;
 
-    const filterSalary = [
-        {
-            id: 1,
-            name: 'Tất cả mức lương',
-            start: '',
-            end: '',
-        },
-        {
-            id: 2,
-            name: 'Dưới 10 triệu',
-            start: '',
-            end: 10,
-        },
-        {
-            id: 3,
-            name: '10 - 15 triệu',
-            start: 10,
-            end: 15,
-        },
-        {
-            id: 4,
-            name: '15 - 20 triệu',
-            start: 15,
-            end: 20,
-        },
-        {
-            id: 5,
-            name: '20 - 25 triệu',
-            start: 20,
-            end: 25,
-        },
-        {
-            id: 6,
-            name: '25 - 30 triệu',
-            start: 25,
-            end: 30,
-        },
-        {
-            id: 7,
-            name: '30 - 50 triệu',
-            start: 30,
-            end: 50,
-        },
-        {
-            id: 8,
-            name: 'Trên 50 triệu',
-            start: 50,
-            end: '',
-        },
-        {
-            id: 9,
-            name: 'Thỏa thuận',
-            start: '',
-            end: '',
-        },
-    ];
+    const initialSalary =
+        filterSalary.filter(
+            (item) =>
+                (item.start === minSalaryValue / million && item.end === maxSalaryValue / million) ||
+                (item.start === minSalaryValue / million && item.end === '') ||
+                (item.start === '' && item.end === maxSalaryValue / million),
+        )[0] ||
+        (salaryTypeValue === 'deal' && filterSalary.find((item) => item.id === 9)) ||
+        filterSalary[0];
 
     const [currentSearch, setCurrentSearch] = useState({
-        filter: 1,
-        start: '',
-        end: '',
+        filter: initialSalary.id,
+        start: initialSalary.start === 0 ? '' : initialSalary.start,
+        end: initialSalary.end === 0 ? '' : initialSalary.end,
+    });
+
+    const [inputValue, setInputValue] = useState({
+        start: currentSearch.start,
+        end: currentSearch.end,
     });
 
     const startRef = useRef(null);
@@ -81,9 +41,16 @@ const SearchSalaryComponent = ({ padding }) => {
 
     const handleChangeStart = (event) => {
         let value = event.target.value;
-        if (value === '' || (value >= 0 && value <= maxSalary)) {
-            setCurrentSearch({
-                ...currentSearch,
+        if (value == 0) {
+            setInputValue({
+                ...inputValue,
+                start: '',
+            });
+            return;
+        }
+        if (value <= maxSalary) {
+            setInputValue({
+                ...inputValue,
                 start: value,
             });
         }
@@ -91,36 +58,68 @@ const SearchSalaryComponent = ({ padding }) => {
 
     const handleChangeEnd = (event) => {
         const value = event.target.value;
-        if (value === '' || (value >= 0 && value <= maxSalary)) {
-            setCurrentSearch({
-                ...currentSearch,
+        if (value == 0) {
+            setInputValue({
+                ...inputValue,
+                end: '',
+            });
+            return;
+        }
+        if (value <= maxSalary) {
+            setInputValue({
+                ...inputValue,
                 end: value,
             });
         }
     };
 
     const handleSetFilter = (id) => {
+        const start = filterSalary.find((item) => item.id === id).start;
+        const end = filterSalary.find((item) => item.id === id).end;
+        const type = id === 1 ? '' : id === 9 ? 'deal' : 'vnd';
+
+        handleSetSalary && handleSetSalary(start * million, end * million, type);
+
         setCurrentSearch({
             filter: id,
-            start: filterSalary.find((item) => item.id === id).start,
-            end: filterSalary.find((item) => item.id === id).end,
+            start: start,
+            end: end,
+        });
+
+        setInputValue({
+            start: start === '' ? '' : Number(start),
+            end: end === '' ? '' : Number(end),
+        });
+    };
+
+    const handeSetSalary = () => {
+        const start = inputValue.start;
+        const end = inputValue.end;
+        const type = 'vnd';
+
+        handleSetSalary && handleSetSalary(start * million, end * million, type);
+        const id = filterSalary.find((item) => item.start === start && item.end === end)?.id || 0;
+        setCurrentSearch({
+            filter: id,
+            start: start,
+            end: end,
         });
     };
 
     useEffect(() => {
         startRef.current.focus();
-    }, [currentSearch.start]);
+    }, [inputValue.start]);
 
     useEffect(() => {
         endRef.current.focus();
-    }, [currentSearch.end]);
+    }, [inputValue.end]);
 
     useEffect(() => {
         const handlePaste = (event) => {
             event.preventDefault();
             const paste = event.clipboardData.getData('text');
             if (paste >= 0 && paste <= maxSalary) {
-                setCurrentSearch({
+                setInputValue({
                     ...currentSearch,
                     start: paste,
                 });
@@ -142,7 +141,7 @@ const SearchSalaryComponent = ({ padding }) => {
             event.preventDefault();
             const paste = event.clipboardData.getData('text');
             if (paste >= 0 && paste <= maxSalary) {
-                setCurrentSearch({
+                setInputValue({
                     ...currentSearch,
                     end: paste,
                 });
@@ -165,7 +164,16 @@ const SearchSalaryComponent = ({ padding }) => {
                     <div className={cx('header-select')} style={{ padding: padding }}>
                         <div className={cx('container-select')}>
                             <PiCurrencyCircleDollar className={cx('icon-dollar')} />
-                            <span className={cx('result')}> {filterSalary.find((item) => item.id === currentSearch.filter).name}</span>
+                            <span className={cx('result')}>
+                                {filterSalary.find((item) => item.id === currentSearch.filter)?.name ||
+                                    (currentSearch.start !== '' && currentSearch.end !== ''
+                                        ? `${currentSearch.start} - ${currentSearch.end} triệu`
+                                        : currentSearch.start !== ''
+                                        ? `Trên ${currentSearch.start} triệu`
+                                        : currentSearch.end !== ''
+                                        ? `Đến ${currentSearch.end} triệu`
+                                        : '')}
+                            </span>
                         </div>
                     </div>
                 )}
@@ -187,19 +195,35 @@ const SearchSalaryComponent = ({ padding }) => {
                                 placeholder="Từ"
                                 className={cx('input')}
                                 ref={startRef}
-                                value={currentSearch.start}
+                                value={inputValue.start}
                                 onChange={handleChangeStart}
+                                max={maxSalary}
                             />
                             <span className={cx('line')}>-</span>
-                            <input type="number" placeholder="Đến" className={cx('input')} ref={endRef} value={currentSearch.end} onChange={handleChangeEnd} />
+                            <input
+                                type="number"
+                                placeholder="Đến"
+                                className={cx('input')}
+                                ref={endRef}
+                                value={inputValue.end}
+                                onChange={handleChangeEnd}
+                                max={maxSalary}
+                            />
                             <span className={cx('line')}>triệu</span>
                         </div>
                         <button
                             type="button"
                             className={cx('button-filter', {
-                                active: (currentSearch.start || currentSearch.end) > 0 && currentSearch.start <= currentSearch.end,
+                                active:
+                                    (inputValue.start !== '' && inputValue.end !== '' && Number(inputValue.start) <= Number(inputValue.end)) ||
+                                    (inputValue.start === '' && inputValue.end !== '') ||
+                                    (inputValue.end === '' && inputValue.start !== ''),
                             })}
-                            disabled={(currentSearch.start || currentSearch.end) > 0 && currentSearch.start <= currentSearch.end ? false : true}
+                            disabled={
+                                (inputValue.start !== '' && inputValue.end !== '' && Number(inputValue.start) > Number(inputValue.end)) ||
+                                ((inputValue.start === '' || inputValue === 0) && (inputValue.end === '' || inputValue === 0))
+                            }
+                            onClick={handeSetSalary}
                         >
                             Áp dụng
                         </button>
@@ -207,7 +231,7 @@ const SearchSalaryComponent = ({ padding }) => {
                 )}
                 icon={() => <HiOutlineChevronDown className={cx('icon-chevron')} />}
                 itemSelect={currentSearch.filter}
-                maxHeight={'290px'}
+                maxHeight={'320px'}
                 styleDropdown={{ right: '0', left: 'auto', top: '60px', width: '311px' }}
             />
         </div>
@@ -216,6 +240,13 @@ const SearchSalaryComponent = ({ padding }) => {
 
 SearchSalaryComponent.propTypes = {
     padding: PropTypes.string,
+    handleSetMinSalary: PropTypes.func,
+    handleSetMaxSalary: PropTypes.func,
+    handleSetSalaryType: PropTypes.func,
+    handleSetSalary: PropTypes.func,
+    maxSalaryValue: PropTypes.number,
+    minSalaryValue: PropTypes.number,
+    salaryTypeValue: PropTypes.string,
 };
 
 export default SearchSalaryComponent;

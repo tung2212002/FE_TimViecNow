@@ -1,12 +1,12 @@
 import * as request from '../utils/axios';
 
 export const getCategoryByIdService = async (id) => {
-    const response = await request.apiAuth.get('/category/' + id);
+    const response = await request.api.get('/category/' + id);
     return response;
 };
 
 export const getListCategoryService = async (params) => {
-    const response = await request.apiAuth.get('/category', { params });
+    const response = await request.api.get('/category', { params });
     return response;
 };
 

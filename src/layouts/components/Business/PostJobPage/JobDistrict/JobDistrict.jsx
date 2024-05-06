@@ -16,7 +16,7 @@ const JobDistrict = ({ location_id, province_id, district_id }) => {
     const dispatch = useDispatch();
 
     const job = useSelector(selectPostJob);
-    const location = job?.location?.find((item) => item.id === location_id);
+    const location = job?.locations?.find((item) => item.id === location_id);
     const district = location?.district.find((item) => item.id === district_id).district;
     const description = location?.district.find((item) => item.id === district_id).description;
     const [districts, setDistricts] = useState([]);

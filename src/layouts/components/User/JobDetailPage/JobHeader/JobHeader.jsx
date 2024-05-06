@@ -17,11 +17,20 @@ import useDocumentTitle from '../../../../../hooks/useDocumentTitle';
 import { Modal } from '../../../../../components/common';
 import { ModalApplyComponent } from '../../../../../components';
 import { showModal } from '../../../../../redux/features/modal/modalSlice';
+import { convertSalary } from '../../../../../utils/convertSalary';
+import { Experience } from '../../../../../constants';
 
 const cx = classNames.bind(styles);
 
 const JobHeader = ({ job }) => {
     const dispatch = useDispatch();
+    const setProvince = [];
+
+    job.locations?.forEach((location) => {
+        if (!setProvince.includes(location.province.name)) {
+            setProvince.push(location.province.name);
+        }
+    });
 
     const listCheck = [
         {
@@ -51,19 +60,19 @@ const JobHeader = ({ job }) => {
             id: 1,
             label: 'Mức lương',
             icon: icons.icon_money,
-            text: job?.salary,
+            text: convertSalary(job.salary_type, job.min_salary, job.max_salary),
         },
         {
             id: 2,
             label: 'Địa điểm',
             icon: icons.icon_location,
-            text: job?.short_cities,
+            text: setProvince.length <= 1 ? setProvince.join(', ') : `${setProvince[0]} & ${setProvince.length - 1} nơi khác`,
         },
         {
             id: 3,
             label: 'Kinh nghiệm',
             icon: icons.icon_time,
-            text: job?.job_exp,
+            text: Experience[job.job_experience_id - 1]?.name,
         },
     ];
 
@@ -131,12 +140,15 @@ const JobHeader = ({ job }) => {
                         <div className={cx('deadline-icon')}>
                             <FaClock className={cx('icon-clock')} />
                         </div>
-                        <div className={cx('text')}>Hạn nộp hồ sơ: {job.deadline ? job.deadline : 'Không xác định'}</div>
+                        <div className={cx('text')}>
+                            Hạn nộp hồ sơ:{' '}
+                            {job.deadline ? `${job.deadline.slice(8, 10)}/${job.deadline.slice(5, 7)}/${job.deadline.slice(0, 4)}` : 'Không xác định'}
+                        </div>
                     </div>
                 </div>
                 <div className={cx('company')}>
                     <a href={job.company.url} target="_blank" rel="noreferrer" className={cx('logo-link')}>
-                        <img src={job.company.logo_url} alt="logo" className={cx('logo')} />
+                        <img src={job.company.logo} alt="logo" className={cx('logo')} />
                     </a>
                     <div className={cx('detail')}>
                         <TippyText content={job.company.name} placement="top">

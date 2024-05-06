@@ -6,7 +6,12 @@ export const getCompanyByIdSerivce = async (id) => {
 };
 
 export const getListCompanySerivce = async (params) => {
-    const response = await request.apiAuth.get('/business/company', { params });
+    const response = await request.apiAuth.get('/business/company', {
+        params,
+        paramsSerializer: {
+            indexes: null,
+        },
+    });
     return response;
 };
 

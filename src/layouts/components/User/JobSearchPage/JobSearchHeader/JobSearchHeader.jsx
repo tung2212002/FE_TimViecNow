@@ -1,13 +1,90 @@
+import { useState } from 'react';
 import classNames from 'classnames/bind';
+import { useNavigate } from 'react-router-dom';
 
 import styles from './JobSearchHeader.module.scss';
 import { SearchSalaryComponent, SearchExpComponent, SearchJobSearchHeaderComponent } from '../../../../../components';
 import { images } from '../../../../../assets';
 import BannerSlide from './BannerSlide/BannerSlide';
+import path from '../../../../../constants/path';
 
 const cx = classNames.bind(styles);
 
 const JobSearchHeader = () => {
+    const navigate = useNavigate();
+    const [search, setSearch] = useState({
+        keyword: '',
+        province_id: 0,
+        job_expereince_id: 0,
+        min_salary: 0,
+        max_salary: 0,
+        salary_type: '',
+    });
+
+    const handleSetKeyword = (value) => {
+        setSearch({
+            ...search,
+            keyword: value,
+        });
+    };
+
+    const handleSetProvince = (value) => {
+        setSearch({
+            ...search,
+            province_id: value,
+        });
+    };
+
+    const handleSetExperience = (value) => {
+        setSearch({
+            ...search,
+            job_expereince_id: value,
+        });
+    };
+
+    const handleSetMinSalary = (value) => {
+        setSearch({
+            ...search,
+            min_salary: value,
+        });
+    };
+
+    const handleSetMaxSalary = (value) => {
+        setSearch({
+            ...search,
+            max_salary: value,
+        });
+    };
+
+    const handleSetSalaryType = (value) => {
+        setSearch({
+            ...search,
+            salary_type: value,
+        });
+    };
+
+    const handleSetSalary = (min, max, type) => {
+        setSearch({
+            ...search,
+            min_salary: min,
+            max_salary: max,
+            salary_type: type,
+        });
+    };
+
+    const handleSearch = () => {
+        navigate(path.JOB_FILTER, {
+            state: {
+                keyword: search.keyword,
+                province_id: search.province_id,
+                job_expereince_id: search.job_expereince_id,
+                min_salary: search.min_salary,
+                max_salary: search.max_salary,
+                salary_type: search.salary_type,
+            },
+        });
+    };
+
     return (
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
@@ -20,13 +97,20 @@ const JobSearchHeader = () => {
                     </p>
                 </div>
                 <div className={cx('box-search')}>
-                    <SearchJobSearchHeaderComponent />
+                    <SearchJobSearchHeaderComponent handleSelectCity={handleSetProvince} handleSelectKeyword={handleSetKeyword} />
                     <div className={cx('group-box')}>
-                        <SearchExpComponent />
-                        <SearchSalaryComponent />
+                        <SearchExpComponent handleSelectExperience={handleSetExperience} />
+                        <SearchSalaryComponent
+                            handleSetMaxSalary={handleSetMaxSalary}
+                            handleSetMinSalary={handleSetMinSalary}
+                            handleSetSalaryType={handleSetSalaryType}
+                            handleSetSalary={handleSetSalary}
+                        />
                     </div>
                     <div className={cx('box-filter')}>
-                        <button className={cx('btn-filter')}>Tìm kiếm</button>
+                        <button className={cx('btn-filter')} onClick={handleSearch}>
+                            Tìm kiếm
+                        </button>
                     </div>
                 </div>
                 <div className={cx('box-work')}>

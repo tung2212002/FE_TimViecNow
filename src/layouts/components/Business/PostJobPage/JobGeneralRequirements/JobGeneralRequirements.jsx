@@ -16,16 +16,16 @@ import {
     selectPostJob,
     setEmploymentType,
     setGenderRequirement,
-    setJobExperience,
+    setJobExperienceId,
     setMaxSalary,
     setMinSalary,
-    setPostionLevel,
+    setJobPositionId,
     setSalaryType,
     setWorkingTime,
     setWorkingTimeText,
 } from '../../../../../redux/features/postJob/postJobSlide';
 import { InputSelectorComponent, SelectionComponent } from '../../../../../components/common';
-
+import { listJobEmployerLevel } from '../../../../../constants';
 const cx = classNames.bind(styles);
 
 const JobGeneralRequirements = () => {
@@ -40,31 +40,20 @@ const JobGeneralRequirements = () => {
         {
             id: 1,
             name: 'Toàn thời gian',
-            value: 'fulltime',
+            value: 'full_time',
         },
         {
             id: 2,
             name: 'Bán thời gian',
-            value: 'parttime',
+            value: 'part_time',
         },
         {
             id: 3,
             name: 'Thực tập',
-            value: 'intern',
+            value: 'internship',
         },
     ];
 
-    const jobLevel = [
-        { value: '0', name: 'Nhân viên' },
-        { value: '1', name: 'Trưởng nhóm' },
-        { value: '2', name: 'Phó phòng' },
-        { value: '3', name: 'Trưởng phòng' },
-        { value: '4', name: 'Phó giám đốc' },
-        { value: '5', name: 'Giám đốc' },
-        { value: '6', name: 'Tổng giám đốc' },
-        { value: '7', name: 'Chủ tịch' },
-        { value: '8', name: 'Thực tập sinh' },
-    ];
     const filterExp = [
         {
             id: 1,
@@ -166,12 +155,12 @@ const JobGeneralRequirements = () => {
         dispatch(setEmploymentType(value));
     };
 
-    const handleSetJobLevel = (value) => {
-        dispatch(setPostionLevel(value));
+    const handleSetJobPositionId = (value) => {
+        dispatch(setJobPositionId(value));
     };
 
-    const handleSetJobExp = (value) => {
-        dispatch(setJobExperience(value));
+    const handleSetJobExpId = (value) => {
+        dispatch(setJobExperienceId(value));
     };
 
     const handleSetMaxSalary = (value) => {
@@ -197,7 +186,7 @@ const JobGeneralRequirements = () => {
 
     const handleSetSalaryType = (value) => {
         dispatch(setSalaryType(value));
-        setIsDeal(!isDeal);
+        setIsDeal(value === 'deal');
     };
 
     const handleAddworkingTime = () => {
@@ -276,14 +265,14 @@ const JobGeneralRequirements = () => {
                         <div className={cx('input-box')}>
                             <InputSelectorComponent
                                 placeholder={'Chọn cấp bậc'}
-                                options={jobLevel}
-                                value={job.position_level}
-                                setValue={handleSetJobLevel}
+                                options={listJobEmployerLevel}
+                                value={job.job_position_id}
+                                setValue={handleSetJobPositionId}
                                 styleInput={{ paddingTop: '7px', paddingBottom: '7px' }}
                                 isRequired={true}
                                 keepValue={true}
                             />
-                            {error.position_level && (
+                            {error.job_position_id && (
                                 <div className={cx('input-box-feedback')}>
                                     <div className={cx('feedback-text')}>Cấp bậc không được để trống</div>
                                 </div>
@@ -304,7 +293,7 @@ const JobGeneralRequirements = () => {
                                         <div className={cx('header-select')}>
                                             <div className={cx('container-select')}>
                                                 <span className={cx('result')}>
-                                                    {filterExp.find((item) => item.id === job.job_experience)?.name || '-- Chọn kinh nghiệm --'}
+                                                    {filterExp.find((item) => item.id === job.job_experience_id)?.name || '-- Chọn kinh nghiệm --'}
                                                 </span>
                                             </div>
                                         </div>
@@ -314,23 +303,23 @@ const JobGeneralRequirements = () => {
                                             {filterExp.map((item) => (
                                                 <li
                                                     key={item.id}
-                                                    className={cx('item', { active: item.id === job.job_experience })}
-                                                    onClick={() => handleSetJobExp(item.id)}
+                                                    className={cx('item', { active: item.id === job.job_experience_id })}
+                                                    onClick={() => handleSetJobExpId(item.id)}
                                                 >
                                                     <span className={cx('text')}>{item.name}</span>
-                                                    {item.id === job.job_experience && <HiCheck className={cx('icon-check')} />}
+                                                    {item.id === job.job_experience_id && <HiCheck className={cx('icon-check')} />}
                                                 </li>
                                             ))}
                                         </ul>
                                     )}
                                     icon={() => <FaCaretDown className={cx('icon-care')} />}
-                                    itemSelect={filterExp.find((item) => item.id === job.job_experience)?.name}
+                                    itemSelect={filterExp.find((item) => item.id === job.job_experience_id)?.name}
                                     maxHeight={'230px'}
                                     styleDropdown={{ right: '0', left: 'auto', top: '37px' }}
                                     styleButton={{ marginRight: '10px' }}
                                 />
                             </div>
-                            {error.job_experience && (
+                            {error.job_experience_id && (
                                 <div className={cx('input-box-feedback')}>
                                     <div className={cx('feedback-text')}>Cấp bậc không được để trống</div>
                                 </div>
@@ -406,7 +395,9 @@ const JobGeneralRequirements = () => {
                                                     <li
                                                         key={item.id}
                                                         className={cx('item', { active: item.name === job.salary_type })}
-                                                        onClick={() => setSalaryType(item.name)}
+                                                        onClick={() => {
+                                                            handleSetSalaryType(item.name);
+                                                        }}
                                                     >
                                                         <span className={cx('text')}>{item.name}</span>
                                                     </li>
@@ -492,7 +483,7 @@ const JobGeneralRequirements = () => {
                                 />
                                 <FaRegClock className={cx('icon-clock', 'icon-clock-end')} />
                             </div>
-                            <button className={cx('button-remove')} type="button" onClick={() => handleRemoveWorkingTime(index)}>
+                            <button className={cx('button-remove')} type="button" onClick={() => handleRemoveWorkingTime(item.id)}>
                                 <FaXmark className={cx('icon-remove')} />
                             </button>
                         </div>

@@ -37,6 +37,11 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
+
+    
+    &:hover {
+        cursor:  pointer !important;
+    }
 }
 .select-dropdown-container {
     display: none;
