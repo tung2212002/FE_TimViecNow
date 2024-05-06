@@ -1,0 +1,330 @@
+.wrapper {
+    background: #fff;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    padding: 20px 24px;
+    width: 100%;
+}
+
+ 
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    // height: fit-content;
+
+    .tab{
+        // display: none;
+    }
+}
+
+.title {
+    border-left: 6px solid #00b14f;
+    color: #212f3f;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 28px;
+    margin: 0;
+    padding-left: 10px;
+    margin-bottom: 20px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.body{
+    overflow-y: auto;
+    max-height: calc(100vh - 400px);
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    .description-item {
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        .h1,
+        .h2,
+        .h3,
+        .h4,
+        .h5,
+        .h6,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: inherit;
+            font-weight: 500;
+            line-height: 1.1;
+            color: inherit;
+        }
+
+        .h1 .small,
+        .h1 small,
+        .h2 .small,
+        .h2 small,
+        .h3 .small,
+        .h3 small,
+        .h4 .small,
+        .h4 small,
+        .h5 .small,
+        .h5 small,
+        .h6 .small,
+        .h6 small,
+        h1 .small,
+        h1 small,
+        h2 .small,
+        h2 small,
+        h3 .small,
+        h3 small,
+        h4 .small,
+        h4 small,
+        h5 .small,
+        h5 small,
+        h6 .small,
+        h6 small {
+            font-weight: 400;
+            line-height: 1;
+            color: #777;
+        }
+
+        .h1,
+        .h2,
+        .h3,
+        h1,
+        h2,
+        h3 {
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .h1 .small,
+        .h1 small,
+        .h2 .small,
+        .h2 small,
+        .h3 .small,
+        .h3 small,
+        h1 .small,
+        h1 small,
+        h2 .small,
+        h2 small,
+        h3 .small,
+        h3 small {
+            font-size: 65%;
+        }
+
+        .h4,
+        .h5,
+        .h6,
+        h4,
+        h5,
+        h6 {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .h4 .small,
+        .h4 small,
+        .h5 .small,
+        .h5 small,
+        .h6 .small,
+        .h6 small,
+        h4 .small,
+        h4 small,
+        h5 .small,
+        h5 small,
+        h6 .small,
+        h6 small {
+            font-size: 75%;
+        }
+
+        .h1,
+        h1 {
+            font-size: 36px;
+        }
+
+        .h2,
+        h2 {
+            font-size: 30px;
+        }
+
+        .h3,
+        h3 {
+            font-size: 24px;
+        }
+
+        .h4,
+        h4 {
+            font-size: 18px;
+        }
+
+        .h5,
+        h5 {
+            font-size: 14px;
+        }
+
+        .h6,
+        h6 {
+            font-size: 12px;
+        }
+
+        p {
+            margin: 0 0 10px;
+        }
+    }
+
+    .title-item {
+        color: #212f3f !important;
+        font-size: 16px !important;
+        font-style: normal !important;
+        font-weight: 600 !important;
+        letter-spacing: -0.16px !important;
+        line-height: 24px !important;
+        margin: 0 !important;
+    }
+
+    .content-item {
+        font-size: 14px;
+        line-height: 22px;
+        color: #333;
+    }
+
+    .content-item * {
+        font-family: unset !important;
+        width: unset !important;
+    }
+}
+
+.info {
+    display: none;
+}
+
+.action {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 16px;
+    .action-item {
+        align-items: center;
+        display: flex;
+        gap: 12px;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .action-button {
+        background: #00b14f;
+        display: flex;
+        justify-content: center;
+        padding: 8px 16px;
+        color: #fff;
+        align-items: center;
+        border-radius: 6px;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 600;
+        height: 40px;
+        line-height: 22px;
+    }
+
+    .action-button:first-child {
+        background: #00b14f;
+
+        &:hover {
+            background: #019b46;
+        }
+    }
+
+    .action-button:last-child {
+        background: #fff;
+        border: 1px solid #99e0b9;
+        color: #00b14f;
+
+        &:hover {
+            border-color: #00b14f;
+        }
+    }
+
+    .deadline {
+        color: #212f3f;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        letter-spacing: 0.14px;
+        line-height: 22px;
+        width: fit-content;
+    }
+
+    .quantity {
+        display: flex;
+        background: #f2f4f5;
+        border-color: transparent;
+        align-items: center;
+        border: 1px solid #99e0b9;
+        border-radius: 4px;
+        cursor: unset;
+        gap: 6px;
+        padding: 2px 8px;
+        width: fit-content;
+    }
+
+    .quantity-icon {
+        align-items: center;
+        display: flex;
+        height: 24px;
+        justify-content: center;
+        width: 24px;
+        .icon-lock {
+            color: #00b14f;
+            font-size: 15px;
+            font-weight: 900;
+            line-height: 20px;
+            text-align: center;
+        }
+    }
+
+    .text {
+        color: #263a4d;
+        font-weight: 400;
+        align-items: center;
+        display: flex;
+        font-weight: 600;
+        letter-spacing: 0.0125em;
+        color: #00b14f;
+        font-size: 14px;
+        line-height: 22px;
+        text-align: left;
+    }
+
+    .disabled {
+        opacity: 1;
+        pointer-events: none;
+        background: #f2f4f5;
+        border-color: transparent;
+
+        .icon-lock {
+            color: #7f878f;
+        }
+
+        .text {
+            color: #263a4d;
+            font-weight: 400;
+        }
+    }
+}

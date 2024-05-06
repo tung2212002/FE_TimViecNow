@@ -1,86 +1,24 @@
 import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
+import PropTypes from 'prop-types';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { HiMagnifyingGlass, HiOutlineChevronDown } from 'react-icons/hi2';
 import { HiOutlineLocationMarker, HiCheck, HiTrendingUp } from 'react-icons/hi';
 
 import styles from './SearchSection.module.scss';
+import { useSelector } from 'react-redux';
+import { selectProvince } from '../../../../../../redux/features/config/configSilde';
+import path from '../../../../../../constants/path';
 
 const cx = classNames.bind(styles);
 
-const SearchSection = () => {
-    const cityList = [
-        { value: '0', name: 'Tất cả địa điểm' },
-        { value: '1', name: 'Hà Nội' },
-        { value: '2', name: 'Hồ Chí Minh' },
-        { value: '3', name: 'Bình Dương' },
-        { value: '4', name: 'Bắc Ninh' },
-        { value: '5', name: 'Đồng Nai' },
-        { value: '6', name: 'Hưng Yên' },
-        { value: '7', name: 'Hải Dương' },
-        { value: '8', name: 'Đà Nẵng' },
-        { value: '9', name: 'Hải Phòng' },
-        { value: '10', name: 'An Giang' },
-        { value: '11', name: 'Bà Rịa-Vũng Tàu' },
-        { value: '12', name: 'Bắc Giang' },
-        { value: '13', name: 'Bắc Kạn' },
-        { value: '14', name: 'Bạc Liêu' },
-        { value: '15', name: 'Bến Tre' },
-        { value: '16', name: 'Bình Định' },
-        { value: '17', name: 'Bình Phước' },
-        { value: '18', name: 'Bình Thuận' },
-        { value: '19', name: 'Cà Mau' },
-        { value: '20', name: 'Cần Thơ' },
-        { value: '21', name: 'Cao Bằng' },
-        { value: '22', name: 'Cửu Long' },
-        { value: '23', name: 'Đắk Lắk' },
-        { value: '24', name: 'Đắc Nông' },
-        { value: '25', name: 'Điện Biên' },
-        { value: '26', name: 'Đồng Tháp' },
-        { value: '27', name: 'Gia Lai' },
-        { value: '28', name: 'Hà Giang' },
-        { value: '29', name: 'Hà Nam' },
-        { value: '30', name: 'Hà Tĩnh' },
-        { value: '31', name: 'Hậu Giang' },
-        { value: '32', name: 'Hoà Bình' },
-        { value: '33', name: 'Khánh Hoà' },
-        { value: '34', name: 'Kiên Giang' },
-        { value: '35', name: 'Kon Tum' },
-        { value: '36', name: 'Lai Châu' },
-        { value: '37', name: 'Lâm Đồng' },
-        { value: '38', name: 'Lạng Sơn' },
-        { value: '39', name: 'Lào Cai' },
-        { value: '40', name: 'Long An' },
-        { value: '41', name: 'Miền Bắc' },
-        { value: '42', name: 'Miền Nam' },
-        { value: '43', name: 'Miền Trung' },
-        { value: '44', name: 'Nam Định' },
-        { value: '45', name: 'Nghệ An' },
-        { value: '46', name: 'Ninh Bình' },
-        { value: '47', name: 'Ninh Thuận' },
-        { value: '48', name: 'Phú Thọ' },
-        { value: '49', name: 'Phú Yên' },
-        { value: '50', name: 'Quảng Bình' },
-        { value: '51', name: 'Quảng Nam' },
-        { value: '52', name: 'Quảng Ngãi' },
-        { value: '53', name: 'Quảng Ninh' },
-        { value: '54', name: 'Quảng Trị' },
-        { value: '55', name: 'Sóc Trăng' },
-        { value: '56', name: 'Sơn La' },
-        { value: '57', name: 'Tây Ninh' },
-        { value: '58', name: 'Thái Bình' },
-        { value: '59', name: 'Thái Nguyên' },
-        { value: '60', name: 'Thanh Hoá' },
-        { value: '61', name: 'Thừa Thiên Huế' },
-        { value: '62', name: 'Tiền Giang' },
-        { value: '63', name: 'Toàn Quốc' },
-        { value: '64', name: 'Trà Vinh' },
-        { value: '65', name: 'Tuyên Quang' },
-        { value: '66', name: 'Vĩnh Long' },
-        { value: '67', name: 'Vĩnh Phúc' },
-        { value: '68', name: 'Yên Bái' },
-        { value: '100', name: 'Nước Ngoài' },
-    ];
+const SearchSection = ({ handleSelectCity }) => {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const province = useSelector(selectProvince);
+    const [cities, setCities] = useState([{ id: 0, name: 'Tất cả địa điểm' }, ...province]);
+
     const fakeItem = [
         { value: '0', name: 'kế toán' },
         { value: '1', name: 'kế toán trưởng' },
@@ -94,23 +32,40 @@ const SearchSection = () => {
         { value: '9', name: 'thương mại điện tử' },
     ];
 
-    const [city, setCity] = useState(cityList);
+    const [city, setCity] = useState(cities);
     const [displayDropdown, setDisplayDropdown] = useState(false);
     const [focus, setFocus] = useState(false);
-    const [selectedCityValue, setSelectedCityValue] = useState('0');
+    const [selectedCityValue, setSelectedCityValue] = useState(0);
     const [inputValue, setInputValue] = useState('');
     const [searchValue, setSearchValue] = useState('');
+
+    const handleSearch = () => {
+        if (searchValue === '' && selectedCityValue === 0) {
+            return;
+        }
+        navigate(path.JOB_FILTER, {
+            state: {
+                keyword: searchValue,
+                province_id: selectedCityValue,
+            },
+        });
+    };
 
     const changeValue = (value) => {
         setInputValue(value);
 
-        const listFilter = cityList.filter((city) => city?.name.toLowerCase().includes(value.toLowerCase()?.trim()));
+        const listFilter = cities.filter((ct) => ct?.name.toLowerCase().includes(value.toLowerCase()?.trim()));
         if (listFilter.length > 0) {
             setCity(listFilter);
         } else {
-            setCity([{ value: '-1', name: 'Không tìm thấy kết quả' }]);
+            setCity([{ id: -1, name: 'Không tìm thấy kết quả' }]);
         }
     };
+
+    useEffect(() => {
+        setCities([{ id: 0, name: 'Tất cả địa điểm' }, ...province]);
+        setCity([{ id: 0, name: 'Tất cả địa điểm' }, ...province]);
+    }, [province]);
 
     useEffect(() => {
         const handleClick = (event) => {
@@ -151,11 +106,10 @@ const SearchSection = () => {
                     <div className={cx('location')} onClick={() => setDisplayDropdown(!displayDropdown)}>
                         <div className={cx('selection')}>
                             <HiOutlineLocationMarker className={cx('icon-location')} />
-
                             <span className={cx('select-show')}>
                                 <span className={cx('selection')}>
                                     <span className={cx('select-2')}>
-                                        <span className={cx('text')}>{cityList.find((ct) => ct.value === selectedCityValue)?.name}</span>
+                                        <span className={cx('text')}>{cities.find((ct) => ct.id === selectedCityValue)?.name}</span>
                                         <button className={cx('button')} type="button">
                                             <HiOutlineChevronDown className={cx('icon', 'icon-chevron-down', { rotate: displayDropdown })} />
                                         </button>
@@ -180,20 +134,21 @@ const SearchSection = () => {
                                     </div>
                                     <div className={cx('select-results')}>
                                         <ul className={cx('select-options')}>
-                                            {city.map((city, index) => (
+                                            {city.map((ct, index) => (
                                                 <li
                                                     key={index}
                                                     className={cx('select-option', {
-                                                        selected: selectedCityValue === city.value && selectedCityValue !== '-1',
+                                                        selected: selectedCityValue === ct.id && selectedCityValue !== -1,
                                                     })}
                                                     onClick={() => {
-                                                        city.value !== '-1' && setSelectedCityValue(city.value);
-                                                        city.value !== '-1' && setDisplayDropdown(false);
+                                                        ct.id !== -1 && setSelectedCityValue(ct.id);
+                                                        ct.id !== -1 && handleSelectCity && handleSelectCity(ct.id);
+                                                        ct.id !== -1 && setDisplayDropdown(false);
                                                     }}
-                                                    disabled={city.value === '-1'}
+                                                    disabled={ct.id === -1}
                                                 >
-                                                    {city.name}
-                                                    {city.value === selectedCityValue && <HiCheck className={cx('icon-check')} />}
+                                                    {ct.name}
+                                                    {ct.id === selectedCityValue && <HiCheck className={cx('icon-check')} />}
                                                 </li>
                                             ))}
                                         </ul>
@@ -203,7 +158,9 @@ const SearchSection = () => {
                         </div>
                     </div>
                     <div className={cx('button-search')}>
-                        <button className={cx('button')}>Tìm kiếm</button>
+                        <button className={cx('button')} onClick={handleSearch} type="button">
+                            Tìm kiếm
+                        </button>
                     </div>
                     <div className={cx('search-job', { display: focus })}>
                         <div className={cx('search-label')}>
@@ -229,6 +186,10 @@ const SearchSection = () => {
             </form>
         </div>
     );
+};
+
+SearchSection.propTypes = {
+    handleSelectCity: PropTypes.func,
 };
 
 export default SearchSection;

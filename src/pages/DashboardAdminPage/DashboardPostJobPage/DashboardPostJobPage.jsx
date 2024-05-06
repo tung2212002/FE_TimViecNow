@@ -23,10 +23,10 @@ import {
     setCampaignId,
     setDeadline,
     setError,
-    setJobPosition,
     setQuantity,
     setTitleJob,
     setCategories,
+    setJobLocation,
 } from '../../../redux/features/postJob/postJobSlide';
 import { JobLocation, JobGeneralRequirements, JobDetailRequirements, JobInfoContact } from '../../../layouts/components/Business/PostJobPage';
 import { getCampaignByIdService, getListCampaignService } from '../../../services/campaignService';
@@ -34,6 +34,10 @@ import { getListJobPositionService } from '../../../services/positionService';
 import { getListCategoryService } from '../../../services/categoryService';
 import regexValidator from '../../../utils/regexValidator';
 import useToast from '../../../hooks/useToast';
+import { createBusinessJobService } from '../../../services/businessJobService';
+import { selectCampaign, setCampaign } from '../../../redux/features/campaign/campaignSilde';
+import { selectCategory, selectJobPosition, setCategory, setJobPosition } from '../../../redux/features/config/configSilde';
+import { Spinner } from '../../../components/common';
 
 const cx = classNames.bind(styles);
 
@@ -45,12 +49,13 @@ const DashboardPostJobPage = () => {
     const query = new URLSearchParams(location.search);
     const campaign_id = query.get('campaign_id');
 
-    const [campaigns, setCampaigns] = useState([]);
-    const [jobPositions, setJobPositions] = useState([]);
-    const [jobCategories, setJobCategories] = useState([]);
-    const [isLoadPosition, setIsLoadPosition] = useState(true);
-    const [isLoadCampaign, setIsLoadCampaign] = useState(true);
-    const [isLoadCategories, setIsLoadCategories] = useState(true);
+    const campaigns = useSelector(selectCampaign);
+    const jobPositions = useSelector(selectJobPosition);
+    const jobCategories = useSelector(selectCategory);
+
+    const [isLoadPosition, setIsLoadPosition] = useState(jobPositions ? false : true);
+    const [isLoadCategories, setIsLoadCategories] = useState(jobCategories ? false : true);
+    const [isLoadCampaign, setIsLoadCampaign] = useState(campaigns ? false : true);
     const { handleAddToast } = useToast();
 
     const job = useSelector(selectPostJob);
@@ -69,8 +74,8 @@ const DashboardPostJobPage = () => {
         dispatch(addLocation());
     };
 
-    const handleSetPosition = (value) => {
-        dispatch(setJobPosition(value));
+    const handleSetJobLocation = (value) => {
+        dispatch(setJobLocation(value));
     };
 
     const handleSetTitle = (value) => {
@@ -101,7 +106,7 @@ const DashboardPostJobPage = () => {
             dispatch(setError({ ...error, salary_to: true }));
             handleAddToast('Cảnh báo', 'Mức lương không được để trống', 'warning');
             return;
-        } else if (job.location.length === 0) {
+        } else if (job.locations.length === 0) {
             dispatch(setError({ ...error, location: true }));
             handleAddToast('Cảnh báo', 'Khu vực làm việc không được để trống', 'warning');
             return;
@@ -150,10 +155,31 @@ const DashboardPostJobPage = () => {
         return true;
     };
 
+    const handlePostRequest = (body) => {
+        createBusinessJobService(body)
+            .then((res) => {
+                if (res.status === 201) {
+                    handleAddToast('Thành công', 'Đăng tin tuyển dụng thành công', 'success');
+                } else if (res.status === 401) {
+                    handleAddToast('Cảnh báo', 'Đã có lỗi xảy ra', 'warning');
+                } else if (res.status === 400) {
+                    handleAddToast('Cảnh báo', 'Dữ liệu không hợp lệ', 'warning');
+                } else if (res.status === 409) {
+                    handleAddToast('Cảnh báo', 'Chiến dịch đã có tin tuyển dụng', 'warning');
+                } else if (res.status === 500) {
+                    handleAddToast('Cảnh báo', 'Đã có lỗi xảy ra', 'warning');
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+                handleAddToast('Cảnh báo', 'Đã có lỗi xảy ra', 'warning');
+            });
+    };
+
     const handleSubmit = () => {
         if (handleValidate()) {
             const locations = [];
-            job.location.forEach((loc) => {
+            job.locations.forEach((loc) => {
                 const province_id = loc?.province !== -1 ? loc.province : null;
 
                 loc?.district?.forEach((dis) => {
@@ -167,7 +193,16 @@ const DashboardPostJobPage = () => {
                     });
                 });
             });
-            const body = Object.assign({}, job, { location: locations });
+            const body = Object.assign({}, job, { locations: locations });
+            for (const key in body) {
+                if (key === 'salary_type') {
+                    body[key] = body[key].toLowerCase();
+                } else if (body[key] === null || body[key] === undefined || body[key] === -1) {
+                    delete body[key];
+                }
+            }
+
+            handlePostRequest(body);
         }
     };
 
@@ -186,38 +221,41 @@ const DashboardPostJobPage = () => {
     }, [campaign_id]);
 
     useEffect(() => {
-        getListCampaignService()
-            .then((res) => {
-                if (res.status === 200) {
-                    const listCampaignNullJob = res.data.data.filter((item) => item.job === null);
-                    setCampaigns(listCampaignNullJob);
-                    setIsLoadCampaign(false);
-                }
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-        getListJobPositionService()
-            .then((res) => {
-                if (res.status === 200) {
-                    setJobPositions(res.data.data);
-                    setIsLoadPosition(false);
-                }
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+        !campaigns &&
+            getListCampaignService()
+                .then((res) => {
+                    if (res.status === 200) {
+                        dispatch(setCampaign(res.data.data));
+                        setIsLoadCampaign(false);
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
 
-        getListCategoryService()
-            .then((res) => {
-                if (res.status === 200) {
-                    setJobCategories(res.data.data);
-                    setIsLoadCategories(false);
-                }
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+        !jobPositions &&
+            getListJobPositionService()
+                .then((res) => {
+                    if (res.status === 200) {
+                        dispatch(setJobPosition(res.data.data));
+                        setIsLoadPosition(false);
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+
+        !jobCategories &&
+            getListCategoryService()
+                .then((res) => {
+                    if (res.status === 200) {
+                        dispatch(setCategory(res.data.data));
+                        setIsLoadCategories(false);
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
     }, []);
 
     return (
@@ -370,14 +408,16 @@ const DashboardPostJobPage = () => {
                                                 {!isLoadCampaign ? (
                                                     <InputSelectorComponent
                                                         placeholder={'Chọn chiến dịch'}
-                                                        options={campaigns}
+                                                        options={campaigns.filter((item) => item.job === null)}
                                                         value={job.campaign_id}
                                                         setValue={handleSetCampaign}
                                                         isRequired={true}
                                                         styleInput={{ width: '100%' }}
                                                     />
                                                 ) : (
-                                                    <div>Loading...</div>
+                                                    <div className={cx('spinner')}>
+                                                        <Spinner />
+                                                    </div>
                                                 )}
                                             </div>
                                         </div>
@@ -398,12 +438,14 @@ const DashboardPostJobPage = () => {
                                                     <InputSelectorComponent
                                                         placeholder={'VD: Nhân viên Marketing, Designer, ...'}
                                                         options={jobPositions}
-                                                        value={job.job_position}
-                                                        setValue={handleSetPosition}
+                                                        value={job.job_location}
+                                                        setValue={handleSetJobLocation}
                                                         styleInput={{ paddingTop: '7px', paddingBottom: '7px' }}
                                                     />
                                                 ) : (
-                                                    <div>Loading...</div>
+                                                    <div className={cx('spinner')}>
+                                                        <Spinner />
+                                                    </div>
                                                 )}
                                                 {error.position && (
                                                     <div className={cx('input-box-feedback')}>
@@ -427,7 +469,9 @@ const DashboardPostJobPage = () => {
                                                         styleInput={{ paddingTop: '7px', paddingBottom: '7px' }}
                                                     />
                                                 ) : (
-                                                    <div>Loading...</div>
+                                                    <div className={cx('spinner')}>
+                                                        <Spinner />
+                                                    </div>
                                                 )}
                                                 {error.categories && (
                                                     <div className={cx('input-box-feedback')}>
@@ -506,7 +550,7 @@ const DashboardPostJobPage = () => {
                                         </label>
                                         <div className={cx('select-box')}>
                                             <div>
-                                                {job.location.map((item) => (
+                                                {job.locations.map((item) => (
                                                     <JobLocation key={item.id} location_id={item.id} />
                                                 ))}
                                                 <button className={cx('select-button')} onClick={handleAddLocation}>

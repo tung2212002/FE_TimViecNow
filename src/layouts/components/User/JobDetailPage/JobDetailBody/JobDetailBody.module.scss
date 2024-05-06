@@ -16,6 +16,10 @@
     flex-direction: column;
     gap: 20px;
     height: fit-content;
+
+    .tab{
+        display: none;
+    }
 }
 
 .title {
@@ -455,6 +459,8 @@
     }
 }
 
+
+
 @media screen and (max-width: 768px) {
     .wrapper {
         // padding: 20px 16px;
@@ -466,6 +472,10 @@
         background-color: #fff !important;
         padding: 20px 16px 0 16px !important  ;
         margin-top: -20px;
+    }
+
+    .tab{
+        display: block !important;
     }
 
     .info {

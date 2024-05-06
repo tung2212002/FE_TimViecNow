@@ -13,10 +13,11 @@ import styles from './RegisterForm.module.scss';
 import { SelectionComponent } from '../../../../../components/common';
 import path from '../../../../../constants/path';
 import regexValidator from '../../../../../utils/regexValidator';
-import { getListDistrictService, getListProvinceService } from '../../../../../services/locationService';
+import { getListDistrictService } from '../../../../../services/locationService';
 import { registerBusinessService } from '../../../../../services/businessAuthService';
 import { login } from '../../../../../redux/features/authBusiness/authSlide';
 import { addToast, removeToast } from '../../../../../redux/features/toast/toastSlice';
+import { selectProvince } from '../../../../../redux/features/config/configSilde';
 
 const cx = classNames.bind(styles);
 
@@ -55,7 +56,8 @@ const RegisterForm = () => {
         isError: true,
     });
 
-    const [province, setProvince] = useState([]);
+    // const [province, setProvince] = useState([]);
+    const province = useSelector(selectProvince);
     const [district, setDistrict] = useState([]);
 
     const positionList = [
@@ -229,22 +231,11 @@ const RegisterForm = () => {
     }, [state.canSubmit]);
 
     useEffect(() => {
-        getListProvinceService()
-            .then((res) => {
-                if (res.status === 200) {
-                    setProvince(res.data.data);
-                }
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    }, []);
-
-    useEffect(() => {
         if (info.province_id === 100 || info.province_id === -1) return;
         const params = {
             province_id: info.province_id,
         };
+
         getListDistrictService(params)
             .then((res) => {
                 if (res.status === 200) {

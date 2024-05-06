@@ -79,7 +79,10 @@
         align-items: center;
         display: flex;
         gap: 6px;
-        max-width: 80%;
+        // max-width: 80%;
+        flex: 1;
+        flex-wrap: wrap;
+        
     }
 
     .tag {

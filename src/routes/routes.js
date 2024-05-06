@@ -9,6 +9,8 @@ import {
     ManagerLoginPage,
     DashboardAdminPage,
     NotFoundPage,
+    CompanyDetailPage,
+    JobFilterPage,
 } from '../pages';
 import route from '../constants/route';
 import { ContentOnlyLayout, DashboardHeader, DashboardLayout } from '../layouts';
@@ -59,6 +61,12 @@ export const publicRoutes = [
         layout: ContentOnlyLayout,
     },
     {
+        path: route.JOB_FILTER,
+        component: JobFilterPage,
+        isPrivate: false,
+        restricted: false,
+    },
+    {
         path: route.JOB_SEARCH_DETAIL,
         component: JobSearchDetailPage,
         isPrivate: false,
@@ -78,6 +86,12 @@ export const publicRoutes = [
         isPrivate: false,
         restricted: true,
         layout: ContentOnlyLayout,
+    },
+    {
+        path: route.COMPANY_DETAIL,
+        component: CompanyDetailPage,
+        isPrivate: false,
+        restricted: false,
     },
     {
         path: route.NOT_FOUND,

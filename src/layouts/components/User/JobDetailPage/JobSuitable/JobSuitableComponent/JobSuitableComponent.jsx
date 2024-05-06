@@ -7,19 +7,32 @@ import { FaRegHeart, FaHeart } from 'react-icons/fa6';
 import styles from './JobSuitableComponent.module.scss';
 import path from '../../../../../../constants/path';
 import slugConvert from '../../../../../../utils/slugCovnert';
+import { convertSalary } from '../../../../../../utils/convertSalary';
 
 const cx = classNames.bind(styles);
 
 const JobSuitableComponent = ({ job }) => {
-    const location = job.location.map((item) => item.name).join(', ');
+    const setProvince = [];
+    const displayLocation = {};
+
+    job.locations?.forEach((location) => {
+        if (!setProvince.includes(location.province.name)) {
+            setProvince.push(location.province.name);
+        }
+    });
 
     return (
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
                 <div className={cx('info')}>
                     <div className={cx('logo-container')}>
-                        <a className={cx('logo-link')} href={job.company.url} target="_blank" rel="noreferrer">
-                            <img className={cx('logo')} src={job.company.logo_url} alt="logo" />
+                        <a
+                            className={cx('logo-link')}
+                            href={path.COMPANY_DETAIL + '/' + job.company.id + '/' + slugConvert(job.company.name)}
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            <img className={cx('logo')} src={job.company.logo} alt="logo" />
                         </a>
                     </div>
                     <div className={cx('detail')}>
@@ -37,9 +50,25 @@ const JobSuitableComponent = ({ job }) => {
                 </div>
                 <div className={cx('tags')}>
                     <div className={cx('list')}>
-                        <div className={cx('tag')}>{job.salary}</div>
-                        <TippyText allowHTML={true} content={<div dangerouslySetInnerHTML={{ __html: job.cities }} />} placement="top" zIndex={9999}>
-                            <div className={cx('tag')}>{location}</div>
+                        <div className={cx('tag')}>{convertSalary(job.salary_type, job.min_salary, job.max_salary)}</div>
+                        <TippyText
+                            content={job?.locations?.map((location, index) => {
+                                const shouldHide = displayLocation[location.province.name] && !location.description;
+                                displayLocation[location.province.name] = true;
+
+                                return (
+                                    !shouldHide && (
+                                        <div key={index} className={cx('text')} style={{ fontSize: '12px' }}>
+                                            - {location.province.name} {location.district && ` : ${location.district.name}`}
+                                        </div>
+                                    )
+                                );
+                            })}
+                            placement="top"
+                        >
+                            <div className={cx('tag')}>
+                                {setProvince.length <= 2 ? setProvince.join(', ') : `${setProvince[0]} & ${setProvince.length - 1} nơi khác`}
+                            </div>
                         </TippyText>
                     </div>
                     <TippyText content={job.is_save ? 'Bỏ lưu' : 'Lưu'} placement="top" zIndex={9999}>

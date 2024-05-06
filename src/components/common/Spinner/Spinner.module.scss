@@ -14,7 +14,7 @@
     border-radius: 50%;
     position: relative;
     animation: spin 2s infinite;
-  border-top-color: transparent !important;
+    border-top-color: transparent !important;
     @keyframes spin {
       100% {
         transform: rotate(360deg);

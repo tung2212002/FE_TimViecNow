@@ -9,7 +9,6 @@
     background-color: #e8edf2;
 }
 
-
 @media screen and (max-width: 1360px) {
     .wrapper {
         margin-left: 64px !important;
@@ -323,8 +322,9 @@
         }
 
         .item-content-title {
-            color: #343a40 !important;
+            color: #000 !important;
             width: 90%;
+            margin: 4px 0;
         }
 
         .item-content-absolute {
@@ -409,6 +409,7 @@
 
         .item-optimal {
             a {
+                // font-size: 12px;
                 color: #2d7cf1 !important;
 
                 &:hover {
@@ -430,7 +431,7 @@
 
                 .job-status-text {
                     background: #e8edf2;
-                    color: #000;
+                    color: #5e6368;
                     font-size: 12px;
                     line-height: 1;
                     font-weight: 400;
@@ -439,6 +440,31 @@
                     vertical-align: baseline;
                     padding: 3px 7px;
                     border-radius: 140px;
+                }
+            }
+
+            .job-status-published{
+                .job-status-text{
+                    background: #f2daff;
+                    color: #6514e9;
+                    font-weight: 500;
+           
+                }
+            }
+
+            .job-status-rejected, .job-status-expired , .job-status-banned{
+                .job-status-text {
+                    background: #f8d7da;
+                    color: #721c24;
+                    font-weight: 500;
+                }
+            }
+
+            .job-status-pending{
+                .job-status-text {
+                    background: #f4ffe3;
+                    color: #3cff00;
+                    font-weight: 500;
                 }
             }
             a {
@@ -456,11 +482,11 @@
             }
         }
 
-        .cv-apply{
+        .cv-apply {
             display: block;
-            .cv-apply-number{
+            .cv-apply-number {
                 display: inline-block;
-                color: #5e6368!important;
+                color: #5e6368 !important;
                 background: #e8edf2;
                 font-size: 12px;
                 line-height: 1;
@@ -470,25 +496,36 @@
                 vertical-align: baseline;
                 padding: 3px 7px;
                 border-radius: 140px;
+                margin: 4px 0;
             }
-            .cv-apply-view{
-                color: #343a40!important;
-                margin-top: 8px;
+            .cv-apply-view {
+                color: #343a40 !important;
+                // margin-top: 8px;
                 line-height: 1.5;
 
-                a{
+                a {
                     display: flex;
                     align-items: center;
                 }
 
-                .cv-apply-view-icon{
+                .cv-apply-view-icon {
                     font-size: 14px;
                     color: #a8afb6;
-                    
+
                     margin-right: 4px;
                 }
-
             }
         }
+    }
+
+    .table-body-empty {
+        text-align: center;
+        padding: 16px;
+        vertical-align: top;
+        border-top: 1px solid #e8edf2;
+        border-right: 1px solid #e8edf2 !important;
+        font-size: 14px;
+        line-height: 1.5;
+        font-weight: 500;
     }
 }

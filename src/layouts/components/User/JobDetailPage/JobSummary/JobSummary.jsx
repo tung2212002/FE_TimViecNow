@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import styles from './JobSummary.module.scss';
 import { icons } from '../../../../../assets';
+import { listJobEmployerLevel } from '../../../../../constants';
+import { Experience } from '../../../../../constants';
 
 const cx = classNames.bind(styles);
 
@@ -28,19 +30,19 @@ const JobSummary = ({ job }) => {
             id: 1,
             icon: icons.icon_award,
             title: 'Cấp bậc',
-            value: job.salary,
+            value: listJobEmployerLevel[job.job_position_id]?.name || null,
         },
         {
             id: 2,
             icon: icons.icon_time,
             title: 'Kinh nghiệm',
-            value: job.job_exp ? job.job_exp : 'Không yêu cầu',
+            value: Experience[job.job_experience_id - 1]?.name || null,
         },
         {
             id: 3,
             icon: icons.icon_user_group,
-            title: 'Sô lượng tuyển',
-            value: job.number_of_vacancy ? job.number_of_vacancy : 'Không giới hạn',
+            title: 'Số lượng tuyển',
+            value: job.quantity || 'Không giới hạn',
         },
         {
             id: 4,

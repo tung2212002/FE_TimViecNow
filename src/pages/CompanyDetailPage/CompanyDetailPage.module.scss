@@ -1,0 +1,141 @@
+.wrapper {
+    background-color: #f4f5f5;
+    // min-height: 100vh;
+}
+
+
+@media screen and (max-width: 768px) {
+    .container{
+
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .container{
+
+        flex-direction: column !important;
+    }
+    
+    .company-body-main{
+        width: 100% !important;
+    }
+
+    .company-body-sub{
+        width: 100% !important;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .container{
+
+    }
+
+
+    
+}
+
+.container {
+    width: 100%;
+    background-color: #f4f5f5;
+    position: relative;
+    margin-right: auto;
+    margin-left: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.company-path {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    height: 60px;
+    width: 100%;
+
+    .company-path-item {
+        color: #212f3f;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        letter-spacing: 0.175px;
+        line-height: 22px;
+    }
+
+    .company-path-icon {
+        color: #212f3f;
+        font-size: 15px;
+        height: 12px;
+        line-height: 20px;
+        margin-left: 4px;
+        margin-right: 4px;
+        width: 12px;
+    }
+
+    .company-path-name {
+        color: #212f3f;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        letter-spacing: 0.14px;
+        line-height: 22px;
+    }
+}
+
+.company-header{
+    margin-bottom: 24px;
+    width: 100%;
+}
+
+.company-body-main {
+    
+    width: calc(100% / 3 * 2 - 15px);
+    margin-bottom: 32px;
+    .company-description , .company-recruitment{
+        margin-bottom: 32px;
+    }
+    
+}
+
+.company-body-sub {
+
+    width: calc(100% / 3 - 15px);
+    float: right;
+
+    .company-location {
+        margin-bottom: 32px;
+    }
+    
+}
+
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px;
+    }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+    .container {
+        width: 970px;
+    }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+    .container {
+        width: 750px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+
+}
+
+@media screen and (max-width: 1200px) {
+    .company-header{
+        margin-top: 19px;
+        min-height: 492px;
+    }
+
+    
+
+    .company-path{
+        display: none !important;
+    }
+}

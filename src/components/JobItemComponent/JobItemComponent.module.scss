@@ -3,7 +3,8 @@
     border: none;
     border-radius: 4px;
     margin: 4px 0;
-    padding: 16px 18.8px;
+    // padding: 12px 18.8px;
+    padding: 12px;
     position: relative;
     width: 100%;
     box-sizing: border-box;
@@ -27,7 +28,8 @@
 }
 
 .wrapper.reponsive {
-    padding: 12px 18.8px;
+    // padding: 12px 18.8px;
+    padding: 12px;
 }
 .cvo-flex *{
     box-sizing: content-box;
@@ -40,14 +42,15 @@
         align-items: center;
         border-radius: 7px;
         display: flex;
-        height: 48px;
+        height: 78px;
         padding: 2px;
         position: relative;
-        width: 48px;
+        width: 78px;
 
         .img {
             max-width: 100%;
-            height: auto;
+            height: 100%;
+            object-fit: contain;
             background: #fff;
         }
     }
@@ -59,6 +62,7 @@
         padding-left: 12px;
         text-overflow: ellipsis !important;
         white-space: nowrap !important;
+        flex-grow: 1;
 
         .title-link {
             display: block;
@@ -102,6 +106,11 @@
     justify-content: space-between;
     margin-bottom: 0;
     margin-top: 8px;
+
+    .job-info{
+        display: flex;
+        align-items: center;
+    }
 
     .salary {
         background: #f4f5f5;

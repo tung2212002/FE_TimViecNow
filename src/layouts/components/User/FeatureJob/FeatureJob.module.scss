@@ -410,10 +410,10 @@
 }
 
 .slick-track {
-    // opacity: 1;
     opacity: 0;
-    transition: opacity 0.5s ease;
     visibility: hidden;
+    // opacity: 1;
+    transition: opacity 0.5s ease;
     // width: 91200px;
     position: relative;
     top: 0;

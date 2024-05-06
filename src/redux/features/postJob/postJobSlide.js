@@ -9,7 +9,7 @@ const initialState = {
         min_salary: 0,
         max_salary: 0,
         salary_type: 'VND',
-        location: [
+        locations: [
             {
                 id: randomId(),
                 province: -1,
@@ -26,7 +26,7 @@ const initialState = {
         job_description: '',
         job_requirement: '',
         job_benefit: '',
-        employment_type: 'fulltime',
+        employment_type: 'full_time',
         deadline: '',
         full_name_contact: getLocalBusiness()?.full_name,
         phone_number_contact: getLocalBusiness()?.phone_number,
@@ -38,10 +38,10 @@ const initialState = {
         working_time_text: '',
         must_have_skills: [],
         should_have_skills: [],
-        job_position: '',
+        job_location: '',
         type_job: [],
-        job_experience: -1,
-        position_level: -1,
+        job_experience_id: -1,
+        job_position_id: -1,
     },
     loading: false,
     error: {
@@ -64,8 +64,9 @@ const initialState = {
         should_have_skills: false,
         recruitment_position_title: false,
         type_job: false,
-        job_experience: false,
-        position_level: false,
+        job_location: false,
+        job_experience_id: false,
+        job_position_id: false,
     },
 };
 
@@ -95,7 +96,7 @@ const postJobSlice = createSlice({
             state.postJob.gender_requirement = action.payload;
         },
         addLocation: (state) => {
-            state.postJob.location.push({
+            state.postJob.locations.push({
                 id: randomId(),
                 province: -1,
                 district: [
@@ -108,15 +109,15 @@ const postJobSlice = createSlice({
             });
         },
         removeLocation: (state, action) => {
-            state.postJob.location = state.postJob.location.filter((location) => location.id !== action.payload);
+            state.postJob.locations = state.postJob.locations.filter((location) => location.id !== action.payload);
         },
         setProvince: (state, action) => {
-            state.postJob.location = state.postJob.location.map((location) =>
+            state.postJob.locations = state.postJob.locations.map((location) =>
                 location.id === action.payload.id ? { ...location, province: action.payload.province } : location,
             );
         },
         refreshProvince: (state, action) => {
-            state.postJob.location = state.postJob.location.map((location) =>
+            state.postJob.locations = state.postJob.locations.map((location) =>
                 location.id === action.payload.id
                     ? {
                           ...location,
@@ -132,7 +133,7 @@ const postJobSlice = createSlice({
             );
         },
         addDistrict: (state, action) => {
-            state.postJob.location = state.postJob.location.map((location) =>
+            state.postJob.locations = state.postJob.locations.map((location) =>
                 location.id === action.payload.id
                     ? {
                           ...location,
@@ -149,7 +150,7 @@ const postJobSlice = createSlice({
             );
         },
         removeDistrict: (state, action) => {
-            state.postJob.location = state.postJob.location.map((location) =>
+            state.postJob.locations = state.postJob.locations.map((location) =>
                 location.id === action.payload.id
                     ? {
                           ...location,
@@ -159,7 +160,7 @@ const postJobSlice = createSlice({
             );
         },
         setDistrict: (state, action) => {
-            state.postJob.location = state.postJob.location.map((location) =>
+            state.postJob.locations = state.postJob.locations.map((location) =>
                 location.id === action.payload.id
                     ? {
                           ...location,
@@ -185,8 +186,8 @@ const postJobSlice = createSlice({
         setDeadline: (state, action) => {
             state.postJob.deadline = action.payload;
         },
-        setJobPosition: (state, action) => {
-            state.postJob.job_position = action.payload;
+        setJobLocation: (state, action) => {
+            state.postJob.job_location = action.payload;
         },
         setEmploymentType: (state, action) => {
             state.postJob.employment_type = action.payload;
@@ -224,11 +225,11 @@ const postJobSlice = createSlice({
         setWorkingTimeText: (state, action) => {
             state.postJob.working_time_text = action.payload;
         },
-        setJobExperience: (state, action) => {
-            state.postJob.job_experience = action.payload;
+        setJobExperienceId: (state, action) => {
+            state.postJob.job_experience_id = action.payload;
         },
-        setPostionLevel: (state, action) => {
-            state.postJob.position_level = action.payload;
+        setJobPositionId: (state, action) => {
+            state.postJob.job_position_id = action.payload;
         },
         setMustHaveSkills: (state, action) => {
             state.postJob.must_have_skills = action.payload;
@@ -272,7 +273,7 @@ export const {
     setCampaignId,
     setQuantity,
     setDeadline,
-    setJobPosition,
+    setJobLocation,
     setEmploymentType,
     setJobRequirement,
     setJobBenefit,
@@ -281,8 +282,8 @@ export const {
     setEmailContact,
     setWorkingTime,
     setWorkingTimeText,
-    setJobExperience,
-    setPostionLevel,
+    setJobExperienceId,
+    setJobPositionId,
     addMustHaveSkills,
     removeMustHaveSkills,
     addWorkingTime,

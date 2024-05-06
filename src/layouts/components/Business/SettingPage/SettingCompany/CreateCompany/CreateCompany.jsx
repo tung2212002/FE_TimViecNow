@@ -211,20 +211,16 @@ const CreateCompany = ({ setActiveTab }) => {
 
     const handleUpdateCompany = () => {
         const body = new FormData();
-        console.log('company', company);
         for (const key in company) {
             if (company[key] === null || company[key] === '' || company[key].length === 0) continue;
             if (key === 'fields') {
                 company[key].forEach((item) => {
-                    console.log(item);
                     body.append('fields', item);
                 });
                 continue;
             }
             body.append(key, company[key]);
         }
-        // console.log('body', body);
-        // return;
         updateCompanyService(user?.company?.id, body)
             .then((res) => {
                 if (res.status === 200) {
@@ -507,7 +503,7 @@ const CreateCompany = ({ setActiveTab }) => {
                         </div>
                         <div className={cx('form-group-item')}>
                             <label className={cx('label')} htmlFor="address">
-                                <span>Tên công ty</span>
+                                <span>Địa chỉ công ty</span>
                                 <span className={cx('required')}> *</span>
                             </label>
                             <div className={cx('input-box')}>

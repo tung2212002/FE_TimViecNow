@@ -3,7 +3,9 @@ import { URL_OAUTH2 } from '../configs';
 export default {
     HOMEPAGE: '/',
     JOB_SEARCH: '/viec-lam',
+    JOB_FILTER: '/tim-viec-lam-moi-nhat',
     JOB_SEARCH_DETAIL: '/viec-lam/chi-tiet',
+    COMPANY_DETAIL: '/cong-ty',
     MATCHING_JOBS: '/viec-lam-phu-hop',
     SUBPAGE: '/subpage',
     LOGIN: '/login',
