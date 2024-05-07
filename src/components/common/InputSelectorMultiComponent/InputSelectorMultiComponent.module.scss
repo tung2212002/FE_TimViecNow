@@ -104,6 +104,7 @@
     flex-wrap: wrap;
     align-items: center;
     padding: 6px;
+
     .tag {
         display: flex;
         align-items: center;
@@ -119,7 +120,7 @@
         line-height: 1;
         font-size: 14px;
         border: 1px solid #00b14f;
-        background: rgba(0, 177, 79, .10196);
+        background: rgba(0, 177, 79, 0.10196);
     }
 
     .text {

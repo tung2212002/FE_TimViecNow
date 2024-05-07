@@ -254,6 +254,12 @@
                 &:hover {
                     background: #028b40;
                 }
+
+                &:disabled {
+                    background: #00b14f;
+                    opacity: 0.5;
+                    cursor: unset;
+                }
             }
 
             .btn.disabled {

@@ -20,6 +20,9 @@ import {
 import { SEO } from '../../layouts/components/User';
 import { getJobSerivce } from '../../services/jobService';
 import { Spinner } from '../../components/common';
+import path from '../../constants/path';
+import Skeleton from 'react-loading-skeleton';
+import { SkeletonJobDetailPage } from '../../components/skeleton';
 
 const cx = classNames.bind(styles);
 
@@ -69,6 +72,7 @@ const JobSearchDetailPage = () => {
     return (
         <div className={cx('wrapper')}>
             <JobDetailHeader />
+
             {job ? (
                 <div className={cx('container')}>
                     <div className={cx('job-path')}>
@@ -76,7 +80,7 @@ const JobSearchDetailPage = () => {
                             <span className={cx('job-path-item')}>Trang chủ</span>
                         </Link>
                         <FaChevronRight className={cx('job-path-icon')} />
-                        <Link to="/job-search">
+                        <Link to={path.JOB_SEARCH}>
                             <span className={cx('job-path-item')}>Tìm kiếm việc làm</span>
                         </Link>
                         <FaChevronRight className={cx('job-path-icon')} />
@@ -100,8 +104,8 @@ const JobSearchDetailPage = () => {
                     </div>
                 </div>
             ) : (
-                <div className={cx('spinner')}>
-                    <Spinner />
+                <div className={cx('container')}>
+                    <SkeletonJobDetailPage />
                 </div>
             )}
 

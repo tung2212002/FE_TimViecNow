@@ -26,6 +26,7 @@ import { GeneralCompanyFilter, JobDetailBody } from '../../layouts/components/Us
 import { EmploymentType } from '../../constants';
 import { selectCategory, selectField } from '../../redux/features/config/configSilde';
 import { VscChevronLeft, VscChevronRight } from 'react-icons/vsc';
+import { SkeletonCompanyComponent } from '../../components/skeleton';
 
 const cx = classNames.bind(styles);
 
@@ -100,6 +101,7 @@ const JobFilterPage = () => {
         setActiveFilter((prev) => ({
             ...prev,
             page: prev.page - 1,
+            loading: true,
         }));
     };
 
@@ -113,6 +115,7 @@ const JobFilterPage = () => {
         setActiveFilter((prev) => ({
             ...prev,
             page: prev.page + 1,
+            loading: true,
         }));
     };
 
@@ -274,6 +277,12 @@ const JobFilterPage = () => {
     };
 
     const handleLoading = () => {
+        setJobs({
+            jobs: [],
+            total: 0,
+            loading: true,
+        });
+
         navigate(path.JOB_FILTER, {
             state: {
                 ...search,
@@ -341,7 +350,7 @@ const JobFilterPage = () => {
                         total: res.data.data.count,
                         loading: false,
                     });
-                    activeFilter.loading === true && setActiveFilter({ ...activeFilter, loading: false });
+                    activeFilter.loading === true && setActiveFilter({ ...activeFilter, loading: false, page: 1 });
                 }
             })
             .catch((err) => {
@@ -359,6 +368,7 @@ const JobFilterPage = () => {
             numberActive: 0,
             sort_by: 'id',
             loading: false,
+            page: 1,
         });
 
         navigate(path.JOB_FILTER, {
@@ -499,7 +509,7 @@ const JobFilterPage = () => {
             </div>
             <div className={cx('container')}>
                 <h1 className={cx('title')}>
-                    Tuyển dụng {jobs.total?.toLocaleString()} công việc {keyword}{' '}
+                    Tuyển dụng {!jobs.loading && !activeFilter.loading && jobs.total?.toLocaleString()} công việc {keyword}{' '}
                     {activeFilter.category_id !== 0 && `danh mục ${categories?.find((cate) => cate.id === activeFilter.category_id)?.name}`}{' '}
                     {activeFilter.fields[0] !== 0 && `ngành nghề ${fieds?.find((field) => field.id === activeFilter.fields[0])?.name}`}{' '}
                 </h1>
@@ -528,7 +538,7 @@ const JobFilterPage = () => {
             </div>
             <div className={cx('container', 'content')}>
                 <div className={cx('list-job')}>
-                    {!jobs.loading ? (
+                    {!jobs.loading && !activeFilter.loading ? (
                         jobs.jobs.length > 0 ? (
                             jobs.jobs.map((job) => (
                                 <div
@@ -547,11 +557,13 @@ const JobFilterPage = () => {
                             </div>
                         )
                     ) : (
-                        <div className={cx('loading')} style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
-                            <Spinner />
-                        </div>
+                        Array.from({ length: 20 }, (_, index) => (
+                            <div className={cx('job', 'skeleton')} key={index}>
+                                <SkeletonCompanyComponent />
+                            </div>
+                        ))
                     )}
-                    {
+                    {!jobs.loading && !activeFilter.loading && jobs.jobs.length > 0 && (
                         <div className={cx('footer')}>
                             <div className={cx('content-footer')}>
                                 <span
@@ -562,8 +574,7 @@ const JobFilterPage = () => {
                                     <VscChevronLeft className={cx('icon')} />
                                 </span>
                                 <p className={cx('text-page')}>
-                                    <span className={cx('number')}>{activeFilter.page}</span> / {Math.ceil(jobs.total / 40)}
-                                    trang
+                                    <span className={cx('number')}>{activeFilter.page}</span> / {Math.ceil(jobs.total / 40)} trang
                                 </p>
                                 <span
                                     className={cx('btn', activeFilter.page === Math.ceil(jobs.total / 40) ? 'deactive' : '')}
@@ -574,7 +585,7 @@ const JobFilterPage = () => {
                                 </span>
                             </div>
                         </div>
-                    }
+                    )}
                 </div>
                 <div className={cx('right-page')} style={{}}>
                     <div className={cx('box-company')}>

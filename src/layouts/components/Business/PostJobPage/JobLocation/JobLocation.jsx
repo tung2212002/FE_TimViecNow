@@ -2,17 +2,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 import { FaLocationDot, FaPlus } from 'react-icons/fa6';
 import { LuTrash } from 'react-icons/lu';
 
 import styles from './JobLocation.module.scss';
 import { InputSelectorComponent } from '../../../../../components/common';
-import { getListDistrictService, getListProvinceService } from '../../../../../services/locationService';
+import { getListDistrictService } from '../../../../../services/locationService';
 import JobDistrict from '../JobDistrict/JobDistrict';
 import { addDistrict, refreshProvince, removeLocation, selectPostJob, setProvince } from '../../../../../redux/features/postJob/postJobSlide';
 import { selectProvince } from '../../../../../redux/features/config/configSilde';
-import { setProvince as setProvinceConfig } from '../../../../../redux/features/config/configSilde';
 const cx = classNames.bind(styles);
 
 const JobLocation = ({ location_id }) => {
@@ -22,6 +23,7 @@ const JobLocation = ({ location_id }) => {
     const location = listLocation?.find((item) => item.id === location_id);
     const province = location?.province;
     const district = location?.district;
+    const [loading, setLoading] = useState(false);
 
     const listProvince = useSelector(selectProvince);
     const [listDistrict, setListDistrict] = useState([]);
@@ -44,6 +46,7 @@ const JobLocation = ({ location_id }) => {
 
     useEffect(() => {
         if (province !== -1) {
+            setLoading(true);
             const params = {
                 province_id: province,
             };
@@ -52,6 +55,7 @@ const JobLocation = ({ location_id }) => {
                     if (res.status === 200) {
                         setListDistrict(res.data.data);
                         dispatch(refreshProvince({ id: location_id }));
+                        setLoading(false);
                     }
                 })
                 .catch((err) => {
@@ -88,19 +92,28 @@ const JobLocation = ({ location_id }) => {
                         )}
                     </div>
                 </div>
-                {district.length > 0 && listDistrict.length > 0 && (
-                    <div className={cx('address-box')}>
-                        <div className={cx('address-box__district')}>
-                            {province !== -1 &&
-                                district.map((item) => <JobDistrict location_id={location_id} province_id={province} key={item.id} district_id={item.id} />)}
-                            {province !== -1 && (
-                                <button className={cx('add-district')} onClick={handleAddDistrict}>
-                                    <FaPlus className={cx('add-icon')} />
-                                    Thêm địa chỉ
-                                </button>
-                            )}
-                        </div>
+                {loading ? (
+                    <div className={cx('box-skeleton')}>
+                        <Skeleton count={1} height={35} width={500} />
                     </div>
+                ) : (
+                    district.length > 0 &&
+                    listDistrict.length > 0 && (
+                        <div className={cx('address-box')}>
+                            <div className={cx('address-box__district')}>
+                                {province !== -1 &&
+                                    district.map((item) => (
+                                        <JobDistrict location_id={location_id} province_id={province} key={item.id} district_id={item.id} />
+                                    ))}
+                                {province !== -1 && (
+                                    <button className={cx('add-district')} onClick={handleAddDistrict}>
+                                        <FaPlus className={cx('add-icon')} />
+                                        Thêm địa chỉ
+                                    </button>
+                                )}
+                            </div>
+                        </div>
+                    )
                 )}
             </div>
         </div>

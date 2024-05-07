@@ -1,6 +1,7 @@
-import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import classNames from 'classnames/bind';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 import styles from './JobDetailRequirements.module.scss';
 import {
@@ -106,7 +107,7 @@ const JobDetailRequirements = () => {
                         />
                     ) : (
                         <div className={cx('spinner')}>
-                            <Spinner />
+                            <Skeleton width={600} height={37} />
                         </div>
                     )}
                 </div>
@@ -127,7 +128,7 @@ const JobDetailRequirements = () => {
                         />
                     ) : (
                         <div className={cx('spinner')}>
-                            <Spinner />
+                            <Skeleton width={600} height={37} />
                         </div>
                     )}
                 </div>
