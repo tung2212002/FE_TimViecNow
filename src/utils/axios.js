@@ -26,7 +26,7 @@ const instance = (config = {}, auth = false, side = 'candidate') => {
                     requestConfig.headers.Authorization = `Bearer ${token}`;
                 }
             }
-            requestConfig.timeout = 10000;
+            requestConfig.timeout = 100000;
             return requestConfig;
         },
         (error) => {
