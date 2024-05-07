@@ -17,7 +17,6 @@ const cx = classNames.bind(styles);
 const SettingCompany = () => {
     const user = useSelector(selectBusiness);
     const [state, setState] = useState(user?.company ? 3 : 1);
-    const [compaines, setCompaines] = useState([]);
 
     const handleSetState = (value) => {
         setState(value);
@@ -26,7 +25,7 @@ const SettingCompany = () => {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
-                {!(state === 3) && (
+                {!(state === 3) && !(state === 4) && (
                     <ul className={cx('nav-tabs')}>
                         <li className={cx('nav-tab', { active: state === 1 })} onClick={() => state !== 1 && setState(1)}>
                             <div className={cx('nav-tab-item')}>
@@ -63,7 +62,7 @@ const SettingCompany = () => {
                         <SearchCompany />
                     </div>
 
-                    <div className={cx('content-tab', { active: state === 2 })}>
+                    <div className={cx('content-tab', { active: state === 2 || state === 4 })}>
                         <CreateCompany setActiveTab={handleSetState} />
                     </div>
                     <div className={cx('content-tab', { active: state === 3 })}>

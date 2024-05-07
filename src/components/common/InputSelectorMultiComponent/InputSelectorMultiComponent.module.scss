@@ -111,11 +111,15 @@
         width: fit-content;
         height: fit-content;
         min-height: 18px;
-        padding: 2px 6px 2px 12px;
-        border-radius: 10px;
-        background: #e5f7ed;
+        padding: 2px 2px 2px 12px;
         margin-right: 5px;
         color: #0b933e;
+        border-radius: 5px;
+        color: #303235;
+        line-height: 1;
+        font-size: 14px;
+        border: 1px solid #00b14f;
+        background: rgba(0, 177, 79, .10196);
     }
 
     .text {
@@ -127,13 +131,15 @@
     .close {
         display: flex;
         align-items: center;
-        margin-left: 4px;
-        margin-top: 2px;
         cursor: pointer;
+        border-radius: 2px;
+        margin-left: 2px;
+        padding: 2px;
     }
 
     .close:hover {
         color: #0b933e;
+        background-color: #b4b4b4;
     }
 
     .icon {

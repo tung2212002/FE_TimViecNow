@@ -26,7 +26,7 @@ const CompanyInfo = ({ setActiveTab }) => {
                             <p className={cx('info-general-email')}>{`${user?.company?.address} | ${user?.company?.scale} nhân viên` || '--'}</p>
                         </div>
                     </div>
-                    <button className={cx('info-action')} onClick={() => setActiveTab(2)}>
+                    <button className={cx('info-action')} onClick={() => setActiveTab(4)}>
                         <FaPenToSquare className={cx('icon')} />
                         Chỉnh sửa
                     </button>
@@ -81,7 +81,16 @@ const CompanyInfo = ({ setActiveTab }) => {
                             </div>
                             <div className={cx('item-row')}>
                                 <div className={cx('item-row-title')}>Mô tả:</div>
-                                <div className={cx('item-row-detail')}>{user?.company?.description || '--'}</div>
+                                <div className={cx('item-row-detail')}>
+                                    {user?.company?.company_short_description ? (
+                                        <div
+                                            className={cx('html-content')}
+                                            dangerouslySetInnerHTML={{ __html: user?.company?.company_short_description }}
+                                        ></div>
+                                    ) : (
+                                        '--'
+                                    )}
+                                </div>
                             </div>
                         </div>
                     </div>

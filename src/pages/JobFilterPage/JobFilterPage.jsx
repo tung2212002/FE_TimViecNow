@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames/bind';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -25,12 +25,14 @@ import path from '../../constants/path';
 import { GeneralCompanyFilter, JobDetailBody } from '../../layouts/components/User/JobFilterPage';
 import { EmploymentType } from '../../constants';
 import { selectCategory, selectField } from '../../redux/features/config/configSilde';
+import { VscChevronLeft, VscChevronRight } from 'react-icons/vsc';
 
 const cx = classNames.bind(styles);
 
 const JobFilterPage = () => {
     const location = useLocation();
     const navigate = useNavigate();
+    const ref = useRef(null);
     const categories = useSelector(selectCategory);
     const fieds = useSelector(selectField);
     const {
@@ -64,6 +66,7 @@ const JobFilterPage = () => {
         numberActive: numberActive || 0,
         sort_by: sort_by || 'id',
         loading: false,
+        page: 1,
     });
 
     const [search, setSearch] = useState({
@@ -86,6 +89,32 @@ const JobFilterPage = () => {
         { id: 3, name: 'Ngày cập nhật', value: 'updated_at' },
         { id: 4, name: 'Việc làm gấp', value: 'is_fis_urgent' },
     ];
+
+    const handlePrevPage = () => {
+        const element = ref.current;
+        element.scrollIntoView({ behavior: 'smooth' });
+        setZoomOut({
+            state: false,
+            id: 0,
+        });
+        setActiveFilter((prev) => ({
+            ...prev,
+            page: prev.page - 1,
+        }));
+    };
+
+    const handleNextPage = () => {
+        const element = ref.current;
+        element.scrollIntoView({ behavior: 'smooth' });
+        setZoomOut({
+            state: false,
+            id: 0,
+        });
+        setActiveFilter((prev) => ({
+            ...prev,
+            page: prev.page + 1,
+        }));
+    };
 
     const handleSetKeyword = (value) => {
         setSearch({
@@ -226,8 +255,13 @@ const JobFilterPage = () => {
     };
 
     const handleSetJobSort = (value) => {
+        setZoomOut({
+            state: false,
+            id: 0,
+        });
         setActiveFilter((prev) => ({
             ...prev,
+
             loading: true,
             sort_by: value,
         }));
@@ -250,6 +284,7 @@ const JobFilterPage = () => {
 
     const handleSearch = () => {
         const params = {
+            skip: activeFilter.page - 1,
             limit: 40,
             order_by: 'desc',
         };
@@ -365,10 +400,10 @@ const JobFilterPage = () => {
 
     useEffect(() => {
         handleSearch();
-    }, [location.state]);
+    }, [location.state, activeFilter.page]);
 
     return (
-        <div className={cx('wrapper', { 'zoom-out': zoomOut.state })}>
+        <div className={cx('wrapper', { 'zoom-out': zoomOut.state })} ref={ref}>
             <div className={cx('box-search')}>
                 <div className={cx('box-container', 'search')}>
                     <SearchJobSearchHeaderComponent
@@ -516,6 +551,30 @@ const JobFilterPage = () => {
                             <Spinner />
                         </div>
                     )}
+                    {
+                        <div className={cx('footer')}>
+                            <div className={cx('content-footer')}>
+                                <span
+                                    className={cx('btn', activeFilter.page === 1 ? 'deactive' : '')}
+                                    onClick={handlePrevPage}
+                                    disabled={activeFilter.page === 1}
+                                >
+                                    <VscChevronLeft className={cx('icon')} />
+                                </span>
+                                <p className={cx('text-page')}>
+                                    <span className={cx('number')}>{activeFilter.page}</span> / {Math.ceil(jobs.total / 40)}
+                                    trang
+                                </p>
+                                <span
+                                    className={cx('btn', activeFilter.page === Math.ceil(jobs.total / 40) ? 'deactive' : '')}
+                                    onClick={handleNextPage}
+                                    disabled={activeFilter.page === Math.ceil(jobs.total / 40)}
+                                >
+                                    <VscChevronRight className={cx('icon')} />
+                                </span>
+                            </div>
+                        </div>
+                    }
                 </div>
                 <div className={cx('right-page')} style={{}}>
                     <div className={cx('box-company')}>

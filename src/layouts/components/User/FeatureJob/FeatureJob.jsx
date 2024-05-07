@@ -12,9 +12,10 @@ import { HiOutlineChevronDown } from 'react-icons/hi2';
 import styles from './FeatureJob.module.scss';
 import { JobItemComponent } from '../../../../components';
 import { SelectionComponent } from '../../../../components/common';
-import { getListJobSerivce, searchJobService } from '../../../../services/jobService';
+import { searchJobService } from '../../../../services/jobService';
 import { selectCategory, selectProvince } from '../../../../redux/features/config/configSilde';
 import { Experience, filterSalary } from '../../../../constants';
+import { SkeletonJobSectionComponent } from '../../../../components/skeleton';
 
 const cx = classNames.bind(styles);
 
@@ -130,7 +131,6 @@ const FeatureJob = ({ reponsive = false, number = 12 }) => {
         if (currentSearch.location === id) return;
         setCurrentSearch({
             ...currentSearch,
-            // location: name,
             location: id,
             reset: true,
         });
@@ -196,7 +196,6 @@ const FeatureJob = ({ reponsive = false, number = 12 }) => {
             const params = {
                 skip: (listJobInfo.currentPage - 1) * number,
                 limit: number,
-                // province_id: province?.find((item) => item.name === currentSearch.location)?.id,
             };
             if (currentSearch.filter === 1) {
                 const filter = province?.find((item) => item.name === listLocation[currentSearch.location - 1].name);
@@ -314,54 +313,6 @@ const FeatureJob = ({ reponsive = false, number = 12 }) => {
                                     <VscChevronLeft className={cx('icon')} />
                                 </span>
                                 <div className={cx('container-location')} ref={refLocation}>
-                                    {/* {listLocation.map((item, index) => (
-                                        <div
-                                            className={cx('btn', 'btn-location', { active: item.name === currentSearch.location })}
-                                            onClick={() => handleSetLocation(item.name)}
-                                            key={index}
-                                        >
-                                            {item.name}
-                                        </div>
-                                    ))} */}
-                                    {/* {currentSearch.filter === 1
-                                        ? listLocation?.map((item, index) => (
-                                              <div
-                                                  className={cx('btn', 'btn-location', { active: item.name === currentSearch.location })}
-                                                  onClick={() => handleSetLocation(item.name)}
-                                                  key={index}
-                                              >
-                                                  {item.name}
-                                              </div>
-                                          ))
-                                        : currentSearch.filter === 2
-                                        ? filterSalary?.map((item, index) => (
-                                              <div
-                                                  className={cx('btn', 'btn-location', { active: item.id === currentSearch.location })}
-                                                  onClick={() => handleSetLocation(item.id)}
-                                                  key={index}
-                                              >
-                                                  {item.name}
-                                              </div>
-                                          ))
-                                        : currentSearch.filter === 3
-                                        ? Experience?.map((item, index) => (
-                                              <div
-                                                  className={cx('btn', 'btn-location', { active: item.id === currentSearch.location })}
-                                                  onClick={() => handleSetLocation(item.id)}
-                                                  key={index}
-                                              >
-                                                  {item.name}
-                                              </div>
-                                          ))
-                                        : categories?.map((item, index) => (
-                                              <div
-                                                  className={cx('btn', 'btn-location', { active: item.id === currentSearch.location })}
-                                                  onClick={() => handleSetLocation(item.id)}
-                                                  key={index}
-                                              >
-                                                  {item.name}
-                                              </div>
-                                          ))} */}
                                     {listToMap[currentSearch.filter]?.map((item, index) => (
                                         <div
                                             className={cx('btn', 'btn-location', { active: item.id === currentSearch.location })}
@@ -395,11 +346,17 @@ const FeatureJob = ({ reponsive = false, number = 12 }) => {
                                 <div className={cx('slick-track', { visible: isListVisible })} ref={refTrack}>
                                     <div className={cx('slick-slide')}>
                                         <div className={cx('feature-job__items')}>
-                                            {listJobInfo.currentList.map((job, index) => (
-                                                <div className={cx('feature-job__item')} key={index}>
-                                                    <JobItemComponent job={job} reponsive={reponsive} />
-                                                </div>
-                                            ))}
+                                            {isListVisible
+                                                ? listJobInfo.currentList.map((job, index) => (
+                                                      <div className={cx('feature-job__item')} key={index}>
+                                                          <JobItemComponent job={job} reponsive={reponsive} />
+                                                      </div>
+                                                  ))
+                                                : Array.from({ length: number }).map((_, index) => (
+                                                      <div className={cx('feature-job__item')} key={index}>
+                                                          <SkeletonJobSectionComponent />
+                                                      </div>
+                                                  ))}
                                         </div>
                                     </div>
                                 </div>

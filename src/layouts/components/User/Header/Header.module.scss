@@ -189,6 +189,10 @@
 .login-btn {
     border: 1px solid #00b14f;
     color: #00b14f;
+
+    &:hover {
+        background-color: rgba(229, 247, 237, .5);
+    }
 }
 
 .register-btn {
@@ -205,6 +209,10 @@
     background: #212f3f 0 0 no-repeat padding-box;
     border: 1px solid #eee;
     color: #fff;
+
+    &:hover {
+        background-color:#161f29!important;
+    }
 }
 
 .nav-item {
