@@ -1,8 +1,10 @@
+import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 
 import { FaChevronDown, FaEye, FaPlus } from 'react-icons/fa6';
 import { FaPen } from 'react-icons/fa';
+import { HiOutlineChevronDoubleRight, HiOutlineChevronDoubleLeft } from 'react-icons/hi';
 
 import styles from './RecruitmentCampaignPage.module.scss';
 import { SelectionComponent } from '../../../components/common';
@@ -10,19 +12,12 @@ import { IoSearchOutline } from 'react-icons/io5';
 import path from '../../../constants/path';
 import { Link } from 'react-router-dom';
 import { getListCampaignService } from '../../../services/campaignService';
-import { JobStatus, JobApprovalStatus } from '../../../constants';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectCampaign, setCampaign } from '../../../redux/features/campaign/campaignSilde';
+import { JobStatus } from '../../../constants';
+import { SkeletonRecruimentCampaignComponent } from '../../../components/skeleton';
 
 const cx = classNames.bind(styles);
 
 const RecruitmentCampaignPage = () => {
-    const dispatch = useDispatch();
-
-    const campaigns = useSelector(selectCampaign);
-
-    const [filterCampaign, setFilterCampaign] = useState('all');
-
     const listFilterCampaign = [
         {
             id: 1,
@@ -65,31 +60,62 @@ const RecruitmentCampaignPage = () => {
             filter_by: 'waitting_approve_job',
         },
     ];
+    const dispatch = useDispatch();
+
+    const [campaigns, setCampaigns] = useState(null);
+
+    const [filterCampaign, setFilterCampaign] = useState({
+        filter_by: 1,
+        page: 1,
+        loading: true,
+    });
 
     const requestSetStatusCampaign = (id, status) => {
         console.log(id, status);
     };
 
+    const handlePrevPage = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        setFilterCampaign({ ...filterCampaign, page: filterCampaign.page - 1, loading: true });
+    };
+
+    const handleNextPage = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        setFilterCampaign({ ...filterCampaign, page: filterCampaign.page + 1, loading: true });
+    };
+
+    const handleFilterCampaign = (filter) => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        setFilterCampaign({ ...filterCampaign, filter_by: filter, page: 1, loading: true });
+    };
+
     useEffect(() => {
-        const body = {
-            skip: 0,
+        const params = {
+            skip: (filterCampaign.page - 1) * 10,
             limit: 10,
-            sort_by: 'id',
-            order_by: 'asc',
-            business_id: null,
-            status: 'all',
+            sort_by: 'created_at',
+            order_by: 'desc',
         };
-        !campaigns &&
-            getListCampaignService(body)
+
+        filterCampaign.filter_by !== 1 && (params.filter_by = filterCampaign.filter_by);
+
+        filterCampaign.loading &&
+            getListCampaignService(params)
                 .then((res) => {
                     if (res.status === 200) {
-                        dispatch(setCampaign(res.data.data));
+                        setCampaigns({
+                            campaigns: res.data.data.campaigns,
+                            count: res.data.data.count,
+                        });
+                        setTimeout(() => {
+                            setFilterCampaign({ ...filterCampaign, loading: false });
+                        }, 500);
                     }
                 })
                 .catch((err) => {
                     console.log(err);
                 });
-    }, []);
+    }, [filterCampaign]);
 
     return (
         <div className={cx('wrapper')}>
@@ -119,7 +145,7 @@ const RecruitmentCampaignPage = () => {
                                         <div className={cx('header-select')}>
                                             <div className={cx('container-select')}>
                                                 <span className={cx('result')}>
-                                                    {listFilterCampaign.find((item) => item.filter_by === filterCampaign)?.name}
+                                                    {listFilterCampaign.find((item) => item.id === filterCampaign.filter_by)?.name}
                                                 </span>
                                             </div>
                                         </div>
@@ -129,8 +155,8 @@ const RecruitmentCampaignPage = () => {
                                             {listFilterCampaign.map((item) => (
                                                 <li
                                                     key={item.id}
-                                                    className={cx('item', { active: item.filter_by === filterCampaign })}
-                                                    onClick={() => setFilterCampaign(item.filter_by)}
+                                                    className={cx('item', { active: item.id === filterCampaign.filter_by })}
+                                                    onClick={() => handleFilterCampaign(item.id)}
                                                 >
                                                     <span className={cx('text')}>{item.name}</span>
                                                 </li>
@@ -138,7 +164,7 @@ const RecruitmentCampaignPage = () => {
                                         </ul>
                                     )}
                                     icon={() => <FaChevronDown className={cx('icon-care')} />}
-                                    itemSelect={listFilterCampaign.find((item) => item.filter_by === filterCampaign)?.name}
+                                    itemSelect={listFilterCampaign.find((item) => item.id === filterCampaign.filter_by)?.name}
                                     maxHeight={'300px'}
                                     styleDropdown={{
                                         right: 'auto',
@@ -169,9 +195,9 @@ const RecruitmentCampaignPage = () => {
                                 </tr>
                             </thead>
                             <tbody className={cx('table-body')}>
-                                {campaigns &&
-                                    (campaigns?.length > 0 ? (
-                                        campaigns.map((item) => (
+                                {campaigns && !filterCampaign.loading ? (
+                                    campaigns.campaigns?.length > 0 ? (
+                                        campaigns.campaigns.map((item) => (
                                             <tr key={item.id} className={cx('table-body-row')}>
                                                 <td className={cx('table-body-item')}>
                                                     <div className={cx('item-campaign')}>
@@ -197,7 +223,7 @@ const RecruitmentCampaignPage = () => {
                                                             </a>
                                                             <br />
                                                             <div className={cx('item-content-cv')}>
-                                                                {item?.cv_applies?.total > 0 ? `Có ${item.cv_applies.total} CV` : 'Chưa có CV nào'}
+                                                                {item?.cv_applies?.count > 0 ? `Có ${item.cv_applies.count} CV` : 'Chưa có CV nào'}
                                                             </div>
                                                             <div className={cx('item-content-action', 'item-content-absolute')}>
                                                                 <a
@@ -236,8 +262,8 @@ const RecruitmentCampaignPage = () => {
                                                                 {item.job ? (
                                                                     <div className={cx('job-status', `job-status-${item.job?.status}`)}>
                                                                         {/* <span className={cx('job-status-text')}>
-                                                                        {item.job?.status !== 'published' ? 'Không hiển thị' : 'Đang hiển thị'}
-                                                                    </span> */}
+                                                                            {item.job?.status !== 'published' ? 'Không hiển thị' : 'Đang hiển thị'}
+                                                                        </span> */}
                                                                         <span className={cx('job-status-text')}>
                                                                             {JobStatus.find((status) => status.value === item.job?.status)?.name}
                                                                         </span>
@@ -293,10 +319,43 @@ const RecruitmentCampaignPage = () => {
                                                 Không có dữ liệu
                                             </td>
                                         </tr>
-                                    ))}
+                                    )
+                                ) : (
+                                    Array.from({ length: 6 }).map((_, index) => (
+                                        <tr className={cx('table-body-row')} key={index}>
+                                            <td colSpan="6" className={cx('table-body-empty')}>
+                                                <SkeletonRecruimentCampaignComponent />
+                                            </td>
+                                        </tr>
+                                    ))
+                                )}
                             </tbody>
                         </table>
                     </div>
+
+                    {campaigns && campaigns.campaigns?.length > 0 && (
+                        <div className={cx('footer')}>
+                            <div className={cx('content-footer')}>
+                                <span
+                                    className={cx('btn', filterCampaign.page === 1 ? 'deactive' : '')}
+                                    onClick={handlePrevPage}
+                                    disabled={filterCampaign.page === 1}
+                                >
+                                    <HiOutlineChevronDoubleLeft className={cx('icon')} />
+                                </span>
+                                <p className={cx('text-page')}>
+                                    <span className={cx('number')}>{filterCampaign.page}</span> / {Math.ceil(campaigns.count / 40)} trang
+                                </p>
+                                <span
+                                    className={cx('btn', filterCampaign.page === Math.ceil(campaigns.count / 40) ? 'deactive' : '')}
+                                    onClick={handleNextPage}
+                                    disabled={filterCampaign.page === Math.ceil(campaigns.count / 10)}
+                                >
+                                    <HiOutlineChevronDoubleRight className={cx('icon')} />
+                                </span>
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

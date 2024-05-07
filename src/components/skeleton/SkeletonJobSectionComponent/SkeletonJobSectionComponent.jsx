@@ -13,11 +13,19 @@ const SkeletonJobSectionComponent = () => {
                 <Skeleton count={1} height={80} width={80} />
             </div>
             <div className={cx('right-col')}>
-                <Skeleton count={1} height={20} width={260} />
-                <Skeleton count={1} height={20} width={240} />
+                <div className={cx('box-title')}>
+                    <Skeleton count={1} height={20} className={cx('title')} />
+                </div>
+                <div className={cx('box-description')}>
+                    <Skeleton count={1} height={20} className={cx('description')} />
+                </div>
                 <div className={cx('right-col-row')}>
-                    <Skeleton count={1} height={16} width={60} />
-                    <Skeleton count={1} height={16} width={60} />
+                    <div className={cx('box-item')}>
+                        <Skeleton count={1} height={16} className={cx('item-title')} />
+                    </div>
+                    <div className={cx('box-item')}>
+                        <Skeleton count={1} height={16} className={cx('item-title')} />
+                    </div>
                 </div>
             </div>
         </div>

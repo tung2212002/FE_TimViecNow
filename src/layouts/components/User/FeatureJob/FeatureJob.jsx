@@ -119,6 +119,7 @@ const FeatureJob = ({ reponsive = false, number = 12 }) => {
     };
 
     const handleSetFilter = (id) => {
+        setIsListVisible(false);
         setCurrentSearch({
             ...currentSearch,
             filter: id,
@@ -128,6 +129,7 @@ const FeatureJob = ({ reponsive = false, number = 12 }) => {
     };
 
     const handleSetLocation = (id) => {
+        setIsListVisible(false);
         if (currentSearch.location === id) return;
         setCurrentSearch({
             ...currentSearch,
@@ -191,7 +193,9 @@ const FeatureJob = ({ reponsive = false, number = 12 }) => {
                 currentList: prev.job.slice((listJobInfo.currentPage - 1) * number, listJobInfo.currentPage * number),
                 currentSlice: (listJobInfo.currentPage - 1) * number,
             }));
-            setIsListVisible(true);
+            setTimeout(() => {
+                setIsListVisible(true);
+            }, 500);
         } else {
             const params = {
                 skip: (listJobInfo.currentPage - 1) * number,
@@ -231,7 +235,9 @@ const FeatureJob = ({ reponsive = false, number = 12 }) => {
                             ...currentSearch,
                             reset: false,
                         });
-                        setIsListVisible(true);
+                        setTimeout(() => {
+                            setIsListVisible(true);
+                        }, 500);
                     }
                 })
                 .catch((err) => {
@@ -343,7 +349,8 @@ const FeatureJob = ({ reponsive = false, number = 12 }) => {
                     <div className={cx('feature-job__list')}>
                         <div className={cx('slick-slider')}>
                             <div className={cx('slick-list')}>
-                                <div className={cx('slick-track', { visible: isListVisible })} ref={refTrack}>
+                                <div className={cx('slick-track')}>
+                                    {/* <div className={cx('slick-track', { visible: isListVisible })} ref={refTrack}> */}
                                     <div className={cx('slick-slide')}>
                                         <div className={cx('feature-job__items')}>
                                             {isListVisible

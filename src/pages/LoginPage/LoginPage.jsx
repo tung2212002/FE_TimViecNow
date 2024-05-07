@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import { useDispatch } from 'react-redux';
 import { useGoogleLogin } from '@react-oauth/google';
@@ -14,6 +14,7 @@ import route from '../../constants/route';
 import useDocumentTitle from '../../hooks/useDocumentTitle';
 import regexValidator from '../../utils/regexValidator';
 import { addToast, removeToast } from '../../redux/features/toast/toastSlice';
+import { Spinner } from '../../components/common';
 
 const cx = classNames.bind(styles);
 
@@ -42,6 +43,8 @@ const LoginPage = () => {
         confirm_password: '',
     });
 
+    const [loading, setLoading] = useState(false);
+
     const handleAddToast = (title, message, type) => {
         const newToast = {
             id: Math.random().toString(36).slice(2),
@@ -55,9 +58,11 @@ const LoginPage = () => {
         }, 3000);
     };
 
-    const handleLogin = (e) => {
-        e.preventDefault();
+    const handleSetLoading = (value) => {
+        setLoading(value);
+    };
 
+    const handleLogin = () => {
         if (!account.email || !account.password) {
             setMessage('Vui lòng nhập đầy đủ thông tin');
             return;
@@ -84,21 +89,24 @@ const LoginPage = () => {
                     dispatch(login(res.data.data));
                 } else if (res.status === 400) {
                     setMessage('Email hoặc mật khẩu không hợp lệ');
+                    setLoading(false);
                 } else if (res.status === 401) {
                     setMessage('Mật khẩu không chính xác');
+                    setLoading(false);
                 } else if (res.status === 404) {
                     setMessage('Tài khoản không tồn tại');
+                    setLoading(false);
                 }
             })
             .catch((err) => {
                 setMessage('Lỗi không xác định');
+                setLoading(false);
                 console.log(err);
             });
     };
 
-    const handleRegister = (e) => {
-        e.preventDefault();
-
+    const handleRegister = () => {
+        setLoading(true);
         if (!accountRegister.full_name || !accountRegister.email || !accountRegister.password || !accountRegister.confirm_password) {
             setMessage('Vui lòng nhập đầy đủ thông tin');
             return;
@@ -137,12 +145,15 @@ const LoginPage = () => {
                     dispatch(login(res.data.data));
                 } else if (res.status === 409) {
                     setMessage('Email đã tồn tại');
+                    setLoading(false);
                 } else if (res.status === 400) {
                     setMessage('Email hoặc mật khẩu không hợp lệ');
+                    setLoading(false);
                 }
             })
             .catch((err) => {
                 setMessage('Lỗi không xác định');
+                setLoading(false);
                 console.log(err);
             });
     };
@@ -170,6 +181,10 @@ const LoginPage = () => {
                 });
         },
     });
+
+    useEffect(() => {
+        loading && handleLogin();
+    }, [loading]);
 
     return (
         <div className={cx('wrapper')}>
@@ -244,8 +259,8 @@ const LoginPage = () => {
                                         </a>
                                     </div>
                                     <div className={cx('form-group', 'login')}>
-                                        <button type="submit" className={cx('btn')} onClick={handleLogin}>
-                                            Đăng nhập
+                                        <button type="button" className={cx('btn')} onClick={() => handleSetLoading(true)} disabled={loading}>
+                                            {loading ? <Spinner color="#fff" /> : 'Đăng nhập'}
                                         </button>
                                         <p className={cx('desc')}>Hoặc đăng nhập bằng</p>
                                     </div>
@@ -422,8 +437,13 @@ const LoginPage = () => {
                                         </p>
                                     </div>
                                     <div className={cx('form-group', 'login')}>
-                                        <button type="submit" className={cx('btn', { disabled: !showPolicy })} onClick={handleRegister} disabled={!showPolicy}>
-                                            Đăng ký
+                                        <button
+                                            type="button"
+                                            className={cx('btn', { disabled: !showPolicy })}
+                                            onClick={handleRegister}
+                                            disabled={!showPolicy || loading}
+                                        >
+                                            {loading ? <Spinner color="#fff" /> : 'Đăng ký'}
                                         </button>
                                         <p className={cx('desc')}>Hoặc đăng nhập bằng</p>
                                     </div>

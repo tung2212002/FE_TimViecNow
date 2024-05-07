@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -14,6 +14,7 @@ import { icons } from '../../assets/index';
 import { loginBusinessService } from '../../services/businessAuthService';
 import { login } from '../../redux/features/authBusiness/authSlide';
 import { addToast, removeToast } from '../../redux/features/toast/toastSlice';
+import { Spinner } from '../../components/common';
 
 const cx = classNames.bind(styles);
 
@@ -33,6 +34,12 @@ const ManagerLoginPage = () => {
         password: '',
     });
 
+    const [loading, setLoading] = useState(false);
+
+    const handleSetLoading = (value) => {
+        setLoading(value);
+    };
+
     const handleAddToast = (title, message, type) => {
         const newToast = {
             id: Math.random().toString(36).slice(2),
@@ -46,9 +53,7 @@ const ManagerLoginPage = () => {
         }, 3000);
     };
 
-    const handleLogin = (e) => {
-        e.preventDefault();
-
+    const handleLogin = () => {
         if (!account.email || !account.password) {
             setMessage('Vui lòng nhập đầy đủ thông tin');
             return;
@@ -75,21 +80,28 @@ const ManagerLoginPage = () => {
                     dispatch(login(res.data.data));
                 } else if (res.status === 400) {
                     handleAddToast('Cảnh báo', 'Email hoặc mật khẩu không hợp lệ', 'warning');
+                    setLoading(false);
                     // setMessage('Email hoặc mật khẩu không hợp lệ');
                 } else if (res.status === 401) {
                     handleAddToast('Lỗi', 'Mật khẩu không chính xác', 'error');
+                    setLoading(false);
                     // setMessage('Mật khẩu không chính xác');
                 } else if (res.status === 404) {
                     handleAddToast('Lỗi', 'Tài khoản không tồn tại', 'error');
+                    setLoading(false);
                     // setMessage('Tài khoản không tồn tại');
                 }
             })
             .catch((err) => {
                 handleAddToast('Lỗi', 'Lỗi không xác định', 'error');
-                // setMessage('Lỗi không xác định');
+                setLoading(false);
                 console.log(err);
             });
     };
+
+    useEffect(() => {
+        loading && handleLogin();
+    }, [loading]);
 
     return (
         <div className={cx('wrapper')}>
@@ -169,8 +181,8 @@ const ManagerLoginPage = () => {
                                     </a>
                                 </div>
                                 <div className={cx('form-group', 'login')}>
-                                    <button type="submit" className={cx('btn')} onClick={handleLogin}>
-                                        Đăng nhập
+                                    <button type="button" className={cx('btn')} onClick={() => handleSetLoading(true)} disabled={loading}>
+                                        {loading ? <Spinner color="#FFF" /> : 'Đăng nhập'}
                                     </button>
                                 </div>
                             </form>

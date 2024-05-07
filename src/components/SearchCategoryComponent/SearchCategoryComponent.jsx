@@ -3,7 +3,6 @@ import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 
 import styles from './SearchCategoryComponent.module.scss';
-import { getListCategoryService } from '../../services/categoryService';
 import { IoBriefcaseOutline } from 'react-icons/io5';
 
 import SelectSearchComponent from '../common/SelectSearchComponent/SelectSearchComponent';

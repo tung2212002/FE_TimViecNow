@@ -97,9 +97,9 @@ const DashboardStatistics = () => {
                     </div>
                 </div>
                 <hr />
-                <div to={path.DASHBOARD_CAMPAIGN} className={cx('view-all')}>
+                <div className={cx('view-all')}>
                     <div className={cx('view-all-content')}>
-                        <Link to={path.DASHBOARD_CAMPAIGN} className={cx('view-all-text')}>
+                        <Link to={path.DASHBOARD_RECRUIREMENT_CAMPAIGNS} className={cx('view-all-text')}>
                             <IoBriefcaseOutline className={cx('icon')} />
                             QUẢN LÝ CHIẾN DỊCH TUYỂN DỤNG
                         </Link>

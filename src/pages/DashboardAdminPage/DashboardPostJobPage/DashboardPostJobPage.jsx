@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import classNames from 'classnames/bind';
 import TippyText from '@tippyjs/react';
 import 'tippy.js/dist/backdrop.css';
 import 'tippy.js/dist/svg-arrow.css';
 import 'tippy.js/animations/shift-away.css';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 import { IoInformationCircleOutline } from 'react-icons/io5';
 import { FaCircleXmark, FaWandMagicSparkles, FaCircleInfo, FaMinus, FaPlus } from 'react-icons/fa6';
@@ -37,14 +39,17 @@ import useToast from '../../../hooks/useToast';
 import { createBusinessJobService } from '../../../services/businessJobService';
 import { selectCampaign, setCampaign } from '../../../redux/features/campaign/campaignSilde';
 import { selectCategory, selectJobPosition, setCategory, setJobPosition } from '../../../redux/features/config/configSilde';
-import { Spinner } from '../../../components/common';
+import { selectBusiness } from '../../../redux/features/authBusiness/authSlide';
 
 const cx = classNames.bind(styles);
 
 const DashboardPostJobPage = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const info = useSelector(selectPostJob);
     const error = useSelector(selectError);
+    const user = useSelector(selectBusiness);
     const location = useLocation();
     const query = new URLSearchParams(location.search);
     const campaign_id = query.get('campaign_id');
@@ -53,6 +58,10 @@ const DashboardPostJobPage = () => {
     const jobPositions = useSelector(selectJobPosition);
     const jobCategories = useSelector(selectCategory);
 
+    const [loading, setLoading] = useState({
+        post: false,
+        draft: false,
+    });
     const [isLoadPosition, setIsLoadPosition] = useState(jobPositions ? false : true);
     const [isLoadCategories, setIsLoadCategories] = useState(jobCategories ? false : true);
     const [isLoadCampaign, setIsLoadCampaign] = useState(campaigns ? false : true);
@@ -160,20 +169,31 @@ const DashboardPostJobPage = () => {
             .then((res) => {
                 if (res.status === 201) {
                     handleAddToast('Thành công', 'Đăng tin tuyển dụng thành công', 'success');
+                    navigate(path.DASHBOARD_RECRUIREMENT_CAMPAIGNS);
                 } else if (res.status === 401) {
                     handleAddToast('Cảnh báo', 'Đã có lỗi xảy ra', 'warning');
+                    setLoading({ ...loading, post: false });
                 } else if (res.status === 400) {
                     handleAddToast('Cảnh báo', 'Dữ liệu không hợp lệ', 'warning');
+                    setLoading({ ...loading, post: false });
                 } else if (res.status === 409) {
                     handleAddToast('Cảnh báo', 'Chiến dịch đã có tin tuyển dụng', 'warning');
+                    setLoading({ ...loading, post: false });
                 } else if (res.status === 500) {
                     handleAddToast('Cảnh báo', 'Đã có lỗi xảy ra', 'warning');
+                    setLoading({ ...loading, post: false });
                 }
             })
             .catch((err) => {
                 console.log(err);
                 handleAddToast('Cảnh báo', 'Đã có lỗi xảy ra', 'warning');
+                setLoading({ ...loading, post: false });
             });
+    };
+
+    const handleSetPost = () => {
+        handleAddToast('Thông báo', 'Đang xử lý, vui lòng chờ trong giây lát', 'info');
+        setLoading({ ...loading, post: true });
     };
 
     const handleSubmit = () => {
@@ -221,17 +241,21 @@ const DashboardPostJobPage = () => {
     }, [campaign_id]);
 
     useEffect(() => {
-        !campaigns &&
-            getListCampaignService()
+        if (!campaigns) {
+            const params = {
+                business_id: user.id,
+            };
+            getListCampaignService(params)
                 .then((res) => {
                     if (res.status === 200) {
-                        dispatch(setCampaign(res.data.data));
+                        dispatch(setCampaign(res.data.data.campaigns));
                         setIsLoadCampaign(false);
                     }
                 })
                 .catch((err) => {
                     console.log(err);
                 });
+        }
 
         !jobPositions &&
             getListJobPositionService()
@@ -258,6 +282,10 @@ const DashboardPostJobPage = () => {
                 });
     }, []);
 
+    useEffect(() => {
+        loading.post && handleSubmit();
+    }, [loading.post]);
+
     return (
         <div className={cx('wrapper')}>
             <div className={cx('auth-modal')}></div>
@@ -279,10 +307,11 @@ const DashboardPostJobPage = () => {
                                 onClick={() => {
                                     console.log(job);
                                 }}
+                                disabled={loading.draft || loading.post}
                             >
                                 Lưu nháp
                             </button>
-                            <button className={cx('button', 'button-post')} onClick={handleSubmit}>
+                            <button className={cx('button', 'button-post')} onClick={handleSetPost} disabled={loading.post || loading.draft}>
                                 Lưu & Đăng tin
                             </button>
                         </div>
@@ -405,7 +434,7 @@ const DashboardPostJobPage = () => {
                                         </label>
                                         <div className={cx('select-box')}>
                                             <div className={cx('select-box-item')}>
-                                                {!isLoadCampaign ? (
+                                                {!isLoadCampaign && campaigns ? (
                                                     <InputSelectorComponent
                                                         placeholder={'Chọn chiến dịch'}
                                                         options={campaigns.filter((item) => item.job === null)}
@@ -416,7 +445,7 @@ const DashboardPostJobPage = () => {
                                                     />
                                                 ) : (
                                                     <div className={cx('spinner')}>
-                                                        <Spinner />
+                                                        <Skeleton width={600} height={33.5} />
                                                     </div>
                                                 )}
                                             </div>
@@ -444,7 +473,7 @@ const DashboardPostJobPage = () => {
                                                     />
                                                 ) : (
                                                     <div className={cx('spinner')}>
-                                                        <Spinner />
+                                                        <Skeleton width={300} height={33.5} />
                                                     </div>
                                                 )}
                                                 {error.position && (
@@ -470,7 +499,7 @@ const DashboardPostJobPage = () => {
                                                     />
                                                 ) : (
                                                     <div className={cx('spinner')}>
-                                                        <Spinner />
+                                                        <Skeleton width={300} height={33.5} />
                                                     </div>
                                                 )}
                                                 {error.categories && (

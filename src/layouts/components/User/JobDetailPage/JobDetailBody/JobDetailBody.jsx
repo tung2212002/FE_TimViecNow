@@ -21,6 +21,7 @@ import { showModal } from '../../../../../redux/features/modal/modalSlice';
 import { Modal } from '../../../../../components/common';
 import { ModalApplyComponent } from '../../../../../components';
 import { searchJobService } from '../../../../../services/jobService';
+import { SkeletonCompanyComponent } from '../../../../../components/skeleton';
 
 const cx = classNames.bind(styles);
 
@@ -207,7 +208,11 @@ const JobDetailBody = ({ job, state }) => {
                 </div>
                 <div className={cx('job-similar', state !== 'related' ? 'off' : '')} id="job-search-detail-similar">
                     <h2 className={cx('job-similar-title')}>Việc làm liên quan</h2>
-                    <div className={cx('job-similar-list')}>{suggest && suggest.job?.slice(0, 20).map((job) => <JobSuggest job={job} key={job.id} />)}</div>
+                    <div className={cx('job-similar-list')}>
+                        {suggest.loading
+                            ? Array.from({ length: 20 }).map((_, index) => <SkeletonCompanyComponent key={index} />)
+                            : suggest.job && suggest.job?.slice(0, 20).map((job) => <JobSuggest job={job} key={job.id} />)}
+                    </div>
                 </div>
                 <div className={cx('job-course')} id="job-search-detail-course">
                     <SuggestCourseSlide />
