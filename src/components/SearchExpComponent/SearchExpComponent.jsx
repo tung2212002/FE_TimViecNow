@@ -11,7 +11,7 @@ import { Experience } from '../../constants';
 
 const cx = classNames.bind(styles);
 
-const SearchExpComponent = ({ padding, handleSelectExperience, experienceValue = 1 }) => {
+const SearchExpComponent = ({ padding, handleSelectExperience, experienceValue = 0 }) => {
     const [currentSearch, setCurrentSearch] = useState({
         filter: experienceValue,
     });

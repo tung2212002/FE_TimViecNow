@@ -45,6 +45,10 @@
     margin-top: 12px;
     width: 100%;
     height: 48px;
+
+    &:hover {
+        background: #00a045;
+    }
 }
 
 @media screen and (max-width: 767px) {
