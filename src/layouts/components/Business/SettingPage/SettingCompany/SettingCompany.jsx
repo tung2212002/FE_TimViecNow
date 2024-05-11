@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import { useSelector } from 'react-redux';
 
@@ -11,12 +11,13 @@ import CompanyInfo from './CompanyInfo/CompanyInfo';
 import CreateCompany from './CreateCompany/CreateCompany';
 import SearchCompany from './SearchCompany/SearchCompany';
 import { selectBusiness } from '../../../../../redux/features/authBusiness/authSlide';
+import { settingBusinessState } from '../../../../../constants/index';
 
 const cx = classNames.bind(styles);
 
 const SettingCompany = () => {
     const user = useSelector(selectBusiness);
-    const [state, setState] = useState(user?.company ? 3 : 1);
+    const [state, setState] = useState(user?.company ? settingBusinessState.INFO : settingBusinessState.SEARCH);
 
     const handleSetState = (value) => {
         setState(value);
@@ -25,9 +26,12 @@ const SettingCompany = () => {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
-                {!(state === 3) && !(state === 4) && (
+                {!(state === settingBusinessState.INFO) && !(state === settingBusinessState.SETTING) && (
                     <ul className={cx('nav-tabs')}>
-                        <li className={cx('nav-tab', { active: state === 1 })} onClick={() => state !== 1 && setState(1)}>
+                        <li
+                            className={cx('nav-tab', { active: state === 1 })}
+                            onClick={() => state !== settingBusinessState.SEARCH && setState(settingBusinessState.SEARCH)}
+                        >
                             <div className={cx('nav-tab-item')}>
                                 <div className={cx('nav-tab-item-icon')}>
                                     <IoSearchSharp className={cx('icon')} />
@@ -41,7 +45,10 @@ const SettingCompany = () => {
                                 </div>
                             </div>
                         </li>
-                        <li className={cx('nav-tab', { active: state === 2 })} onClick={() => state !== 2 && setState(2)}>
+                        <li
+                            className={cx('nav-tab', { active: state === settingBusinessState.CREATE })}
+                            onClick={() => state !== settingBusinessState.CREATE && setState(settingBusinessState.CREATE)}
+                        >
                             <div className={cx('nav-tab-item')}>
                                 <div className={cx('nav-tab-item-icon')}>
                                     <FaPlus className={cx('icon')} />
@@ -58,14 +65,14 @@ const SettingCompany = () => {
                     </ul>
                 )}
                 <div className={cx('content-tabs')}>
-                    <div className={cx('content-tab', { active: state === 1 })}>
+                    <div className={cx('content-tab', { active: state === settingBusinessState.SEARCH })}>
                         <SearchCompany />
                     </div>
 
-                    <div className={cx('content-tab', { active: state === 2 || state === 4 })}>
+                    <div className={cx('content-tab', { active: state === settingBusinessState.CREATE || state === settingBusinessState.SETTING })}>
                         <CreateCompany setActiveTab={handleSetState} />
                     </div>
-                    <div className={cx('content-tab', { active: state === 3 })}>
+                    <div className={cx('content-tab', { active: state === settingBusinessState.INFO })}>
                         <CompanyInfo setActiveTab={handleSetState} />
                     </div>
                 </div>

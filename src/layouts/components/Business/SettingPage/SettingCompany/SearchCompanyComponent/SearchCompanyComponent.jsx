@@ -10,7 +10,7 @@ const SearchCompanyComponent = ({ company }) => {
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
                 <div className={cx('company-logo')}>
-                    <img src={company?.logo_url} alt="company-logo" className={cx('logo')} />
+                    <img src={company?.logo} alt="company-logo" className={cx('logo')} />
                 </div>
                 <div className={cx('company-info')}>
                     <p className={cx('company-name')}>
@@ -23,7 +23,7 @@ const SearchCompanyComponent = ({ company }) => {
                     </div>
                     <div className={cx('company-address')}>
                         <p className={cx('address')}>
-                            {company?.address} | {company.size} nhân sự
+                            {company?.address} | {company.scale} nhân sự
                         </p>
                     </div>
                     <div className={cx('company-field')}>

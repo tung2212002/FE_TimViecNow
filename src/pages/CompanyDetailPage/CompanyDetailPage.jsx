@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import classNames from 'classnames/bind';
-import PropTypes from 'prop-types';
 
 import { FaChevronRight } from 'react-icons/fa6';
 

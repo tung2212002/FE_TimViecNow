@@ -15,9 +15,10 @@ import { EditorComponent, InputSelectorMultiComponent, SelectionComponent } from
 import { listScale } from '../../../../../../constants';
 import { getListFieldService } from '../../../../../../services/fieldService';
 import regexValidator from '../../../../../../utils/regexValidator';
-import { createCompanyService, updateCompanyService } from '../../../../../../services/companyService';
+import { createCompanyService, updateCompanyService } from '../../../../../../services/businessCompanyService';
 import useToast from '../../../../../../hooks/useToast';
 import { selectBusiness, updateBusinessSubInfo } from '../../../../../../redux/features/authBusiness/authSlide';
+import { settingBusinessState } from '../../../../../../constants';
 
 const cx = classNames.bind(styles);
 
@@ -195,6 +196,8 @@ const CreateCompany = ({ setActiveTab }) => {
         createCompanyService(body)
             .then((res) => {
                 if (res.status === 201) {
+                    dispatch(updateBusinessSubInfo({ company: res.data.data }));
+                    setActiveTab(settingBusinessState.INFO);
                     handleAddToast('Thành công', 'Tạo công ty thành công', 'success');
                 } else if (res.status === 400) {
                     handleAddToast('Thất bại', 'Dữ liệu không hợp lệ', 'error');
@@ -225,6 +228,7 @@ const CreateCompany = ({ setActiveTab }) => {
             .then((res) => {
                 if (res.status === 200) {
                     dispatch(updateBusinessSubInfo({ company: res.data.data }));
+                    setActiveTab(settingBusinessState.INFO);
                     handleAddToast('Thành công', 'Cập nhật thành công', 'success');
                 } else if (res.status === 400) {
                     handleAddToast('Thất bại', 'Dữ liệu không hợp lệ', 'error');
