@@ -1,11 +1,13 @@
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 
+import { VscChevronLeft, VscChevronRight } from 'react-icons/vsc';
+
 import styles from './CompanyRecruitment.module.scss';
 import { useEffect, useRef, useState } from 'react';
 import { getListJobSerivce } from '../../../../../services/jobService';
 import JobSuggest from '../../JobDetailPage/JobDetailBody/JobSuggest/JobSuggest';
-import { VscChevronLeft, VscChevronRight } from 'react-icons/vsc';
+import { SkeletonCompanyComponent } from '../../../../../components/skeleton';
 
 const cx = classNames.bind(styles);
 
@@ -18,12 +20,14 @@ const CompanyRecruitment = ({ company }) => {
         page: 1,
         fetchPage: 1,
         currentJob: [],
+        loading: true,
     });
 
     const handlePrevPage = () => {
         setJobInfo((prev) => ({
             ...prev,
             page: prev.page - 1,
+            loading: true,
         }));
 
         const element = ref.current;
@@ -34,6 +38,7 @@ const CompanyRecruitment = ({ company }) => {
         setJobInfo((prev) => ({
             ...prev,
             page: prev.page + 1,
+            loading: true,
         }));
 
         const element = ref.current;
@@ -42,10 +47,13 @@ const CompanyRecruitment = ({ company }) => {
 
     useEffect(() => {
         if (jobInfo.page < jobInfo.fetchPage) {
-            setJobInfo((prev) => ({
-                ...prev,
-                currentJob: jobInfo.job.slice((jobInfo.page - 1) * 6, jobInfo.page * 6),
-            }));
+            setTimeout(() => {
+                setJobInfo((prev) => ({
+                    ...prev,
+                    currentJob: jobInfo.job.slice((jobInfo.page - 1) * 6, jobInfo.page * 6),
+                    loading: false,
+                }));
+            }, 1000);
         } else {
             const params = {
                 limit: 6,
@@ -57,13 +65,16 @@ const CompanyRecruitment = ({ company }) => {
             getListJobSerivce(params)
                 .then((res) => {
                     if (res.status === 200) {
-                        setJobInfo((prev) => ({
-                            ...prev,
-                            job: [...prev.job, ...res.data.data.jobs],
-                            total: Math.ceil(res.data.data.count / 6),
-                            fetchPage: prev.fetchPage + 1,
-                            currentJob: res.data.data.jobs,
-                        }));
+                        setTimeout(() => {
+                            setJobInfo((prev) => ({
+                                ...prev,
+                                job: [...prev.job, ...res.data.data.jobs],
+                                total: Math.ceil(res.data.data.count / 6),
+                                fetchPage: prev.fetchPage + 1,
+                                currentJob: res.data.data.jobs,
+                                loading: false,
+                            }));
+                        }, 1000);
                     }
                 })
                 .catch((err) => {
@@ -77,9 +88,14 @@ const CompanyRecruitment = ({ company }) => {
             <div className={cx('container')}>
                 <h2 className={cx('title')}>Tuyển dụng</h2>
                 <div className={cx('body')}>
-                    {jobInfo.currentJob.map((item, index) => (
-                        <JobSuggest key={index} job={item} numberStyle={1} />
-                    ))}
+                    <div className={cx('list-job', jobInfo.loading ? 'loading' : '')}>
+                        {jobInfo.currentJob.map((item, index) => (
+                            <JobSuggest key={index} job={item} numberStyle={1} />
+                        ))}
+                    </div>
+                    <div className={cx('empty', !jobInfo.loading && jobInfo.currentJob.length === 0 ? '' : 'hidden')}>
+                        {jobInfo.loading && Array.from({ length: 6 }).map((_, index) => <SkeletonCompanyComponent key={index} />)}
+                    </div>
                     <div className={cx('footer')}>
                         <div className={cx('content-footer')}>
                             <span className={cx('btn', jobInfo.page === 1 ? 'deactive' : '')} onClick={handlePrevPage} disabled={jobInfo.page === 1}>

@@ -199,3 +199,10 @@ export const filterSalary = [
         end: '',
     },
 ];
+
+export const settingBusinessState = {
+    SEARCH: 1,
+    CREATE: 2,
+    INFO: 3,
+    SETTING: 4,
+};

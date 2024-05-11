@@ -7,6 +7,7 @@ import { FaPenToSquare } from 'react-icons/fa6';
 import styles from './CompanyInfo.module.scss';
 import { selectBusiness } from '../../../../../../redux/features/authBusiness/authSlide';
 import { images } from '../../../../../../assets';
+import { settingBusinessState } from '../../../../../../constants';
 
 const cx = classNames.bind(styles);
 
@@ -26,7 +27,7 @@ const CompanyInfo = ({ setActiveTab }) => {
                             <p className={cx('info-general-email')}>{`${user?.company?.address} | ${user?.company?.scale} nhân viên` || '--'}</p>
                         </div>
                     </div>
-                    <button className={cx('info-action')} onClick={() => setActiveTab(4)}>
+                    <button className={cx('info-action')} onClick={() => setActiveTab(settingBusinessState.SETTING)}>
                         <FaPenToSquare className={cx('icon')} />
                         Chỉnh sửa
                     </button>
