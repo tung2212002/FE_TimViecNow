@@ -1,0 +1,66 @@
+@media screen and (min-width: 768px) {
+    .container-job-list {
+        padding-right: 15px;
+        padding-left: 15px;
+        width: 750px !important;
+        display: flex !important;
+    }
+
+    .job-list {
+        width: calc(100% * 7 / 12);
+    }
+
+    .banner {
+        width: calc(100% * 5 / 12) !important;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .container-job-list {
+        width: 970px !important;
+        display: flex !important;
+    }
+
+    .job-list {
+        width: calc(100% * 2 / 3);
+    }
+
+    .banner {
+        width: calc(100% / 3) !important;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .container-job-list {
+        width: 1170px !important;
+        display: flex !important;
+    }
+
+    .job-list {
+        width: calc(100% * 2 / 3);
+    }
+
+    .banner {
+        width: calc(100% / 3) !important;
+    }
+}
+
+.wrapper-job-list {
+    background-color: #f3f5f7;
+    padding: 0;
+}
+
+.container-job-list {
+    box-sizing: border-box;
+    // padding-right: 15px;
+    // padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    // display: flex;
+    display: block;
+}
+
+.banner {
+    float: left;
+    width: 100%;
+}

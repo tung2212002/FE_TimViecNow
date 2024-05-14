@@ -1,0 +1,57 @@
+.wrapper {
+    margin-bottom: 12px;
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    padding: 2px 5px;
+    color: #00b14f;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+
+    &:hover {
+        background: #e5f7ed;
+        border-radius: 100px;
+    }
+
+    &:hover .icon-phone {
+        background: #00b14f;
+        color: #fff;
+    }
+
+    &:hover .full-name {
+        color: #00b14f;
+    }
+}
+
+ 
+
+.icon-phone {
+    background: rgba(0, 177, 79, 0.07);
+    border-radius: 16px;
+    color: #4fc986;
+    height: 28px;
+    margin-right: 8px;
+    padding: 6px;
+    width: 28px;
+}
+
+.outer-dot {
+    align-items: center;
+    display: flex;
+}
+
+.dot {
+    background: #bcc1c5;
+    border-radius: 100%;
+    color: #bcc1c5;
+    display: inline-block;
+    height: 2px;
+    margin: 0 6px;
+    width: 2px;
+}
+
+.full-name {
+    color: #212f3f;
+    font-weight: 600;
+}

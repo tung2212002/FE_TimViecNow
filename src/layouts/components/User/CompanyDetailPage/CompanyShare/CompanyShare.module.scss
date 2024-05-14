@@ -1,0 +1,105 @@
+.wrapper {
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.container {
+}
+
+.title {
+    background: linear-gradient(90deg, #1c4742, #22c96d);
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 26px;
+    margin: 0;
+    padding: 12px 20px;
+}
+
+.body{
+    padding: 0 20px 8px    ;
+}
+
+.item{
+    padding: 20px 0;
+    .box-title{
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+
+        .icon{
+            color: #00b14f;
+            font-size: 20px;
+            height: 20px;
+            line-height: 20px;
+            margin-right: 8px;
+            text-align: center;
+            width: 20px;
+        }
+
+        .text{
+            color: #212f3f;
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 20px;
+            line-height: 1.5;
+        }
+
+    }
+    .box-copy{
+        display: flex;
+        align-items: center;
+        background: #fff;
+        border: 1px solid #e9eaec;
+        border-radius: 6px;
+        column-gap: 10px;
+        height: 48px;
+        padding: 10px 12px ;
+
+        input{
+            flex: 1;
+            border: none;
+            color: #6f7882;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 20px;
+            outline: none;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+            white-space: nowrap !important;
+        }
+
+        button{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f4f5f5;
+            border-radius: 2px;
+            width: 28px;
+            height: 28px;
+            outline: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .icon{
+            color: #212f3f;
+            font-size: 16px;
+            height: 16px;
+            line-height: 16px;
+            width: 16px;
+
+            &:hover{
+                color: #00b14f;
+            }
+
+            &.active{
+                color: #00b14f;
+            }
+        }
+    }
+
+    &:not(:last-child){
+        border-bottom: 1px solid #e9eaec;
+    }
+}

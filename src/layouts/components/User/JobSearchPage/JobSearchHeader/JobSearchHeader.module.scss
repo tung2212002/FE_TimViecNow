@@ -1,0 +1,229 @@
+.wrapper {
+    background: linear-gradient(0deg, #fff, #e4fff0);
+    padding: 20px 0;
+    position: relative;
+}
+
+ 
+
+@media screen and (min-width: 768px) {
+    .wrapper {
+        padding: 40px 0 24px;
+    }
+
+    .container {
+        width: 750px;
+    }
+
+    .search {
+        background: #fff;
+        border-radius: 6px;
+        flex-direction: row;
+        gap: 0;
+        margin-bottom: 12px;
+    }
+
+    .box-filter {
+        flex-direction: row;
+        gap: 12px;
+        margin-bottom: 12px;
+    }
+
+    .desc {
+        font-size: 14px !important;
+        width: 100% !important;
+    }
+
+    .bg-left-tablet {
+        left: 0;
+        top: 0;
+        display: block !important;
+    }
+
+    .bg-right-tablet {
+        display: block !important;
+        right: 0;
+        top: 0;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .container {
+        width: 970px;
+    }
+    .group-box {
+        flex-direction: row !important;
+        gap: 12px !important;
+        margin-bottom: 12px !important;
+    }
+}
+@media screen and (min-width: 1200px) {
+    .wrapper {
+        padding-bottom: 24px;
+        padding-top: 32px;
+    }
+    .container {
+        width: 1170px;
+    }
+
+    .header-title {
+        margin-bottom: 16px !important;
+
+        h1 {
+            font-size: 30px !important;
+            line-height: 32px !important;
+        }
+    }
+
+    .box-search {
+        display: flex;
+        gap: 18px;
+        margin-bottom: 0px !important;
+    }
+
+    .group-box {
+        gap: 18px !important;
+        margin-bottom: 0 !important;
+    }
+
+    .box-filter {
+        gap: 18px;
+        margin-bottom: 0;
+    }
+
+    .btn-filter {
+        margin-top: 0 !important;
+        min-width: 120px !important;
+        padding-bottom: 15px !important;
+        padding-top: 15px !important;
+    }
+
+    .img-back {
+        display: block !important;
+    }
+
+    .img-robot {
+        height: 89.14px;
+        right: 95px;
+        top: 13.28px;
+        width: 70.86px;
+    }
+
+    .bg-right {
+        right: 0;
+        top: 0;
+    }
+}
+
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.header-title {
+    margin-bottom: 24px;
+    text-align: center;
+
+    h1 {
+        color: #009643;
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 28px;
+        margin: 0 auto 6px;
+        width: 97%;
+    }
+
+    p {
+        color: #263a4d;
+        font-size: 12px;
+        font-weight: 400;
+        letter-spacing: 0.12px;
+        line-height: 16px;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .highlight {
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 0.175px;
+        line-height: 22px;
+    }
+}
+
+.group-box {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.box-search {
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 4;
+}
+
+.btn-filter {
+    padding: 6px 12px;
+    margin-bottom: 0;
+    text-align: center;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    background: #00b14f;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    margin-top: 12px;
+    padding-bottom: 11px;
+    padding-top: 11px;
+    width: 100%;
+}
+
+.box-work {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+
+    .work {
+        align-items: center;
+        display: inline-flex;
+        gap: 8px;
+        padding: 4px 8px;
+
+        .label {
+            color: #263a4d;
+            font-size: 12px;
+            font-weight: 400;
+            letter-spacing: 0.12px;
+            line-height: 16px;
+        }
+
+        .quantity {
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.175px;
+            line-height: 22px;
+            color: #00b14f;
+        }
+    }
+}
+
+.img-back {
+    position: absolute;
+    z-index: 0;
+    display: none;
+}
+
+.img-robot {
+    max-width: 100%;
+    height: auto;
+}
+.bg-left {
+    top: 0;
+    left: 0;
+}

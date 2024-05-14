@@ -1,0 +1,127 @@
+.wrapper {
+    background: #f4f5f5;
+}
+
+
+@media screen and (min-width: 768px) {
+    .container{
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+}
+
+.container {
+    width: 100%;
+    background: #f4f5f5;
+    position: relative;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.job-path {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 12px 0;
+
+    .job-path-item {
+        color: #00b14f;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 600;
+        letter-spacing: 0.175px;
+        line-height: 22px;
+    }
+
+    .job-path-icon {
+        color: #212f3f;
+        font-size: 15px;
+        height: 12px;
+        line-height: 20px;
+        margin-left: 4px;
+        margin-right: 4px;
+        width: 12px;
+    }
+
+    .job-path-name {
+        color: #212f3f;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        letter-spacing: 0.14px;
+        line-height: 22px;
+    }
+}
+
+.job-detail {
+    display: flex;
+    gap: 24px;
+    flex-direction: column;
+
+    .job-detail-body {
+        display: flex;
+        gap: 24px;
+    }
+
+    .job-detail-left {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        width: 67%;
+    }
+
+    .job-detail-right {
+        align-items: center;
+        background: #f4f5f5;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        width: calc(33% - 24px);
+    }
+}
+
+.seo {
+    margin-top: 24px;
+}
+
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px;
+    }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+    .container {
+        width: 970px;
+    }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+    .container {
+        width: 750px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .wrapper {
+        min-width: 360px !important;
+    }
+    .container {
+        padding: 0;
+    }
+
+    .job-detail-body {
+        gap: 0;
+        flex-direction: column;
+    }
+
+    .job-detail-left {
+        width: 100% !important;
+    }
+
+    .job-detail-right {
+        display: none !important;
+    }
+
+    .job-path {
+        display: none !important;
+    }
+}

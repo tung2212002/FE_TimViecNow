@@ -2,22 +2,26 @@ import styles from './DefaultLayout.module.scss';
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 
-import { HeaderComponent, FooterComponent } from '../../components';
+import { BackTopComponent } from '../../components';
+import { Footer, Header, HeaderHidden } from '../components/User';
 
 const cx = classNames.bind(styles);
 
-function DefaultLayout({ children }) {
+function DefaultLayout({ children, positionHeader = '' }) {
     return (
         <div className={cx('wrapper')}>
-            <HeaderComponent />
+            <Header positionHeader={positionHeader} />
+            <HeaderHidden />
             {children}
-            <FooterComponent />
+            <Footer />
+            <BackTopComponent />
         </div>
     );
 }
 
 DefaultLayout.propTypes = {
     children: PropTypes.node.isRequired,
+    positionHeader: PropTypes.string,
 };
 
 export default DefaultLayout;

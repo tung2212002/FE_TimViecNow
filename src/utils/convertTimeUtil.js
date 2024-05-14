@@ -1,25 +1,108 @@
-function convertTimeAgo(date) {
-    const parts = date.split('/');
-    const day = parseInt(parts[0]);
-    const month = parseInt(parts[1]);
-    const year = parseInt(parts[2]);
-
-    const yearNow = new Date().getFullYear();
-    const monthNow = new Date().getMonth() + 1;
-    const dayNow = new Date().getDate();
-
-    let timeAgo = '';
-    if (year - yearNow > 0) {
-        timeAgo = `${year - yearNow} năm`;
-    } else if (month - monthNow > 0) {
-        timeAgo = `${month - monthNow} tháng`;
-    } else if (day - dayNow > 0) {
-        timeAgo = `${day - dayNow} ngày`;
-    } else {
-        timeAgo = 'Hôm nay';
+function convertTimeAgo(datetime) {
+    const datetimeNow = new Date();
+    const datetimeInput = new Date(datetime);
+    const timeAgo = datetimeNow - datetimeInput;
+    if (timeAgo < 0) {
+        return '';
     }
+    const days = Math.floor(timeAgo / (1000 * 60 * 60 * 24));
+    const months = Math.floor(days / 30);
+    const years = Math.floor(days / 365);
+    const hours = Math.floor(timeAgo / (1000 * 60 * 60));
+    const minutes = Math.floor(timeAgo / (1000 * 60));
 
-    return timeAgo;
+    if (years > 0) {
+        return `${years} năm`;
+    }
+    if (months > 0) {
+        return `${months} tháng`;
+    }
+    if (days > 0) {
+        return `${days} ngày`;
+    }
+    if (hours > 0) {
+        return `${hours} giờ`;
+    }
+    if (minutes > 0) {
+        return `${minutes} phút`;
+    }
+    return 'vừa xong';
 }
 
-export { convertTimeAgo };
+function convertTimeFuture(datetime) {
+    const datetimeNow = new Date();
+    const datetimeInput = new Date(datetime);
+    const timeAgo = datetimeInput - datetimeNow;
+
+    if (timeAgo < 0) {
+        return '';
+    }
+    const days = Math.floor(timeAgo / (1000 * 60 * 60 * 24));
+    const months = Math.floor(days / 30);
+    const years = Math.floor(days / 365);
+    const hours = Math.floor(timeAgo / (1000 * 60 * 60));
+    const minutes = Math.floor(timeAgo / (1000 * 60));
+
+    if (years > 0) {
+        return `${years} năm`;
+    }
+    if (months > 0) {
+        return `${months} tháng`;
+    }
+    if (days > 0) {
+        return `${days} ngày`;
+    }
+    if (hours > 0) {
+        return `${hours} giờ`;
+    }
+    if (minutes > 0) {
+        return `${minutes} phút`;
+    }
+    return 'vừa xong';
+}
+
+function convertDateFuture(date) {
+    const dateNow = new Date();
+    const dateInput = new Date(date);
+    const timeAgo = dateInput - dateNow;
+    if (timeAgo < 0) {
+        return '';
+    }
+    const days = Math.floor(timeAgo / (1000 * 60 * 60 * 24));
+    const months = Math.floor(days / 30);
+    const years = Math.floor(days / 365);
+    if (years > 0) {
+        return `${years} năm`;
+    }
+    if (months > 0) {
+        return `${months} tháng`;
+    }
+    if (days > 0) {
+        return `${days} ngày`;
+    }
+    return '';
+}
+
+function convertDateAgo(date) {
+    const dateNow = new Date();
+    const dateInput = new Date(date);
+    const timeAgo = dateNow - dateInput;
+    if (timeAgo < 0) {
+        return '';
+    }
+    const days = Math.floor(timeAgo / (1000 * 60 * 60 * 24));
+    const months = Math.floor(days / 30);
+    const years = Math.floor(days / 365);
+    if (years > 0) {
+        return `${years} năm`;
+    }
+    if (months > 0) {
+        return `${months} tháng`;
+    }
+    if (days > 0) {
+        return `${days} ngày`;
+    }
+    return '';
+}
+
+export { convertTimeAgo, convertTimeFuture, convertDateFuture, convertDateAgo };

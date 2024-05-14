@@ -1,0 +1,40 @@
+.wrapper {
+    height: 100%;
+    background: #f5f8fa;
+    width: 230px;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+}
+
+ 
+
+.item {
+    background: transparent;
+    padding: 11px 18px;
+
+    &.active {
+        background: #fff;
+
+        .icon {
+            color: #00b14f;
+        }
+
+        .value {
+            color: #00b14f;
+            font-weight: 600;
+        }
+    }
+}
+
+.item-link {
+    font-size: 14px;
+    line-height: 1.5;
+    display: flex;
+    align-items: center;
+}
+
+.icon {
+    margin-right: 8px;
+    color: #495057;
+}

@@ -1,20 +1,17 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Provider } from 'react-redux';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 import store from './redux/store';
 import AppRouter from './routes';
-import GlobalStyles from './components/GlobalStyle/GlobalStyle';
+import { GOOGLE_CLIENT_ID } from './configs';
 
 function App() {
-    useEffect(() => {
-        document.title = 'FE_DATN';
-    }, []);
-
     return (
         <Provider store={store}>
-            <GlobalStyles>
+            <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
                 <AppRouter />
-            </GlobalStyles>
+            </GoogleOAuthProvider>
         </Provider>
     );
 }

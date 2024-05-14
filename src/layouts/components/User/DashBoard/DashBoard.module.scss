@@ -1,0 +1,387 @@
+.wrapper {
+    background-color: #fff;
+    padding: 40px 0 20px;
+    box-sizing: border-box;
+}
+
+ 
+
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 0 !important;
+    }
+    .dashboard-section__content {
+        flex-direction: column;
+    }
+
+    .dashboard-section__header {
+        padding: 12px 16px;
+        height: auto !important;
+        background-image: url(../../../../assets/images/dashboard-bg-header-mb.png) !important;
+
+        .title {
+            font-size: 20px !important;
+            font-weight: 700 !important;
+            line-height: 28px !important;
+            margin-bottom: 5px !important;
+            width: 235px !important;
+        }
+    }
+
+    .work-item:last-child {
+        display: none !important;
+    }
+}
+
+@media (min-width: 768px) {
+    .container {
+        width: 750px !important;
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+}
+@media (min-width: 992px) {
+    .container {
+        width: 970px !important;
+    }
+}
+@media (min-width: 1100px) {
+    .newest-job {
+        flex-shrink: 0;
+        width: 298px !important;
+    }
+
+    .trend-chart {
+        flex-direction: row !important;
+    }
+}
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px !important;
+    }
+}
+
+.container {
+
+    margin-right: auto;
+    margin-left: auto;
+}
+.dashboard-section {
+    background: linear-gradient(83.78deg, #122235 1.64%, #1aa357 93.62%);
+    border-radius: 8px;
+}
+
+.dashboard-section__header {
+    background-image: url(https://static.topcv.vn/v4/image/welcome/dashboard/dashboard-bg-header.png);
+    background-size: cover;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    height: 56px;
+    padding: 12px 24px;
+    position: relative;
+    .title {
+        color: #fff;
+        font-family: Inter, sans-serif;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 32px;
+        margin: 0;
+        padding: 0;
+    }
+
+    .date {
+        color: #11d769;
+    }
+}
+
+.dashboard-section__content {
+    display: flex;
+    gap: 20px;
+    padding: 21px;
+}
+
+.newest-job {
+    width: 100%;
+
+    .newest-job__img {
+        height: 128px;
+        margin-bottom: 22px;
+        object-fit: contain;
+        width: 100%;
+    }
+}
+
+.newest-job__content {
+    position: relative;
+
+    .newest-job__title {
+        color: #fff;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 20px;
+    }
+
+    .newest-job__slide {
+        height: 233px;
+        margin-top: 10px;
+        overflow-y: hidden;
+        position: relative;
+        transition: 0.5s;
+    }
+}
+
+.newest-job__item {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 10px;
+    height: 0;
+    opacity: 0;
+    transition: all 0.25s linear;
+    width: 229px;
+    .logo {
+        color: #337ab7;
+    }
+
+    .company-logo {
+        background: #fff;
+        border: 1px solid #e9eaec;
+        border-radius: 4px;
+        height: 48px;
+        object-fit: contain;
+        width: 48px;
+    }
+
+    .content {
+        font-style: normal;
+        overflow: hidden;
+        font-weight: 600;
+    }
+
+    .title-link {
+        color: #337ab7;
+    }
+    .title {
+        -webkit-box-orient: vertical;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        color: #fff;
+        font-size: 12px;
+        line-height: 16px;
+        margin-bottom: 2px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .company-link {
+        color: #337ab7;
+    }
+
+    .company {
+        -webkit-box-orient: vertical;
+        display: -webkit-box;
+        line-height: 16px;
+        margin-bottom: 2px;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 1;
+        overflow: hidden;
+        color: #a6acb2;
+        font-size: 10px;
+    }
+
+    .location {
+        -webkit-box-orient: vertical;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        color: #a6acb2;
+        font-size: 10px;
+        overflow: hidden;
+        line-height: 16px;
+        margin-bottom: 2px;
+        text-overflow: ellipsis;
+    }
+
+    // @keyframes zoomIn {
+    //     0% {
+    //         opacity: 0;
+    //         -webkit-transform: scale3d(.3,.3,.3);
+    //         transform: scale3d(.3,.3,.3);
+
+    //     }
+    //     50% {
+    //         opacity: 1;
+    //     }
+
+    // }
+
+    &.active {
+        height: 64px !important;
+        margin-bottom: 16px !important;
+        opacity: 1 !important;
+    }
+}
+
+.statistic-job {
+    width: 100%;
+
+    .work-market {
+        display: flex;
+        gap: 12px;
+        justify-content: space-between;
+    }
+
+    .work-item {
+        background-image: url(https://static.topcv.vn/v4/image/welcome/dashboard/bg-statistics-job-item.png);
+        background-size: cover;
+        padding: 14px 16px;
+        width: 100%;
+    }
+
+    .quantity {
+        color: #fff;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 32px;
+        margin-bottom: 8px !important;
+    }
+
+    .title {
+        color: #fff;
+        font-family: Inter, sans-serif;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 16px;
+    }
+}
+
+.trend-chart {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 12px;
+
+    .item-chart {
+        background: rgba(33, 47, 63, 0.3);
+        border-radius: 2px;
+        padding: 14px 16px;
+        width: 100%;
+
+        .header {
+            align-items: center;
+            // flex-direction: column;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+            padding: 4px 0;
+        }
+
+        .title {
+            align-items: center;
+            display: flex;
+        }
+
+        .trend-icon {
+            align-items: center;
+            background: #00b14f;
+            border-radius: 50%;
+            display: flex;
+            height: 20px;
+            justify-content: center;
+            margin-right: 8px;
+            width: 20px;
+            padding: 4px;
+        }
+
+        .selected-text {
+            color: #11d769;
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 16px;
+            padding: 0;
+        }
+
+        .text {
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 20px;
+        }
+    }
+}
+
+.box-select {
+    position: relative;
+    height: 28px !important;
+    width: 115px !important;
+
+    .ul-select {
+        // max-height: 200px;
+        // overflow-y: auto;
+        background: #fff;
+        z-index: 2;
+
+        .item {
+            color: #172530 !important;
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 20px;
+            padding: 12px 12px 12px 16px;
+            cursor: pointer;
+
+            .text {
+                font-size: 14px;
+                font-weight: 500;
+                color: #172530;
+            }
+
+            .icon {
+                font-size: 20px;
+                color: #00b14f;
+                position: absolute;
+                right: 12px;
+            }
+        }
+
+        .item:hover {
+            background: #f4f5f5;
+        }
+
+        .item.active .text {
+            color: #00b14f;
+            font-weight: 600;
+        }
+    }
+
+    .selected {
+        align-items: center;
+        background: linear-gradient(178.55deg, rgba(0, 177, 79, 0) 10.22%, rgba(0, 146, 65, 0.22) 98.77%);
+        border: 1px solid #11d769;
+        border-radius: 6px;
+        display: flex !important;
+        padding: 8px 0 8px 12px;
+        // padding-right: 30px;
+        width: 115px;
+        height: 28px !important;
+
+        .text {
+            color: #11d769;
+        }
+    }
+}
+
+.icon-chevron {
+    box-sizing: content-box;
+    font-size: 16px;
+    color: #11d769;
+    // padding-left: 8px;
+    padding-right: 8px;
+    padding-left: 8px;
+    // margin-right: 8px;
+}
+
+.icon-chevron.rotate {
+    transform: rotate(180deg);
+}

@@ -1,0 +1,180 @@
+.wrapper {
+    background-color: #fff;
+    border: none;
+    border-radius: 4px;
+    margin: 4px 0;
+    // padding: 12px 18.8px;
+    padding: 12px;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #fff;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+    &:hover {
+        background: #f6f6f6;
+        border: 1px solid #d3d5d9;
+
+        .title-text {
+            color: #00b14f !important;
+        }
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .wrapper {
+        margin: 10px 0 !important;
+    }
+}
+
+.wrapper.reponsive {
+    // padding: 12px 18.8px;
+    padding: 12px;
+}
+.cvo-flex *{
+    box-sizing: content-box;
+}
+
+.cvo-flex {
+    display: flex;
+
+    .avatar {
+        align-items: center;
+        border-radius: 7px;
+        display: flex;
+        height: 78px;
+        padding: 2px;
+        position: relative;
+        width: 78px;
+
+        .img {
+            max-width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: #fff;
+        }
+    }
+
+    .box-title {
+        box-sizing: content-box;
+        min-height: 44px;
+        overflow: hidden !important;
+        padding-left: 12px;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+        flex-grow: 1;
+
+        .title-link {
+            display: block;
+            width: 100%;
+            margin-bottom: 3px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .title-text {
+            color: #212f3f;
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 20px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .company-name {
+            color: #6f7882;
+            display: inline;
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 16px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .title {
+            margin: 0;
+        }
+    }
+}
+
+.box-footer {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0;
+    margin-top: 8px;
+
+    .job-info{
+        display: flex;
+        align-items: center;
+    }
+
+    .salary {
+        background: #f4f5f5;
+        border-radius: 4px;
+        color: #212f3f;
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 16px;
+        padding: 4px 8px;
+        margin-right: 4px;
+
+        .text-salary {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: #212f3f;
+            font-size: 12px;
+            line-height: 16px;
+        }
+    }
+
+    .address {
+        background: #f4f5f5;
+        border-radius: 4px;
+        color: #212f3f;
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 16px;
+        padding: 4px 8px;
+
+        .title-link {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: #212f3f;
+            font-size: 12px;
+            line-height: 16px;
+        }
+    }
+
+    .btn-like {
+        background: 0 0 !important;
+        border: none !important;
+        color: #bcc1c5;
+        border-radius: 5px;
+        height: 24px;
+        padding: 0;
+        width: 24px;
+    }
+
+    .icon-like {
+        font-size: 20px;
+    }
+
+    .icon-active {
+        color: #00b14f;
+    }
+}
+
+.tooltip {
+    white-space: pre-wrap;
+    line-height: 1.5;
+    text-align: center;
+    padding: 5px 10px;
+}

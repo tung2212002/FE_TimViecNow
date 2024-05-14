@@ -1,102 +1,107 @@
-import { useState, useEffect } from 'react';
+import { useLayoutEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
 
 import { DefaultLayout } from '../layouts';
-import { selectToken, updateUserInfo } from '../redux/features/auth/authSlide';
-import {
-  getLocalAccessToken,
-  getLocalToken,
-  setLocalUser,
-} from '../utils/authLocalStorage';
-import { getInfoService } from '../services/userService';
 import { privateRoutes, publicRoutes } from './routes';
 import PublicRoute from './PublicRoute';
 import PrivateRoute from './PrivateRoute';
+import { getListProvinceService } from '../services/locationService';
+import { setField, setProvince, setSkill, setCategory } from '../redux/features/config/configSilde';
+import { getListSkillService } from '../services/skillService';
+import { getListFieldService } from '../services/fieldService';
+import { getListCategoryService } from '../services/categoryService';
 
 const AppRouter = () => {
-  const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-  const [isFirstTime, setIsFirstTime] = useState(true);
+    const handleGetConfig = () => {
+        getListProvinceService()
+            .then((res) => {
+                if (res.status === 200) {
+                    dispatch(setProvince(res.data.data));
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
 
-  const token = useSelector(selectToken);
+        let params = {
+            limit: 1000,
+        };
 
-  useEffect(() => {
-    if (!token) {
-      const tokenFromLocalStorage = getLocalAccessToken();
-      if (tokenFromLocalStorage) {
-        getInfoService()
-          .then((response) => {
-            if (response.status === 200) {
-              setLocalUser(response.data);
-              let token = getLocalToken();
-              dispatch(updateUserInfo({ token, user: response.data }));
-              setIsFirstTime(false);
-            } else {
-              setIsFirstTime(false);
-            }
-          })
-          .catch((error) => {
-            console.error(error);
-            setIsFirstTime(false);
-          });
-      }
-    }
-  }, []);
+        getListSkillService(params)
+            .then((res) => {
+                if (res.status === 200) {
+                    dispatch(setSkill(res.data.data));
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
 
-  // if (isFirstTime) {
-  //   return 'loading';
-  // }
+        getListFieldService()
+            .then((res) => {
+                if (res.status === 200) {
+                    dispatch(setField(res.data.data));
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
 
-  // const publicRoutes = appRoutes.filter((route) => !route.isPrivate);
+        getListCategoryService()
+            .then((res) => {
+                if (res.status === 200) {
+                    dispatch(setCategory(res.data.data));
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
 
-  return (
-    <BrowserRouter>
-      <Routes>
-        {publicRoutes.map((route, index) => {
-          const Layout = route.layout || DefaultLayout;
-          const Page = route.component;
-          return (
-            <Route
-              key={index}
-              path={route.path}
-              element={
-                // <Layout>
-                //   <Page />
-                // </Layout>
-                <PublicRoute
-                  component={Page}
-                  layout={Layout}
-                  restricted={route.restricted}
-                />
-              }
-            />
-          );
-        })}
-        {privateRoutes.map((route, index) => {
-          const Layout = route.layout || DefaultLayout;
-          const Page = route.component;
-          return (
-            <Route
-              key={index}
-              path={route.path}
-              element={
-                // <Layout>
-                //   <Page />
-                // </Layout>\
-                <PrivateRoute
-                  component={Page}
-                  layout={Layout}
-                  isPrivate={route.isPrivate}
-                  restricted={route.restricted}
-                />
-              }
-            />
-          );
-        })}
-      </Routes>
-    </BrowserRouter>
-  );
+    useLayoutEffect(() => {
+        handleGetConfig();
+    }, []);
+
+    return (
+        <BrowserRouter>
+            <Routes>
+                {publicRoutes.map((route, index) => {
+                    const Layout = route.layout || DefaultLayout;
+                    const Page = route.component;
+                    return (
+                        <Route
+                            key={index}
+                            path={route.path}
+                            element={<PublicRoute component={Page} layout={Layout} restricted={route.restricted} positionHeader={route.positionHeader} />}
+                        />
+                    );
+                })}
+                {privateRoutes.map((route, index) => {
+                    const Layout = route.layout || DefaultLayout;
+                    const Page = route.component;
+                    return (
+                        <Route
+                            key={index}
+                            path={route.path}
+                            element={
+                                <PrivateRoute
+                                    component={Page}
+                                    layout={Layout}
+                                    isPrivate={route.isPrivate}
+                                    restricted={route.restricted}
+                                    positionHeader={route.positionHeader}
+                                    verifyBusinessEmail={route.verifyBusinessEmail}
+                                />
+                            }
+                        />
+                    );
+                })}
+            </Routes>
+        </BrowserRouter>
+    );
 };
 
 export default AppRouter;
