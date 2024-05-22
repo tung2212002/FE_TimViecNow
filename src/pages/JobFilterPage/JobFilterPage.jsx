@@ -10,7 +10,6 @@ import styles from './JobFilterPage.module.scss';
 import useDocumentTitle from '../../hooks/useDocumentTitle';
 import { searchJobService } from '../../services/jobService';
 import JobSuggest from '../../layouts/components/User/JobDetailPage/JobDetailBody/JobSuggest/JobSuggest';
-import { Spinner } from '../../components/common';
 
 import {
     SearchEmploymentTypeComponent,
@@ -90,6 +89,8 @@ const JobFilterPage = () => {
         { id: 3, name: 'Ngày cập nhật', value: 'updated_at' },
         { id: 4, name: 'Việc làm gấp', value: 'is_fis_urgent' },
     ];
+
+    const random = Math.floor(Math.random() * 500) + 1;
 
     const handlePrevPage = () => {
         const element = ref.current;
@@ -592,7 +593,7 @@ const JobFilterPage = () => {
                         <div className={cx('company')}>
                             <h3 className={cx('title')}>Có thể bạn quan tâm</h3>
                             <div className={cx('info')}>
-                                <GeneralCompanyFilter />
+                                <GeneralCompanyFilter id={random} />
                             </div>
                         </div>
                         <div className={cx('detail-job')}>

@@ -97,21 +97,27 @@ const CompanyRecruitment = ({ company }) => {
                         {jobInfo.loading && Array.from({ length: 6 }).map((_, index) => <SkeletonCompanyComponent key={index} />)}
                     </div>
                     <div className={cx('footer')}>
-                        <div className={cx('content-footer')}>
-                            <span className={cx('btn', jobInfo.page === 1 ? 'deactive' : '')} onClick={handlePrevPage} disabled={jobInfo.page === 1}>
-                                <VscChevronLeft className={cx('icon')} />
-                            </span>
-                            <p className={cx('text-page')}>
-                                <span className={cx('number')}>{jobInfo.page}</span> / {jobInfo.total} trang
-                            </p>
-                            <span
-                                className={cx('btn', jobInfo.page === jobInfo.total ? 'deactive' : '')}
-                                onClick={handleNextPage}
-                                disabled={jobInfo.page === jobInfo.total}
-                            >
-                                <VscChevronRight className={cx('icon')} />
-                            </span>
-                        </div>
+                        {jobInfo?.total > 0 ? (
+                            <div className={cx('content-footer')}>
+                                <span className={cx('btn', jobInfo.page === 1 ? 'deactive' : '')} onClick={handlePrevPage} disabled={jobInfo.page === 1}>
+                                    <VscChevronLeft className={cx('icon')} />
+                                </span>
+                                <p className={cx('text-page')}>
+                                    <span className={cx('number')}>{jobInfo.page}</span> / {jobInfo.total} trang
+                                </p>
+                                <span
+                                    className={cx('btn', jobInfo.page === jobInfo.total ? 'deactive' : '')}
+                                    onClick={handleNextPage}
+                                    disabled={jobInfo.page === jobInfo.total}
+                                >
+                                    <VscChevronRight className={cx('icon')} />
+                                </span>
+                            </div>
+                        ) : (
+                            <div className={cx('content-footer')}>
+                                <p>Không có công việc nào</p>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

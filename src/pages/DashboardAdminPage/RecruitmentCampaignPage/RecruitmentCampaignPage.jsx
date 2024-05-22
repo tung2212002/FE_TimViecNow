@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 
@@ -10,14 +10,17 @@ import styles from './RecruitmentCampaignPage.module.scss';
 import { SelectionComponent } from '../../../components/common';
 import { IoSearchOutline } from 'react-icons/io5';
 import path from '../../../constants/path';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getListCampaignService } from '../../../services/campaignService';
 import { JobStatus } from '../../../constants';
 import { SkeletonRecruimentCampaignComponent } from '../../../components/skeleton';
+import { selectBusiness } from '../../../redux/features/authBusiness/authSlide';
 
 const cx = classNames.bind(styles);
 
 const RecruitmentCampaignPage = () => {
+    const navigate = useNavigate();
+    const user = useSelector(selectBusiness);
     const listFilterCampaign = [
         {
             id: 1,
@@ -60,8 +63,6 @@ const RecruitmentCampaignPage = () => {
             filter_by: 'waitting_approve_job',
         },
     ];
-    const dispatch = useDispatch();
-
     const [campaigns, setCampaigns] = useState(null);
 
     const [filterCampaign, setFilterCampaign] = useState({
@@ -107,9 +108,13 @@ const RecruitmentCampaignPage = () => {
                             campaigns: res.data.data.campaigns,
                             count: res.data.data.count,
                         });
-                        setTimeout(() => {
-                            setFilterCampaign({ ...filterCampaign, loading: false });
-                        }, 500);
+                        if (res.data.data.campaigns.length === 0 && user?.role === 'business') {
+                            navigate(path.DASHBOARD_RECRUIREMENT_CAMPAIGNS_CREATE);
+                        } else {
+                            setTimeout(() => {
+                                setFilterCampaign({ ...filterCampaign, loading: false });
+                            }, 500);
+                        }
                     }
                 })
                 .catch((err) => {
