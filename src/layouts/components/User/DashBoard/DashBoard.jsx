@@ -1,4 +1,4 @@
-import { forwardRef, useState } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import TippyText from '@tippyjs/react';
 import styles from './DashBoard.module.scss';
@@ -10,10 +10,12 @@ import { fakeJob } from '../../../../assets/fakejob';
 import ChartJobOpportunity from './ChartJobOpportunity/ChartJobOpportunity';
 import ChartJobDemand from './ChartJobDemand/ChartJobDemand';
 import { SelectionComponent } from '../../../../components/common';
+import { getJobCruitmentDemandService } from '../../../../services/jobService';
 
 const cx = classNames.bind(styles);
 
 const DashBoard = (props, ref) => {
+    const date = new Date();
     const fakeData = {
         quantity_job_recruitment: 40396,
         quantity_job_recruitment_yesterday: 38069,
@@ -31,6 +33,7 @@ const DashBoard = (props, ref) => {
             name: 'Mức lương',
         },
     ];
+    const [jobDemand, setJobDemand] = useState({});
     const [selectJob, setSelectJob] = useState(1);
     const [newestJob, setNewestJob] = useState(fakeJob.slice(0, 3));
     const handleToLocaleString = (number) => {
@@ -41,6 +44,16 @@ const DashBoard = (props, ref) => {
         setSelectJob(id);
     };
 
+    useEffect(() => {
+        getJobCruitmentDemandService()
+            .then((res) => {
+                setJobDemand(res.data.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
+
     return (
         <div className={cx('wrapper')} ref={ref}>
             <div className={cx('container')}>
@@ -48,7 +61,14 @@ const DashBoard = (props, ref) => {
                     <div className={cx('dashboard-section__header')}>
                         <p className={cx('title')}>
                             Thị trường việc làm hôm nay
-                            <span className={cx('date')}> 22/01/2024</span>
+                            <span className={cx('date')}>
+                                {' '}
+                                {date.toLocaleDateString('vi-VN', {
+                                    day: 'numeric',
+                                    month: 'numeric',
+                                    year: 'numeric',
+                                })}
+                            </span>
                         </p>
                     </div>
                     <div className={cx('dashboard-section__content')}>
@@ -85,15 +105,17 @@ const DashBoard = (props, ref) => {
                         <div className={cx('statistic-job')}>
                             <div className={cx('work-market')}>
                                 <div className={cx('work-item')}>
-                                    <p className={cx('quantity')}>{handleToLocaleString(fakeData.quantity_job_new_today)}</p>
+                                    <p className={cx('quantity')}>{jobDemand?.number_of_job_active && handleToLocaleString(jobDemand.number_of_job_24h)}</p>
                                     <p className={cx('title')}>Việc làm mới 24h gần nhất</p>
                                 </div>
                                 <div className={cx('work-item')}>
-                                    <p className={cx('quantity')}>{handleToLocaleString(fakeData.quantity_job_recruitment)}</p>
+                                    <p className={cx('quantity')}>{jobDemand?.number_of_job_active && handleToLocaleString(jobDemand.number_of_job_active)}</p>
                                     <p className={cx('title')}>Việc làm đang tuyển</p>
                                 </div>
                                 <div className={cx('work-item')}>
-                                    <p className={cx('quantity')}>{handleToLocaleString(fakeData.quantity_company_recruitment)}</p>
+                                    <p className={cx('quantity')}>
+                                        {jobDemand?.number_of_company_active && handleToLocaleString(jobDemand.number_of_company_active)}
+                                    </p>
                                     <p className={cx('title')}>Công ty đang tuyển</p>
                                 </div>
                             </div>
