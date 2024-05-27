@@ -202,7 +202,7 @@ const ChartJobDemand = ({ stateId }) => {
     }, []);
 
     useEffect(() => {
-        gẹtCountJobByCategoryService()
+        getCountJobByCategoryService()
             .then((res) => {
                 if (res.status === 200) {
                     setDataNumber1(handleCategory(res.data.data.slice(0, 5)));

@@ -293,7 +293,9 @@ const TopJobSlide = () => {
     useEffect(() => {
         getListCategoryService()
             .then((res) => {
-                setCategories(res.data.data);
+                if (res.status == 200) {
+                    setCategories(res.data.data);
+                }
             })
             .catch((err) => {
                 console.log(err);
