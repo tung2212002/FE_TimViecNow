@@ -11,14 +11,14 @@ import { getCompanyByIdSerivce } from '../../../../../services/companyService';
 
 const cx = classNames.bind(styles);
 
-const GeneralCompanyFilter = ({ id = 579 }) => {
+const GeneralCompanyFilter = ({ id = 579, limit }) => {
     const [company, setCompany] = useState(null);
     const [listJob, setListJob] = useState([]);
 
     useEffect(() => {
         const params = {
             company_id: id,
-            limit: 10,
+            limit: limit ? limit : 5,
         };
         getListJobSerivce(params)
             .then((res) => {
@@ -85,6 +85,7 @@ const GeneralCompanyFilter = ({ id = 579 }) => {
 
 GeneralCompanyFilter.propTypes = {
     id: PropTypes.number,
+    limit: PropTypes.number,
 };
 
 export default GeneralCompanyFilter;

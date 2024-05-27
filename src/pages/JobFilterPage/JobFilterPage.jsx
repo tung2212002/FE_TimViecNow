@@ -10,7 +10,6 @@ import styles from './JobFilterPage.module.scss';
 import useDocumentTitle from '../../hooks/useDocumentTitle';
 import { searchJobService } from '../../services/jobService';
 import JobSuggest from '../../layouts/components/User/JobDetailPage/JobDetailBody/JobSuggest/JobSuggest';
-import { Spinner } from '../../components/common';
 
 import {
     SearchEmploymentTypeComponent,
@@ -37,20 +36,20 @@ const JobFilterPage = () => {
     const categories = useSelector(selectCategory);
     const fieds = useSelector(selectField);
     const {
-        keyword,
-        province_id,
-        job_experience_id,
-        min_salary,
-        max_salary,
-        salary_type,
-        show,
-        category_id,
-        fields,
-        employment_type,
-        job_position_id,
-        numberActive,
-        sort_by,
-    } = location.state;
+        keyword = '',
+        province_id = null,
+        job_experience_id = null,
+        min_salary = null,
+        max_salary = null,
+        salary_type = '',
+        show = false,
+        category_id = null,
+        fields = [],
+        employment_type = null,
+        job_position_id = null,
+        numberActive = 0,
+        sort_by = 'id',
+    } = location.state || {};
 
     const [jobs, setJobs] = useState({
         jobs: [],
@@ -90,6 +89,8 @@ const JobFilterPage = () => {
         { id: 3, name: 'Ngày cập nhật', value: 'updated_at' },
         { id: 4, name: 'Việc làm gấp', value: 'is_fis_urgent' },
     ];
+
+    const random = Math.floor(Math.random() * 500) + 1;
 
     const handlePrevPage = () => {
         const element = ref.current;
@@ -264,9 +265,9 @@ const JobFilterPage = () => {
         });
         setActiveFilter((prev) => ({
             ...prev,
-
             loading: true,
             sort_by: value,
+            page: 1,
         }));
         navigate(path.JOB_FILTER, {
             state: {
@@ -293,7 +294,7 @@ const JobFilterPage = () => {
 
     const handleSearch = () => {
         const params = {
-            skip: activeFilter.page - 1,
+            skip: (activeFilter.page - 1) * 40,
             limit: 40,
             order_by: 'desc',
         };
@@ -350,7 +351,8 @@ const JobFilterPage = () => {
                         total: res.data.data.count,
                         loading: false,
                     });
-                    activeFilter.loading === true && setActiveFilter({ ...activeFilter, loading: false, page: 1 });
+                    // activeFilter.loading === true && setActiveFilter({ ...activeFilter, loading: false, page: 1 });
+                    activeFilter.loading === true && setActiveFilter({ ...activeFilter, loading: false });
                 }
             })
             .catch((err) => {
@@ -592,7 +594,7 @@ const JobFilterPage = () => {
                         <div className={cx('company')}>
                             <h3 className={cx('title')}>Có thể bạn quan tâm</h3>
                             <div className={cx('info')}>
-                                <GeneralCompanyFilter />
+                                <GeneralCompanyFilter id={random} />
                             </div>
                         </div>
                         <div className={cx('detail-job')}>

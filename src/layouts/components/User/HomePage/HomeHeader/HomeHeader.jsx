@@ -11,10 +11,14 @@ import { icons, images } from '../../../../../assets';
 import SearchSection from './SearchSection/SearchSection';
 import ChartJob from './ChartJob/ChartJob';
 import { SelectionComponent } from '../../../../../components/common';
+import { getJobCruitmentDemandService } from '../../../../../services/jobService';
 
 const cx = classNames.bind(styles);
 
 const HomeHeader = ({ handleScrollToDashBoard }) => {
+    const date = new Date();
+    const [jobDemand, setJobDemand] = useState({});
+
     const listSubTitle = [
         'Định hướng nghề nghiệp ',
         'Việc làm mới ',
@@ -52,6 +56,16 @@ const HomeHeader = ({ handleScrollToDashBoard }) => {
         return () => clearInterval(interval);
     }, [subTitle]);
 
+    useEffect(() => {
+        getJobCruitmentDemandService()
+            .then((res) => {
+                setJobDemand(res.data.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
+
     return (
         <div className={cx('wrapper')} style={{ backgroundImage: `url(${images.background_header})` }}>
             <div className={cx('container')}>
@@ -77,19 +91,25 @@ const HomeHeader = ({ handleScrollToDashBoard }) => {
                             <div className={cx('job-market')}>
                                 <div className={cx('job-market__header')}>
                                     <span className={cx('title')}>
-                                        <img src={icons.job_market} alt="job_market" className={cx('icon')} /> Thị trường việc làm hôm này:
+                                        <img src={icons.job_market} alt="job_market" className={cx('icon')} /> Thị trường việc làm hôm nay:
                                     </span>
-                                    <span className={cx('datetime')}>01/01/2024</span>
+                                    <span className={cx('datetime')}>
+                                        {date.toLocaleDateString('vi-VN', {
+                                            day: 'numeric',
+                                            month: 'numeric',
+                                            year: 'numeric',
+                                        })}
+                                    </span>
                                 </div>
                                 <div className={cx('job-market__content')}>
                                     <div className={cx('job-hiring')}>
                                         <span className={cx('title')}>Việc làm đang tuyển</span>
-                                        <span className={cx('quantity')}>34.567</span>
+                                        <span className={cx('quantity')}>{jobDemand?.number_of_job_active}</span>
                                         <HiTrendingUp className={cx('icon')} />
                                     </div>
                                     <div className={cx('job-hiring')}>
                                         <span className={cx('title')}>Việc làm mới hôm nay</span>
-                                        <span className={cx('quantity')}>5.678</span>
+                                        <span className={cx('quantity')}>{jobDemand?.number_of_job_24h}</span>
                                     </div>
                                 </div>
                             </div>
