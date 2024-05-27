@@ -4,6 +4,9 @@ import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 
 import styles from './ChartJobDemand.module.scss';
+import { getCountJobBySalaryService, getCountJobByCategoryService } from '../../../../../services/jobService';
+import SkeletonChartComponent from '../../../../../components/skeleton/SkeletonChartComponent/SkeletonChartComponent';
+import SkeletonChartLabelComponent from '../../../../../components/skeleton/SkeletonChartComponent/SkeletonChartLabelComponent';
 
 const cx = classNames.bind(styles);
 
@@ -12,79 +15,61 @@ const ChartJobDemand = ({ stateId }) => {
     const [chartInstance, setChartInstance] = useState(null);
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-    const dataNumber1 = [
-        {
-            x: 'Kinh doanh / Bán hàng',
-            y: 11628,
-        },
-        {
-            x: 'Marketing / Truyền thông / Quảng cáo',
-            y: 5824,
-        },
-        {
-            x: 'Dịch vụ khách hàng',
-            y: 3815,
-        },
-        {
-            x: 'Tư vấn',
-            y: 3538,
-        },
-        {
-            x: 'Hành chính / Văn phòng',
-            y: 3422,
-        },
-    ];
+    const [loadingCategory, setLoadingCategory] = useState(true);
+    const [loadingSalary, setLoadingSalary] = useState(true);
 
-    const dataNumber2 = [
-        {
-            x: 'Dưới 3 triệu',
-            y: 580,
-        },
-        {
-            x: 'Từ 3 - 10 triệu',
-            y: 1074,
-        },
-        {
-            x: 'Từ 10 - 20 triệu',
-            y: 20926,
-        },
-        {
-            x: 'Từ 20 - 30 triệu',
-            y: 22137,
-        },
-        {
-            x: 'Trên 30 triệu',
-            y: 1611,
-        },
-        {
-            x: 'Thỏa thuận',
-            y: 7630,
-        },
-    ];
+    const [dataNumber1, setDataNumber1] = useState([]);
 
+    const [dataNumber2, setDataNumber2] = useState([]);
+
+    const handleCategory = (category) => {
+        const data = category.map((item) => ({
+            x: item.name,
+            y: item.count,
+        }));
+        return data;
+    };
+
+    const handleSalary = (salary) => {
+        const data = salary.map((item) => ({
+            x:
+                item.salary_type == 'deal'
+                    ? 'Thỏa thuận'
+                    : item.min_salary == 0
+                    ? `Dưới ${item.max_salary} triệu`
+                    : item.max_salary == 0
+                    ? `Trên ${item.min_salary} triệu`
+                    : `Từ ${item.min_salary} - ${item.max_salary} triệu`,
+            y: item.count,
+        }));
+        return data;
+    };
     const listItem1 = [
-        { color: 'rgb(17, 215, 105)', text: 'Kinh doanh / Bán hàng', colorRgba1: 'rgba(17, 215, 105, 0.4)', colorRgba2: 'rgba(17, 215, 105, 0.1)' },
+        { color: 'rgb(17, 215, 105)', colorRgba1: 'rgba(17, 215, 105, 0.4)', colorRgba2: 'rgba(17, 215, 105, 0.1)' },
         {
             color: 'rgb(48, 138, 255)',
-            text: 'Marketing / Truyền thông / Quảng cáo',
             colorRgba1: 'rgba(48, 138, 255, 0.4)',
             colorRgba2: 'rgba(48, 138, 255, 0.1)',
         },
-        { color: 'rgb(218, 131, 0)', text: 'Dịch vụ khách hàng', colorRgba1: 'rgba(218, 131, 0, 0.4)', colorRgba2: 'rgba(218, 131, 0, 0.1)' },
-        { color: 'rgb(28, 255, 241)', text: 'Tư vấn', colorRgba1: 'rgba(28, 255, 241, 0.4)', colorRgba2: 'rgba(28, 255, 241, 0.1)' },
-        { color: 'rgb(255, 231, 0)', text: 'Hành chính / Văn phòng', colorRgba1: 'rgba(255, 231, 0, 0.4)', colorRgba2: 'rgba(255, 231, 0, 0.1)' },
+        { color: 'rgb(218, 131, 0)', colorRgba1: 'rgba(218, 131, 0, 0.4)', colorRgba2: 'rgba(218, 131, 0, 0.1)' },
+        { color: 'rgb(28, 255, 241)', colorRgba1: 'rgba(28, 255, 241, 0.4)', colorRgba2: 'rgba(28, 255, 241, 0.1)' },
+        { color: 'rgb(255, 231, 0)', colorRgba1: 'rgba(255, 231, 0, 0.4)', colorRgba2: 'rgba(255, 231, 0, 0.1)' },
     ];
     const listItem2 = [
-        { color: 'rgb(17, 215, 105)', text: 'Dưới 3 triệu', colorRgba1: 'rgba(17, 215, 105, 0.4)', colorRgba2: 'rgba(17, 215, 105, 0.1)' },
-        { color: 'rgb(48, 138, 255)', text: 'Từ 3 - 10 triệu', colorRgba1: 'rgba(48, 138, 255, 0.4)', colorRgba2: 'rgba(48, 138, 255, 0.1)' },
-        { color: 'rgb(218, 131, 0)', text: 'Từ 10 - 20 triệu', colorRgba1: 'rgba(218, 131, 0, 0.4)', colorRgba2: 'rgba(218, 131, 0, 0.1)' },
-        { color: 'rgb(28, 255, 241)', text: 'Từ 20 - 30 triệu', colorRgba1: 'rgba(28, 255, 241, 0.4)', colorRgba2: 'rgba(28, 255, 241, 0.1)' },
-        { color: 'rgb(255, 231, 0)', text: 'Trên 30 triệu', colorRgba1: 'rgba(255, 231, 0, 0.4)', colorRgba2: 'rgba(255, 231, 0, 0.1)' },
-        { color: 'rgb(255, 255, 255)', text: 'Thỏa thuận', colorRgba1: 'rgba(255, 255, 255, 0.4)', colorRgba2: 'rgba(255, 255, 255, 0.1)' },
+        { color: 'rgb(17, 215, 105)', colorRgba1: 'rgba(17, 215, 105, 0.4)', colorRgba2: 'rgba(17, 215, 105, 0.1)' },
+        { color: 'rgb(48, 138, 255)', colorRgba1: 'rgba(48, 138, 255, 0.4)', colorRgba2: 'rgba(48, 138, 255, 0.1)' },
+        { color: 'rgb(218, 131, 0)', colorRgba1: 'rgba(218, 131, 0, 0.4)', colorRgba2: 'rgba(218, 131, 0, 0.1)' },
+        { color: 'rgb(28, 255, 241)', colorRgba1: 'rgba(28, 255, 241, 0.4)', colorRgba2: 'rgba(28, 255, 241, 0.1)' },
+        { color: 'rgb(255, 231, 0)', colorRgba1: 'rgba(255, 231, 0, 0.4)', colorRgba2: 'rgba(255, 231, 0, 0.1)' },
+        { color: 'rgb(255, 255, 255)', colorRgba1: 'rgba(255, 255, 255, 0.4)', colorRgba2: 'rgba(255, 255, 255, 0.1)' },
     ];
-    const [listItem, setListItem] = useState(listItem1);
-    const [inputData, setInputData] = useState(dataNumber1);
+    const [listItem, setListItem] = useState(null);
+
+    const [inputData, setInputData] = useState(null);
+
     useEffect(() => {
+        if ((stateId === 1 && loadingCategory) || (stateId === 2 && loadingSalary)) return;
+
         const generateGradient = (context, index) => {
             const canvas = context.chart.ctx;
             const gradient = canvas.createLinearGradient(0, 0, 0, 300);
@@ -203,7 +188,35 @@ const ChartJobDemand = ({ stateId }) => {
         }
     }, [windowWidth, chartInstance]);
 
-    return (
+    useEffect(() => {
+        getCountJobBySalaryService()
+            .then((res) => {
+                if (res.status === 200) {
+                    setDataNumber2(handleSalary(res.data.data));
+                    setLoadingSalary(false);
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
+
+    useEffect(() => {
+        gẹtCountJobByCategoryService()
+            .then((res) => {
+                if (res.status === 200) {
+                    setDataNumber1(handleCategory(res.data.data.slice(0, 5)));
+                    setInputData(handleCategory(res.data.data.slice(0, 5)));
+                    setListItem(listItem1);
+                    setLoadingCategory(false);
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
+
+    return (stateId === 1 && !loadingCategory) || (stateId === 2 && !loadingSalary) ? (
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
                 <canvas ref={chartRef} height="170" width={'352'} className={cx('canvas')} style={{ width: '352px', height: '170px' }}></canvas>
@@ -212,9 +225,20 @@ const ChartJobDemand = ({ stateId }) => {
                 {listItem.map((item, index) => (
                     <div className={cx('item')} key={index}>
                         <div className={cx('color')} style={{ background: item.color }}></div>
-                        <div className={cx('text')}>{item.text}</div>
+                        <div className={cx('text')}>{inputData[index].x}</div>
                     </div>
                 ))}
+            </div>
+        </div>
+    ) : (
+        <div className={cx('wrapper')}>
+            <div className={cx('container')}>
+                <div className={cx('skeleton')} style={{ width: '100%', height: '100px' }}>
+                    <SkeletonChartComponent scale={1} />
+                </div>
+            </div>
+            <div className={cx('footer')}>
+                <SkeletonChartLabelComponent scale={1} />
             </div>
         </div>
     );

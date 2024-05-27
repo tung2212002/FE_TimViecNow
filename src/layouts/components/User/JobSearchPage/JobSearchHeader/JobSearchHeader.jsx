@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import { useNavigate } from 'react-router-dom';
 
@@ -7,6 +7,8 @@ import { SearchSalaryComponent, SearchExpComponent, SearchJobSearchHeaderCompone
 import { images } from '../../../../../assets';
 import BannerSlide from './BannerSlide/BannerSlide';
 import path from '../../../../../constants/path';
+import { getJobCruitmentDemandService } from '../../../../../services/jobService';
+import { convertDateTime } from '../../../../../utils/convertTimeUtil';
 
 const cx = classNames.bind(styles);
 
@@ -20,6 +22,7 @@ const JobSearchHeader = () => {
         max_salary: 0,
         salary_type: '',
     });
+    const [jobDemand, setJobDemand] = useState({});
 
     const handleSetKeyword = (value) => {
         setSearch({
@@ -85,6 +88,16 @@ const JobSearchHeader = () => {
         });
     };
 
+    useEffect(() => {
+        getJobCruitmentDemandService()
+            .then((res) => {
+                setJobDemand(res.data.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
+
     return (
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
@@ -116,15 +129,15 @@ const JobSearchHeader = () => {
                 <div className={cx('box-work')}>
                     <div className={cx('work')}>
                         <span className={cx('label')}>Vị trí chờ bạn khám phá</span>
-                        <span className={cx('quantity')}>4.321</span>
+                        <span className={cx('quantity')}>{jobDemand.number_of_job_active}</span>
                     </div>
                     <div className={cx('work')}>
                         <span className={cx('label')}>Việc làm mới nhất</span>
-                        <span className={cx('quantity')}>321</span>
+                        <span className={cx('quantity')}>{jobDemand.number_of_job_24h}</span>
                     </div>
                     <div className={cx('work')}>
                         <span className={cx('label')}>Cập nhật lúc</span>
-                        <span className={cx('quantity')}>16:56 01/01/2024</span>
+                        <span className={cx('quantity')}>{jobDemand.time_scan && convertDateTime(jobDemand.time_scan)}</span>
                     </div>
                 </div>
                 <BannerSlide />
