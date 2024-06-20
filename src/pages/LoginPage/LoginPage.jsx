@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import classNames from 'classnames/bind';
 import { useDispatch } from 'react-redux';
 import { useGoogleLogin } from '@react-oauth/google';
@@ -15,11 +15,15 @@ import useDocumentTitle from '../../hooks/useDocumentTitle';
 import regexValidator from '../../utils/regexValidator';
 import { addToast, removeToast } from '../../redux/features/toast/toastSlice';
 import { Spinner } from '../../components/common';
+import { useLocation } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
 const LoginPage = () => {
     const dispatch = useDispatch();
+    // get path from Navigation
+    const location = useLocation();
+    const path = location?.state?.from;
     const isLogin = !(window.location.pathname === route.REGISTER);
 
     useDocumentTitle(isLogin ? 'Đăng nhập' : 'Đăng ký');

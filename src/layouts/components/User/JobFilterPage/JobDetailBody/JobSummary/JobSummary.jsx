@@ -9,7 +9,6 @@ import { Experience } from '../../../../../../constants';
 const cx = classNames.bind(styles);
 
 const JobSummary = ({ job }) => {
-    console.log(job);
     const employmentTypes = {
         full_time: 'Toàn thời gian',
         part_time: 'Bán thời gian',

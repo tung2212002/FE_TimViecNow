@@ -259,3 +259,10 @@
     transition: opacity 0.4s ease, max-height 0.6s ease;
     box-shadow: 1px 2px 20px rgba(0, 0, 0, 0.06);
 }
+
+
+.active {
+    div{
+        color: #00b14f;
+    }
+}

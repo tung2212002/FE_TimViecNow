@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import route from '../constants/route';
@@ -13,6 +13,8 @@ import { getInfoService } from '../services/userService';
 import { getInfoBusinessService } from '../services/businessService';
 
 const PublicRoute = ({ component: Component, layout: Layout, restricted, positionHeader, ...rest }) => {
+    const location = useLocation();
+    const previousPath = location.state?.from;
     const side = useSide();
     const dispatch = useDispatch();
     const [isLoading, setIsLoading] = useState({
@@ -21,7 +23,6 @@ const PublicRoute = ({ component: Component, layout: Layout, restricted, positio
     });
     const token = side === 'candidate' ? getLocalAccessToken() : getLocalBusinessAccessToken();
     const user = side === 'candidate' ? useSelector(selectUser) : useSelector(selectBusiness);
-
     useEffect(() => {
         if (user) {
             setIsLoading({ loading: false, valid: true });
@@ -70,7 +71,18 @@ const PublicRoute = ({ component: Component, layout: Layout, restricted, positio
             {!user && isLoading.loading && <div className="loading">...</div>}
 
             {user && !isLoading.loading && restricted && isLoading.valid && (
-                <Navigate to={side === 'candidate' ? route.HOMEPAGE : route.DASHBOARD_ADMIN} replace />
+                <Navigate
+                    to={
+                        side === 'candidate'
+                            ? previousPath && ![route.LOGIN, route.REGISTER].includes(previousPath)
+                                ? previousPath
+                                : route.HOMEPAGE
+                            : previousPath && ![route.LOGIN_BUSINESS, route.REGISTER_BUSINESS].includes(previousPath)
+                            ? previousPath
+                            : route.DASHBOARD_ADMIN
+                    }
+                    replace
+                />
             )}
 
             {user && !isLoading.loading && !restricted && isLoading.valid && (

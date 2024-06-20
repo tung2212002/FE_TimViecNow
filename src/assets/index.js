@@ -95,6 +95,7 @@ const images = {
     tab_active: require('./images/tab_active.svg'),
     bg_search_right: require('./images/bg-search-right.png'),
     bg_search_left_opacity: require('./images/bg-search-left-opacity.png'),
+    arrow_desktop: require('./images/arrow_desktop.png'),
     cv: require('./images/cv.png'),
     chart: require('./images/chart.png'),
     report_1: require('./images/report_1.png'),
@@ -118,6 +119,9 @@ const images = {
     banner_campaign: require('./images/banner-campaign.png'),
     not_found: require('./images/not_found.png'),
     verify_email: require('./images/verify_email.png'),
+    empty_02: require('./images/empty_02.png'),
+    company_billboard: require('./images/company-billBoard.png'),
+    image_search_company: require('./images/img-search-company.png'),
 };
 
 const gifs = {

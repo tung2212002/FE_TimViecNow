@@ -1,0 +1,276 @@
+.wrapper {
+    background: #fff;
+    border: 1px solid #f4f4f4;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    padding: 16px;
+    width: 100%;
+}
+
+.wrapper-1{
+    background-color: #fff;
+    &:hover {
+        background-color: #f2fbf6;
+        border: 1px solid transparent;
+    }
+}
+
+
+.wrapper-2{
+    background-color: #f2fbf6 !important;
+    border: 1px solid #acf2cb !important;
+    box-shadow: 0 8px 16px 0 rgba(1, 18, 34, .04);
+    &:hover {
+        background-color: #f2fbf6 !important;
+        border: 1px solid #00b14f !important;
+
+    }
+}
+
+
+.container {
+    display: flex;
+    gap: 16px;
+    position: relative;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    border-radius: 8px;
+    flex-shrink: 0;
+    height: 100px;
+    outline: 1px solid #e9eaec;
+    padding: 8px;
+    width: 100px !important;
+
+
+    .logo {
+        border-radius: 5px;
+        height: 100%;
+        object-fit: contain;
+        width: 100%;
+    }
+
+    .flash {
+        left: -11px;
+        position: absolute;
+        top: -21px;
+        .icon {
+            height: 33.76px;
+            width: 24px;
+            object-fit: contain;
+            border-radius: 5px;
+        }
+    }
+}
+
+
+.info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+
+        .title-block {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .title {
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            display: -webkit-box;
+            color: #212f3f;
+            flex: 1;
+            margin-bottom: 4px;
+            margin-right: 24px;
+            margin-top: 0;
+            overflow: hidden;
+            overflow-wrap: break-word;
+            text-overflow: ellipsis;
+
+            &:hover {
+                .title-link {
+                    text-decoration: underline;
+                }
+            }
+        }
+
+        .title-link {
+            color: #212f3f;
+            font-size: 17px;
+            font-weight: 700;
+            line-height: 25px;
+
+        }
+
+        .company-name{
+            font-size: 15px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 20px;
+            margin-bottom: 8px;
+        
+            .company-link {
+                -webkit-line-clamp: 1;
+                -webkit-box-orient: vertical;
+                display: -webkit-box;
+                color: #424e5c;
+                margin-top: 0;
+                overflow: hidden;
+                overflow-wrap: break-word;
+                text-overflow: ellipsis;
+                width: fit-content;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+
+        .job-applied-date{
+
+            margin-bottom: 10px;
+            .date{
+                color: #424e5c;
+                font-size: 15px;
+                font-weight: 400;
+                line-height: 20px;
+            }
+        }
+
+
+        .salary {
+            flex-shrink: 0;
+            min-width: 150px;
+            overflow: hidden;
+            position: relative;
+            text-align: right;
+            .label {
+                align-items: center;
+                color: #00b14f;
+                display: flex;
+                font-size: 15px;
+                font-weight: 700;
+                gap: 10px;
+                justify-content: flex-end;
+                line-height: 20px;
+                margin-bottom: 0;
+                margin-top: 0;
+                white-space: nowrap;
+            }
+        
+    }
+
+    .box-footer {
+        display: flex;
+        align-items: center;
+        column-gap: 24px;
+        justify-content: space-between;
+
+        .job-applied-date{
+            color: #999;
+            font-size: 15px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 20px;
+
+            .cv-link{
+                color: #00b14f;
+                text-decoration: underline;
+            }
+        }
+
+
+        .action-block {
+            align-items: flex-end;
+            display: flex;
+            gap: 8px;
+            .btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 4px;
+                background: #e5f7ed;
+                border-radius: 30px;
+                color: #00b14f;
+                font-size: 15px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 20px;
+                margin-left: 8px;
+                padding: 4px 8px;
+
+                &:hover {
+                    background: #c0eed4;
+                    color: #00b14f;
+                    text-decoration: none;
+                
+                }
+            }
+
+        }
+
+
+    }
+
+    .box-cv-status{
+        display: flex;
+        justify-content: space-between;
+        border-top: 1px solid #e7e7e7;
+        column-gap: 12px;
+        margin-top: 12px;
+        padding-top: 12px;
+
+        .cv-status-text{
+            color: #6f7882;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 20px;
+            width: calc(50% - 6px);
+        }
+
+        .applied{
+            color: #3b78cd;
+        }
+
+        .cv-status-time{
+            color: #6f7882;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 20px;
+            width: calc(50% - 6px);
+            text-align: right;
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .apply,
+    .salary {
+        display: none !important;
+    }
+
+    .logo-container {
+        height: 78px !important;
+        padding: 3px !important;
+        width: 78px !important;
+    }
+
+    .title-link {
+        font-size: 15px !important;
+        font-weight: 700 !important;
+        line-height: 22px !important;
+    }
+
+    .company-link {
+        font-size: 12px !important;
+        line-height: 18px !important;
+    }
+}

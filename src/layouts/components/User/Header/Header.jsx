@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import classNames from 'classnames/bind';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -36,10 +36,20 @@ const cx = classNames.bind(styles);
 const Header = ({ positionHeader }) => {
     const auth = useSelector(selectAuth);
     const dispatch = useDispatch();
+    const location = useLocation();
+    const path = '/' + location.pathname.split('/')[1];
 
     const handleLogout = () => {
         logoutService().then(() => {
             dispatch(logout());
+        });
+    };
+
+    const handleScroll = () => {
+        // smooth scroll
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
         });
     };
 
@@ -58,12 +68,12 @@ const Header = ({ positionHeader }) => {
                 {
                     icon: IoBriefcaseOutline,
                     label: 'Việc làm đã ứng tuyển',
-                    to: '/',
+                    to: route.APPLIED_JOBS,
                 },
                 {
                     icon: FaRegHeart,
                     label: 'Việc làm đã lưu',
-                    to: '/',
+                    to: route.SAVED_JOBS,
                     addHr: true,
                 },
                 {
@@ -73,164 +83,189 @@ const Header = ({ positionHeader }) => {
                     badgeId: 2,
                     size: 'lg',
                 },
-                {
-                    icon: FaLaptopCode,
-                    label: 'Việc làm IT',
-                    to: '/',
-                    badgeId: 1,
-                    size: 'lg',
-                },
-                {
-                    icon: LiaMedalSolid,
-                    label: 'Việc làm Senior',
-                    to: '/',
-                    badgeId: 1,
-                },
+                // {
+                //     icon: FaLaptopCode,
+                //     label: 'Việc làm IT',
+                //     to: '/',
+                //     badgeId: 1,
+                //     size: 'lg',
+                // },
+                // {
+                //     icon: LiaMedalSolid,
+                //     label: 'Việc làm Senior',
+                //     to: '/',
+                //     badgeId: 1,
+                // },
             ],
         },
         {
             label: 'Hồ sơ & CV',
-            to: route.SUBPAGE,
+            to: route.MANAGER_CV,
             subItems: [
                 {
                     icon: RiFileUserLine,
                     label: 'Quản lý CV',
-                    to: '/',
+                    to: route.MANAGER_CV,
                 },
-                {
-                    icon: FaRegFileLines,
-                    label: 'Quản lý Cover Letter',
-                    to: '/',
-                    addHr: true,
-                },
-                {
-                    icon: RiFileUserLine,
-                    label: 'Mẫu CV',
-                    to: '/',
-                },
-                {
-                    icon: FaRegFileLines,
-                    label: 'Mẫu Cover Letter',
-                    to: '/',
-                    addHr: true,
-                },
-                {
-                    icon: RiFileUserLine,
-                    label: 'Dịch vụ tư vấn CV',
-                    to: '/',
-                },
+                // {
+                //     icon: FaRegFileLines,
+                //     label: 'Quản lý Cover Letter',
+                //     to: '/',
+                //     addHr: true,
+                // },
+                // {
+                //     icon: RiFileUserLine,
+                //     label: 'Mẫu CV',
+                //     to: '/',
+                // },
+                // {
+                //     icon: FaRegFileLines,
+                //     label: 'Mẫu Cover Letter',
+                //     to: '/',
+                //     addHr: true,
+                // },
+                // {
+                //     icon: RiFileUserLine,
+                //     label: 'Dịch vụ tư vấn CV',
+                //     to: '/',
+                // },
                 {
                     icon: TbFilePencil,
                     label: 'Hướng dẫn viết CV theo ngành nghề',
-                    to: '/',
+                    to: '/1',
                     badgeId: 1,
                 },
-                {
-                    icon: TbFileCheck,
-                    label: 'Thư viện CV theo ngành nghề',
-                    to: '/',
-                    badgeId: 1,
-                    addHr: true,
-                },
-                {
-                    icon: TbUserSquare,
-                    label: 'CVNow Profile',
-                    to: '/',
-                    badgeId: 1,
-                },
+                // {
+                //     icon: TbFileCheck,
+                //     label: 'Thư viện CV theo ngành nghề',
+                //     to: '/',
+                //     badgeId: 1,
+                //     addHr: true,
+                // },
+                // {
+                //     icon: TbUserSquare,
+                //     label: 'CVNow Profile',
+                //     to: '/',
+                //     badgeId: 1,
+                // },
             ],
         },
         {
             label: 'Công ty',
-            to: route.SUBPAGE,
+            to: route.COMPANY,
             subItems: [
                 {
                     icon: BiBuildings,
                     label: 'Danh sách công ty',
-                    to: '/',
+                    to: '/1',
                 },
                 {
                     icon: FaStarOfDavid,
                     label: 'Top công ty',
-                    to: '/',
+                    to: '/2',
                 },
             ],
         },
-        {
-            label: 'Phát triển sự nghiệp',
-            to: '/',
-            subItems: [
-                {
-                    icon: FaChalkboardUser,
-                    label: 'Trắc nghiệm tính cách MBTI',
-                    to: '/',
-                    size: 'lg',
-                },
-                {
-                    icon: FaChalkboardUser,
-                    label: 'Trắc nghiệm MI',
-                    to: '/',
-                    size: 'lg',
-                    addHr: true,
-                },
-                {
-                    icon: TbFileCertificate,
-                    label: 'TVNow Contest',
-                    to: '/',
-                },
-                {
-                    icon: TbFilePencil,
-                    label: 'TVNow Skills',
-                    to: '/',
-                    badgeId: 1,
-                },
-            ],
-        },
+        // {
+        //     label: 'Phát triển sự nghiệp',
+        //     to: '/',
+        //     subItems: [
+        //         {
+        //             icon: FaChalkboardUser,
+        //             label: 'Trắc nghiệm tính cách MBTI',
+        //             to: '/',
+        //             size: 'lg',
+        //         },
+        //         {
+        //             icon: FaChalkboardUser,
+        //             label: 'Trắc nghiệm MI',
+        //             to: '/',
+        //             size: 'lg',
+        //             addHr: true,
+        //         },
+        //         {
+        //             icon: TbFileCertificate,
+        //             label: 'TVNow Contest',
+        //             to: '/',
+        //         },
+        //         {
+        //             icon: TbFilePencil,
+        //             label: 'TVNow Skills',
+        //             to: '/',
+        //             badgeId: 1,
+        //         },
+        //     ],
+        // },
         {
             label: 'Công cụ',
-            to: '/',
+            to: route.TOOL,
             subItems: [
                 {
                     icon: FaScaleBalanced,
                     label: 'Tính lương Gross/Net',
-                    to: '/',
+                    to: '/1',
                     size: 'lg',
                 },
                 {
                     icon: FaChartColumn,
                     label: 'Tính thuế thu nhập cá nhân',
-                    to: '/',
+                    to: '/2',
                     size: 'lg',
                     addHr: true,
                 },
                 {
                     icon: TbCoins,
                     label: 'Tính lãi suất kép',
-                    to: '/',
+                    to: '/3',
                 },
                 {
                     icon: TbPigMoney,
                     label: 'Lập kế hoạch tiết kiệm',
-                    to: '/',
+                    to: '/4',
                     addHr: true,
                 },
                 {
                     icon: BiShieldX,
                     label: 'Tính bảo hiểm thất nghiệp',
-                    to: '/',
+                    to: '/5',
                 },
                 {
                     icon: IoShieldCheckmarkOutline,
                     label: 'Tính bảo hiểm xã hội một lần',
-                    to: '/',
+                    to: '/6',
+                },
+                {
+                    icon: FaChalkboardUser,
+                    label: 'Trắc nghiệm tính cách MBTI',
+                    to: '/7',
+                    size: 'lg',
+                },
+                {
+                    icon: FaChalkboardUser,
+                    label: 'Trắc nghiệm MI',
+                    to: '/8',
+                    size: 'lg',
+                    addHr: true,
+                },
+                {
+                    icon: TbFileCertificate,
+                    label: 'TVNow Contest',
+                    to: '/9',
+                },
+                {
+                    icon: TbFilePencil,
+                    label: 'TVNow Skills',
+                    to: '/10',
+                    badgeId: 1,
                 },
             ],
-        },
-        {
-            label: 'Mở quà - Đón lợi thế',
-            to: '/',
             icon: gifs.gift_menu,
         },
+        // {
+        //     label: 'Mở quà - Đón lợi thế',
+        //     to: '/',
+        //     icon: gifs.gift_menu,
+        // },
     ];
 
     const accountItems = [
@@ -298,10 +333,14 @@ const Header = ({ positionHeader }) => {
                 <ul className={cx('navbar-mid')}>
                     {navItems.map((item, index) => (
                         <li key={index} className={cx('item', 'nav-item')}>
-                            <NavLink to={item.to} className={cx('link')} activeclassname={cx('active')}>
+                            <Link
+                                to={item.to}
+                                className={cx('link', [item.to, ...item.subItems.map((subItem) => subItem.to)].includes(path) ? 'active' : '')}
+                                onClick={handleScroll}
+                            >
                                 <div className={cx('label')}>{item.label}</div>
                                 {item.icon && <img className={cx('icon')} src={item.icon} alt="gift" />}
-                            </NavLink>
+                            </Link>
                             {item.subItems && (
                                 <div className={cx('menu')}>
                                     <NavBar key={index}>
