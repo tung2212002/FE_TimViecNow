@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 
@@ -15,6 +15,7 @@ const SelectionComponent = ({
     styleDropdown,
     styleButton,
     itemSelect,
+    styleOnActive,
     disabled = false,
 }) => {
     const ulRef = useRef(null);
@@ -50,7 +51,7 @@ const SelectionComponent = ({
     return (
         <div className={cx('wrapper')}>
             <div className={cx('selection')} ref={ulRef}>
-                <div className={cx('header')} onMouseUp={disabled ? null : handleDropDown}>
+                <div className={cx('header', { 'on-active': styleOnActive })} onMouseUp={disabled ? null : handleDropDown} style={styleOnActive}>
                     <HeaderComponent />
                     <button className={cx('button')} type="button" style={styleButton}>
                         {Icon && <Icon className={cx('icon', 'icon-chevron-down')} />}
@@ -88,6 +89,7 @@ SelectionComponent.propTypes = {
     styleDropdown: PropTypes.object,
     disabled: PropTypes.bool,
     styleButton: PropTypes.object,
+    styleOnActive: PropTypes.object,
 };
 
 export default SelectionComponent;

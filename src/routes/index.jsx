@@ -1,5 +1,5 @@
 import { useLayoutEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { DefaultLayout } from '../layouts';
@@ -11,9 +11,14 @@ import { setField, setProvince, setSkill, setCategory } from '../redux/features/
 import { getListSkillService } from '../services/skillService';
 import { getListFieldService } from '../services/fieldService';
 import { getListCategoryService } from '../services/categoryService';
+import { selectBusiness } from '../redux/features/authBusiness/authSlide';
+import { selectUser } from '../redux/features/auth/authSlide';
+import useSide from '../hooks/useSIde';
 
 const AppRouter = () => {
     const dispatch = useDispatch();
+    const side = useSide();
+    const user = side === 'candidate' ? useSelector(selectUser) : useSelector(selectBusiness);
 
     const handleGetConfig = () => {
         getListProvinceService()
@@ -68,17 +73,18 @@ const AppRouter = () => {
     return (
         <BrowserRouter>
             <Routes>
-                {publicRoutes.map((route, index) => {
-                    const Layout = route.layout || DefaultLayout;
-                    const Page = route.component;
-                    return (
-                        <Route
-                            key={index}
-                            path={route.path}
-                            element={<PublicRoute component={Page} layout={Layout} restricted={route.restricted} positionHeader={route.positionHeader} />}
-                        />
-                    );
-                })}
+                {!user &&
+                    publicRoutes.map((route, index) => {
+                        const Layout = route.layout || DefaultLayout;
+                        const Page = route.component;
+                        return (
+                            <Route
+                                key={index}
+                                path={route.path}
+                                element={<PublicRoute component={Page} layout={Layout} restricted={route.restricted} positionHeader={route.positionHeader} />}
+                            />
+                        );
+                    })}
                 {privateRoutes.map((route, index) => {
                     const Layout = route.layout || DefaultLayout;
                     const Page = route.component;
@@ -99,6 +105,28 @@ const AppRouter = () => {
                         />
                     );
                 })}
+
+                {user &&
+                    publicRoutes.map((route, index) => {
+                        const Layout = route.layout || DefaultLayout;
+                        const Page = route.component;
+                        return (
+                            <Route
+                                key={index}
+                                path={route.path}
+                                element={
+                                    <PrivateRoute
+                                        component={Page}
+                                        layout={Layout}
+                                        isPrivate={route.isPrivate}
+                                        restricted={route.restricted}
+                                        positionHeader={route.positionHeader}
+                                        verifyBusinessEmail={route.verifyBusinessEmail}
+                                    />
+                                }
+                            />
+                        );
+                    })}
             </Routes>
         </BrowserRouter>
     );

@@ -51,7 +51,7 @@ const GeneralJobFilter = ({ job }) => {
                             })}
                             maxWidth="200px"
                         >
-                            <a href={`viec-lam/chi-tiet/${job.id}/${slugConvert(job.title)}`} target="_blank" rel="noreferrer" className={cx('text')}>
+                            <a href={`/viec-lam/chi-tiet/${job.id}/${slugConvert(job.title)}`} target="_blank" rel="noreferrer" className={cx('text')}>
                                 {setProvince.length <= 2 ? setProvince.join(', ') : `${setProvince[0]} & ${setProvince.length - 1} nơi khác`}
                             </a>
                         </TippyText>

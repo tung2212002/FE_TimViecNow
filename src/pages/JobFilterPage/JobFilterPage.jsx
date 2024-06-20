@@ -60,7 +60,7 @@ const JobFilterPage = () => {
     const [activeFilter, setActiveFilter] = useState({
         show: show || false,
         category_id: category_id || 0,
-        fields: fields || [0],
+        fields: fields.length > 0 ? fields : [0],
         employment_type: employment_type || 0,
         job_position_id: job_position_id || 0,
         numberActive: numberActive || 0,

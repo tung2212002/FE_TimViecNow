@@ -7,6 +7,10 @@ import LoginPage from './LoginPage/LoginPage';
 import MatchingJobsPage from './MatchingJobPage/MatchingJobsPage';
 import NotFoundPage from './NotFoundPage/NotFoundPage';
 import CompanyDetailPage from './CompanyDetailPage/CompanyDetailPage';
+import AppliedJobPage from './AppliedJobPage/AppliedJobPage';
+import SavedJobPage from './SavedJobPage/SavedJobPage';
+import ListCompanyPage from './ListCompanyPage/ListCompanyPage';
+import SearchCompanyPage from './SearchCompanyPage/SearchCompanyPage';
 // Page for Manager
 import ManagerRegisterPage from './ManagerRegisterPage/ManagerRegisterPage';
 import ManagerLoginPage from './ManagerLoginPage/ManagerLoginPage';
@@ -28,4 +32,8 @@ export {
     DashboardPostPage,
     CompanyDetailPage,
     JobFilterPage,
+    AppliedJobPage,
+    SavedJobPage,
+    ListCompanyPage,
+    SearchCompanyPage,
 };

@@ -305,7 +305,7 @@ const DashboardPostJobPage = () => {
                             <button
                                 className={cx('button', 'button-save-draft')}
                                 onClick={() => {
-                                    console.log(job);
+                                    // console.log(job);
                                 }}
                                 disabled={loading.draft || loading.post}
                             >
