@@ -5,6 +5,16 @@ export const getCompanyByIdSerivce = async (id) => {
     return response;
 };
 
+export const searchCompanyService = async (params) => {
+    const response = await request.apiAuth.get('/company/search', {
+        params,
+        paramsSerializer: {
+            indexes: null,
+        },
+    });
+    return response;
+};
+
 export const getListCompanySerivce = async (params) => {
     const response = await request.apiAuth.get('/company', {
         params,

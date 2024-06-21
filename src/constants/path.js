@@ -7,10 +7,10 @@ export default {
     JOB_SEARCH_DETAIL: '/viec-lam/chi-tiet',
     COMPANY_DETAIL: '/cong-ty',
     MATCHING_JOBS: '/viec-lam-phu-hop',
+    APPLIED_JOBS: '/lich-su-ung-tuyen',
     SUBPAGE: '/subpage',
     LOGIN: '/login',
     REGISTER: '/register',
-
     MANAGER_REGISTER: '/tuyen-dung/app/register',
     MANAGER_LOGIN: '/tuyen-dung/app/login',
     DASHBOARD_HOME: '/tuyen-dung/app/dashboard',

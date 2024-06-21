@@ -1,7 +1,12 @@
 import { useEffect, useState } from 'react';
 
 const useSide = () => {
-    const [side, setSide] = useState('');
+    const getInitialSide = () => {
+        const currentPath = window.location.pathname;
+        return currentPath.startsWith('/tuyen-dung/app') ? 'employer' : 'candidate';
+    };
+
+    const [side, setSide] = useState(getInitialSide);
 
     useEffect(() => {
         const updateSide = () => {
@@ -9,8 +14,6 @@ const useSide = () => {
             const newSide = currentPath.startsWith('/tuyen-dung/app') ? 'employer' : 'candidate';
             setSide(newSide);
         };
-
-        updateSide();
 
         window.addEventListener('popstate', updateSide);
 
