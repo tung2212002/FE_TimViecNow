@@ -15,7 +15,7 @@
     transform: scale(0.8);
 }
 
-.row{
+.row {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -24,8 +24,8 @@
     gap: 24px;
 }
 
-.col{
-    width:20%;
+.col {
+    width: 20%;
 }
 
 .col:first-child {

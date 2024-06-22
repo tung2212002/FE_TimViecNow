@@ -2,9 +2,9 @@ import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 
 import styles from './JobSummary.module.scss';
-import { icons } from '../../../../../../assets';
-import { convertSalary } from '../../../../../../utils/convertSalary';
-import { Experience } from '../../../../../../constants';
+import { icons } from '@assets';
+import { convertSalary } from '@utils/convertSalary';
+import { Experience } from '@constants';
 
 const cx = classNames.bind(styles);
 

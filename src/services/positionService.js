@@ -1,4 +1,4 @@
-import * as request from '../utils/axios';
+import * as request from '@utils/axios';
 
 export const getJobPositionByIdService = async (id) => {
     const response = await request.api.get('/position/job_position/' + id);

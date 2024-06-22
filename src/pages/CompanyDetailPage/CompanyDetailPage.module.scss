@@ -3,35 +3,28 @@
     // min-height: 100vh;
 }
 
-
 @media screen and (max-width: 768px) {
-    .container{
-
+    .container {
     }
 }
 
 @media screen and (max-width: 992px) {
-    .container{
-
+    .container {
         flex-direction: column !important;
     }
-    
-    .company-body-main{
+
+    .company-body-main {
         width: 100% !important;
     }
 
-    .company-body-sub{
+    .company-body-sub {
         width: 100% !important;
     }
 }
 
 @media screen and (max-width: 1200px) {
-    .container{
-
+    .container {
     }
-
-
-    
 }
 
 .container {
@@ -81,30 +74,27 @@
     }
 }
 
-.company-header{
+.company-header {
     margin-bottom: 24px;
     width: 100%;
 }
 
 .company-body-main {
-    
     width: calc(100% / 3 * 2 - 15px);
     margin-bottom: 32px;
-    .company-description , .company-recruitment{
+    .company-description,
+    .company-recruitment {
         margin-bottom: 32px;
     }
-    
 }
 
 .company-body-sub {
-
     width: calc(100% / 3 - 15px);
     float: right;
 
     .company-location {
         margin-bottom: 32px;
     }
-    
 }
 
 @media (min-width: 1200px) {
@@ -124,18 +114,15 @@
 }
 
 @media screen and (max-width: 992px) {
-
 }
 
 @media screen and (max-width: 1200px) {
-    .company-header{
+    .company-header {
         margin-top: 19px;
         min-height: 492px;
     }
 
-    
-
-    .company-path{
+    .company-path {
         display: none !important;
     }
 }

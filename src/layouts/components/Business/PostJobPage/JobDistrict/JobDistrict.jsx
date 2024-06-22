@@ -6,9 +6,9 @@ import PropTypes from 'prop-types';
 import { HiXMark } from 'react-icons/hi2';
 
 import styles from './JobDistrict.module.scss';
-import { InputSelectorComponent } from '../../../../../components/common';
-import { getListDistrictService } from '../../../../../services/locationService';
-import { removeDistrict, selectPostJob, setDistrict } from '../../../../../redux/features/postJob/postJobSlide';
+import { InputSelectorComponent } from '@components/common';
+import { getListDistrictService } from '@services/locationService';
+import { removeDistrict, selectPostJob, setDistrict } from '@redux/features/postJob/postJobSlide';
 
 const cx = classNames.bind(styles);
 

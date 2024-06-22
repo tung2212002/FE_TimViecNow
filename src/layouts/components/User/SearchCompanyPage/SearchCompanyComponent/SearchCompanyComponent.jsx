@@ -5,8 +5,8 @@ import { FaLocationArrow, FaInfo } from 'react-icons/fa';
 import { LuDot } from 'react-icons/lu';
 
 import styles from './SearchCompanyComponent.module.scss';
-import path from '../../../../../constants/path';
-import slugConvert from '../../../../../utils/slugCovnert';
+import path from '@constants/path';
+import slugConvert from '@utils/slugCovnert';
 
 const cx = classNames.bind(styles);
 

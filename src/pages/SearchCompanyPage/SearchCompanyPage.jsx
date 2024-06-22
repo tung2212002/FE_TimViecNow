@@ -3,13 +3,13 @@ import classNames from 'classnames/bind';
 import { useLocation } from 'react-router-dom';
 
 import { FaSearch } from 'react-icons/fa';
+import { VscChevronLeft, VscChevronRight } from 'react-icons/vsc';
 
 import styles from './SearchCompanyPage.module.scss';
-import { images } from '../../assets';
-import { searchCompanyService } from '../../services/companyService';
-import { SkeletonCompanyComponent } from '../../components/skeleton';
-import { SearchCompanyComponent } from '../../layouts/components/User/SearchCompanyPage';
-import { VscChevronLeft, VscChevronRight } from 'react-icons/vsc';
+import { images } from '@assets';
+import { searchCompanyService } from '@services/companyService';
+import { SkeletonCompanyComponent } from '@components/skeleton';
+import { SearchCompanyComponent } from '@layouts/components/User/SearchCompanyPage';
 
 const cx = classNames.bind(styles);
 

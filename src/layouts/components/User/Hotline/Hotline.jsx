@@ -5,7 +5,7 @@ import { FaPhoneAlt } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 
 import styles from './Hotline.module.scss';
-import { images } from '../../../../assets';
+import { images } from '@assets';
 import BoxPhone from './BoxPhone/BoxPhone';
 
 const cx = classNames.bind(styles);

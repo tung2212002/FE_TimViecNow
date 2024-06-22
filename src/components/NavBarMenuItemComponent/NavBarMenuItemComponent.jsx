@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { FaArrowRightLong } from 'react-icons/fa6';
 
 import styles from './NavBarMenuItemComponent.module.scss';
-import { bageNavbarMenu } from '../../constants';
+import { bageNavbarMenu } from '@constants';
 
 const cx = classNames.bind(styles);
 

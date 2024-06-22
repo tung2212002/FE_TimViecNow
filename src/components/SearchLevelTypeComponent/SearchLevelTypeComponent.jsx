@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import styles from './SearchLevelTypeComponent.module.scss';
 import { GiRank3 } from 'react-icons/gi';
 
-import SelectSearchComponent from '../common/SelectSearchComponent/SelectSearchComponent';
-import { listJobEmployerLevel } from '../../constants';
+import SelectSearchComponent from '@components/common/SelectSearchComponent/SelectSearchComponent';
+import { listJobEmployerLevel } from '@constants';
 
 const cx = classNames.bind(styles);
 

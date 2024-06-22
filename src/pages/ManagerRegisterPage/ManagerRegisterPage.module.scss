@@ -25,13 +25,11 @@
     .img-right {
         display: none;
     }
-
-    
 }
 
 .modal-container {
-    max-width: 500px ;
-    margin: 1.75rem auto ;
+    max-width: 500px;
+    margin: 1.75rem auto;
     min-width: 875px;
     position: relative;
     width: auto;
@@ -79,7 +77,6 @@
             height: 1px;
             background-color: #e9ecef;
             bottom: 0;
-
         }
     }
 
@@ -139,28 +136,26 @@
     }
 }
 
-.container{
+.container {
     overflow: auto;
     height: 100vh;
     display: flex;
     padding-bottom: 200px;
 
-    .content{
+    .content {
         max-width: 850px;
         background-color: #fff;
         padding: 20px;
         margin: auto;
         margin-top: 24px;
 
-        .content-header{
-
-            .content-header-logo{
+        .content-header {
+            .content-header-logo {
                 margin-bottom: 10px;
                 height: 60px;
-
             }
 
-            .content-header-title{
+            .content-header-title {
                 font-size: 24px;
                 font-weight: 600;
                 color: #00b14f;
@@ -168,30 +163,28 @@
                 margin-bottom: 8px;
             }
 
-            .content-header-subtitle{
+            .content-header-subtitle {
                 color: #212f3f;
                 font-size: 14px;
                 font-weight: 300;
                 font-style: normal;
             }
-            
         }
-        
     }
 }
 
-.img-right{
+.img-right {
     position: sticky;
     top: 0;
     z-index: 5;
     width: 33.33%;
-    .img-container{
-        width: 100% ;
+    .img-container {
+        width: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
         overflow: hidden;
-        .img-right-banner{
+        .img-right-banner {
             width: 100% !important;
             max-width: 100%;
             height: auto;

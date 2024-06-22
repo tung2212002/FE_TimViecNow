@@ -2,9 +2,9 @@ import React, { useRef } from 'react';
 import classNames from 'classnames/bind';
 
 import styles from './HomePage.module.scss';
-import useDocumentTitle from '../../hooks/useDocumentTitle';
-import { HomeHeader } from '../../layouts/components/User/HomePage';
-import { FeatureJob, TopCompanySlide, DashBoard, TopJobSlide, SEO } from '../../layouts/components/User';
+import useDocumentTitle from '@hooks/useDocumentTitle';
+import { HomeHeader } from '@layouts/components/User/HomePage';
+import { FeatureJob, TopCompanySlide, DashBoard, TopJobSlide, SEO } from '@layouts/components/User';
 
 const cx = classNames.bind(styles);
 

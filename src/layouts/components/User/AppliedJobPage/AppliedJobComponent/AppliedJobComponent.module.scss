@@ -8,7 +8,7 @@
     width: 100%;
 }
 
-.wrapper-1{
+.wrapper-1 {
     background-color: #fff;
     &:hover {
         background-color: #f2fbf6;
@@ -16,18 +16,15 @@
     }
 }
 
-
-.wrapper-2{
+.wrapper-2 {
     background-color: #f2fbf6 !important;
     border: 1px solid #acf2cb !important;
-    box-shadow: 0 8px 16px 0 rgba(1, 18, 34, .04);
+    box-shadow: 0 8px 16px 0 rgba(1, 18, 34, 0.04);
     &:hover {
         background-color: #f2fbf6 !important;
         border: 1px solid #00b14f !important;
-
     }
 }
-
 
 .container {
     display: flex;
@@ -46,7 +43,6 @@
     outline: 1px solid #e9eaec;
     padding: 8px;
     width: 100px !important;
-
 
     .logo {
         border-radius: 5px;
@@ -68,104 +64,99 @@
     }
 }
 
-
 .info-container {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     width: 100%;
 
-        .title-block {
-            display: flex;
-            align-items: baseline;
-            justify-content: space-between;
-            margin-bottom: 8px;
-        }
+    .title-block {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        margin-bottom: 8px;
+    }
 
-        .title {
-            -webkit-line-clamp: 2;
+    .title {
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        display: -webkit-box;
+        color: #212f3f;
+        flex: 1;
+        margin-bottom: 4px;
+        margin-right: 24px;
+        margin-top: 0;
+        overflow: hidden;
+        overflow-wrap: break-word;
+        text-overflow: ellipsis;
+
+        &:hover {
+            .title-link {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    .title-link {
+        color: #212f3f;
+        font-size: 17px;
+        font-weight: 700;
+        line-height: 25px;
+    }
+
+    .company-name {
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 20px;
+        margin-bottom: 8px;
+
+        .company-link {
+            -webkit-line-clamp: 1;
             -webkit-box-orient: vertical;
             display: -webkit-box;
-            color: #212f3f;
-            flex: 1;
-            margin-bottom: 4px;
-            margin-right: 24px;
+            color: #424e5c;
             margin-top: 0;
             overflow: hidden;
             overflow-wrap: break-word;
             text-overflow: ellipsis;
+            width: fit-content;
 
             &:hover {
-                .title-link {
-                    text-decoration: underline;
-                }
+                text-decoration: underline;
             }
         }
+    }
 
-        .title-link {
-            color: #212f3f;
-            font-size: 17px;
-            font-weight: 700;
-            line-height: 25px;
-
-        }
-
-        .company-name{
+    .job-applied-date {
+        margin-bottom: 10px;
+        .date {
+            color: #424e5c;
             font-size: 15px;
-            font-style: normal;
             font-weight: 400;
             line-height: 20px;
-            margin-bottom: 8px;
-        
-            .company-link {
-                -webkit-line-clamp: 1;
-                -webkit-box-orient: vertical;
-                display: -webkit-box;
-                color: #424e5c;
-                margin-top: 0;
-                overflow: hidden;
-                overflow-wrap: break-word;
-                text-overflow: ellipsis;
-                width: fit-content;
-
-                &:hover {
-                    text-decoration: underline;
-                }
-            }
         }
+    }
 
-        .job-applied-date{
-
-            margin-bottom: 10px;
-            .date{
-                color: #424e5c;
-                font-size: 15px;
-                font-weight: 400;
-                line-height: 20px;
-            }
+    .salary {
+        flex-shrink: 0;
+        min-width: 150px;
+        overflow: hidden;
+        position: relative;
+        text-align: right;
+        .label {
+            align-items: center;
+            color: #00b14f;
+            display: flex;
+            font-size: 15px;
+            font-weight: 700;
+            gap: 10px;
+            justify-content: flex-end;
+            line-height: 20px;
+            margin-bottom: 0;
+            margin-top: 0;
+            white-space: nowrap;
         }
-
-
-        .salary {
-            flex-shrink: 0;
-            min-width: 150px;
-            overflow: hidden;
-            position: relative;
-            text-align: right;
-            .label {
-                align-items: center;
-                color: #00b14f;
-                display: flex;
-                font-size: 15px;
-                font-weight: 700;
-                gap: 10px;
-                justify-content: flex-end;
-                line-height: 20px;
-                margin-bottom: 0;
-                margin-top: 0;
-                white-space: nowrap;
-            }
-        
     }
 
     .box-footer {
@@ -174,19 +165,18 @@
         column-gap: 24px;
         justify-content: space-between;
 
-        .job-applied-date{
+        .job-applied-date {
             color: #999;
             font-size: 15px;
             font-style: normal;
             font-weight: 400;
             line-height: 20px;
 
-            .cv-link{
+            .cv-link {
                 color: #00b14f;
                 text-decoration: underline;
             }
         }
-
 
         .action-block {
             align-items: flex-end;
@@ -211,16 +201,12 @@
                     background: #c0eed4;
                     color: #00b14f;
                     text-decoration: none;
-                
                 }
             }
-
         }
-
-
     }
 
-    .box-cv-status{
+    .box-cv-status {
         display: flex;
         justify-content: space-between;
         border-top: 1px solid #e7e7e7;
@@ -228,7 +214,7 @@
         margin-top: 12px;
         padding-top: 12px;
 
-        .cv-status-text{
+        .cv-status-text {
             color: #6f7882;
             font-size: 14px;
             font-weight: 400;
@@ -236,11 +222,11 @@
             width: calc(50% - 6px);
         }
 
-        .applied{
+        .applied {
             color: #3b78cd;
         }
 
-        .cv-status-time{
+        .cv-status-time {
             color: #6f7882;
             font-size: 14px;
             font-weight: 400;

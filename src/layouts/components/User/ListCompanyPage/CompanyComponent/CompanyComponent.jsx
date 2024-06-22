@@ -2,8 +2,8 @@ import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 
 import styles from './CompanyComponent.module.scss';
-import path from '../../../../../constants/path';
-import slugConvert from '../../../../../utils/slugCovnert';
+import path from '@constants/path';
+import slugConvert from '@utils/slugCovnert';
 
 const cx = classNames.bind(styles);
 

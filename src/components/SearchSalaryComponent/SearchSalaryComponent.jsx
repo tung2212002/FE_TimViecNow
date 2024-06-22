@@ -6,8 +6,8 @@ import { PiCurrencyCircleDollar } from 'react-icons/pi';
 import { HiCheck, HiOutlineChevronDown } from 'react-icons/hi';
 
 import styles from './SearchSalaryComponent.module.scss';
-import { SelectionComponent } from '../common';
-import { filterSalary } from '../../constants';
+import { SelectionComponent } from '@components/common';
+import { filterSalary } from '@constants';
 
 const cx = classNames.bind(styles);
 

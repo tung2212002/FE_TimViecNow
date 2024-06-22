@@ -1,14 +1,13 @@
-.wrapper{
-
+.wrapper {
 }
 
-.form{
+.form {
     border: 1px solid #e8edf2;
     padding: 18px;
     margin: 16px 18px 18px 18px;
     color: #303235;
 
-    input[type="text"]{
+    input[type='text'] {
         color: #000;
         display: block;
         width: 100%;
@@ -22,11 +21,11 @@
         background-clip: padding-box;
         border: 1px solid #e8edf2;
         border-radius: 4px;
-        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
         padding-right: 30px;
         text-overflow: ellipsis;
 
-        &:disabled{
+        &:disabled {
             color: #52759b !important;
             border: 1px solid #d7dee4 !important;
             background: #e8edf2 !important;
@@ -34,27 +33,27 @@
     }
 }
 
-.form-title{
+.form-title {
     font-size: 14px;
     font-weight: 600;
     line-height: 1.5;
     margin-bottom: 16px;
 }
 
-.form-group{
+.form-group {
     display: flex;
     flex-wrap: wrap;
     margin-right: -15px;
     margin-left: -15px;
 
-    .form-col{
+    .form-col {
         width: 100%;
         max-width: 50%;
         margin-bottom: 14px;
         padding: 0 15px;
     }
 
-    .label{
+    .label {
         font-size: 14px;
         font-weight: 500;
         line-height: 1.5;
@@ -63,8 +62,7 @@
         margin-right: 8px;
     }
 
-
-    .avatar{
+    .avatar {
         width: 40px;
         height: 40px;
         border-radius: 50%;
@@ -72,7 +70,7 @@
         margin-right: 8px;
         border: 1px solid #e8edf2;
 
-        .avatar-img{
+        .avatar-img {
             width: 100%;
             height: 100%;
             border-radius: 50%;
@@ -80,12 +78,11 @@
         }
     }
 
-
-    .form-col-avatar{
+    .form-col-avatar {
         display: flex;
         align-items: center;
 
-        .button{
+        .button {
             font-size: 14px;
             line-height: 1.5;
             color: #212529;
@@ -98,24 +95,23 @@
             border-radius: 5px;
             transition: all 0.15s ease-in-out;
 
-            &:hover{
+            &:hover {
                 background-color: #e2e6ea;
                 border-color: #dae0e5;
             }
         }
     }
-    .form-col-item{
-        display: flex!important;
+    .form-col-item {
+        display: flex !important;
         flex-direction: column;
-        
-        .input-name{
-            
-            &:focus{
+
+        .input-name {
+            &:focus {
                 border-color: #00b14f;
             }
         }
 
-        .error-text{
+        .error-text {
             display: none;
             width: 100%;
             margin-top: 4px;
@@ -123,47 +119,44 @@
             line-height: 1.5;
             color: #dc3545;
         }
-
-
     }
-    
-    .input-box{
+
+    .input-box {
         margin-top: 8px;
     }
 
-    .error{
-        .error-text{
+    .error {
+        .error-text {
             display: block !important;
         }
 
-        .input-name{
-
-            &:focus{
-                box-shadow: 0 0 0 0.2rem rgba(220,53,69,.25);
+        .input-name {
+            &:focus {
+                box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
             }
         }
     }
 }
-hr{
+hr {
     border: 0;
     border-top: 1px solid #e8edf2;
     margin: 16px 0;
 }
 
-.title-group{
+.title-group {
     margin-bottom: 16px;
 
-    b{
+    b {
         font-size: 14px;
         font-weight: 500;
         line-height: 1.5;
     }
 }
 
-.form-row{
+.form-row {
     margin-bottom: 14px;
 
-    .label{
+    .label {
         font-size: 14px;
         font-weight: 500;
         line-height: 1.5;
@@ -172,15 +165,15 @@ hr{
         margin-right: 8px;
     }
 
-    .input{
+    .input {
         margin-top: 8px;
     }
 }
 
-.form-button{
+.form-button {
     text-align: right;
 
-    .button-cancel{
+    .button-cancel {
         display: inline-block;
         font-size: 14px;
         line-height: 1.5;
@@ -197,12 +190,12 @@ hr{
         border-color: #e8edf2;
         transition: all 0.15s ease-in-out;
         margin-right: 10px;
-        &:hover{
-            background-color: #d0dae4;   
+        &:hover {
+            background-color: #d0dae4;
         }
     }
 
-    .button-save{
+    .button-save {
         font-size: 14px;
         line-height: 1.5;
         font-weight: 400;
@@ -213,7 +206,7 @@ hr{
         border-color: #00b14f;
         border-radius: 5px;
 
-        &.disabled{
+        &.disabled {
             opacity: 0.7;
             background-color: #f5f8fa;
             border-color: #e8edf2;
@@ -221,7 +214,7 @@ hr{
             cursor: none !important;
         }
 
-        &:hover{
+        &:hover {
             background-color: #00652d;
             border-color: #00652d;
         }

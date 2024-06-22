@@ -39,12 +39,12 @@
     justify-content: space-between;
     width: 100%;
 
-    &.on-active{
+    &.on-active {
         border: 1px solid transparent;
     }
-    
+
     &:hover {
-        cursor:  pointer !important;
+        cursor: pointer !important;
     }
 }
 .select-dropdown-container {
@@ -75,6 +75,6 @@
     transform: rotate(180deg);
 }
 
-.active .on-active{
+.active .on-active {
     border: 1px solid #33c172 !important;
 }

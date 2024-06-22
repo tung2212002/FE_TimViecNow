@@ -10,9 +10,9 @@ import { RiFolderUserFill } from 'react-icons/ri';
 import { IoClose } from 'react-icons/io5';
 
 import styles from './ModalApplyComponent.module.scss';
-import { icons } from '../../assets';
-import { hideModal } from '../../redux/features/modal/modalSlice';
-import Modal2 from '../common/Modal2/Modal2';
+import { icons } from '@assets';
+import { hideModal } from '@redux/features/modal/modalSlice';
+import Modal2 from '@components/common/Modal2/Modal2';
 
 const cx = classNames.bind(styles);
 

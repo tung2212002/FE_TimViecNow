@@ -7,16 +7,16 @@ import 'tippy.js/dist/backdrop.css';
 import 'tippy.js/dist/svg-arrow.css';
 import 'tippy.js/animations/shift-away.css';
 
-import { FaRegHeart, FaChevronRight } from 'react-icons/fa6';
+import { FaChevronRight } from 'react-icons/fa6';
 import { LuTrash } from 'react-icons/lu';
 
 import styles from './SavedJobComponent.module.scss';
-import slugConvert from '../../../../../utils/slugCovnert';
-import path from '../../../../../constants/path';
-import route from '../../../../../constants/route';
-import { icons, images } from '../../../../../assets';
-import { convertSalary } from '../../../../../utils/convertSalary';
-import { convertDateFuture, convertDateTime, convertTimeAgo } from '../../../../../utils/convertTimeUtil';
+import slugConvert from '@utils/slugCovnert';
+import path from '@constants/path';
+import route from '@constants/route';
+import { icons } from '@assets';
+import { convertSalary } from '@utils/convertSalary';
+import { convertDateTime, convertTimeAgo } from '@utils/convertTimeUtil';
 
 const cx = classNames.bind(styles);
 

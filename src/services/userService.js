@@ -1,4 +1,4 @@
-import * as request from '../utils/axios';
+import * as request from '@utils/axios';
 
 export const getInfoService = async () => {
     const response = await request.apiAuth.get('/user/users/me');

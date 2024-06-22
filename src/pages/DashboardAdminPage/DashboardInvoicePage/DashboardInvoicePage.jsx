@@ -1,8 +1,8 @@
 import classNames from 'classnames/bind';
 
 import styles from './DashboardInvoicePage.module.scss';
-import { images } from '../../../assets';
-import path from '../../../constants/path';
+import { images } from '@assets';
+import path from '@constants/path';
 
 const cx = classNames.bind(styles);
 

@@ -7,7 +7,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import { VscChevronLeft, VscChevronRight } from 'react-icons/vsc';
 
 import styles from './BannerSlide.module.scss';
-import { images } from '../../../../../../assets';
+import { images } from '@assets';
 
 const cx = classNames.bind(styles);
 

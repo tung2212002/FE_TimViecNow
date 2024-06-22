@@ -3,11 +3,11 @@ import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 
 import styles from './GeneralCompanyFilter.module.scss';
-import slugConvert from '../../../../../utils/slugCovnert';
-import path from '../../../../../constants/path';
+import slugConvert from '@utils/slugCovnert';
+import path from '@constants/path';
 import GeneralJobFilter from '../GeneralJobFilter/GeneralJobFilter';
-import { getListJobSerivce } from '../../../../../services/jobService';
-import { getCompanyByIdSerivce } from '../../../../../services/companyService';
+import { getListJobSerivce } from '@services/jobService';
+import { getCompanyByIdSerivce } from '@services/companyService';
 
 const cx = classNames.bind(styles);
 

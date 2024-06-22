@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-import { logoutBusinessService } from '../../../services/businessAuthService';
+import { logoutBusinessService } from '@services/businessAuthService';
 import {
     setLocalBusinessToken,
     removeLocalBusinessToken,
@@ -8,7 +8,7 @@ import {
     updateLocalBusinessToken,
     updateLocalBusinessInfo,
     setLocalBusiness,
-} from '../../../utils/authBusinessStorage';
+} from '@utils/authBusinessStorage';
 
 const initialState = {
     user: null,

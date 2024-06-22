@@ -1,13 +1,13 @@
+import { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 
 import { VscChevronLeft, VscChevronRight } from 'react-icons/vsc';
 
 import styles from './CompanyRecruitment.module.scss';
-import { useEffect, useRef, useState } from 'react';
-import { getListJobSerivce } from '../../../../../services/jobService';
+import { getListJobSerivce } from '@services/jobService';
 import JobSuggest from '../../JobDetailPage/JobDetailBody/JobSuggest/JobSuggest';
-import { SkeletonCompanyComponent } from '../../../../../components/skeleton';
+import { SkeletonCompanyComponent } from '@components/skeleton';
 
 const cx = classNames.bind(styles);
 

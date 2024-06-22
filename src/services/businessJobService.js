@@ -1,4 +1,4 @@
-import * as request from '../utils/axios';
+import * as request from '@utils/axios';
 
 export const getBusinessJobSerivce = async (id) => {
     const response = await request.apiBusinessAuth.get('/business/job/' + id);

@@ -5,24 +5,18 @@ import styles from './DashBoard.module.scss';
 
 import { HiCheck, HiOutlineChevronDown, HiTrendingUp } from 'react-icons/hi';
 
-import { images } from '../../../../assets';
-import { fakeJob } from '../../../../assets/fakejob';
+import { images } from '@assets';
+import { fakeJob } from '@assets/fakejob';
 import ChartJobOpportunity from './ChartJobOpportunity/ChartJobOpportunity';
 import ChartJobDemand from './ChartJobDemand/ChartJobDemand';
-import { SelectionComponent } from '../../../../components/common';
-import { getJobCruitmentDemandService } from '../../../../services/jobService';
+import { SelectionComponent } from '@components/common';
+import { getJobCruitmentDemandService } from '@services/jobService';
 
 const cx = classNames.bind(styles);
 
 const DashBoard = (props, ref) => {
     const date = new Date();
-    const fakeData = {
-        quantity_job_recruitment: 40396,
-        quantity_job_recruitment_yesterday: 38069,
-        quantity_job_new_today: 5277,
-        quantity_company_recruitment: 13043,
-        time_scan: '20:35 05/03/2024',
-    };
+
     const listBoxJob = [
         {
             id: 1,

@@ -1,4 +1,4 @@
-import { URL_OAUTH2 } from '../configs';
+import { URL_OAUTH2 } from '@configs';
 
 export default {
     HOMEPAGE: '/',

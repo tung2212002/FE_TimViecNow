@@ -1,37 +1,35 @@
-.wrapper{
+.wrapper {
     min-height: 110px;
-    box-shadow: 0 2px 5px rgba(0,0,0,.05098);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05098);
     border-radius: 10px;
     display: flex;
     padding: 8px;
-
 }
 
-.container{
+.container {
     display: flex;
     flex-direction: row;
     width: 100%;
 }
 
-.company-logo{
+.company-logo {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 20%;
 
-    .logo{
+    .logo {
         width: 50px;
         height: 50px;
-        
     }
 }
 
-.company-info{
+.company-info {
     width: 60%;
     color: #5e6368;
 
-    .company-name{
-        .company-name-link{
+    .company-name {
+        .company-name-link {
             display: inline-block;
             white-space: nowrap;
             overflow: hidden;
@@ -41,67 +39,64 @@
             line-height: 1.5;
             color: #000;
             width: 100%;
-            &:hover{
+            &:hover {
                 text-decoration: underline;
             }
         }
     }
 
-    .company-tax-code{
-       .tax-code{
-        width: 100%;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        font-size: 12px;
-        margin-top: 5px;
-       }
+    .company-tax-code {
+        .tax-code {
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 12px;
+            margin-top: 5px;
+        }
     }
 
-    .company-address{
+    .company-address {
         margin: 5px 0;
 
-        .address{
+        .address {
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
             color: #5e6368;
             font-size: 12px;
-
         }
-
     }
 
-    .company-field{
+    .company-field {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
 
-        .field{
+        .field {
             display: inline-block;
             background: #e8edf2;
             padding: 3px 5px;
             margin: 5px 3px 5px 0;
             border-radius: 5px;
             color: #5e6368;
-
         }
     }
 }
 
-.company-action{
+.company-action {
     display: flex;
     align-items: center;
     justify-content: center;
     flex: 1;
-    .btn{
+    .btn {
         background: #e5f7ed;
         color: #00b14f;
         min-width: 50px;
         padding: 6px 12px;
         border-radius: 20px;
 
-        &:hover{
+        &:hover {
             background: #00b14f;
             color: #fff;
         }

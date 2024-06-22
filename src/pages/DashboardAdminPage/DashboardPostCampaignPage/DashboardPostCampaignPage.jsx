@@ -5,13 +5,13 @@ import { useDispatch } from 'react-redux';
 
 import { FaFlag, FaArrowRight, FaChevronRight } from 'react-icons/fa6';
 import { RiErrorWarningLine } from 'react-icons/ri';
+import { FaLightbulb } from 'react-icons/fa';
 
 import styles from './DashboardPostCampaignPage.module.scss';
-import { images } from '../../../assets';
-import path from '../../../constants/path';
-import { FaLightbulb } from 'react-icons/fa';
-import { createCampaignService } from '../../../services/campaignService';
-import { addToast, removeToast } from '../../../redux/features/toast/toastSlice';
+import { images } from '@assets';
+import path from '@constants/path';
+import { createCampaignService } from '@services/campaignService';
+import { addToast, removeToast } from '@redux/features/toast/toastSlice';
 
 const cx = classNames.bind(styles);
 

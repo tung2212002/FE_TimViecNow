@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { FaLock, FaUser, FaFile, FaBuilding } from 'react-icons/fa';
 
 import styles from './SiderBar.module.scss';
-import path from '../../../../../constants/path';
+import path from '@constants/path';
 
 const cx = classNames.bind(styles);
 

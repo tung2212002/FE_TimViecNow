@@ -9,15 +9,11 @@
     background-color: #e8edf2;
 }
 
-
 @media screen and (max-width: 1360px) {
     .wrapper {
         margin-left: 64px !important;
     }
 }
-
-
- 
 
 .auth-modal {
     left: 3%;
@@ -288,8 +284,6 @@
         &:hover {
             color: #c52e20;
         }
-
-
     }
 
     .icon-circle-xmark.active {
@@ -332,7 +326,7 @@
         font-weight: 500;
     }
 
-    .spinner{
+    .spinner {
         height: 35px;
     }
 }

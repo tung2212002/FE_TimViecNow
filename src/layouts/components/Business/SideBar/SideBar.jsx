@@ -15,9 +15,9 @@ import { MdOutlineMarkEmailUnread, MdMarkEmailUnread } from 'react-icons/md';
 import { BiSolidBadgeDollar } from 'react-icons/bi';
 
 import styles from './SideBar.module.scss';
-import path from '../../../../constants/path';
-import { images } from '../../../../assets';
-import { selectBusiness } from '../../../../redux/features/authBusiness/authSlide';
+import path from '@constants/path';
+import { images } from '@assets';
+import { selectBusiness } from '@redux/features/authBusiness/authSlide';
 
 const cx = classNames.bind(styles);
 

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import classNames from 'classnames/bind';
 import { useSelector } from 'react-redux';
 
@@ -10,8 +10,8 @@ import styles from './SettingCompany.module.scss';
 import CompanyInfo from './CompanyInfo/CompanyInfo';
 import CreateCompany from './CreateCompany/CreateCompany';
 import SearchCompany from './SearchCompany/SearchCompany';
-import { selectBusiness } from '../../../../../redux/features/authBusiness/authSlide';
-import { settingBusinessState } from '../../../../../constants/index';
+import { selectBusiness } from '@redux/features/authBusiness/authSlide';
+import { settingBusinessState } from '@constants/index';
 
 const cx = classNames.bind(styles);
 

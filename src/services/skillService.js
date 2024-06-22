@@ -1,4 +1,4 @@
-import * as request from '../utils/axios';
+import * as request from '@utils/axios';
 
 export const getSkillByIdService = async (id) => {
     const response = await request.api.get('/skill/' + id);

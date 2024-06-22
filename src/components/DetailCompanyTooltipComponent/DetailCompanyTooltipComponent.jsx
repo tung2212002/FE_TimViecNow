@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import { FaLocationDot, FaBusinessTime, FaClock } from 'react-icons/fa6';
 
 import styles from './DetailCompanyTooltipComponent.module.scss';
-import { Experience } from '../../constants';
+import { Experience } from '@constants';
 import { convertDateFuture } from '../../utils/convertTimeUtil';
-import { convertSalary } from '../../utils/convertSalary';
-import path from '../../constants/path';
-import slugConvert from '../../utils/slugCovnert';
+import { convertSalary } from '@utils/convertSalary';
+import path from '@constants/path';
+import slugConvert from '@utils/slugCovnert';
 
 const cx = classNames.bind(styles);
 

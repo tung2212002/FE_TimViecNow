@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 
 import styles from './DashboardAdminPage.module.scss';
-import { DashboardMember, DashboardStatistics, DashboardSlide } from '../../../layouts/components/Business/DashboardPage';
+import { DashboardMember, DashboardStatistics, DashboardSlide } from '@layouts/components/Business/DashboardPage';
 
 const cx = classNames.bind(styles);
 

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 
@@ -6,12 +7,11 @@ import { VscChevronLeft, VscChevronRight } from 'react-icons/vsc';
 import { FaRegCircle } from 'react-icons/fa';
 
 import styles from './SavedJobPage.module.scss';
-import { SavedJobComponent } from '../../layouts/components/User/SavedJobPage';
-import { images } from '../../assets';
-import { GeneralCompanyFilter } from '../../layouts/components/User/JobFilterPage';
-import { SkeletonCompanyComponent } from '../../components/skeleton';
-import { Link } from 'react-router-dom';
-import route from '../../constants/route';
+import { SavedJobComponent } from '@layouts/components/User/SavedJobPage';
+import { images } from '@assets';
+import { GeneralCompanyFilter } from '@layouts/components/User/JobFilterPage';
+import { SkeletonCompanyComponent } from '@components/skeleton';
+import route from '@constants/route';
 
 const cx = classNames.bind(styles);
 

@@ -6,9 +6,9 @@ import { LuPhone } from 'react-icons/lu';
 import { FaChevronRight } from 'react-icons/fa6';
 
 import styles from './DashboardMember.module.scss';
-import { icons, images } from '../../../../../assets';
-import { selectBusiness } from '../../../../../redux/features/authBusiness/authSlide';
-import path from '../../../../../constants/path';
+import { icons, images } from '@assets';
+import { selectBusiness } from '@redux/features/authBusiness/authSlide';
+import path from '@constants/path';
 
 const cx = classNames.bind(styles);
 
