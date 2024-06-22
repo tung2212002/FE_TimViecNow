@@ -1,4 +1,4 @@
-import * as request from '../utils/axios';
+import * as request from '@utils/axios';
 
 export const getCampaignByIdService = async (id) => {
     const response = await request.apiAuth.get('/business/campaign/' + id);

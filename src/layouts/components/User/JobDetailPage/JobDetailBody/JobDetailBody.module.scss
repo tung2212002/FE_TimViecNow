@@ -9,15 +9,13 @@
     width: 100%;
 }
 
- 
-
 .container {
     display: flex;
     flex-direction: column;
     gap: 20px;
     height: fit-content;
 
-    .tab{
+    .tab {
         display: none;
     }
 }
@@ -459,8 +457,6 @@
     }
 }
 
-
-
 @media screen and (max-width: 768px) {
     .wrapper {
         // padding: 20px 16px;
@@ -474,7 +470,7 @@
         margin-top: -20px;
     }
 
-    .tab{
+    .tab {
         display: block !important;
     }
 

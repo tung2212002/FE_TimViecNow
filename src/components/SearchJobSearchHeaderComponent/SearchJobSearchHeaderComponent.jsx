@@ -7,7 +7,7 @@ import { HiMagnifyingGlass, HiOutlineChevronDown } from 'react-icons/hi2';
 import { HiOutlineLocationMarker, HiCheck, HiTrendingUp } from 'react-icons/hi';
 
 import styles from './SearchJobSearchHeaderComponent.module.scss';
-import { selectProvince } from '../../redux/features/config/configSilde';
+import { selectProvince } from '@redux/features/config/configSilde';
 
 const cx = classNames.bind(styles);
 

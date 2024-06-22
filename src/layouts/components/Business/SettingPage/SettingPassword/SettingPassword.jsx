@@ -1,13 +1,13 @@
+import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 
 import styles from './SettingPassword.module.scss';
-import regexValidator from '../../../../../utils/regexValidator';
+import regexValidator from '@utils/regexValidator';
 import { PiWarningCircle } from 'react-icons/pi';
-import { Link } from 'react-router-dom';
-import path from '../../../../../constants/path';
-import { changePasswordBusinessService } from '../../../../../services/businessAuthService';
-import useToast from '../../../../../hooks/useToast';
+import path from '@constants/path';
+import { changePasswordBusinessService } from '@services/businessAuthService';
+import useToast from '@hooks/useToast';
 
 const cx = classNames.bind(styles);
 

@@ -1,16 +1,16 @@
+import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect, useState } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import route from '../constants/route';
-import useSide from '../hooks/useSIde';
-import { getLocalAccessToken, getLocalToken, setLocalUser } from '../utils/authLocalStorage';
-import { getLocalBusinessAccessToken, getLocalBusinessToken, setLocalBusiness } from '../utils/authBusinessStorage';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectUser, updateUserInfo } from '../redux/features/auth/authSlide';
-import { selectBusiness, updateBusinessInfo } from '../redux/features/authBusiness/authSlide';
-import { getInfoService } from '../services/userService';
-import { getInfoBusinessService } from '../services/businessService';
+import route from '@constants/route';
+import useSide from '@hooks/useSIde';
+import { getLocalAccessToken, getLocalToken, setLocalUser } from '@utils/authLocalStorage';
+import { getLocalBusinessAccessToken, getLocalBusinessToken, setLocalBusiness } from '@utils/authBusinessStorage';
+import { selectUser, updateUserInfo } from '@redux/features/auth/authSlide';
+import { selectBusiness, updateBusinessInfo } from '@redux/features/authBusiness/authSlide';
+import { getInfoService } from '@services/userService';
+import { getInfoBusinessService } from '@services/businessService';
 
 const PublicRoute = ({ component: Component, layout: Layout, restricted, positionHeader, ...rest }) => {
     const location = useLocation();

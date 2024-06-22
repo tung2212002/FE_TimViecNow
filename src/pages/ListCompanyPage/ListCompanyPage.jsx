@@ -5,11 +5,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { IoIosSearch } from 'react-icons/io';
 
 import styles from './ListCompanyPage.module.scss';
-import route from '../../constants/route';
-import { images } from '../../assets';
-import { CompanyComponent } from '../../layouts/components/User/ListCompanyPage';
-import { getListCompanySerivce } from '../../services/companyService';
-import { SkeletonCompanySquareComponent } from '../../components/skeleton';
+import route from '@constants/route';
+import { images } from '@assets';
+import { CompanyComponent } from '@layouts/components/User/ListCompanyPage';
+import { getListCompanySerivce } from '@services/companyService';
+import { SkeletonCompanySquareComponent } from '@components/skeleton';
 
 const cx = classNames.bind(styles);
 

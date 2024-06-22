@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 
@@ -5,7 +6,6 @@ import { FaLocationDot } from 'react-icons/fa6';
 import { FaMap } from 'react-icons/fa';
 
 import styles from './CompanyLocation.module.scss';
-import { useEffect } from 'react';
 
 const cx = classNames.bind(styles);
 

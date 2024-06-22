@@ -15,9 +15,9 @@ import { PiWarningCircle } from 'react-icons/pi';
 import { FaRegCalendar } from 'react-icons/fa';
 
 import styles from './DashboardPostJobPage.module.scss';
-import { icons } from '../../../assets';
-import path from '../../../constants/path';
-import { InputSelectorComponent, InputSelectorMultiComponent } from '../../../components/common';
+import { icons } from '@assets';
+import path from '@constants/path';
+import { InputSelectorComponent, InputSelectorMultiComponent } from '@components/common';
 import {
     addLocation,
     selectError,
@@ -29,17 +29,17 @@ import {
     setTitleJob,
     setCategories,
     setJobLocation,
-} from '../../../redux/features/postJob/postJobSlide';
-import { JobLocation, JobGeneralRequirements, JobDetailRequirements, JobInfoContact } from '../../../layouts/components/Business/PostJobPage';
-import { getCampaignByIdService, getListCampaignService } from '../../../services/campaignService';
-import { getListJobPositionService } from '../../../services/positionService';
-import { getListCategoryService } from '../../../services/categoryService';
-import regexValidator from '../../../utils/regexValidator';
-import useToast from '../../../hooks/useToast';
-import { createBusinessJobService } from '../../../services/businessJobService';
-import { selectCampaign, setCampaign } from '../../../redux/features/campaign/campaignSilde';
-import { selectCategory, selectJobPosition, setCategory, setJobPosition } from '../../../redux/features/config/configSilde';
-import { selectBusiness } from '../../../redux/features/authBusiness/authSlide';
+} from '@redux/features/postJob/postJobSlide';
+import { JobLocation, JobGeneralRequirements, JobDetailRequirements, JobInfoContact } from '@layouts/components/Business/PostJobPage';
+import { getCampaignByIdService, getListCampaignService } from '@services/campaignService';
+import { getListJobPositionService } from '@services/positionService';
+import { getListCategoryService } from '@services/categoryService';
+import regexValidator from '@utils/regexValidator';
+import useToast from '@hooks/useToast';
+import { createBusinessJobService } from '@services/businessJobService';
+import { selectCampaign, setCampaign } from '@redux/features/campaign/campaignSilde';
+import { selectCategory, selectJobPosition, setCategory, setJobPosition } from '@redux/features/config/configSilde';
+import { selectBusiness } from '@redux/features/authBusiness/authSlide';
 
 const cx = classNames.bind(styles);
 

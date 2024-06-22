@@ -22,13 +22,13 @@
     .container {
         width: 970px;
     }
-    .item{
+    .item {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
     }
-    
-    .box-general{
+
+    .box-general {
         width: calc(33% - 24px) !important;
     }
 }
@@ -41,7 +41,6 @@
     .container {
         width: 1170px;
     }
-
 }
 
 .container {
@@ -260,22 +259,22 @@
         &::-webkit-scrollbar {
             width: 10px;
         }
-        
+
         /* Track */
         &::-webkit-scrollbar-track {
             background: #f1f1f1;
         }
-        
+
         /* Handle */
         &::-webkit-scrollbar-thumb {
             background-color: rgba(0, 0, 0, 0);
             border-radius: 10px;
         }
-        
+
         &:hover::-webkit-scrollbar-thumb {
             background-color: rgba(0, 0, 0, 0.1);
         }
-  
+
         /* Handle on hover */
         &::-webkit-scrollbar-thumb:hover {
             background-color: rgba(0, 0, 0, 0.4);
@@ -291,7 +290,6 @@
             list-style: none;
             margin: auto;
             padding: 10px 0;
-            
         }
         li:not(:last-child) {
             border-bottom: 1px solid #e9eaec;

@@ -10,9 +10,9 @@ import { FaCircleInfo } from 'react-icons/fa6';
 import { IoBriefcaseOutline } from 'react-icons/io5';
 
 import styles from './DashboardStatistics.module.scss';
-import path from '../../../../../constants/path';
 import StatisticComponent from './StatisticComponent/StatisticComponent';
-import { images } from '../../../../../assets';
+import path from '@constants/path';
+import { images } from '@assets';
 
 const cx = classNames.bind(styles);
 

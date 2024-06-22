@@ -5,7 +5,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 import styles from './VerticalBanner.module.scss';
-import { images } from '../../../../assets';
+import { images } from '@assets';
 
 const cx = classNames.bind(styles);
 

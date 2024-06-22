@@ -6,9 +6,9 @@ import PropTypes from 'prop-types';
 import { FaRegPaperPlane } from 'react-icons/fa';
 
 import styles from './HeaderDynamic.module.scss';
-import { showModal } from '../../../../../redux/features/modal/modalSlice';
-import { Modal } from '../../../../../components/common';
-import { ModalApplyComponent } from '../../../../../components';
+import { showModal } from '@redux/features/modal/modalSlice';
+import { Modal } from '@components/common';
+import { ModalApplyComponent } from '@components';
 
 const cx = classNames.bind(styles);
 

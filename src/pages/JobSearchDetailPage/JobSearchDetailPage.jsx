@@ -5,7 +5,7 @@ import classNames from 'classnames/bind';
 import { FaChevronRight } from 'react-icons/fa6';
 
 import styles from './JobSearchDetailPage.module.scss';
-import useDocumentTitle from '../../hooks/useDocumentTitle';
+import useDocumentTitle from '@hooks/useDocumentTitle';
 import {
     JobDetailBody,
     JobDetailHeader,
@@ -16,13 +16,11 @@ import {
     JobSuitable,
     TabCompany,
     JobSummary,
-} from '../../layouts/components/User/JobDetailPage';
-import { SEO } from '../../layouts/components/User';
-import { getJobSerivce } from '../../services/jobService';
-import { Spinner } from '../../components/common';
-import path from '../../constants/path';
-import Skeleton from 'react-loading-skeleton';
-import { SkeletonJobDetailPage } from '../../components/skeleton';
+} from '@layouts/components/User/JobDetailPage';
+import { SEO } from '@layouts/components/User';
+import { getJobSerivce } from '@services/jobService';
+import path from '@constants/path';
+import { SkeletonJobDetailPage } from '@components/skeleton';
 
 const cx = classNames.bind(styles);
 

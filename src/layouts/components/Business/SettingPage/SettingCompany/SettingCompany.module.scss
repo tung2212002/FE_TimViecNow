@@ -1,5 +1,5 @@
-.wrapper{
-    background-color: #fff;    
+.wrapper {
+    background-color: #fff;
 }
 
 .wrapper * {
@@ -11,7 +11,7 @@
     color: #303235;
 }
 
-.container{
+.container {
     display: flex;
     flex-direction: column;
     padding: 18px;
@@ -19,59 +19,57 @@
     border-radius: 4px;
 }
 
-.nav-tabs{
-
+.nav-tabs {
     display: flex;
     flex-wrap: wrap;
 }
 
-.nav-tab{
+.nav-tab {
     width: 100%;
     max-width: 50%;
     cursor: pointer;
-    .nav-tab-item{
+    .nav-tab-item {
         display: flex;
         flex-wrap: wrap;
         border: 1px solid transparent;
-        border-bottom: 2px solid transparent ;
+        border-bottom: 2px solid transparent;
         color: #495057;
         background-color: #fff;
         padding: 7px 14px;
         border-top-left-radius: 4px;
         border-top-right-radius: 4px;
-        .nav-tab-item-icon{
+        .nav-tab-item-icon {
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 0 15px 0 1px;
         }
 
-        .nav-tab-item-text{
+        .nav-tab-item-text {
             position: relative;
             flex: 1;
         }
 
-        .nav-tab-item-title{
+        .nav-tab-item-title {
             font-size: 14px;
             font-weight: 500;
             line-height: 1.5;
             color: #303235;
         }
 
-        .nav-tab-item-description{
+        .nav-tab-item-description {
             font-size: 12px;
             font-weight: 400;
             line-height: 1.5;
             color: #6c757d;
-
         }
 
-        .nav-tab-item-tick{
+        .nav-tab-item-tick {
             visibility: hidden;
             padding: 0 1px 0 15px;
         }
 
-        .icon{
+        .icon {
             width: 34px;
             height: 34px;
             font-size: 14px;
@@ -81,48 +79,45 @@
             padding: 10px;
             border-radius: 50%;
         }
-
     }
 
-
-
-    &.active .nav-tab-item{
+    &.active .nav-tab-item {
         border-color: #dee2e6 #dee2e6 #fff;
         color: #495057;
         background-color: #fff;
         border-bottom: 2px solid #00b14f !important;
- }  
-
- &.active{
-    .icon, .nav-tab-item-title, .nav-tab-item-tick{
-        color: #00b14f !important;
-        fill: #00b14f !important;
     }
 
-    .nav-tab-item-tick{
-        visibility: visible !important;
-    }
+    &.active {
+        .icon,
+        .nav-tab-item-title,
+        .nav-tab-item-tick {
+            color: #00b14f !important;
+            fill: #00b14f !important;
+        }
 
-    .icon-check{
-        fill: #fff !important;
-        color: #fff !important;
-        background-color: #00b14f;
-        border-radius: 50%;
-        font-size: 20px;
-        padding: 4px;
-    }
- }
+        .nav-tab-item-tick {
+            visibility: visible !important;
+        }
 
+        .icon-check {
+            fill: #fff !important;
+            color: #fff !important;
+            background-color: #00b14f;
+            border-radius: 50%;
+            font-size: 20px;
+            padding: 4px;
+        }
+    }
 }
 
-.content-tabs{
-
+.content-tabs {
 }
 
-.content-tab{
+.content-tab {
     display: none;
     width: 100%;
-    &.active{
+    &.active {
         display: block;
     }
 }

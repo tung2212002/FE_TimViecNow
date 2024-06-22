@@ -23,9 +23,9 @@ import {
     setSalaryType,
     setWorkingTime,
     setWorkingTimeText,
-} from '../../../../../redux/features/postJob/postJobSlide';
-import { InputSelectorComponent, SelectionComponent } from '../../../../../components/common';
-import { listJobEmployerLevel } from '../../../../../constants';
+} from '@redux/features/postJob/postJobSlide';
+import { InputSelectorComponent, SelectionComponent } from '@components/common';
+import { listJobEmployerLevel } from '@constants';
 const cx = classNames.bind(styles);
 
 const JobGeneralRequirements = () => {

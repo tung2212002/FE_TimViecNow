@@ -2,10 +2,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import classNames from 'classnames/bind';
 
 import styles from './JobInfoContact.module.scss';
-import { selectError, selectPostJob, setEmailContact, setFullNameContact, setPhoneNumberContact } from '../../../../../redux/features/postJob/postJobSlide';
-import { selectBusiness } from '../../../../../redux/features/authBusiness/authSlide';
-import randomId from '../../../../../utils/randomId';
-import { InputSelectorMultiOptionComponent } from '../../../../../components/common';
+import { selectError, selectPostJob, setEmailContact, setFullNameContact, setPhoneNumberContact } from '@redux/features/postJob/postJobSlide';
+import { selectBusiness } from '@redux/features/authBusiness/authSlide';
+import randomId from '@utils/randomId';
+import { InputSelectorMultiOptionComponent } from '@components/common';
 
 const cx = classNames.bind(styles);
 

@@ -5,7 +5,7 @@ import Slider from 'react-slick';
 import { VscChevronRight, VscChevronLeft } from 'react-icons/vsc';
 
 import styles from './ReportSlide.module.scss';
-import { images } from '../../../../../../assets';
+import { images } from '@assets';
 
 const cx = classNames.bind(styles);
 

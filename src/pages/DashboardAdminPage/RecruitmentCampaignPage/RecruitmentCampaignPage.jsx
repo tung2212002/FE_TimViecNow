@@ -1,3 +1,4 @@
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
@@ -7,14 +8,13 @@ import { FaPen } from 'react-icons/fa';
 import { HiOutlineChevronDoubleRight, HiOutlineChevronDoubleLeft } from 'react-icons/hi';
 
 import styles from './RecruitmentCampaignPage.module.scss';
-import { SelectionComponent } from '../../../components/common';
+import { SelectionComponent } from '@components/common';
 import { IoSearchOutline } from 'react-icons/io5';
-import path from '../../../constants/path';
-import { Link, useNavigate } from 'react-router-dom';
-import { getListCampaignService } from '../../../services/campaignService';
-import { JobStatus } from '../../../constants';
-import { SkeletonRecruimentCampaignComponent } from '../../../components/skeleton';
-import { selectBusiness } from '../../../redux/features/authBusiness/authSlide';
+import path from '@constants/path';
+import { getListCampaignService } from '@services/campaignService';
+import { JobStatus } from '@constants';
+import { SkeletonRecruimentCampaignComponent } from '@components/skeleton';
+import { selectBusiness } from '@redux/features/authBusiness/authSlide';
 
 const cx = classNames.bind(styles);
 

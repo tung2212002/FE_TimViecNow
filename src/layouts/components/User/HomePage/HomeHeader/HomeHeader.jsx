@@ -7,11 +7,11 @@ import { HiOutlineChevronDown } from 'react-icons/hi2';
 import { TbChevronsDown } from 'react-icons/tb';
 
 import styles from './HomeHeader.module.scss';
-import { icons, images } from '../../../../../assets';
+import { icons, images } from '@assets';
 import SearchSection from './SearchSection/SearchSection';
 import ChartJob from './ChartJob/ChartJob';
-import { SelectionComponent } from '../../../../../components/common';
-import { getJobCruitmentDemandService } from '../../../../../services/jobService';
+import { SelectionComponent } from '@components/common';
+import { getJobCruitmentDemandService } from '@services/jobService';
 
 const cx = classNames.bind(styles);
 

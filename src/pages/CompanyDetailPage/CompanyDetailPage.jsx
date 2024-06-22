@@ -5,10 +5,11 @@ import classNames from 'classnames/bind';
 import { FaChevronRight } from 'react-icons/fa6';
 
 import styles from './CompanyDetailPage.module.scss';
-import { CompanyDescription, CompanyHeader, CompanyRecruitment, CompanyRelate, CompanyShare } from '../../layouts/components/User/CompanyDetailPage';
-import CompanyLocation from '../../layouts/components/User/CompanyDetailPage/CompanyLocation/CompanyLocation';
-import { getCompanyByIdSerivce } from '../../services/companyService';
-import slugConvert from '../../utils/slugCovnert';
+import { CompanyDescription, CompanyHeader, CompanyRecruitment, CompanyRelate, CompanyShare } from '@layouts/components/User/CompanyDetailPage';
+import CompanyLocation from '@layouts/components/User/CompanyDetailPage/CompanyLocation/CompanyLocation';
+import { getCompanyByIdSerivce } from '@services/companyService';
+import slugConvert from '@utils/slugCovnert';
+
 const cx = classNames.bind(styles);
 
 const CompanyDetailPage = () => {

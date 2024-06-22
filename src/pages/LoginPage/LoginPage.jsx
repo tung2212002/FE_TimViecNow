@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import { useDispatch } from 'react-redux';
 import { useGoogleLogin } from '@react-oauth/google';
@@ -8,22 +8,18 @@ import { BsShieldLockFill } from 'react-icons/bs';
 import { FaEye, FaEyeSlash, FaGoogle, FaFacebook, FaLinkedin, FaUser } from 'react-icons/fa';
 
 import styles from './LoginPage.module.scss';
-import { loginGoogleService, loginService, registerService } from '../../services/authService';
-import { login } from '../../redux/features/auth/authSlide';
-import route from '../../constants/route';
-import useDocumentTitle from '../../hooks/useDocumentTitle';
-import regexValidator from '../../utils/regexValidator';
-import { addToast, removeToast } from '../../redux/features/toast/toastSlice';
-import { Spinner } from '../../components/common';
-import { useLocation } from 'react-router-dom';
+import { loginGoogleService, loginService, registerService } from '@services/authService';
+import { login } from '@redux/features/auth/authSlide';
+import route from '@constants/route';
+import useDocumentTitle from '@hooks/useDocumentTitle';
+import regexValidator from '@utils/regexValidator';
+import { addToast, removeToast } from '@redux/features/toast/toastSlice';
+import { Spinner } from '@components/common';
 
 const cx = classNames.bind(styles);
 
 const LoginPage = () => {
     const dispatch = useDispatch();
-    // get path from Navigation
-    const location = useLocation();
-    const path = location?.state?.from;
     const isLogin = !(window.location.pathname === route.REGISTER);
 
     useDocumentTitle(isLogin ? 'Đăng nhập' : 'Đăng ký');

@@ -7,13 +7,13 @@ import { HiCheck } from 'react-icons/hi2';
 import { FaCaretDown } from 'react-icons/fa6';
 
 import styles from './SettingInfo.module.scss';
-import { selectBusiness, updateBusinessInfo } from '../../../../../redux/features/authBusiness/authSlide';
-import { images } from '../../../../../assets';
-import useToast from '../../../../../hooks/useToast';
-import { SelectionComponent } from '../../../../../components/common';
-import { listGender, listWorkPosition } from '../../../../../constants';
-import path from '../../../../../constants/path';
-import { updateBusinessService } from '../../../../../services/businessService';
+import { selectBusiness, updateBusinessInfo } from '@redux/features/authBusiness/authSlide';
+import { images } from '@assets';
+import useToast from '@hooks/useToast';
+import { SelectionComponent } from '@components/common';
+import { listGender, listWorkPosition } from '@constants';
+import path from '@constants/path';
+import { updateBusinessService } from '@services/businessService';
 
 const cx = classNames.bind(styles);
 

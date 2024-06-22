@@ -443,16 +443,17 @@
                 }
             }
 
-            .job-status-published{
-                .job-status-text{
+            .job-status-published {
+                .job-status-text {
                     background: #f2daff;
                     color: #6514e9;
                     font-weight: 500;
-           
                 }
             }
 
-            .job-status-rejected, .job-status-expired , .job-status-banned{
+            .job-status-rejected,
+            .job-status-expired,
+            .job-status-banned {
                 .job-status-text {
                     background: #f8d7da;
                     color: #721c24;
@@ -460,7 +461,7 @@
                 }
             }
 
-            .job-status-pending{
+            .job-status-pending {
                 .job-status-text {
                     background: #f4ffe3;
                     color: #3cff00;
@@ -529,8 +530,6 @@
         font-weight: 500;
     }
 }
-
-
 
 .footer {
     margin: 0 auto;

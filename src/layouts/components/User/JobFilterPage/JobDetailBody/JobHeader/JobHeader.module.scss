@@ -1,8 +1,7 @@
-.wrapper{
+.wrapper {
     border-bottom: 2px solid #e2e2e2;
     padding-bottom: 20px;
-} 
-
+}
 
 .container {
     display: flex;
@@ -15,8 +14,7 @@
     height: fit-content;
     width: 100%;
 
-
-    .button-close{
+    .button-close {
         position: absolute;
         right: 0;
         top: 0;
@@ -26,16 +24,16 @@
         border-radius: 50%;
         height: 32px;
         width: 32px;
-        transition: .2s;
+        transition: 0.2s;
         padding: 4px;
         text-align: center;
         box-sizing: content-box;
-        .icon-close{
+        .icon-close {
             color: #263a4d;
             font-size: 28px;
         }
 
-        &:hover{
+        &:hover {
             background: #f2f4f5;
         }
     }

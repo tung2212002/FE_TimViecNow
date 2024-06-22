@@ -14,7 +14,7 @@
     }
 }
 
-.wrapper-1{
+.wrapper-1 {
     background-color: #fff;
     &:hover {
         background-color: #f2fbf6;
@@ -22,18 +22,15 @@
     }
 }
 
-
-.wrapper-2{
+.wrapper-2 {
     background-color: #f2fbf6 !important;
     border: 1px solid #acf2cb !important;
-    box-shadow: 0 8px 16px 0 rgba(1, 18, 34, .04);
+    box-shadow: 0 8px 16px 0 rgba(1, 18, 34, 0.04);
     &:hover {
         background-color: #f2fbf6 !important;
         border: 1px solid #00b14f !important;
-
     }
 }
-
 
 .container {
     display: flex;
@@ -150,7 +147,7 @@
 
             &:hover {
                 .title-link {
-                color: #00b14f;
+                    color: #00b14f;
                 }
             }
         }
@@ -267,51 +264,50 @@
     }
 }
 
-.zoom{
+.zoom {
     border: 1px solid #00b14f !important;
     position: relative !important;
-     &::after{
+    &::after {
         background-color: #00b14f;
         clear: both;
         -webkit-clip-path: polygon(0 0, 0 100%, 100% 50%);
         clip-path: polygon(0 0, 0 100%, 100% 50%);
-        content: "";
+        content: '';
         height: 15px;
         left: 100%;
         position: absolute;
         top: 50% !important;
         transform: translateY(-50%);
         width: 6px;
-     }
+    }
 }
 
-.zoom-out{
-
-    .deadline{
-        display: none  !important;
-    }
-    .apply{
+.zoom-out {
+    .deadline {
         display: none !important;
     }
-    .title{
+    .apply {
+        display: none !important;
+    }
+    .title {
         margin-right: 0 !important;
     }
-    .title-block{
+    .title-block {
         display: flex !important;
         flex-direction: column !important;
 
-        .title-link{
+        .title-link {
             font-size: 14px !important;
             font-weight: 600 !important;
-            letter-spacing: .175px !important;
+            letter-spacing: 0.175px !important;
             line-height: 20px !important;
         }
     }
 
-    .salary{
+    .salary {
         margin-top: 8px !important;
         text-align: left !important;
-        .label{
+        .label {
             display: inline-block !important;
             background: #e5f7ed !important;
             padding: 2px 12px !important;

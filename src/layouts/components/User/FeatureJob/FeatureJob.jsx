@@ -10,12 +10,12 @@ import { IoFilter } from 'react-icons/io5';
 import { HiOutlineChevronDown } from 'react-icons/hi2';
 
 import styles from './FeatureJob.module.scss';
-import { JobItemComponent } from '../../../../components';
-import { SelectionComponent } from '../../../../components/common';
-import { searchJobService } from '../../../../services/jobService';
-import { selectCategory, selectProvince } from '../../../../redux/features/config/configSilde';
-import { Experience, filterSalary } from '../../../../constants';
-import { SkeletonJobSectionComponent } from '../../../../components/skeleton';
+import { JobItemComponent } from '@components';
+import { SelectionComponent } from '@components/common';
+import { searchJobService } from '@services/jobService';
+import { selectCategory, selectProvince } from '@redux/features/config/configSilde';
+import { Experience, filterSalary } from '@constants';
+import { SkeletonJobSectionComponent } from '@components/skeleton';
 
 const cx = classNames.bind(styles);
 

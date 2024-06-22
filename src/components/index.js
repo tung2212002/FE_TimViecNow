@@ -6,6 +6,7 @@ import SearchEmploymentTypeComponent from './SearchEmploymentTypeComponent/Searc
 import SearchFieldComponent from './SearchFieldComponent/SearchFieldComponent';
 import SearchLevelTypeComponent from './SearchLevelTypeComponent/SearchLevelTypeComponent';
 
+import BackTopAdminComponent from './BackTopAdminComponent/BackTopAdminComponent';
 import BackTopComponent from './BackTopComponent/BackTopComponent';
 import ModalApplyComponent from './ModalApplyComponent/ModalApplyComponent';
 import NavBarMenuItemComponent from './NavBarMenuItemComponent/NavBarMenuItemComponent';
@@ -20,6 +21,7 @@ export {
     SearchFieldComponent,
     SearchLevelTypeComponent,
     BackTopComponent,
+    BackTopAdminComponent,
     ModalApplyComponent,
     NavBarMenuItemComponent,
     JobItemComponent,

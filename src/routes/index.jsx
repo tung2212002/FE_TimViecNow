@@ -2,18 +2,18 @@ import { useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import { DefaultLayout } from '../layouts';
+import { DefaultLayout } from '@layouts';
 import { privateRoutes, publicRoutes } from './routes';
 import PublicRoute from './PublicRoute';
 import PrivateRoute from './PrivateRoute';
-import { getListProvinceService } from '../services/locationService';
-import { setField, setProvince, setSkill, setCategory } from '../redux/features/config/configSilde';
-import { getListSkillService } from '../services/skillService';
-import { getListFieldService } from '../services/fieldService';
-import { getListCategoryService } from '../services/categoryService';
-import { selectBusiness } from '../redux/features/authBusiness/authSlide';
-import { selectUser } from '../redux/features/auth/authSlide';
-import useSide from '../hooks/useSIde';
+import { getListProvinceService } from '@services/locationService';
+import { setField, setProvince, setSkill, setCategory } from '@redux/features/config/configSilde';
+import { getListSkillService } from '@services/skillService';
+import { getListFieldService } from '@services/fieldService';
+import { getListCategoryService } from '@services/categoryService';
+import { selectBusiness } from '@redux/features/authBusiness/authSlide';
+import { selectUser } from '@redux/features/auth/authSlide';
+import useSide from '@hooks/useSIde';
 
 const AppRouter = () => {
     const dispatch = useDispatch();

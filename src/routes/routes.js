@@ -15,9 +15,9 @@ import {
     SavedJobPage,
     ListCompanyPage,
     SearchCompanyPage,
-} from '../pages';
-import route from '../constants/route';
-import { ContentOnlyLayout, DashboardHeader, DashboardLayout } from '../layouts';
+} from '@pages';
+import route from '@constants/route';
+import { ContentOnlyLayout, DashboardHeader, DashboardLayout } from '@layouts';
 import {
     DashboardCardPage,
     DashboardSearchCVPage,
@@ -29,7 +29,7 @@ import {
     DashboardSettingPage,
     DashboardVerifyPage,
     DashboardNotFound,
-} from '../pages/DashboardAdminPage';
+} from '@pages/DashboardAdminPage';
 
 export const publicRoutes = [
     {

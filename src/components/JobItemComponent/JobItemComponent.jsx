@@ -9,8 +9,8 @@ import { IoHeartOutline, IoHeartSharp } from 'react-icons/io5';
 
 import styles from './JobItemComponent.module.scss';
 import DetailCompanyTooltipComponent from '../DetailCompanyTooltipComponent/DetailCompanyTooltipComponent';
-import slugConvert from '../../utils/slugCovnert';
-import { convertSalary } from '../../utils/convertSalary';
+import slugConvert from '@utils/slugCovnert';
+import { convertSalary } from '@utils/convertSalary';
 
 const cx = classNames.bind(styles);
 

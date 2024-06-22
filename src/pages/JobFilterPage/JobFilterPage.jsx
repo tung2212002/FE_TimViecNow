@@ -5,12 +5,12 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import { LuListFilter } from 'react-icons/lu';
 import { FaChevronDown } from 'react-icons/fa';
+import { VscChevronLeft, VscChevronRight } from 'react-icons/vsc';
 
 import styles from './JobFilterPage.module.scss';
-import useDocumentTitle from '../../hooks/useDocumentTitle';
-import { searchJobService } from '../../services/jobService';
-import JobSuggest from '../../layouts/components/User/JobDetailPage/JobDetailBody/JobSuggest/JobSuggest';
-
+import useDocumentTitle from '@hooks/useDocumentTitle';
+import { searchJobService } from '@services/jobService';
+import JobSuggest from '@layouts/components/User/JobDetailPage/JobDetailBody/JobSuggest/JobSuggest';
 import {
     SearchEmploymentTypeComponent,
     SearchExpComponent,
@@ -19,13 +19,12 @@ import {
     SearchSalaryComponent,
     SearchCategoryComponent,
     SearchFieldComponent,
-} from '../../components';
-import path from '../../constants/path';
-import { GeneralCompanyFilter, JobDetailBody } from '../../layouts/components/User/JobFilterPage';
-import { EmploymentType } from '../../constants';
-import { selectCategory, selectField } from '../../redux/features/config/configSilde';
-import { VscChevronLeft, VscChevronRight } from 'react-icons/vsc';
-import { SkeletonCompanyComponent } from '../../components/skeleton';
+} from '@components';
+import path from '@constants/path';
+import { GeneralCompanyFilter, JobDetailBody } from '@layouts/components/User/JobFilterPage';
+import { EmploymentType } from '@constants';
+import { selectCategory, selectField } from '@redux/features/config/configSilde';
+import { SkeletonCompanyComponent } from '@components/skeleton';
 
 const cx = classNames.bind(styles);
 

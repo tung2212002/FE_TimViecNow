@@ -4,9 +4,9 @@ import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 
 import styles from './ChartJobDemand.module.scss';
-import { getCountJobBySalaryService, getCountJobByCategoryService } from '../../../../../services/jobService';
-import SkeletonChartComponent from '../../../../../components/skeleton/SkeletonChartComponent/SkeletonChartComponent';
-import SkeletonChartLabelComponent from '../../../../../components/skeleton/SkeletonChartComponent/SkeletonChartLabelComponent';
+import { getCountJobBySalaryService, getCountJobByCategoryService } from '@services/jobService';
+import SkeletonChartComponent from '@components/skeleton/SkeletonChartComponent/SkeletonChartComponent';
+import SkeletonChartLabelComponent from '@components/skeleton/SkeletonChartComponent/SkeletonChartLabelComponent';
 
 const cx = classNames.bind(styles);
 

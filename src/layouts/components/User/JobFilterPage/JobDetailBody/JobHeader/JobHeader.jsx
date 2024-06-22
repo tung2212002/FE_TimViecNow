@@ -13,13 +13,13 @@ import { FaClock } from 'react-icons/fa6';
 import { HiMiniXMark } from 'react-icons/hi2';
 
 import styles from './JobHeader.module.scss';
-import { icons } from '../../../../../../assets';
-import useDocumentTitle from '../../../../../../hooks/useDocumentTitle';
-import { showModal } from '../../../../../../redux/features/modal/modalSlice';
-import { convertSalary } from '../../../../../../utils/convertSalary';
-import { Experience } from '../../../../../../constants';
-import path from '../../../../../../constants/path';
-import slugConvert from '../../../../../../utils/slugCovnert';
+import { icons } from '@assets';
+import useDocumentTitle from '@hooks/useDocumentTitle';
+import { showModal } from '@redux/features/modal/modalSlice';
+import { convertSalary } from '@utils/convertSalary';
+import { Experience } from '@constants';
+import path from '@constants/path';
+import slugConvert from '@utils/slugCovnert';
 
 const cx = classNames.bind(styles);
 

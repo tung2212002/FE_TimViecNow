@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { addToast, removeToast, selectToast } from '../redux/features/toast/toastSlice';
+import { addToast, removeToast, selectToast } from '@redux/features/toast/toastSlice';
 
 const useToast = () => {
     const dispatch = useDispatch();

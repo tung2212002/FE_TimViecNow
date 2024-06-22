@@ -8,7 +8,7 @@ import { FaCircleInfo } from 'react-icons/fa6';
 import { HiArrowTrendingUp, HiArrowTrendingDown } from 'react-icons/hi2';
 
 import styles from './JobDetailBody.module.scss';
-import { images } from '../../../../../assets';
+import { images } from '@assets';
 import JobSuggest from './JobSuggest/JobSuggest';
 import HeaderDynamic from '../HeaderDynamic/HeaderDynamic';
 import JobSummary from './JobSummary/JobSummary';
@@ -17,11 +17,11 @@ import JobSuitable from '../JobSuitable/JobSuitable';
 import CompanySummary from '../CompanySummary/CompanySummary';
 import JobReport from '../JobReport/JobReport';
 import SuggestCourseSlide from './SuggestCourseSlide/SuggestCourseSlide';
-import { showModal } from '../../../../../redux/features/modal/modalSlice';
-import { Modal } from '../../../../../components/common';
-import { ModalApplyComponent } from '../../../../../components';
-import { searchJobService } from '../../../../../services/jobService';
-import { SkeletonCompanyComponent } from '../../../../../components/skeleton';
+import { showModal } from '@redux/features/modal/modalSlice';
+import { Modal } from '@components/common';
+import { ModalApplyComponent } from '@components';
+import { searchJobService } from '@services/jobService';
+import { SkeletonCompanyComponent } from '@components/skeleton';
 
 const cx = classNames.bind(styles);
 

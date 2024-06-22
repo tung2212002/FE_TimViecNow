@@ -10,15 +10,15 @@ import { FaCaretDown } from 'react-icons/fa';
 import { HiCheck } from 'react-icons/hi';
 
 import styles from './CreateCompany.module.scss';
-import { icons } from '../../../../../../assets';
-import { EditorComponent, InputSelectorMultiComponent, SelectionComponent } from '../../../../../../components/common';
-import { listScale } from '../../../../../../constants';
-import { getListFieldService } from '../../../../../../services/fieldService';
-import regexValidator from '../../../../../../utils/regexValidator';
-import { createCompanyService, updateCompanyService } from '../../../../../../services/businessCompanyService';
-import useToast from '../../../../../../hooks/useToast';
-import { selectBusiness, updateBusinessSubInfo } from '../../../../../../redux/features/authBusiness/authSlide';
-import { settingBusinessState } from '../../../../../../constants';
+import { icons } from '@assets';
+import { EditorComponent, InputSelectorMultiComponent, SelectionComponent } from '@components/common';
+import { listScale } from '@constants';
+import { getListFieldService } from '@services/fieldService';
+import regexValidator from '@utils/regexValidator';
+import { createCompanyService, updateCompanyService } from '@services/businessCompanyService';
+import useToast from '@hooks/useToast';
+import { selectBusiness, updateBusinessSubInfo } from '@redux/features/authBusiness/authSlide';
+import { settingBusinessState } from '@constants';
 
 const cx = classNames.bind(styles);
 
