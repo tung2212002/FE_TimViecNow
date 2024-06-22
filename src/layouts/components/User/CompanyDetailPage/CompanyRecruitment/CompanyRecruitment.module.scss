@@ -16,23 +16,21 @@
     padding: 12px 20px;
 }
 
-.body{
+.body {
     background: #fff;
     border: 1px solid #e9eaec;
     border-radius: 0 0 10px 10px;
     margin-bottom: 44px;
     padding: 32px 20px;
 
-    .list-job{
-        &.loading{
+    .list-job {
+        &.loading {
             visibility: hidden !important;
             padding: 0 !important;
             margin: 0 !important;
             border: none !important;
             height: 0 !important;
         }
-
-
     }
 }
 

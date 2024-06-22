@@ -3,11 +3,10 @@ import classNames from 'classnames/bind';
 import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { FaChevronDown, FaRegHeart, FaLaptopCode, FaBars } from 'react-icons/fa';
+import { FaChevronDown, FaRegHeart, FaBars } from 'react-icons/fa';
 import {
     FaMagnifyingGlass,
     FaListCheck,
-    FaRegFileLines,
     FaStarOfDavid,
     FaChalkboardUser,
     FaScaleBalanced,
@@ -16,19 +15,18 @@ import {
     FaArrowRightFromBracket,
 } from 'react-icons/fa6';
 import { IoBriefcaseOutline, IoCloseSharp, IoShieldCheckmarkOutline } from 'react-icons/io5';
-import { LiaMedalSolid } from 'react-icons/lia';
 import { RiFileUserLine } from 'react-icons/ri';
-import { TbFilePencil, TbFileCheck, TbUserSquare, TbFileCertificate, TbCoins, TbPigMoney, TbGift, TbEye, TbSettings } from 'react-icons/tb';
+import { TbFilePencil, TbFileCertificate, TbCoins, TbPigMoney, TbGift, TbEye, TbSettings } from 'react-icons/tb';
 import { BiBuildings, BiShieldX, BiEnvelope, BiLockAlt } from 'react-icons/bi';
 
 import styles from './HeaderHidden.module.scss';
-import { gifs, images } from '../../../../assets';
-import { selectAuth } from '../../../../redux/features/auth/authSlide';
-import { logoutService } from '../../../../services/authService';
-import { logout } from '../../../../redux/features/auth/authSlide';
+import { gifs, images } from '@assets';
+import { selectAuth } from '@redux/features/auth/authSlide';
+import { logoutService } from '@services/authService';
+import { logout } from '@redux/features/auth/authSlide';
 import NavBar from '../NavBar/NavBar';
-import { NavBarMenuItemComponent } from '../../../../components';
-import route from '../../../../constants/route';
+import { NavBarMenuItemComponent } from '@components';
+import route from '@constants/route';
 
 const cx = classNames.bind(styles);
 

@@ -1,9 +1,9 @@
+import { Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
 
 import styles from './CardSettingInfo.module.scss';
-import { icons } from '../../../../../assets';
-import { Link } from 'react-router-dom';
-import path from '../../../../../constants/path';
+import { icons } from '@assets';
+import path from '@constants/path';
 
 const cx = classNames.bind(styles);
 

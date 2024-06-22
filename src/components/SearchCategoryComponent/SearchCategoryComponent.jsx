@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
@@ -5,9 +6,8 @@ import PropTypes from 'prop-types';
 import styles from './SearchCategoryComponent.module.scss';
 import { IoBriefcaseOutline } from 'react-icons/io5';
 
-import SelectSearchComponent from '../common/SelectSearchComponent/SelectSearchComponent';
-import { useSelector } from 'react-redux';
-import { selectCategory } from '../../redux/features/config/configSilde';
+import SelectSearchComponent from '@components/common/SelectSearchComponent/SelectSearchComponent';
+import { selectCategory } from '@redux/features/config/configSilde';
 
 const cx = classNames.bind(styles);
 

@@ -7,7 +7,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import { FaArrowRight, FaArrowLeft } from 'react-icons/fa6';
 
 import styles from './DashboardSlide.module.scss';
-import { images } from '../../../../../assets';
+import { images } from '@assets';
 
 const cx = classNames.bind(styles);
 

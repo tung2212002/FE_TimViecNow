@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 
@@ -5,7 +6,6 @@ import { FaCaretDown } from 'react-icons/fa';
 import { IoClose } from 'react-icons/io5';
 
 import styles from './InputSelectorMultiComponent.module.scss';
-import { useEffect, useRef, useState } from 'react';
 
 const cx = classNames.bind(styles);
 

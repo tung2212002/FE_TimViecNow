@@ -1,4 +1,4 @@
-import * as request from '../utils/axios';
+import * as request from '@utils/axios';
 
 export const sendVerifyService = async (body) => {
     const response = await request.apiAuth.post('/verify/send_verify_code', body);

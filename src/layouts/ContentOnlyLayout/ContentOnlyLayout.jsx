@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 
 import styles from './ContentOnlyLayout.module.scss';
-import { Toast } from '../../components/common';
-import { selectToastList } from '../../redux/features/toast/toastSlice';
+import { Toast } from '@components/common';
+import { selectToastList } from '@redux/features/toast/toastSlice';
 
 const cx = classNames.bind(styles);
 
 function ContentOnlyLayout({ children }) {
     const listToast = useSelector(selectToastList);
-
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     return (
         <div className={cx('wrapper')}>
             {listToast.length > 0 && (

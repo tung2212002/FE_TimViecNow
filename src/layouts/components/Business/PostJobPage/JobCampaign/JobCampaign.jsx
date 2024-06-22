@@ -6,7 +6,7 @@ import { FaCaretDown } from 'react-icons/fa';
 import { FaPlus } from 'react-icons/fa6';
 
 import styles from './JobCampaign.module.scss';
-import { SelectionComponent } from '../../../../../components/common';
+import { SelectionComponent } from '@components/common';
 
 const cx = classNames.bind(styles);
 

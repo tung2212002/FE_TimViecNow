@@ -1,14 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import classNames from 'classnames/bind';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { FaBell, FaComments, FaChevronDown, FaRegHeart, FaLaptopCode } from 'react-icons/fa';
+import { FaBell, FaComments, FaChevronDown, FaRegHeart } from 'react-icons/fa';
 import {
     FaMagnifyingGlass,
     FaListCheck,
-    FaRegFileLines,
     FaStarOfDavid,
     FaChalkboardUser,
     FaScaleBalanced,
@@ -17,19 +16,18 @@ import {
     FaArrowRightFromBracket,
 } from 'react-icons/fa6';
 import { IoBriefcaseOutline, IoShieldCheckmarkOutline } from 'react-icons/io5';
-import { LiaMedalSolid } from 'react-icons/lia';
 import { RiFileUserLine } from 'react-icons/ri';
-import { TbFilePencil, TbFileCheck, TbUserSquare, TbFileCertificate, TbCoins, TbPigMoney, TbGift, TbEye, TbSettings } from 'react-icons/tb';
+import { TbFilePencil, TbFileCertificate, TbCoins, TbPigMoney, TbGift, TbEye, TbSettings } from 'react-icons/tb';
 import { BiBuildings, BiShieldX, BiEnvelope, BiLockAlt } from 'react-icons/bi';
 
 import styles from './Header.module.scss';
-import { icons, gifs, images } from '../../../../assets';
-import { selectAuth } from '../../../../redux/features/auth/authSlide';
-import { logoutService } from '../../../../services/authService';
-import { logout } from '../../../../redux/features/auth/authSlide';
+import { icons, gifs, images } from '@assets';
+import { selectAuth } from '@redux/features/auth/authSlide';
+import { logoutService } from '@services/authService';
+import { logout } from '@redux/features/auth/authSlide';
 import NavBar from '../NavBar/NavBar';
-import { NavBarMenuItemComponent } from '../../../../components';
-import route from '../../../../constants/route';
+import { NavBarMenuItemComponent } from '@components';
+import route from '@constants/route';
 
 const cx = classNames.bind(styles);
 

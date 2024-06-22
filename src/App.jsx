@@ -2,9 +2,9 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
-import store from './redux/store';
-import AppRouter from './routes';
-import { GOOGLE_CLIENT_ID } from './configs';
+import store from '@redux/store';
+import AppRouter from '@routes';
+import { GOOGLE_CLIENT_ID } from '@configs';
 
 function App() {
     return (

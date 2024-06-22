@@ -6,8 +6,8 @@ import { PiStarOfDavidBold } from 'react-icons/pi';
 import { HiCheck, HiOutlineChevronDown } from 'react-icons/hi';
 
 import styles from './SearchExpComponent.module.scss';
-import { SelectionComponent } from '../common';
-import { Experience } from '../../constants';
+import { SelectionComponent } from '@components/common';
+import { Experience } from '@constants';
 
 const cx = classNames.bind(styles);
 

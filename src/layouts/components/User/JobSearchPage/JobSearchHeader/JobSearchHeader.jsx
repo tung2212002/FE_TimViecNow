@@ -3,12 +3,12 @@ import classNames from 'classnames/bind';
 import { useNavigate } from 'react-router-dom';
 
 import styles from './JobSearchHeader.module.scss';
-import { SearchSalaryComponent, SearchExpComponent, SearchJobSearchHeaderComponent } from '../../../../../components';
-import { images } from '../../../../../assets';
+import { SearchSalaryComponent, SearchExpComponent, SearchJobSearchHeaderComponent } from '@components';
+import { images } from '@assets';
 import BannerSlide from './BannerSlide/BannerSlide';
-import path from '../../../../../constants/path';
-import { getJobCruitmentDemandService } from '../../../../../services/jobService';
-import { convertDateTime } from '../../../../../utils/convertTimeUtil';
+import path from '@constants/path';
+import { getJobCruitmentDemandService } from '@services/jobService';
+import { convertDateTime } from '@utils/convertTimeUtil';
 
 const cx = classNames.bind(styles);
 

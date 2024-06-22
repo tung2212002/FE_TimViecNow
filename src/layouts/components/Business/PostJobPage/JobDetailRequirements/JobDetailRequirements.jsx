@@ -12,9 +12,9 @@ import {
     setJobRequirement,
     setMustHaveSkills,
     setShouldHaveSkills,
-} from '../../../../../redux/features/postJob/postJobSlide';
-import { InputSelectorMultiComponent, EditorComponent, Spinner } from '../../../../../components/common';
-import { selectSkill } from '../../../../../redux/features/config/configSilde';
+} from '@redux/features/postJob/postJobSlide';
+import { InputSelectorMultiComponent, EditorComponent } from '@components/common';
+import { selectSkill } from '@redux/features/config/configSilde';
 
 const cx = classNames.bind(styles);
 

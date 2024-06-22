@@ -1,21 +1,20 @@
+import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { HiMagnifyingGlass, HiOutlineChevronDown } from 'react-icons/hi2';
 import { HiOutlineLocationMarker, HiCheck, HiTrendingUp } from 'react-icons/hi';
 
 import styles from './SearchSection.module.scss';
-import { useSelector } from 'react-redux';
-import { selectProvince } from '../../../../../../redux/features/config/configSilde';
-import path from '../../../../../../constants/path';
+import { selectProvince } from '@redux/features/config/configSilde';
+import path from '@constants/path';
 
 const cx = classNames.bind(styles);
 
 const SearchSection = ({ handleSelectCity }) => {
     const navigate = useNavigate();
-    const location = useLocation();
     const province = useSelector(selectProvince);
     const [cities, setCities] = useState([{ id: 0, name: 'Tất cả địa điểm' }, ...province]);
 

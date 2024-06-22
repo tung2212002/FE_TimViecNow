@@ -7,9 +7,9 @@ import { BiSolidDollarCircle } from 'react-icons/bi';
 import { FaLocationDot } from 'react-icons/fa6';
 
 import styles from './GeneralJobFilter.module.scss';
-import slugConvert from '../../../../../utils/slugCovnert';
-import path from '../../../../../constants/path';
-import { convertSalary } from '../../../../../utils/convertSalary';
+import slugConvert from '@utils/slugCovnert';
+import path from '@constants/path';
+import { convertSalary } from '@utils/convertSalary';
 
 const cx = classNames.bind(styles);
 

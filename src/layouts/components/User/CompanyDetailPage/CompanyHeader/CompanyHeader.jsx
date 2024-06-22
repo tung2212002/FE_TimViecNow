@@ -6,7 +6,7 @@ import { FaUsers } from 'react-icons/fa';
 import { FaPlus, FaGlobe, FaBuilding } from 'react-icons/fa6';
 
 import styles from './CompanyHeader.module.scss';
-import { images } from '../../../../../assets';
+import { images } from '@assets';
 
 const cx = classNames.bind(styles);
 

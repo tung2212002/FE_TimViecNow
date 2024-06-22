@@ -6,13 +6,13 @@ import { useNavigate } from 'react-router-dom';
 import { FaRegPaperPlane } from 'react-icons/fa';
 
 import styles from './DashboardVerifyPage.module.scss';
-import useDocumentTitle from '../../../hooks/useDocumentTitle';
-import { images } from '../../../assets';
-import { selectBusiness, updateBusinessInfo } from '../../../redux/features/authBusiness/authSlide';
-import { sendVerifyService, verifyCodeService } from '../../../services/verifyService';
-import useToast from '../../../hooks/useToast';
-import { getInfoBusinessService } from '../../../services/businessService';
-import path from '../../../constants/path';
+import useDocumentTitle from '@hooks/useDocumentTitle';
+import { images } from '@assets';
+import { selectBusiness, updateBusinessInfo } from '@redux/features/authBusiness/authSlide';
+import { sendVerifyService, verifyCodeService } from '@services/verifyService';
+import useToast from '@hooks/useToast';
+import { getInfoBusinessService } from '@services/businessService';
+import path from '@constants/path';
 
 const cx = classNames.bind(styles);
 

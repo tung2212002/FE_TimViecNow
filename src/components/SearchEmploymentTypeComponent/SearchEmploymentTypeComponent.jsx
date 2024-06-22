@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import styles from './SearchEmploymentTypeComponent.module.scss';
 import { AiOutlineFieldTime } from 'react-icons/ai';
 
-import SelectSearchComponent from '../common/SelectSearchComponent/SelectSearchComponent';
-import { EmploymentType } from '../../constants';
+import SelectSearchComponent from '@components/common/SelectSearchComponent/SelectSearchComponent';
+import { EmploymentType } from '@constants';
 const cx = classNames.bind(styles);
 
 const SearchEmploymentTypeComponent = ({ canSearch = false, handleSetFilter, filter, active = false }) => {

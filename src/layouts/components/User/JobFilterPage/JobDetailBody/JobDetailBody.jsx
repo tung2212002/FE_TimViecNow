@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
@@ -6,10 +6,10 @@ import PropTypes from 'prop-types';
 import { FaLock } from 'react-icons/fa';
 
 import styles from './JobDetailBody.module.scss';
-import { showModal } from '../../../../../redux/features/modal/modalSlice';
+import { showModal } from '@redux/features/modal/modalSlice';
 import JobHeader from './JobHeader/JobHeader';
-import path from '../../../../../constants/path';
-import slugConvert from '../../../../../utils/slugCovnert';
+import path from '@constants/path';
+import slugConvert from '@utils/slugCovnert';
 
 const cx = classNames.bind(styles);
 

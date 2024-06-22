@@ -12,13 +12,13 @@ import { FaLock, FaRegPaperPlane, FaRegHeart } from 'react-icons/fa';
 import { FaClock } from 'react-icons/fa6';
 
 import styles from './JobHeader.module.scss';
-import { icons } from '../../../../../assets';
-import useDocumentTitle from '../../../../../hooks/useDocumentTitle';
-import { Modal } from '../../../../../components/common';
-import { ModalApplyComponent } from '../../../../../components';
-import { showModal } from '../../../../../redux/features/modal/modalSlice';
-import { convertSalary } from '../../../../../utils/convertSalary';
-import { Experience } from '../../../../../constants';
+import { icons } from '@assets';
+import useDocumentTitle from '@hooks/useDocumentTitle';
+import { Modal } from '@components/common';
+import { ModalApplyComponent } from '@components';
+import { showModal } from '@redux/features/modal/modalSlice';
+import { convertSalary } from '@utils/convertSalary';
+import { Experience } from '@constants';
 
 const cx = classNames.bind(styles);
 

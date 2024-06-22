@@ -1,4 +1,4 @@
-import * as request from '../utils/axios';
+import * as request from '@utils/axios';
 
 export const loginService = async (body) => {
     const response = await request.api.post('/user/login', body);

@@ -17,18 +17,18 @@
     padding: 12px 20px;
 }
 
-.body{
-    padding: 0 20px 8px    ;
+.body {
+    padding: 0 20px 8px;
 }
 
-.item{
+.item {
     padding: 20px 0;
-    .box-title{
+    .box-title {
         display: flex;
         align-items: center;
         margin-bottom: 8px;
 
-        .icon{
+        .icon {
             color: #00b14f;
             font-size: 20px;
             height: 20px;
@@ -38,16 +38,15 @@
             width: 20px;
         }
 
-        .text{
+        .text {
             color: #212f3f;
             font-size: 14px;
             font-weight: 500;
             line-height: 20px;
             line-height: 1.5;
         }
-
     }
-    .box-copy{
+    .box-copy {
         display: flex;
         align-items: center;
         background: #fff;
@@ -55,9 +54,9 @@
         border-radius: 6px;
         column-gap: 10px;
         height: 48px;
-        padding: 10px 12px ;
+        padding: 10px 12px;
 
-        input{
+        input {
             flex: 1;
             border: none;
             color: #6f7882;
@@ -70,7 +69,7 @@
             white-space: nowrap !important;
         }
 
-        button{
+        button {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -82,24 +81,24 @@
             transition: background-color 0.3s ease;
         }
 
-        .icon{
+        .icon {
             color: #212f3f;
             font-size: 16px;
             height: 16px;
             line-height: 16px;
             width: 16px;
 
-            &:hover{
+            &:hover {
                 color: #00b14f;
             }
 
-            &.active{
+            &.active {
                 color: #00b14f;
             }
         }
     }
 
-    &:not(:last-child){
+    &:not(:last-child) {
         border-bottom: 1px solid #e9eaec;
     }
 }

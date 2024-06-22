@@ -1,15 +1,14 @@
-import { useState } from 'react';
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 
-import { FaChevronRight, FaMessage } from 'react-icons/fa6';
+import { FaMessage } from 'react-icons/fa6';
 import { FaEye } from 'react-icons/fa';
 
 import styles from './AppliedJobComponent.module.scss';
-import slugConvert from '../../../../../utils/slugCovnert';
-import path from '../../../../../constants/path';
-import { convertSalary } from '../../../../../utils/convertSalary';
-import { convertDateTime } from '../../../../../utils/convertTimeUtil';
+import slugConvert from '@utils/slugCovnert';
+import path from '@constants/path';
+import { convertSalary } from '@utils/convertSalary';
+import { convertDateTime } from '@utils/convertTimeUtil';
 
 const cx = classNames.bind(styles);
 

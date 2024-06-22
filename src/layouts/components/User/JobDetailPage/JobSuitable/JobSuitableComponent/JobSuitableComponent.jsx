@@ -5,9 +5,9 @@ import TippyText from '@tippyjs/react';
 import { FaRegHeart, FaHeart } from 'react-icons/fa6';
 
 import styles from './JobSuitableComponent.module.scss';
-import path from '../../../../../../constants/path';
-import slugConvert from '../../../../../../utils/slugCovnert';
-import { convertSalary } from '../../../../../../utils/convertSalary';
+import path from '@constants/path';
+import slugConvert from '@utils/slugCovnert';
+import { convertSalary } from '@utils/convertSalary';
 
 const cx = classNames.bind(styles);
 

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
@@ -5,9 +6,8 @@ import PropTypes from 'prop-types';
 import styles from './SearchFieldComponent.module.scss';
 import { PiCubeFocus } from 'react-icons/pi';
 
-import SelectSearchComponent from '../common/SelectSearchComponent/SelectSearchComponent';
-import { selectField } from '../../redux/features/config/configSilde';
-import { useState } from 'react';
+import SelectSearchComponent from '@components/common/SelectSearchComponent/SelectSearchComponent';
+import { selectField } from '@redux/features/config/configSilde';
 
 const cx = classNames.bind(styles);
 

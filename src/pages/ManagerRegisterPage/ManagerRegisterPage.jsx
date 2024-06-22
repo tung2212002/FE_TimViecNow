@@ -2,11 +2,11 @@ import { useDispatch } from 'react-redux';
 import classNames from 'classnames/bind';
 
 import styles from './ManagerRegisterPage.module.scss';
-import Modal from '../../components/common/Modal/Modal';
-import { icons, images } from '../../assets';
-import path from '../../constants/path';
-import { hideModal, showModal } from '../../redux/features/modal/modalSlice';
-import { Policy, RegisterForm } from '../../layouts/components/Business/AuthenticationPage';
+import Modal from '@components/common/Modal/Modal';
+import { icons, images } from '@assets';
+import path from '@constants/path';
+import { hideModal, showModal } from '@redux/features/modal/modalSlice';
+import { Policy, RegisterForm } from '@layouts/components/Business/AuthenticationPage';
 
 const cx = classNames.bind(styles);
 

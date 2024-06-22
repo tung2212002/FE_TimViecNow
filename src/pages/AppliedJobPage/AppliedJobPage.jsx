@@ -1,18 +1,18 @@
+import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 
 import { FaCaretDown } from 'react-icons/fa';
 import { HiCheck } from 'react-icons/hi';
+import { VscChevronLeft, VscChevronRight } from 'react-icons/vsc';
 
 import styles from './AppliedJobPage.module.scss';
-import { SelectionComponent } from '../../components/common';
-import { cVAppliedStatus } from '../../constants';
-import { AppliedJobComponent } from '../../layouts/components/User/AppliedJobPage';
-import { SkeletonCompanyComponent } from '../../components/skeleton';
-import { VscChevronLeft, VscChevronRight } from 'react-icons/vsc';
-import { Link } from 'react-router-dom';
-import route from '../../constants/route';
-import { images } from '../../assets';
+import { SelectionComponent } from '@components/common';
+import { cVAppliedStatus } from '@constants';
+import { AppliedJobComponent } from '@layouts/components/User/AppliedJobPage';
+import { SkeletonCompanyComponent } from '@components/skeleton';
+import route from '@constants/route';
+import { images } from '@assets';
 
 const cx = classNames.bind(styles);
 

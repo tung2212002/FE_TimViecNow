@@ -13,7 +13,6 @@
     .slider {
         width: 100%;
     }
-    
 }
 
 @media screen and (min-width: 992px) and (max-width: 1199px) {
@@ -98,7 +97,7 @@
         padding: 16px;
         width: 270px;
         // margin: 0 10px;
-        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 
         &:hover {
             border: 1px solid #33c172;
@@ -137,16 +136,16 @@
     .vnr500 {
         background: linear-gradient(90deg, #fd7222, #edab28);
     }
-    
+
     .fast500 {
         background: #243a76;
     }
-    
+
     .profit500 {
         background: #dc2f2f;
     }
-    
-    .v1000{
+
+    .v1000 {
         background: #e48924;
     }
     .img {

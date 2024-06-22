@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 import { FaPenToSquare } from 'react-icons/fa6';
 
 import styles from './CompanyInfo.module.scss';
-import { selectBusiness } from '../../../../../../redux/features/authBusiness/authSlide';
-import { images } from '../../../../../../assets';
-import { settingBusinessState } from '../../../../../../constants';
+import { selectBusiness } from '@redux/features/authBusiness/authSlide';
+import { images } from '@assets';
+import { settingBusinessState } from '@constants';
 
 const cx = classNames.bind(styles);
 

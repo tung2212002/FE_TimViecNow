@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-import { logoutService } from '../../../services/authService';
-import { setLocalToken, removeLocalToken, removeLocalUser, updateLocalToken, updateLocalUserInfo, setLocalUser } from '../../../utils/authLocalStorage';
+import { logoutService } from '@services/authService';
+import { setLocalToken, removeLocalToken, removeLocalUser, updateLocalToken, updateLocalUserInfo, setLocalUser } from '@utils/authLocalStorage';
 
 const initialState = {
     user: null,

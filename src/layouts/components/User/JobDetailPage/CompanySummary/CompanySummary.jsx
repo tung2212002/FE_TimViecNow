@@ -9,8 +9,8 @@ import { FaUserGroup, FaArrowUpRightFromSquare } from 'react-icons/fa6';
 import { TiLocation } from 'react-icons/ti';
 
 import styles from './CompanySummary.module.scss';
-import path from '../../../../../constants/path';
-import slugConvert from '../../../../../utils/slugCovnert';
+import path from '@constants/path';
+import slugConvert from '@utils/slugCovnert';
 
 const cx = classNames.bind(styles);
 

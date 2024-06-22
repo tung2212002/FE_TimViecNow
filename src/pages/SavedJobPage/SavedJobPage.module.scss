@@ -73,16 +73,16 @@
         margin-bottom: 16px;
         padding: 16px;
 
-        .empty{
+        .empty {
             padding: 26px 0 32px;
             text-align: center;
 
-            p{
+            p {
                 margin-bottom: 22px;
                 margin-top: 30px;
             }
 
-            .btn{
+            .btn {
                 background: #00b14f;
                 border-radius: 5px;
                 color: #fff;
@@ -90,9 +90,8 @@
                 font-weight: 700;
                 padding: 9px 20px;
 
-                &:hover{
+                &:hover {
                     background: #019b46;
-                
                 }
             }
         }
@@ -117,13 +116,11 @@
                 display: flex;
                 align-items: center;
 
-                &:hover{
+                &:hover {
                     cursor: pointer;
                 }
-
             }
 
-            
             .icon {
                 color: #ccc;
                 cursor: pointer;
@@ -149,8 +146,6 @@
         .box {
             margin-bottom: 30px;
         }
-
-    
     }
 }
 
@@ -159,12 +154,12 @@
     padding-right: 15px;
     padding-left: 15px;
 
-    .title{
+    .title {
         color: #212f3f;
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 28px;
-    margin: 0 0 16px;
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 28px;
+        margin: 0 0 16px;
     }
 }
 
@@ -192,7 +187,6 @@
         padding: 0;
     }
 }
-
 
 .footer {
     margin: 0 auto;
@@ -251,4 +245,3 @@
         }
     }
 }
-

@@ -5,9 +5,9 @@ import { IoSearch } from 'react-icons/io5';
 import styles from './SearchCompany.module.scss';
 import SearchCompanyComponent from '../SearchCompanyComponent/SearchCompanyComponent';
 import { useEffect, useState } from 'react';
-import { Spinner } from '../../../../../../components/common';
-import { getListCompanySerivce } from '../../../../../../services/businessCompanyService';
-import { SkeletonCompanyComponent } from '../../../../../../components/skeleton';
+import { Spinner } from '@components/common';
+import { getListCompanySerivce } from '@services/businessCompanyService';
+import { SkeletonCompanyComponent } from '@components/skeleton';
 
 const cx = classNames.bind(styles);
 
@@ -22,7 +22,6 @@ const SearchCompany = () => {
     });
 
     const [isSearch, setIsSearch] = useState(false);
-    const [loading, setLoading] = useState(false);
 
     const handleChange = (e) => {
         setCompany((prev) => ({ ...prev, keyword: e.target.value }));

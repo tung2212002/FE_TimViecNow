@@ -1,18 +1,11 @@
 import { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import classNames from 'classnames/bind';
 
 import styles from './DashboardSettingPage.module.scss';
-import {
-    CardSettingInfo,
-    SettigBusinessLicense,
-    SettingCompany,
-    SettingInfo,
-    SettingPassword,
-    SiderBar,
-} from '../../../layouts/components/Business/SettingPage';
-import route from '../../../constants/route';
-import path from '../../../constants/path';
+import { CardSettingInfo, SettigBusinessLicense, SettingCompany, SettingInfo, SettingPassword, SiderBar } from '@layouts/components/Business/SettingPage';
+import route from '@constants/route';
+import path from '@constants/path';
 
 const cx = classNames.bind(styles);
 

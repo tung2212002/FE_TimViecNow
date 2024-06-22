@@ -1,9 +1,9 @@
 import classNames from 'classnames/bind';
 
 import styles from './JobSearchPage.module.scss';
-import { JobSearchHeader } from '../../layouts/components/User/JobSearchPage';
-import { VerticalBanner, JobTripleBannerSlide, Hotline, FeatureJob, TopJobSlide } from '../../layouts/components/User';
-import useDocumentTitle from '../../hooks/useDocumentTitle';
+import { JobSearchHeader } from '@layouts/components/User/JobSearchPage';
+import { VerticalBanner, JobTripleBannerSlide, Hotline, FeatureJob, TopJobSlide } from '@layouts/components/User';
+import useDocumentTitle from '@hooks/useDocumentTitle';
 
 const cx = classNames.bind(styles);
 

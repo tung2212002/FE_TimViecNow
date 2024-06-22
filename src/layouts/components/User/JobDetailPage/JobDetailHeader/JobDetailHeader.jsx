@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 
 import styles from './JobDetailHeader.module.scss';
 import { SearchSalaryComponent, SearchExpComponent, SearchJobSearchHeaderComponent } from '../../../../../components';
-import path from '../../../../../constants/path';
+import path from '@constants/path';
 
 const cx = classNames.bind(styles);
 

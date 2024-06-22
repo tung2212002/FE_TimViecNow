@@ -1,4 +1,4 @@
-import * as request from '../utils/axios';
+import * as request from '@utils/axios';
 
 export const getListAdminService = async (params) => {
     const response = await request.apiBusinessAuth.get('/admin', { params });

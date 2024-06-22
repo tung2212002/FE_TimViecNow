@@ -7,14 +7,14 @@ import { PiLockOpenBold } from 'react-icons/pi';
 import { FaEye, FaEyeSlash, FaRegEnvelope } from 'react-icons/fa';
 
 import styles from './ManagerLoginPage.module.scss';
-import useDocumentTitle from '../../hooks/useDocumentTitle';
-import regexValidator from '../../utils/regexValidator';
-import path from '../../constants/path';
-import { icons } from '../../assets/index';
-import { loginBusinessService } from '../../services/businessAuthService';
-import { login } from '../../redux/features/authBusiness/authSlide';
-import { addToast, removeToast } from '../../redux/features/toast/toastSlice';
-import { Spinner } from '../../components/common';
+import useDocumentTitle from '@hooks/useDocumentTitle';
+import regexValidator from '@utils/regexValidator';
+import path from '@constants/path';
+import { icons } from '@assets/index';
+import { loginBusinessService } from '@services/businessAuthService';
+import { login } from '@redux/features/authBusiness/authSlide';
+import { addToast, removeToast } from '@redux/features/toast/toastSlice';
+import { Spinner } from '@components/common';
 
 const cx = classNames.bind(styles);
 
