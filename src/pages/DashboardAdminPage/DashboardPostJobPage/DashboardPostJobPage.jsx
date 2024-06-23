@@ -31,15 +31,15 @@ import {
     setJobLocation,
 } from '@redux/features/postJob/postJobSlide';
 import { JobLocation, JobGeneralRequirements, JobDetailRequirements, JobInfoContact } from '@layouts/components/Business/PostJobPage';
-import { getCampaignByIdService, getListCampaignService } from '@services/campaignService';
-import { getListJobPositionService } from '@services/positionService';
-import { getListCategoryService } from '@services/categoryService';
+import { getCampaignByIdService, getListCampaignService } from '@services/business/campaignService';
+import { getListJobPositionService } from '@services/common/positionService';
+import { getListCategoryService } from '@services/common/categoryService';
 import regexValidator from '@utils/regexValidator';
 import useToast from '@hooks/useToast';
-import { createBusinessJobService } from '@services/businessJobService';
+import { createBusinessJobService } from '@services/business/businessJobService';
 import { selectCampaign, setCampaign } from '@redux/features/campaign/campaignSilde';
 import { selectCategory, selectJobPosition, setCategory, setJobPosition } from '@redux/features/config/configSilde';
-import { selectBusiness } from '@redux/features/authBusiness/authSlide';
+import { selectUser } from '@redux/features/authUser/authSlide';
 
 const cx = classNames.bind(styles);
 
@@ -49,7 +49,7 @@ const DashboardPostJobPage = () => {
 
     const info = useSelector(selectPostJob);
     const error = useSelector(selectError);
-    const user = useSelector(selectBusiness);
+    const user = useSelector(selectUser);
     const location = useLocation();
     const query = new URLSearchParams(location.search);
     const campaign_id = query.get('campaign_id');

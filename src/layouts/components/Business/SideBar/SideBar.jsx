@@ -17,13 +17,13 @@ import { BiSolidBadgeDollar } from 'react-icons/bi';
 import styles from './SideBar.module.scss';
 import path from '@constants/path';
 import { images } from '@assets';
-import { selectBusiness } from '@redux/features/authBusiness/authSlide';
+import { selectUser } from '@redux/features/authUser/authSlide';
 
 const cx = classNames.bind(styles);
 
 const SideBar = () => {
     const location = useLocation();
-    const user = useSelector(selectBusiness);
+    const user = useSelector(selectUser);
 
     const mathPath = () => {
         return location.pathname + (location.search ? location.search : '');

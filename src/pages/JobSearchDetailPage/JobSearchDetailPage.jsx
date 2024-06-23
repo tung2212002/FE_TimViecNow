@@ -18,7 +18,7 @@ import {
     JobSummary,
 } from '@layouts/components/User/JobDetailPage';
 import { SEO } from '@layouts/components/User';
-import { getJobSerivce } from '@services/jobService';
+import { getJobSerivce } from '@services/user/jobService';
 import path from '@constants/path';
 import { SkeletonJobDetailPage } from '@components/skeleton';
 

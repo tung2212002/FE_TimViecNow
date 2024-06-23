@@ -7,19 +7,19 @@ import { HiCheck } from 'react-icons/hi2';
 import { FaCaretDown } from 'react-icons/fa6';
 
 import styles from './SettingInfo.module.scss';
-import { selectBusiness, updateBusinessInfo } from '@redux/features/authBusiness/authSlide';
+import { selectUser, updateInfo } from '@redux/features/authUser/authSlide';
 import { images } from '@assets';
 import useToast from '@hooks/useToast';
 import { SelectionComponent } from '@components/common';
 import { listGender, listWorkPosition } from '@constants';
 import path from '@constants/path';
-import { updateBusinessService } from '@services/businessService';
+import { updateBusinessService } from '@services/business/businessService';
 
 const cx = classNames.bind(styles);
 
 const SettingInfo = () => {
     const ref = useRef(null);
-    const user = useSelector(selectBusiness);
+    const user = useSelector(selectUser);
     const dispatch = useDispatch();
 
     const { handleAddToast } = useToast();
@@ -106,7 +106,7 @@ const SettingInfo = () => {
         updateBusinessService(user.id, formData)
             .then((res) => {
                 if (res.status === 200) {
-                    dispatch(updateBusinessInfo({ user: res.data.data }));
+                    dispatch(updateInfo({ user: res.data.data }));
                     handleAddToast('Success', 'Cập nhật thông tin thành công', 'success');
                     setAvatar(res.data.data.avatar);
                 } else if (res.status === 400) {

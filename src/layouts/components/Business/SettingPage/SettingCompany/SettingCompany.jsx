@@ -10,13 +10,13 @@ import styles from './SettingCompany.module.scss';
 import CompanyInfo from './CompanyInfo/CompanyInfo';
 import CreateCompany from './CreateCompany/CreateCompany';
 import SearchCompany from './SearchCompany/SearchCompany';
-import { selectBusiness } from '@redux/features/authBusiness/authSlide';
+import { selectUser } from '@redux/features/authUser/authSlide';
 import { settingBusinessState } from '@constants/index';
 
 const cx = classNames.bind(styles);
 
 const SettingCompany = () => {
-    const user = useSelector(selectBusiness);
+    const user = useSelector(selectUser);
     const [state, setState] = useState(user?.company ? settingBusinessState.INFO : settingBusinessState.SEARCH);
 
     const handleSetState = (value) => {

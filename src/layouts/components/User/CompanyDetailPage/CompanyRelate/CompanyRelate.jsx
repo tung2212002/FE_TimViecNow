@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 
 import styles from './CompanyRelate.module.scss';
-import { getListCompanySerivce } from '@services/companyService';
+import { getListCompanySerivce } from '@services/user/companyService';
 import CompanyRelateComponent from './CompanyRelateComponent/CompanyRelateComponent';
 
 const cx = classNames.bind(styles);

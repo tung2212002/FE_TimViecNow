@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import randomId from '@utils/randomId';
-import { getLocalBusiness } from '@utils/authBusinessStorage';
+import { getLocalBusiness } from '@utils/authStorage/authBusinessStorage';
 
 const initialState = {
     postJob: {

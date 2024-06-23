@@ -5,14 +5,14 @@ import PropTypes from 'prop-types';
 import { FaPenToSquare } from 'react-icons/fa6';
 
 import styles from './CompanyInfo.module.scss';
-import { selectBusiness } from '@redux/features/authBusiness/authSlide';
+import { selectUser } from '@redux/features/authUser/authSlide';
 import { images } from '@assets';
 import { settingBusinessState } from '@constants';
 
 const cx = classNames.bind(styles);
 
 const CompanyInfo = ({ setActiveTab }) => {
-    const user = useSelector(selectBusiness);
+    const user = useSelector(selectUser);
 
     return (
         <div className={cx('wrapper')}>

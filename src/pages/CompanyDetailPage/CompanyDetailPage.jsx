@@ -7,8 +7,8 @@ import { FaChevronRight } from 'react-icons/fa6';
 import styles from './CompanyDetailPage.module.scss';
 import { CompanyDescription, CompanyHeader, CompanyRecruitment, CompanyRelate, CompanyShare } from '@layouts/components/User/CompanyDetailPage';
 import CompanyLocation from '@layouts/components/User/CompanyDetailPage/CompanyLocation/CompanyLocation';
-import { getCompanyByIdSerivce } from '@services/companyService';
-import slugConvert from '@utils/slugCovnert';
+import { getCompanyByIdSerivce } from '@services/user/companyService';
+import slugConvert from '@utils/convert/slugConvert';
 
 const cx = classNames.bind(styles);
 

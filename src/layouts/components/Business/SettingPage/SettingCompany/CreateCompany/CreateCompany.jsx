@@ -13,18 +13,18 @@ import styles from './CreateCompany.module.scss';
 import { icons } from '@assets';
 import { EditorComponent, InputSelectorMultiComponent, SelectionComponent } from '@components/common';
 import { listScale } from '@constants';
-import { getListFieldService } from '@services/fieldService';
+import { getListFieldService } from '@services/common/fieldService';
 import regexValidator from '@utils/regexValidator';
-import { createCompanyService, updateCompanyService } from '@services/businessCompanyService';
+import { createCompanyService, updateCompanyService } from '@services/business/businessCompanyService';
 import useToast from '@hooks/useToast';
-import { selectBusiness, updateBusinessSubInfo } from '@redux/features/authBusiness/authSlide';
+import { selectUser, updateSubInfo } from '@redux/features/authUser/authSlide';
 import { settingBusinessState } from '@constants';
 
 const cx = classNames.bind(styles);
 
 const CreateCompany = ({ setActiveTab }) => {
     const dispatch = useDispatch();
-    const user = useSelector(selectBusiness);
+    const user = useSelector(selectUser);
     const [isGetFiled, setIsGetFiled] = useState(true);
     const [listField, setListField] = useState([]);
     const refFile = useRef(null);
@@ -196,7 +196,7 @@ const CreateCompany = ({ setActiveTab }) => {
         createCompanyService(body)
             .then((res) => {
                 if (res.status === 201) {
-                    dispatch(updateBusinessSubInfo({ company: res.data.data }));
+                    dispatch(updateSubInfo({ company: res.data.data }));
                     setActiveTab(settingBusinessState.INFO);
                     handleAddToast('Thành công', 'Tạo công ty thành công', 'success');
                 } else if (res.status === 400) {
@@ -227,7 +227,7 @@ const CreateCompany = ({ setActiveTab }) => {
         updateCompanyService(user?.company?.id, body)
             .then((res) => {
                 if (res.status === 200) {
-                    dispatch(updateBusinessSubInfo({ company: res.data.data }));
+                    dispatch(updateSubInfo({ company: res.data.data }));
                     setActiveTab(settingBusinessState.INFO);
                     handleAddToast('Thành công', 'Cập nhật thành công', 'success');
                 } else if (res.status === 400) {

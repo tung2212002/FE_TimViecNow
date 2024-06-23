@@ -9,7 +9,7 @@ import styles from './JobDetailBody.module.scss';
 import { showModal } from '@redux/features/modal/modalSlice';
 import JobHeader from './JobHeader/JobHeader';
 import path from '@constants/path';
-import slugConvert from '@utils/slugCovnert';
+import slugConvert from '@utils/convert/slugConvert';
 
 const cx = classNames.bind(styles);
 

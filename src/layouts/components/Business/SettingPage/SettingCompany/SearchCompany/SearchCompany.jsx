@@ -6,7 +6,7 @@ import styles from './SearchCompany.module.scss';
 import SearchCompanyComponent from '../SearchCompanyComponent/SearchCompanyComponent';
 import { useEffect, useState } from 'react';
 import { Spinner } from '@components/common';
-import { getListCompanySerivce } from '@services/businessCompanyService';
+import { getListCompanySerivce } from '@services/business/businessCompanyService';
 import { SkeletonCompanyComponent } from '@components/skeleton';
 
 const cx = classNames.bind(styles);

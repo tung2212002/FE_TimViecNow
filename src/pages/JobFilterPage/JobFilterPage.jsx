@@ -9,7 +9,7 @@ import { VscChevronLeft, VscChevronRight } from 'react-icons/vsc';
 
 import styles from './JobFilterPage.module.scss';
 import useDocumentTitle from '@hooks/useDocumentTitle';
-import { searchJobService } from '@services/jobService';
+import { searchJobService } from '@services/user/jobService';
 import JobSuggest from '@layouts/components/User/JobDetailPage/JobDetailBody/JobSuggest/JobSuggest';
 import {
     SearchEmploymentTypeComponent,

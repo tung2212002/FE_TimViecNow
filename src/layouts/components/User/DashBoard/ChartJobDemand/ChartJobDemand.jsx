@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 
 import styles from './ChartJobDemand.module.scss';
-import { getCountJobBySalaryService, getCountJobByCategoryService } from '@services/jobService';
+import { getCountJobBySalaryService, getCountJobByCategoryService } from '@services/user/jobService';
 import SkeletonChartComponent from '@components/skeleton/SkeletonChartComponent/SkeletonChartComponent';
 import SkeletonChartLabelComponent from '@components/skeleton/SkeletonChartComponent/SkeletonChartLabelComponent';
 

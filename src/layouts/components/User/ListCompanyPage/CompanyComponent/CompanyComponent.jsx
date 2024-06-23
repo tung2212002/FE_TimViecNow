@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import styles from './CompanyComponent.module.scss';
 import path from '@constants/path';
-import slugConvert from '@utils/slugCovnert';
+import slugConvert from '@utils/convert/slugConvert';
 
 const cx = classNames.bind(styles);
 

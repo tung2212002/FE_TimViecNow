@@ -11,12 +11,12 @@ import { FaChevronRight } from 'react-icons/fa6';
 import { LuTrash } from 'react-icons/lu';
 
 import styles from './SavedJobComponent.module.scss';
-import slugConvert from '@utils/slugCovnert';
+import slugConvert from '@utils/convert/slugConvert';
 import path from '@constants/path';
 import route from '@constants/route';
 import { icons } from '@assets';
-import { convertSalary } from '@utils/convertSalary';
-import { convertDateTime, convertTimeAgo } from '@utils/convertTimeUtil';
+import { convertSalary } from '@utils/convert/convertSalary';
+import { convertDateTime, convertTimeAgo } from '@utils/convert/convertTimeUtil';
 
 const cx = classNames.bind(styles);
 

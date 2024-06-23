@@ -22,9 +22,8 @@ import { BiBuildings, BiShieldX, BiEnvelope, BiLockAlt } from 'react-icons/bi';
 
 import styles from './Header.module.scss';
 import { icons, gifs, images } from '@assets';
-import { selectAuth } from '@redux/features/auth/authSlide';
-import { logoutService } from '@services/authService';
-import { logout } from '@redux/features/auth/authSlide';
+import { logoutService } from '@services/user/authService';
+import { logout, selectAuthUser } from '@redux/features/authUser/authSlide';
 import NavBar from '../NavBar/NavBar';
 import { NavBarMenuItemComponent } from '@components';
 import route from '@constants/route';
@@ -32,7 +31,7 @@ import route from '@constants/route';
 const cx = classNames.bind(styles);
 
 const Header = ({ positionHeader }) => {
-    const auth = useSelector(selectAuth);
+    const auth = useSelector(selectAuthUser);
     const dispatch = useDispatch();
     const location = useLocation();
     const path = '/' + location.pathname.split('/')[1];

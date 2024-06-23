@@ -7,8 +7,8 @@ import { SearchSalaryComponent, SearchExpComponent, SearchJobSearchHeaderCompone
 import { images } from '@assets';
 import BannerSlide from './BannerSlide/BannerSlide';
 import path from '@constants/path';
-import { getJobCruitmentDemandService } from '@services/jobService';
-import { convertDateTime } from '@utils/convertTimeUtil';
+import { getJobCruitmentDemandService } from '@services/user/jobService';
+import { convertDateTime } from '@utils/convert/convertTimeUtil';
 
 const cx = classNames.bind(styles);
 

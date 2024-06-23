@@ -5,10 +5,10 @@ import { FaMessage } from 'react-icons/fa6';
 import { FaEye } from 'react-icons/fa';
 
 import styles from './AppliedJobComponent.module.scss';
-import slugConvert from '@utils/slugCovnert';
+import slugConvert from '@utils/convert/slugConvert';
 import path from '@constants/path';
-import { convertSalary } from '@utils/convertSalary';
-import { convertDateTime } from '@utils/convertTimeUtil';
+import { convertSalary } from '@utils/convert/convertSalary';
+import { convertDateTime } from '@utils/convert/convertTimeUtil';
 
 const cx = classNames.bind(styles);
 

@@ -9,7 +9,7 @@ import { VscChevronRight, VscChevronLeft } from 'react-icons/vsc';
 
 import styles from './TopJobSlide.module.scss';
 import { icons } from '@assets';
-import { getListCategoryService } from '@services/categoryService';
+import { getListCategoryService } from '@services/common/categoryService';
 import path from '@constants/path';
 
 const cx = classNames.bind(styles);

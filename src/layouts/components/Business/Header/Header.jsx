@@ -10,8 +10,8 @@ import { FaBars } from 'react-icons/fa6';
 import styles from './Header.module.scss';
 import path from '@constants/path';
 import { icons, images } from '@assets';
-import { logout } from '@redux/features/authBusiness/authSlide';
-import { logoutBusinessService } from '@services/businessAuthService';
+import { logout } from '../../../../redux/features/authUser/authSlide';
+import { logoutBusinessService } from '@services/business/businessAuthService';
 
 const cx = classNames.bind(styles);
 

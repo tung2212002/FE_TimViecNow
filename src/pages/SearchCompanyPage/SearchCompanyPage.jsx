@@ -7,7 +7,7 @@ import { VscChevronLeft, VscChevronRight } from 'react-icons/vsc';
 
 import styles from './SearchCompanyPage.module.scss';
 import { images } from '@assets';
-import { searchCompanyService } from '@services/companyService';
+import { searchCompanyService } from '@services/user/companyService';
 import { SkeletonCompanyComponent } from '@components/skeleton';
 import { SearchCompanyComponent } from '@layouts/components/User/SearchCompanyPage';
 

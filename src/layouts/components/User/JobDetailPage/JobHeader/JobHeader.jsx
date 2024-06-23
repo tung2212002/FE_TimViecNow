@@ -17,7 +17,7 @@ import useDocumentTitle from '@hooks/useDocumentTitle';
 import { Modal } from '@components/common';
 import { ModalApplyComponent } from '@components';
 import { showModal } from '@redux/features/modal/modalSlice';
-import { convertSalary } from '@utils/convertSalary';
+import { convertSalary } from '@utils/convert/convertSalary';
 import { Experience } from '@constants';
 
 const cx = classNames.bind(styles);

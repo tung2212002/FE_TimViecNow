@@ -21,9 +21,8 @@ import { BiBuildings, BiShieldX, BiEnvelope, BiLockAlt } from 'react-icons/bi';
 
 import styles from './HeaderHidden.module.scss';
 import { gifs, images } from '@assets';
-import { selectAuth } from '@redux/features/auth/authSlide';
-import { logoutService } from '@services/authService';
-import { logout } from '@redux/features/auth/authSlide';
+import { selectAuthUser, logout } from '@redux/features/authUser/authSlide';
+import { logoutService } from '@services/user/authService';
 import NavBar from '../NavBar/NavBar';
 import { NavBarMenuItemComponent } from '@components';
 import route from '@constants/route';
@@ -31,7 +30,7 @@ import route from '@constants/route';
 const cx = classNames.bind(styles);
 
 const HeaderHidden = () => {
-    const auth = useSelector(selectAuth);
+    const auth = useSelector(selectAuthUser);
     const dispatch = useDispatch();
 
     const [dropdownId, setDropdownId] = useState(null);
