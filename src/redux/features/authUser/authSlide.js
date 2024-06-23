@@ -1,38 +1,37 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-import { logoutBusinessService } from '@services/businessAuthService';
-import {
-    setLocalBusinessToken,
-    removeLocalBusinessToken,
-    removeLocalBusiness,
-    updateLocalBusinessToken,
-    updateLocalBusinessInfo,
-    setLocalBusiness,
-} from '@utils/authBusinessStorage';
-
+import functionLocal from '../../../utils/function/functionLocal';
+import functionService from '../../../utils/function/functionService';
+import getSide from '../../../utils/getSide';
 const initialState = {
     user: null,
     token: null,
     isAuth: false,
+    role: null,
     loading: false,
     error: null,
 };
 
-export const login = createAsyncThunk('authBusiness/login', async (data) => {
+export const login = createAsyncThunk('login', async (data) => {
     const { user, access_token, refresh_token } = data;
     if (!user) {
         throw new Error('User not found');
     }
-    setLocalBusinessToken({ access_token, refresh_token });
-    setLocalBusiness(user);
-    return { user, token: { access_token, refresh_token } };
+    const side = getSide();
+    const { setLocalToken, setLocalUser } = functionLocal(side);
+    setLocalToken({ access_token, refresh_token });
+    setLocalUser(user);
+    return { user, token: { access_token, refresh_token }, role: user.role };
 });
 
-export const logout = createAsyncThunk('authBusiness/logout', async () => {
+export const logout = createAsyncThunk('logout', async () => {
+    const side = getSide();
     try {
-        removeLocalBusinessToken();
-        removeLocalBusiness();
-        await logoutBusinessService();
+        const { removeLocalToken, removeLocalUser } = functionLocal(side);
+        const { logoutService } = functionService(side);
+        removeLocalToken();
+        removeLocalUser();
+        await logoutService();
     } catch (error) {
         console.log('Error:', error);
         return null;
@@ -40,27 +39,31 @@ export const logout = createAsyncThunk('authBusiness/logout', async () => {
     return null;
 });
 
-export const updateBusinessInfo = createAsyncThunk('authBusiness/updateBusinessInfo', async (data) => {
+export const updateInfo = createAsyncThunk('updateInfo', async (data) => {
     const { user, token } = data;
+    const side = getSide();
+    const { updateLocalUserInfo, setLocalToken, setLocalUser, updateLocalToken } = functionLocal(side);
     if (user) {
-        updateLocalBusinessInfo(user);
+        updateLocalUserInfo(user);
+        setLocalUser(user);
     }
     if (token) {
-        updateLocalBusinessToken(token);
+        updateLocalToken(token);
+        setLocalToken(token);
     }
     return { user, token };
 });
 
-export const updateBusinessSubInfo = createAsyncThunk('authBusiness/updateBusinessSubInfo', async (data) => {
+export const updateSubInfo = createAsyncThunk('updateSubInfo', async (data) => {
     return data;
 });
 
-export const setLoading = createAsyncThunk('authBusiness/loading', async (loading) => {
+export const setLoading = createAsyncThunk('loading', async (loading) => {
     return loading;
 });
 
-const authBusinessSlice = createSlice({
-    name: 'authBusiness',
+const authUserSlice = createSlice({
+    name: 'authUser',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
@@ -73,12 +76,14 @@ const authBusinessSlice = createSlice({
                 state.user = action.payload.user;
                 state.isAuth = true;
                 state.token = action.payload.token;
+                state.role = action.payload.role;
             })
             .addCase(login.rejected, (state) => {
                 state.loading = false;
                 state.user = null;
                 state.isAuth = false;
                 state.token = null;
+                state.role = null;
             })
             .addCase(logout.pending, (state) => {
                 state.loading = true;
@@ -88,12 +93,14 @@ const authBusinessSlice = createSlice({
                 state.user = null;
                 state.isAuth = false;
                 state.token = null;
+                state.role = null;
             })
             .addCase(logout.rejected, (state) => {
                 state.loading = false;
                 state.user = null;
                 state.isAuth = false;
                 state.token = null;
+                state.role = null;
             })
             .addCase(setLoading.pending, (state) => {
                 state.loading = true;
@@ -104,34 +111,37 @@ const authBusinessSlice = createSlice({
             .addCase(setLoading.rejected, (state) => {
                 state.loading = false;
             })
-            .addCase(updateBusinessInfo.pending, (state) => {
+            .addCase(updateInfo.pending, (state) => {
                 state.loading = true;
             })
-            .addCase(updateBusinessInfo.fulfilled, (state, action) => {
+            .addCase(updateInfo.fulfilled, (state, action) => {
                 state.loading = false;
                 state.user = action.payload?.user || state.user;
                 state.isAuth = true;
                 state.token = action.payload?.token || state.token;
+                state.role = action.payload?.role || state.role;
             })
-            .addCase(updateBusinessInfo.rejected, (state) => {
+            .addCase(updateInfo.rejected, (state) => {
                 state.loading = false;
             })
-            .addCase(updateBusinessSubInfo.pending, (state) => {
+            .addCase(updateSubInfo.pending, (state) => {
                 state.loading = true;
             })
-            .addCase(updateBusinessSubInfo.fulfilled, (state, action) => {
+            .addCase(updateSubInfo.fulfilled, (state, action) => {
                 state.loading = false;
                 state.user = { ...state.user, ...action.payload };
             });
     },
 });
 
-export default authBusinessSlice.reducer;
+export default authUserSlice.reducer;
 
-export const selectBusiness = (state) => state.authBusiness.user;
+export const selectUser = (state) => state.authUser.user;
 
-export const selectIsAuthBusiness = (state) => state.authBusiness.isAuth;
+export const selectIsAuthUser = (state) => state.authUser.isAuth;
 
-export const selectAuthBusiness = (state) => state.authBusiness;
+export const selectAuthUser = (state) => state.authUser;
 
-export const selectBusinessToken = (state) => state.authBusiness.token;
+export const selectUserToken = (state) => state.authUser.token;
+
+export const selectUserRole = (state) => state.authUser.role;

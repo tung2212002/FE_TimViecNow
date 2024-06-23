@@ -12,7 +12,7 @@ import { HiOutlineChevronDown } from 'react-icons/hi2';
 import styles from './FeatureJob.module.scss';
 import { JobItemComponent } from '@components';
 import { SelectionComponent } from '@components/common';
-import { searchJobService } from '@services/jobService';
+import { searchJobService } from '@services/user/jobService';
 import { selectCategory, selectProvince } from '@redux/features/config/configSilde';
 import { Experience, filterSalary } from '@constants';
 import { SkeletonJobSectionComponent } from '@components/skeleton';

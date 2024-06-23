@@ -8,17 +8,17 @@ import { FaRegPaperPlane } from 'react-icons/fa';
 import styles from './DashboardVerifyPage.module.scss';
 import useDocumentTitle from '@hooks/useDocumentTitle';
 import { images } from '@assets';
-import { selectBusiness, updateBusinessInfo } from '@redux/features/authBusiness/authSlide';
-import { sendVerifyService, verifyCodeService } from '@services/verifyService';
+import { selectUser, updateInfo } from '@redux/features/authUser/authSlide';
+import { sendVerifyService, verifyCodeService } from '@services/business/verifyService';
 import useToast from '@hooks/useToast';
-import { getInfoBusinessService } from '@services/businessService';
+import { getInfoBusinessService } from '@services/business/businessService';
 import path from '@constants/path';
 
 const cx = classNames.bind(styles);
 
 const DashboardVerifyPage = () => {
     const dispatch = useDispatch();
-    const user = useSelector(selectBusiness);
+    const user = useSelector(selectUser);
     const [data, setData] = useState({
         code: '',
         session_id: '',
@@ -41,7 +41,7 @@ const DashboardVerifyPage = () => {
         getInfoBusinessService()
             .then((response) => {
                 if (response.status === 200) {
-                    dispatch(updateBusinessInfo({ user: response.data.data }));
+                    dispatch(updateInfo({ user: response.data.data }));
                     navigate(path.DASHBOARD_HOME);
                 }
             })

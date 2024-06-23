@@ -8,8 +8,8 @@ import { BsShieldLockFill } from 'react-icons/bs';
 import { FaEye, FaEyeSlash, FaGoogle, FaFacebook, FaLinkedin, FaUser } from 'react-icons/fa';
 
 import styles from './LoginPage.module.scss';
-import { loginGoogleService, loginService, registerService } from '@services/authService';
-import { login } from '@redux/features/auth/authSlide';
+import { loginGoogleService, loginService, registerService } from '@services/user/authService';
+import { login } from '@redux/features/authUser/authSlide';
 import route from '@constants/route';
 import useDocumentTitle from '@hooks/useDocumentTitle';
 import regexValidator from '@utils/regexValidator';

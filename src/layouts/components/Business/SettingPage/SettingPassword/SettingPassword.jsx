@@ -6,7 +6,7 @@ import styles from './SettingPassword.module.scss';
 import regexValidator from '@utils/regexValidator';
 import { PiWarningCircle } from 'react-icons/pi';
 import path from '@constants/path';
-import { changePasswordBusinessService } from '@services/businessAuthService';
+import { changePasswordBusinessService } from '@services/business/businessAuthService';
 import useToast from '@hooks/useToast';
 
 const cx = classNames.bind(styles);

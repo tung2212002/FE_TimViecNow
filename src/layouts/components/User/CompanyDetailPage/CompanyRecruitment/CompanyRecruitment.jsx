@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { VscChevronLeft, VscChevronRight } from 'react-icons/vsc';
 
 import styles from './CompanyRecruitment.module.scss';
-import { getListJobSerivce } from '@services/jobService';
+import { getListJobSerivce } from '@services/user/jobService';
 import JobSuggest from '../../JobDetailPage/JobDetailBody/JobSuggest/JobSuggest';
 import { SkeletonCompanyComponent } from '@components/skeleton';
 

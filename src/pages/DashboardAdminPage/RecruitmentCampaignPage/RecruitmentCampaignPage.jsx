@@ -11,16 +11,16 @@ import styles from './RecruitmentCampaignPage.module.scss';
 import { SelectionComponent } from '@components/common';
 import { IoSearchOutline } from 'react-icons/io5';
 import path from '@constants/path';
-import { getListCampaignService } from '@services/campaignService';
+import { getListCampaignService } from '@services/business/campaignService';
 import { JobStatus } from '@constants';
 import { SkeletonRecruimentCampaignComponent } from '@components/skeleton';
-import { selectBusiness } from '@redux/features/authBusiness/authSlide';
+import { selectUser } from '@redux/features/authUser/authSlide';
 
 const cx = classNames.bind(styles);
 
 const RecruitmentCampaignPage = () => {
     const navigate = useNavigate();
-    const user = useSelector(selectBusiness);
+    const user = useSelector(selectUser);
     const listFilterCampaign = [
         {
             id: 1,

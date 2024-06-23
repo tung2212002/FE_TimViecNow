@@ -10,7 +10,7 @@ import { LuTrash } from 'react-icons/lu';
 
 import styles from './JobLocation.module.scss';
 import { InputSelectorComponent } from '@components/common';
-import { getListDistrictService } from '@services/locationService';
+import { getListDistrictService } from '@services/common/locationService';
 import JobDistrict from '../JobDistrict/JobDistrict';
 import { addDistrict, refreshProvince, removeLocation, selectPostJob, setProvince } from '@redux/features/postJob/postJobSlide';
 import { selectProvince } from '@redux/features/config/configSilde';

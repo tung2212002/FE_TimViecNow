@@ -10,7 +10,7 @@ import { fakeJob } from '@assets/fakejob';
 import ChartJobOpportunity from './ChartJobOpportunity/ChartJobOpportunity';
 import ChartJobDemand from './ChartJobDemand/ChartJobDemand';
 import { SelectionComponent } from '@components/common';
-import { getJobCruitmentDemandService } from '@services/jobService';
+import { getJobCruitmentDemandService } from '@services/user/jobService';
 
 const cx = classNames.bind(styles);
 

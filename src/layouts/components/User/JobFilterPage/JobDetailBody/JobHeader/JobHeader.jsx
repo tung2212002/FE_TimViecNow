@@ -16,10 +16,10 @@ import styles from './JobHeader.module.scss';
 import { icons } from '@assets';
 import useDocumentTitle from '@hooks/useDocumentTitle';
 import { showModal } from '@redux/features/modal/modalSlice';
-import { convertSalary } from '@utils/convertSalary';
+import { convertSalary } from '@utils/convert/convertSalary';
 import { Experience } from '@constants';
 import path from '@constants/path';
-import slugConvert from '@utils/slugCovnert';
+import slugConvert from '@utils/convert/slugConvert';
 
 const cx = classNames.bind(styles);
 

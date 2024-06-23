@@ -1,27 +1,17 @@
 import axios from 'axios';
 
 import { API_URL } from '../configs';
-import { getLocalAccessToken, getLocalRefreshToken, removeAll, updateLocalAccessToken } from './authLocalStorage';
-import { getLocalBusinessAccessToken, getLocalBusinessRefreshToken, removeAllBusiness, updateLocalBusinessAccessToken } from './authBusinessStorage';
+import functionLocal from './function/functionLocal';
+import { sideType } from '../constants';
+import getSide from './getSide';
 
-const getAuthHeader = () => {
-    const path = window.location.pathname;
-    const newSide = path.startsWith('/tuyen-dung/app') ? 'employer' : 'candidate';
-    return newSide === 'candidate' ? getLocalAccessToken() : getLocalBusinessAccessToken();
-};
-
-const getAuthHeaderRefresh = () => {
-    const path = window.location.pathname;
-    const newSide = path.startsWith('/tuyen-dung/app') ? 'employer' : 'candidate';
-    return newSide === 'candidate' ? getLocalRefreshToken() : getLocalBusinessRefreshToken();
-};
-
-const instance = (config = {}, auth = false, side = 'candidate') => {
+const instance = (config = {}, auth = false, side = sideType.USER) => {
+    const { getLocalAccessToken, getLocalRefreshToken, updateLocalAccessToken, removeAll } = functionLocal(side);
     const request = axios.create(config);
     request.interceptors.request.use(
         async (requestConfig) => {
             if (auth) {
-                const token = getAuthHeader();
+                const token = getLocalAccessToken();
                 if (token) {
                     requestConfig.headers.Authorization = `Bearer ${token}`;
                 }
@@ -41,58 +31,33 @@ const instance = (config = {}, auth = false, side = 'candidate') => {
             const originalRequest = error.config;
             if (error.response && error.response.status === 401 && !originalRequest._retry) {
                 originalRequest._retry = true;
-                const refreshToken = getAuthHeaderRefresh();
-                side = window.location.pathname.startsWith('/tuyen-dung/app') ? 'business' : 'candidate';
+                const refreshToken = getLocalRefreshToken();
+                side = getSide();
+                const url = `${API_URL}/${side == sideType.USER ? 'auth' : 'business'}/refresh_token`;
                 if (refreshToken) {
-                    if (side === 'candidate') {
-                        return axios
-                            .post(
-                                `${API_URL}/auth/refresh_token`,
-                                {},
-                                {
-                                    headers: {
-                                        Authorization: `Bearer ${refreshToken}`,
-                                        'Content-Type': 'application/json',
-                                    },
+                    return axios
+                        .post(
+                            url,
+                            {},
+                            {
+                                headers: {
+                                    Authorization: `Bearer ${refreshToken}`,
+                                    'Content-Type': 'application/json',
                                 },
-                            )
-                            .then((res) => {
-                                if (res.status === 200) {
-                                    const token = res.data.data.access_token;
-                                    updateLocalAccessToken(token);
-                                    originalRequest.headers.Authorization = `Bearer ${token}`;
-                                    return axios(originalRequest);
-                                }
-                            })
-                            .catch((error) => {
-                                removeAll();
-                                return Promise.resolve({ status: error.response.status, data: error.response.data });
-                            });
-                    } else if (side === 'business') {
-                        return axios
-                            .post(
-                                `${API_URL}/business/refresh_token`,
-                                {},
-                                {
-                                    headers: {
-                                        Authorization: `Bearer ${refreshToken}`,
-                                        'Content-Type': 'application/json',
-                                    },
-                                },
-                            )
-                            .then((res) => {
-                                if (res.status === 200) {
-                                    const token = res.data.data.access_token;
-                                    updateLocalBusinessAccessToken(token);
-                                    originalRequest.headers.Authorization = `Bearer ${token}`;
-                                    return axios(originalRequest);
-                                }
-                            })
-                            .catch((error) => {
-                                removeAllBusiness();
-                                return Promise.resolve({ status: error.response.status, data: error.response.data });
-                            });
-                    }
+                            },
+                        )
+                        .then((res) => {
+                            if (res.status === 200) {
+                                const token = res.data.data.access_token;
+                                updateLocalAccessToken(token);
+                                originalRequest.headers.Authorization = `Bearer ${token}`;
+                                return axios(originalRequest);
+                            }
+                        })
+                        .catch((error) => {
+                            removeAll();
+                            return Promise.resolve({ status: error.response.status, data: error.response.data });
+                        });
                 } else {
                     return Promise.resolve({ status: error.response.status, data: error.response.data });
                 }
@@ -142,13 +107,17 @@ export const apiAuthAttach = instance(
     true,
 );
 
-export const apiBusiness = instance({
-    baseURL: API_URL,
-    headers: {
-        'Content-Type': 'application/json',
-        Accept: '*/*',
+export const apiBusiness = instance(
+    {
+        baseURL: API_URL,
+        headers: {
+            'Content-Type': 'application/json',
+            Accept: '*/*',
+        },
     },
-});
+    true,
+    sideType.BUSINESS,
+);
 
 export const apiBusinessAuth = instance(
     {
@@ -159,15 +128,20 @@ export const apiBusinessAuth = instance(
         },
     },
     true,
+    sideType.BUSINESS,
 );
 
-export const apiBusinessAttach = instance({
-    baseURL: API_URL,
-    headers: {
-        'Content-Type': 'multipart/form-data',
-        Accept: '*/*',
+export const apiBusinessAttach = instance(
+    {
+        baseURL: API_URL,
+        headers: {
+            'Content-Type': 'multipart/form-data',
+            Accept: '*/*',
+        },
     },
-});
+    true,
+    sideType.BUSINESS,
+);
 
 export const apiAuthBusinessAttach = instance(
     {
@@ -178,5 +152,5 @@ export const apiAuthBusinessAttach = instance(
         },
     },
     true,
-    'business',
+    sideType.BUSINESS,
 );

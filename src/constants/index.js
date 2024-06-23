@@ -214,3 +214,15 @@ export const cVAppliedStatus = [
     { id: 3, value: 'approved', name: 'Hồ sơ phù hợp' },
     { id: 4, value: 'rejected', name: 'Hồ sơ chưa phù hợp' },
 ];
+
+export const sideType = {
+    USER: 'user',
+    BUSINESS: 'business',
+};
+
+export const role = {
+    USER: 'user',
+    ADMIN: 'admin',
+    SUPER_USER: 'super_user',
+    BUSINESS: 'business',
+};

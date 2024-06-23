@@ -8,7 +8,7 @@ import styles from './ListCompanyPage.module.scss';
 import route from '@constants/route';
 import { images } from '@assets';
 import { CompanyComponent } from '@layouts/components/User/ListCompanyPage';
-import { getListCompanySerivce } from '@services/companyService';
+import { getListCompanySerivce } from '@services/user/companyService';
 import { SkeletonCompanySquareComponent } from '@components/skeleton';
 
 const cx = classNames.bind(styles);

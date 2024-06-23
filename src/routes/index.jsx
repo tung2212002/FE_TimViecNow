@@ -6,19 +6,16 @@ import { DefaultLayout } from '@layouts';
 import { privateRoutes, publicRoutes } from './routes';
 import PublicRoute from './PublicRoute';
 import PrivateRoute from './PrivateRoute';
-import { getListProvinceService } from '@services/locationService';
+import { getListProvinceService } from '@services/common/locationService';
 import { setField, setProvince, setSkill, setCategory } from '@redux/features/config/configSilde';
-import { getListSkillService } from '@services/skillService';
-import { getListFieldService } from '@services/fieldService';
-import { getListCategoryService } from '@services/categoryService';
-import { selectBusiness } from '@redux/features/authBusiness/authSlide';
-import { selectUser } from '@redux/features/auth/authSlide';
-import useSide from '@hooks/useSIde';
+import { getListSkillService } from '@services/common/skillService';
+import { getListFieldService } from '@services/common/fieldService';
+import { getListCategoryService } from '@services/common/categoryService';
+import { selectUser } from '../redux/features/authUser/authSlide';
 
 const AppRouter = () => {
     const dispatch = useDispatch();
-    const side = useSide();
-    const user = side === 'candidate' ? useSelector(selectUser) : useSelector(selectBusiness);
+    const user = useSelector(selectUser);
 
     const handleGetConfig = () => {
         getListProvinceService()
@@ -100,6 +97,7 @@ const AppRouter = () => {
                                     restricted={route.restricted}
                                     positionHeader={route.positionHeader}
                                     verifyBusinessEmail={route.verifyBusinessEmail}
+                                    roles={route.roles}
                                 />
                             }
                         />
@@ -122,6 +120,7 @@ const AppRouter = () => {
                                         restricted={route.restricted}
                                         positionHeader={route.positionHeader}
                                         verifyBusinessEmail={route.verifyBusinessEmail}
+                                        roles={route.roles}
                                     />
                                 }
                             />

@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 
 import styles from './JobInfoContact.module.scss';
 import { selectError, selectPostJob, setEmailContact, setFullNameContact, setPhoneNumberContact } from '@redux/features/postJob/postJobSlide';
-import { selectBusiness } from '@redux/features/authBusiness/authSlide';
+import { selectUser } from '@redux/features/authUser/authSlide';
 import randomId from '@utils/randomId';
 import { InputSelectorMultiOptionComponent } from '@components/common';
 
@@ -11,7 +11,7 @@ const cx = classNames.bind(styles);
 
 const JobInfoContact = () => {
     const dispatch = useDispatch();
-    const user = useSelector(selectBusiness);
+    const user = useSelector(selectUser);
     const job = useSelector(selectPostJob);
     const error = useSelector(selectError);
 
