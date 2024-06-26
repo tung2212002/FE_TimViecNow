@@ -1,4 +1,6 @@
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import Tippy from '@tippyjs/react/headless';
 import 'tippy.js/dist/tippy.css';
@@ -13,15 +15,22 @@ import styles from './DashboardStatistics.module.scss';
 import StatisticComponent from './StatisticComponent/StatisticComponent';
 import path from '@constants/path';
 import { images } from '@assets';
+import { getListCampaignService } from '../../../../../services/business/campaignService';
+import { searchListBusinessJobSerivce } from '../../../../../services/business/businessJobService';
+import { selectBusinessJob, setNumberCampaignPush, setNumberJobPush } from '../../../../../redux/features/businessJob/businessJobSilde';
 
 const cx = classNames.bind(styles);
 
 const DashboardStatistics = () => {
+    const dispath = useDispatch();
+
+    const data = useSelector(selectBusinessJob);
+
     const statistics = [
         {
             id: 1,
             title: 'Chiến dịch đang mở',
-            value: '2',
+            value: parseInt(data.numberCampaignPush || 0),
             icon: CiBullhorn,
             color: '#2d7cf1',
             background: '#ebf3ff',
@@ -40,7 +49,7 @@ const DashboardStatistics = () => {
         {
             id: 3,
             title: 'Tin tuyển dụng hiển thị',
-            value: '2',
+            value: parseInt(data.numberJobPush || 0),
             icon: FaRegFileAlt,
             color: '#e5b500',
             background: '#fffae9',
@@ -53,10 +62,37 @@ const DashboardStatistics = () => {
             icon: TbFileImport,
             color: '#da4538',
             background: '#fff3f2',
-
             url: path.DASHBOARD_CAMPAIGN_CV,
         },
     ];
+
+    useEffect(() => {
+        !data.loadingnumberCampaignPush &&
+            getListCampaignService()
+                .then((res) => {
+                    dispath(setNumberCampaignPush(res.data.data.count));
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+    }, []);
+
+    useEffect(() => {
+        const params = {
+            limit: 100,
+            skip: 0,
+            job_status: 'published',
+        };
+        !data.loadingNumberJobPush &&
+            searchListBusinessJobSerivce(params)
+                .then((res) => {
+                    dispath(setNumberJobPush(res.data.data.count));
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+    }, []);
+
     return (
         <div className={cx('wrapper')}>
             <div className={cx('container')}>

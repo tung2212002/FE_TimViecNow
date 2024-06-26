@@ -1,24 +1,27 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import { Link, useLocation } from 'react-router-dom';
 
 import { FaBookmark, FaCartShopping, FaPencil } from 'react-icons/fa6';
-import { FaCommentDots, FaQuestionCircle, FaBell, FaCaretDown } from 'react-icons/fa';
+import { FaCommentDots, FaQuestionCircle, FaBell, FaCaretDown, FaRegUser } from 'react-icons/fa';
 import { FaBars } from 'react-icons/fa6';
 
 import styles from './Header.module.scss';
 import path from '@constants/path';
 import { icons, images } from '@assets';
-import { logout } from '../../../../redux/features/authUser/authSlide';
+import { logout } from '@redux/features/authUser/authSlide';
 import { logoutBusinessService } from '@services/business/businessAuthService';
+import { selectUserRole } from '@redux/features/authUser/authSlide';
+import { groupRole } from '../../../../constants';
 
 const cx = classNames.bind(styles);
 
 const Header = () => {
     const dispatch = useDispatch();
-
     const location = useLocation();
+
+    const role = useSelector(selectUserRole);
     const [showMenu, setShowMenu] = useState(false);
     const [pathActive, setPathActive] = useState(location.pathname + (location.search ? location.search : ''));
     const [process, setProcess] = useState({
@@ -27,6 +30,25 @@ const Header = () => {
     });
     const [canFinish, setCanFinish] = useState(false);
     const [shouldSpeedUp, setShouldSpeedUp] = useState(false);
+
+    const listItem = [
+        { to: path.DASHBOARD_ADMIN, icon: FaBookmark, text: 'HR Insider', roles: groupRole.BUSINESS, classIcon: 'icon-bookmark' },
+        { to: path.DASHBOARD_POST, icon: FaPencil, text: 'Đăng tin', roles: groupRole.BUSINESS, classIcon: 'icon-pencil' },
+        { to: path.DASHBOARD_SEARCH, icon: FaPencil, text: 'Tìm CV', roles: groupRole.BUSINESS_ADMIN, classIcon: 'icon-pencil' },
+        { to: path.DASHBOARD_ADMIN, icon: FaCommentDots, text: 'Connect', roles: groupRole.BUSINESS_ADMIN, classIcon: 'icon-comment' },
+        { to: path.DASHBOARD_ADMIN, icon: FaQuestionCircle, text: 'Trợ giúp', roles: groupRole.BUSINESS_ADMIN, classIcon: 'icon-question' },
+        {
+            to: path.DASHBOARD_ADMIN,
+            icon: FaBell,
+            text: '',
+            badge: 1,
+            roles: groupRole.BUSINESS_ADMIN,
+            classIcon: 'icon-bell',
+            classBadge: 'badge',
+            classWrapper: 'notification',
+        },
+        { to: path.DASHBOARD_CART, icon: FaCartShopping, text: 'Giỏ hàng', badge: 0, roles: groupRole.BUSINESS, classIcon: 'icon-cart', classBadge: 'count' },
+    ];
 
     const useDocumentTitle = (title) => {
         document.title = title;
@@ -40,7 +62,7 @@ const Header = () => {
 
     useEffect(() => {
         if (canFinish) {
-            setShouldSpeedUp(true); // Đặt biến trung gian để chỉ định muốn tăng tốc
+            setShouldSpeedUp(true);
         }
     }, [canFinish]);
 
@@ -86,32 +108,10 @@ const Header = () => {
     }, [process.isFinish, shouldSpeedUp]);
 
     useEffect(() => {
-        switch (location.pathname + (location.search ? location.search : '')) {
-            case path.DASHBOARD_ADMIN:
-                useDocumentTitle('HR Insider');
-                setPathActive(path.DASHBOARD_ADMIN);
-                break;
-            case path.DASHBOARD_POST:
-                useDocumentTitle('Đăng tin');
-                setPathActive(path.DASHBOARD_POST);
-                break;
-            case path.DASHBOARD_SEARCH:
-                useDocumentTitle('Tìm CV');
-                setPathActive(path.DASHBOARD_SEARCH);
-                break;
-            case path.DASHBOARD_CART:
-                useDocumentTitle('Giỏ hàng');
-                setPathActive(path.DASHBOARD_CART);
-                break;
-            case path.DASHBOARD_HOME:
-                useDocumentTitle('Trang chủ');
-                setPathActive(path.DASHBOARD_HOME);
-                break;
-            default:
-                useDocumentTitle('Trang chủ');
-                setPathActive(path.DASHBOARD_HOME);
-                break;
-        }
+        const pathName = location.pathname + (location.search ? location.search : '');
+        const index = listItem.findIndex((item) => item.to === pathName);
+        useDocumentTitle(index !== -1 ? listItem[index].text : 'Trang chủ');
+        setPathActive(pathName);
     }, [location]);
 
     return (
@@ -126,63 +126,23 @@ const Header = () => {
                 </Link>
                 <div className={cx('navbar__main')}>
                     <ul className={cx('navbar__main-list')}>
-                        <li className={cx('navbar__main-item')}>
-                            <Link to={path.DASHBOARD_ADMIN} className={cx('navbar__main-link', { isActive: pathActive === path.DASHBOARD_ADMIN })}>
-                                <div className={cx('navbar__main-wrapper')}>
-                                    <FaBookmark className={cx('icon', 'icon-bookmark')} />
-                                    HR Insider
-                                </div>
-                            </Link>
-                        </li>
-                        <li className={cx('navbar__main-item')}>
-                            <Link to={path.DASHBOARD_POST} className={cx('navbar__main-link', { isActive: pathActive === path.DASHBOARD_POST })}>
-                                <div className={cx('navbar__main-wrapper')}>
-                                    <FaPencil className={cx('icon', 'icon-pencil')} />
-                                    Đăng tin
-                                </div>
-                            </Link>
-                        </li>
-                        <li className={cx('navbar__main-item')}>
-                            <Link to={path.DASHBOARD_SEARCH} className={cx('navbar__main-link', { isActive: pathActive === path.DASHBOARD_SEARCH })}>
-                                <div className={cx('navbar__main-wrapper')}>
-                                    <FaPencil className={cx('icon', 'icon-pencil')} />
-                                    Tìm CV
-                                </div>
-                            </Link>
-                        </li>
-                        <li className={cx('navbar__main-item')}>
-                            <Link to={path.DASHBOARD_ADMIN} className={cx('navbar__main-link', { isActive: pathActive === path.DASHBOARD_ADMIN })}>
-                                <div className={cx('navbar__main-wrapper')}>
-                                    <FaCommentDots className={cx('icon', 'icon-comment')} />
-                                    Connect
-                                </div>
-                            </Link>
-                        </li>
-                        <li className={cx('navbar__main-item')}>
-                            <Link to={path.DASHBOARD_ADMIN} className={cx('navbar__main-link', { isActive: pathActive === path.DASHBOARD_ADMIN })}>
-                                <div className={cx('navbar__main-wrapper')}>
-                                    <FaQuestionCircle className={cx('icon', 'icon-question')} />
-                                    Trợ giúp
-                                </div>
-                            </Link>
-                        </li>
-                        <li className={cx('navbar__main-item')}>
-                            <Link to={path.DASHBOARD_ADMIN} className={cx('navbar__main-link', { isActive: pathActive === path.DASHBOARD_ADMIN })}>
-                                <div className={cx('navbar__main-wrapper', 'notification')}>
-                                    <FaBell className={cx('icon', 'icon-bell')} />
-                                    <div className={cx('badge')}>1</div>
-                                </div>
-                            </Link>
-                        </li>
-                        <li className={cx('navbar__main-item')}>
-                            <Link to={path.DASHBOARD_CART} className={cx('navbar__main-link', { isActive: pathActive === path.DASHBOARD_CART })}>
-                                <div className={cx('navbar__main-wrapper')}>
-                                    <FaCartShopping className={cx('icon', 'icon-cart')} />
-                                    Giỏ hàng
-                                    <div className={cx('count')}>0</div>
-                                </div>
-                            </Link>
-                        </li>
+                        {listItem.map((item, index) => {
+                            if (item.roles.includes(role)) {
+                                return (
+                                    <li className={cx('navbar__main-item')} key={index}>
+                                        <Link to={item.to} className={cx('navbar__main-link', { isActive: pathActive === item.to })}>
+                                            <div className={cx('navbar__main-wrapper', item.classWrapper)}>
+                                                <item.icon className={cx('icon', item.classIcon)} />
+                                                {item.text}
+                                                {item.badge !== undefined && <div className={cx(item.classBadge)}>{item.badge}</div>}
+                                            </div>
+                                        </Link>
+                                    </li>
+                                );
+                            }
+                            return null;
+                        })}
+
                         <li className={cx('navbar__main-item')}>
                             <Link to={path.DASHBOARD_ADMIN} className={cx('navbar__main-link', { isActive: pathActive === path.DASHBOARD_ADMIN })}>
                                 <div className={cx('navbar__main-wrapper', 'menu-avatar')} onClick={() => setShowMenu(!showMenu)}>

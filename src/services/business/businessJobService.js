@@ -5,6 +5,11 @@ export const getBusinessJobSerivce = async (id) => {
     return response;
 };
 
+export const searchListBusinessJobSerivce = async (params) => {
+    const response = await request.apiBusinessAuth.get('/business/job/search', { params });
+    return response;
+};
+
 export const getListBusinessJobSerivce = async (params) => {
     const response = await request.apiBusinessAuth.get('/business/job', { params });
     return response;

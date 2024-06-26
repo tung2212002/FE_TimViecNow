@@ -6,24 +6,28 @@ import { useSelector } from 'react-redux';
 import { FaQuestionCircle, FaShieldAlt, FaRegFileAlt, FaRegUserCircle, FaUserCircle, FaChartBar, FaShoppingCart } from 'react-icons/fa';
 import { FaAnglesRight, FaRegGem, FaGem, FaClockRotateLeft, FaFileInvoice, FaGear } from 'react-icons/fa6';
 import { IoGridOutline, IoBriefcaseOutline, IoBriefcase, IoGrid, IoGiftSharp } from 'react-icons/io5';
-import { LuGift, LuShoppingCart, LuBadgePercent } from 'react-icons/lu';
-import { RiRobot2Line, RiRobot2Fill } from 'react-icons/ri';
+import { LuGift, LuShoppingCart, LuBadgePercent, LuUserSquare2 } from 'react-icons/lu';
+import { RiRobot2Line, RiRobot2Fill, RiAdvertisementLine, RiAdvertisementFill, RiShieldUserFill, RiShieldUserLine } from 'react-icons/ri';
 import { PiMagicWandBold, PiMagicWandFill } from 'react-icons/pi';
 import { TbFileInvoice, TbBellExclamation, TbBellFilled } from 'react-icons/tb';
 import { GoGear } from 'react-icons/go';
 import { MdOutlineMarkEmailUnread, MdMarkEmailUnread } from 'react-icons/md';
 import { BiSolidBadgeDollar } from 'react-icons/bi';
+import { HiUserGroup } from 'react-icons/hi';
+import { HiOutlineUserGroup } from 'react-icons/hi2';
 
 import styles from './SideBar.module.scss';
 import path from '@constants/path';
 import { images } from '@assets';
-import { selectUser } from '@redux/features/authUser/authSlide';
+import { selectUser, selectUserRole } from '@redux/features/authUser/authSlide';
+import { groupRole, role } from '@constants';
 
 const cx = classNames.bind(styles);
 
 const SideBar = () => {
     const location = useLocation();
     const user = useSelector(selectUser);
+    const userRole = useSelector(selectUserRole);
 
     const mathPath = () => {
         return location.pathname + (location.search ? location.search : '');
@@ -45,6 +49,7 @@ const SideBar = () => {
             path: path.DASHBOARD_HOME,
             icon: IoGridOutline,
             iconActive: IoGrid,
+            roles: groupRole.BUSINESS_ADMIN,
         },
         {
             id: 2,
@@ -52,6 +57,7 @@ const SideBar = () => {
             path: path.DASHBOARD_ACCOUNT_SETTING,
             icon: FaRegGem,
             iconActive: FaGem,
+            roles: groupRole.BUSINESS,
         },
         {
             id: 3,
@@ -59,6 +65,7 @@ const SideBar = () => {
             path: path.DASHBOARD_PROFILE,
             icon: LuGift,
             iconActive: IoGiftSharp,
+            roles: groupRole.BUSINESS,
         },
         {
             id: 4,
@@ -67,6 +74,7 @@ const SideBar = () => {
             icon: RiRobot2Line,
             notification: notification.aiSuggest,
             iconActive: RiRobot2Fill,
+            roles: groupRole.BUSINESS,
         },
         {
             id: 5,
@@ -78,6 +86,7 @@ const SideBar = () => {
             path: path.DASHBOARD_RECRUIREMENT_CAMPAIGNS,
             icon: IoBriefcaseOutline,
             iconActive: IoBriefcase,
+            roles: groupRole.BUSINESS_ADMIN,
         },
         {
             id: 7,
@@ -85,6 +94,7 @@ const SideBar = () => {
             path: path.DASHBOARD_POST_JOB,
             icon: FaRegFileAlt,
             iconActive: FaRegFileAlt,
+            roles: groupRole.BUSINESS_ADMIN,
         },
         {
             id: 8,
@@ -92,6 +102,7 @@ const SideBar = () => {
             path: path.DASHBOARD_SEARCH,
             icon: FaRegUserCircle,
             iconActive: FaUserCircle,
+            roles: groupRole.BUSINESS_ADMIN,
         },
         {
             id: 9,
@@ -99,6 +110,7 @@ const SideBar = () => {
             path: path.DASHBOARD_ACCOUNT_SETTING,
             icon: FaChartBar,
             iconActive: FaChartBar,
+            roles: groupRole.BUSINESS_ADMIN,
         },
         {
             id: 10,
@@ -110,6 +122,7 @@ const SideBar = () => {
             path: path.DASHBOARD_ACCOUNT_SETTING,
             icon: LuShoppingCart,
             iconActive: FaShoppingCart,
+            roles: groupRole.BUSINESS,
         },
         {
             id: 12,
@@ -117,6 +130,7 @@ const SideBar = () => {
             path: path.DASHBOARD_INVOICE,
             icon: PiMagicWandBold,
             iconActive: PiMagicWandFill,
+            roles: groupRole.BUSINESS,
         },
         {
             id: 13,
@@ -124,6 +138,7 @@ const SideBar = () => {
             path: path.DASHBOARD_ACCOUNT_SETTING,
             icon: LuBadgePercent,
             iconActive: BiSolidBadgeDollar,
+            roles: groupRole.BUSINESS,
         },
         {
             id: 14,
@@ -131,24 +146,28 @@ const SideBar = () => {
             path: path.DASHBOARD_CART,
             icon: TbFileInvoice,
             iconActive: FaFileInvoice,
+            roles: groupRole.BUSINESS,
         },
         {
             id: 15,
-            hr: true,
+            name: 'Quản lí người dùng',
+            path: path.DASHBOARD_HOME,
+            icon: HiOutlineUserGroup,
+            iconActive: HiUserGroup,
         },
         {
             id: 16,
-            name: 'Lịch sử hoạt động',
-            path: path.DASHBOARD_ACCOUNT_SETTING,
-            icon: FaClockRotateLeft,
-            iconActive: FaClockRotateLeft,
+            name: 'Quản lý nhà tuyển dụng',
+            path: path.DASHBOARD_HOME,
+            icon: RiShieldUserLine,
+            iconActive: RiShieldUserFill,
         },
         {
             id: 17,
-            name: 'Cài đặt tài khoản',
-            path: path.DASHBOARD_SETTING_INFO,
-            icon: GoGear,
-            iconActive: FaGear,
+            name: 'Quản lí nội dung',
+            path: path.DASHBOARD_HOME,
+            icon: RiAdvertisementLine,
+            iconActive: RiAdvertisementFill,
         },
         {
             id: 18,
@@ -156,21 +175,43 @@ const SideBar = () => {
         },
         {
             id: 19,
+            name: 'Lịch sử hoạt động',
+            path: path.DASHBOARD_ACCOUNT_SETTING,
+            icon: FaClockRotateLeft,
+            iconActive: FaClockRotateLeft,
+            roles: groupRole.BUSINESS_ADMIN,
+        },
+        {
+            id: 20,
+            name: 'Cài đặt tài khoản',
+            path: path.DASHBOARD_SETTING_INFO,
+            icon: GoGear,
+            iconActive: FaGear,
+            roles: groupRole.BUSINESS_ADMIN,
+        },
+        {
+            id: 21,
+            hr: true,
+        },
+        {
+            id: 22,
             name: 'Thông báo hệ thống',
             path: path.DASHBOARD_ACCOUNT_SETTING,
             icon: TbBellExclamation,
             notification: notification.system,
             iconActive: TbBellFilled,
+            roles: groupRole.BUSINESS_ADMIN,
         },
         {
-            id: 20,
+            id: 23,
             name: 'Hộp thư hỗ trợ',
             path: path.DASHBOARD_ACCOUNT_SETTING,
             icon: MdOutlineMarkEmailUnread,
             iconActive: MdMarkEmailUnread,
+            roles: groupRole.BUSINESS_ADMIN,
         },
         {
-            id: 21,
+            id: 24,
             hr: true,
         },
     ];
@@ -198,26 +239,32 @@ const SideBar = () => {
                                 <Link to={path.DASHBOARD_ACCOUNT_SETTING} className={cx('user-info-name')}>
                                     <span className={cx('user-name')}>{user?.full_name}</span>
                                 </Link>
-                                <span className={cx('user-role')}>{user?.role === 'business' ? 'Employer' : user?.role === 'admin' ? 'Admin' : 'User'}</span>
-                                <div className={cx('user-verify')}>
-                                    Tài khoản xác thực: <span className={cx('user-verify-level')}>Cấp 1/5</span>{' '}
-                                    <span className={cx('user-verify-icon')}>
-                                        <FaQuestionCircle className={cx('icon')} />
-                                    </span>
-                                </div>
+                                <span className={cx('user-role')}>
+                                    {userRole === role.BUSINESS ? 'Employer' : groupRole.BUSINESS_ADMIN.includes(userRole) ? 'Admin' : 'User'}
+                                </span>
+                                {userRole === role.BUSINESS && (
+                                    <div className={cx('user-verify')}>
+                                        Tài khoản xác thực: <span className={cx('user-verify-level')}>Cấp 1/5</span>{' '}
+                                        <span className={cx('user-verify-icon')}>
+                                            <FaQuestionCircle className={cx('icon')} />
+                                        </span>
+                                    </div>
+                                )}
                             </div>
                         </div>
-                        <div className={cx('sidebar__header-content-verify')}>
-                            <Link className={cx('btn-verify-link')} to={path.DASHBOARD_EKYC}>
-                                <div className={cx('btn-verify')}>
-                                    <FaShieldAlt className={cx('icon')} />
-                                    <span className={cx('text')}>
-                                        Xác thực tài khoản điện tử
-                                        <FaAnglesRight className={cx('icon-right')} />
-                                    </span>
-                                </div>
-                            </Link>
-                        </div>
+                        {userRole === role.BUSINESS && (
+                            <div className={cx('sidebar__header-content-verify')}>
+                                <Link className={cx('btn-verify-link')} to={path.DASHBOARD_EKYC}>
+                                    <div className={cx('btn-verify')}>
+                                        <FaShieldAlt className={cx('icon')} />
+                                        <span className={cx('text')}>
+                                            Xác thực tài khoản điện tử
+                                            <FaAnglesRight className={cx('icon-right')} />
+                                        </span>
+                                    </div>
+                                </Link>
+                            </div>
+                        )}
                     </div>
                 </div>
                 <div className={cx('sidebar__body')}>
@@ -226,6 +273,9 @@ const SideBar = () => {
                         {listMenu.map((item) => {
                             if (item.hr) {
                                 return <hr className={cx('hr')} key={item.id} />;
+                            }
+                            if (item.roles && !item.roles.includes(userRole)) {
+                                return null;
                             }
                             return (
                                 <li key={item.id} className={cx('sidebar__body-item', { isActive: item.path === mathPath() })}>
