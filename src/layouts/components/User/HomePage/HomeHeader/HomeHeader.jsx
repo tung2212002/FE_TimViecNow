@@ -11,7 +11,7 @@ import { icons, images } from '@assets';
 import SearchSection from './SearchSection/SearchSection';
 import ChartJob from './ChartJob/ChartJob';
 import { SelectionComponent } from '@components/common';
-import { getJobCruitmentDemandService } from '@services/jobService';
+import { getJobCruitmentDemandService } from '@services/user/jobService';
 
 const cx = classNames.bind(styles);
 

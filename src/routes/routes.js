@@ -29,7 +29,9 @@ import {
     DashboardSettingPage,
     DashboardVerifyPage,
     DashboardNotFound,
+    DashboardForAdminPage,
 } from '@pages/DashboardAdminPage';
+import { role } from '../constants';
 
 export const publicRoutes = [
     {
@@ -238,6 +240,14 @@ export const privateRoutes = [
         isPrivate: true,
         restricted: false,
         layout: DashboardHeader,
+    },
+    {
+        path: route.DASHBOARD_FOR_ADMIN,
+        component: DashboardForAdminPage,
+        isPrivate: true,
+        restricted: false,
+        layout: DashboardLayout,
+        roles: [role.ADMIN],
     },
     {
         path: route.DASHBOARD_NOT_FOUND,

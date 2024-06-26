@@ -20,7 +20,7 @@ import SuggestCourseSlide from './SuggestCourseSlide/SuggestCourseSlide';
 import { showModal } from '@redux/features/modal/modalSlice';
 import { Modal } from '@components/common';
 import { ModalApplyComponent } from '@components';
-import { searchJobService } from '@services/jobService';
+import { searchJobService } from '@services/user/jobService';
 import { SkeletonCompanyComponent } from '@components/skeleton';
 
 const cx = classNames.bind(styles);

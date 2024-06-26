@@ -22,7 +22,7 @@ const StatisticComponent = ({ title, value, icon, color, background }) => {
 
 StatisticComponent.propTypes = {
     title: PropTypes.string,
-    value: PropTypes.string,
+    value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     icon: PropTypes.node,
     color: PropTypes.string,
     background: PropTypes.string,

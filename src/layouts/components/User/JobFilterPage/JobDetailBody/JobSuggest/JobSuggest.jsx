@@ -10,12 +10,12 @@ import 'tippy.js/animations/shift-away.css';
 import { FaRegHeart, FaHeart, FaChevronRight } from 'react-icons/fa6';
 
 import styles from './JobSuggest.module.scss';
-import slugConvert from '@utils/slugCovnert';
+import slugConvert from '@utils/convert/slugConvert';
 import path from '@constants/path';
 import route from '@constants/route';
 import { icons } from '@assets';
-import { convertSalary } from '@utils/convertSalary';
-import { convertDateFuture, convertTimeAgo } from '@utils/convertTimeUtil';
+import { convertSalary } from '@utils/convert/convertSalary';
+import { convertDateFuture, convertTimeAgo } from '@utils/convert/convertTimeUtil';
 
 const cx = classNames.bind(styles);
 

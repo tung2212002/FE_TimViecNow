@@ -214,3 +214,24 @@ export const cVAppliedStatus = [
     { id: 3, value: 'approved', name: 'Hồ sơ phù hợp' },
     { id: 4, value: 'rejected', name: 'Hồ sơ chưa phù hợp' },
 ];
+
+export const sideType = {
+    USER: 'user',
+    BUSINESS: 'business',
+};
+
+export const role = {
+    USER: 'user',
+    ADMIN: 'admin',
+    SUPER_USER: 'super_user',
+    BUSINESS: 'business',
+};
+
+export const groupRole = {
+    BUSINESS: [role.BUSINESS],
+    USER: [role.USER],
+    ADMIN: [role.ADMIN, role.SUPER_USER],
+    SUPER_USER: [role.SUPER_USER],
+    BUSINESS_USER: [role.BUSINESS, role.USER],
+    BUSINESS_ADMIN: [role.BUSINESS, role.ADMIN, role.SUPER_USER],
+};

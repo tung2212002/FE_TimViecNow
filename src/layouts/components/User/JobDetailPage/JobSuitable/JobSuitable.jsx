@@ -6,7 +6,7 @@ import { FaArrowRight } from 'react-icons/fa6';
 
 import styles from './JobSuitable.module.scss';
 import JobSuitableComponent from './JobSuitableComponent/JobSuitableComponent';
-import { searchJobService } from '@services/jobService';
+import { searchJobService } from '@services/user/jobService';
 
 const cx = classNames.bind(styles);
 

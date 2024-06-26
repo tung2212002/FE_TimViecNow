@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import styles from './JobSummary.module.scss';
 import { icons } from '@assets';
-import { convertSalary } from '@utils/convertSalary';
+import { convertSalary } from '@utils/convert/convertSalary';
 import { Experience } from '@constants';
 
 const cx = classNames.bind(styles);

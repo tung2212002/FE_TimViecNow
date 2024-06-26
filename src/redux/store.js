@@ -1,22 +1,22 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import authReducer from './features/auth/authSlide';
 import modalSlice from './features/modal/modalSlice';
-import authBusinessSlice from './features/authBusiness/authSlide';
 import toastSlice from './features/toast/toastSlice';
 import postJobSlide from './features/postJob/postJobSlide';
 import campaignSilde from './features/campaign/campaignSilde';
 import configSilde from './features/config/configSilde';
+import authSlide from './features/authUser/authSlide';
+import businessJobSilde from './features/businessJob/businessJobSilde';
 
 const store = configureStore({
     reducer: {
-        auth: authReducer,
+        authUser: authSlide,
         modal: modalSlice,
-        authBusiness: authBusinessSlice,
         toast: toastSlice,
         postJob: postJobSlide,
         campaign: campaignSilde,
         config: configSilde,
+        businessJob: businessJobSilde,
     },
 });
 

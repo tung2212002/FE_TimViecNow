@@ -9,7 +9,7 @@ import RecruitmentCampaignPage from './RecruitmentCampaignPage/RecruitmentCampai
 import DashboardSettingPage from './DashboardSettingPage/DashboardSettingPage';
 import DashboardVerifyPage from './DashboardVerifyPage/DashboardVerifyPage';
 import DashboardNotFound from './DashboardNotFound/DashboardNotFound';
-
+import DashboardForAdminPage from './DashboardForAdminPage/DashboardForAdminPage';
 export {
     DashboardCardPage,
     DashboardAdminPage,
@@ -22,4 +22,5 @@ export {
     DashboardSettingPage,
     DashboardVerifyPage,
     DashboardNotFound,
+    DashboardForAdminPage,
 };

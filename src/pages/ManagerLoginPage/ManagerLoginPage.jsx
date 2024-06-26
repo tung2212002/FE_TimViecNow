@@ -11,8 +11,8 @@ import useDocumentTitle from '@hooks/useDocumentTitle';
 import regexValidator from '@utils/regexValidator';
 import path from '@constants/path';
 import { icons } from '@assets/index';
-import { loginBusinessService } from '@services/businessAuthService';
-import { login } from '@redux/features/authBusiness/authSlide';
+import { loginBusinessService } from '@services/business/businessAuthService';
+import { login } from '../../redux/features/authUser/authSlide';
 import { addToast, removeToast } from '@redux/features/toast/toastSlice';
 import { Spinner } from '@components/common';
 
@@ -81,15 +81,12 @@ const ManagerLoginPage = () => {
                 } else if (res.status === 400) {
                     handleAddToast('Cảnh báo', 'Email hoặc mật khẩu không hợp lệ', 'warning');
                     setLoading(false);
-                    // setMessage('Email hoặc mật khẩu không hợp lệ');
                 } else if (res.status === 401) {
                     handleAddToast('Lỗi', 'Mật khẩu không chính xác', 'error');
                     setLoading(false);
-                    // setMessage('Mật khẩu không chính xác');
                 } else if (res.status === 404) {
                     handleAddToast('Lỗi', 'Tài khoản không tồn tại', 'error');
                     setLoading(false);
-                    // setMessage('Tài khoản không tồn tại');
                 }
             })
             .catch((err) => {

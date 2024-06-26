@@ -13,9 +13,9 @@ import styles from './RegisterForm.module.scss';
 import { SelectionComponent } from '@components/common';
 import path from '@constants/path';
 import regexValidator from '@utils/regexValidator';
-import { getListDistrictService } from '@services/locationService';
-import { registerBusinessService } from '@services/businessAuthService';
-import { login } from '@redux/features/authBusiness/authSlide';
+import { getListDistrictService } from '@services/common/locationService';
+import { registerBusinessService } from '@services/business/businessAuthService';
+import { login } from '../../../../../redux/features/authUser/authSlide';
 import { addToast, removeToast } from '@redux/features/toast/toastSlice';
 import { selectProvince } from '@redux/features/config/configSilde';
 

@@ -4,63 +4,45 @@ import { Navigate, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import route from '@constants/route';
-import useSide from '@hooks/useSIde';
-import { getLocalAccessToken, getLocalToken, setLocalUser } from '@utils/authLocalStorage';
-import { getLocalBusinessAccessToken, getLocalBusinessToken, setLocalBusiness } from '@utils/authBusinessStorage';
-import { selectUser, updateUserInfo } from '@redux/features/auth/authSlide';
-import { selectBusiness, updateBusinessInfo } from '@redux/features/authBusiness/authSlide';
-import { getInfoService } from '@services/userService';
-import { getInfoBusinessService } from '@services/businessService';
+import useSidePage from '../hooks/useSidePage';
+import { sideType } from '../constants';
+import functionLocal from '../utils/function/functionLocal';
+import functionService from '../utils/function/functionService';
+import { selectUser, updateInfo } from '../redux/features/authUser/authSlide';
 
-const PublicRoute = ({ component: Component, layout: Layout, restricted, positionHeader, ...rest }) => {
+const PublicRoute = ({ component: Component, layout: Layout, restricted, positionHeader, roles, ...rest }) => {
+    const side = useSidePage();
     const location = useLocation();
-    const previousPath = location.state?.from;
-    const side = useSide();
     const dispatch = useDispatch();
     const [isLoading, setIsLoading] = useState({
         loading: true,
         valid: false,
     });
-    const token = side === 'candidate' ? getLocalAccessToken() : getLocalBusinessAccessToken();
-    const user = side === 'candidate' ? useSelector(selectUser) : useSelector(selectBusiness);
+    const previousPath = location.state?.from;
+    const { getLocalAccessToken, getLocalToken, setLocalUser } = functionLocal(side);
+    const { getInfoService } = functionService(side);
+    const token = getLocalAccessToken();
+    const user = useSelector(selectUser);
     useEffect(() => {
         if (user) {
             setIsLoading({ loading: false, valid: true });
         }
         if (token) {
-            if (side === 'candidate') {
-                getInfoService()
-                    .then((response) => {
-                        if (response.status === 200) {
-                            setLocalUser(response.data.data);
-                            let token = getLocalToken();
-                            dispatch(updateUserInfo({ token, user: response.data.data }));
-                            setIsLoading({ loading: false, valid: true });
-                        } else {
-                            setIsLoading({ loading: false, valid: false });
-                        }
-                    })
-                    .catch((error) => {
+            getInfoService()
+                .then((response) => {
+                    if (response.status === 200) {
+                        setLocalUser(response.data.data);
+                        let token = getLocalToken();
+                        dispatch(updateInfo({ token, user: response.data.data }));
+                        setIsLoading({ loading: false, valid: true });
+                    } else {
                         setIsLoading({ loading: false, valid: false });
-                        console.error(error);
-                    });
-            } else if (side === 'employer') {
-                getInfoBusinessService()
-                    .then((response) => {
-                        if (response.status === 200) {
-                            setLocalBusiness(response.data.data);
-                            let token = getLocalBusinessToken();
-                            dispatch(updateBusinessInfo({ token, user: response.data.data }));
-                            setIsLoading({ loading: false, valid: true });
-                        } else {
-                            setIsLoading({ loading: false, valid: false });
-                        }
-                    })
-                    .catch((error) => {
-                        setIsLoading({ loading: false, valid: false });
-                        console.error(error);
-                    });
-            }
+                    }
+                })
+                .catch((error) => {
+                    setIsLoading({ loading: false, valid: false });
+                    console.error(error);
+                });
         } else {
             setIsLoading({ loading: false, valid: false });
         }
@@ -73,7 +55,7 @@ const PublicRoute = ({ component: Component, layout: Layout, restricted, positio
             {user && !isLoading.loading && restricted && isLoading.valid && (
                 <Navigate
                     to={
-                        side === 'candidate'
+                        side === sideType.USER
                             ? previousPath && ![route.LOGIN, route.REGISTER].includes(previousPath)
                                 ? previousPath
                                 : route.HOMEPAGE
@@ -105,6 +87,7 @@ PublicRoute.propTypes = {
     layout: PropTypes.elementType.isRequired,
     restricted: PropTypes.bool,
     positionHeader: PropTypes.string,
+    roles: PropTypes.array,
 };
 
 export default PublicRoute;

@@ -5,10 +5,10 @@ import { FaLocationDot, FaBusinessTime, FaClock } from 'react-icons/fa6';
 
 import styles from './DetailCompanyTooltipComponent.module.scss';
 import { Experience } from '@constants';
-import { convertDateFuture } from '../../utils/convertTimeUtil';
-import { convertSalary } from '@utils/convertSalary';
+import { convertDateFuture } from '@utils/convert/convertTimeUtil';
+import { convertSalary } from '@utils/convert/convertSalary';
 import path from '@constants/path';
-import slugConvert from '@utils/slugCovnert';
+import slugConvert from '@utils/convert/slugConvert';
 
 const cx = classNames.bind(styles);
 

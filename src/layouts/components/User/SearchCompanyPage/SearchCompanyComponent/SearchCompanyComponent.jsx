@@ -6,7 +6,7 @@ import { LuDot } from 'react-icons/lu';
 
 import styles from './SearchCompanyComponent.module.scss';
 import path from '@constants/path';
-import slugConvert from '@utils/slugCovnert';
+import slugConvert from '@utils/convert/slugConvert';
 
 const cx = classNames.bind(styles);
 
