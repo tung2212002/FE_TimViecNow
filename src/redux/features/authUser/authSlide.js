@@ -32,6 +32,7 @@ export const logout = createAsyncThunk('logout', async () => {
         removeLocalToken();
         removeLocalUser();
         await logoutService();
+        window.location.reload();
     } catch (error) {
         console.log('Error:', error);
         return null;
@@ -76,7 +77,7 @@ const authUserSlice = createSlice({
                 state.user = action.payload.user;
                 state.isAuth = true;
                 state.token = action.payload.token;
-                state.role = action.payload.role;
+                state.role = action.payload.user?.role;
             })
             .addCase(login.rejected, (state) => {
                 state.loading = false;
@@ -119,7 +120,7 @@ const authUserSlice = createSlice({
                 state.user = action.payload?.user || state.user;
                 state.isAuth = true;
                 state.token = action.payload?.token || state.token;
-                state.role = action.payload?.role || state.role;
+                state.role = action.payload?.user?.role || state.role;
             })
             .addCase(updateInfo.rejected, (state) => {
                 state.loading = false;
