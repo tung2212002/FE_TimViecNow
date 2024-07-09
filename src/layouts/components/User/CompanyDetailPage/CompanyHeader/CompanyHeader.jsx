@@ -6,7 +6,7 @@ import { FaUsers } from 'react-icons/fa';
 import { FaPlus, FaGlobe, FaBuilding } from 'react-icons/fa6';
 
 import styles from './CompanyHeader.module.scss';
-import { images } from '@assets';
+import { images, icons } from '@assets';
 
 const cx = classNames.bind(styles);
 
@@ -16,11 +16,11 @@ const CompanyHeader = ({ company }) => {
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
                 <div className={cx('banner')}>
-                    <img src={company.banner} alt={company.name} className="img-banner" />
+                    <img src={company.banner || images.company_cover_1} alt={company.name} className="img-banner" />
                 </div>
                 <div className={cx('logo')}>
                     <div className={cx('box-logo')}>
-                        <img src={company.logo || images.avatar_default} alt={company.name} className="img-logo" />
+                        <img src={company.logo || icons.icon_default_logo_company} alt={company.name} className="img-logo" />
                     </div>
                 </div>
                 <div className={cx('detail')}>

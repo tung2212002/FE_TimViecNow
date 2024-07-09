@@ -9,6 +9,7 @@ import slugConvert from '@utils/convert/slugConvert';
 import path from '@constants/path';
 import { convertSalary } from '@utils/convert/convertSalary';
 import { convertDateTime } from '@utils/convert/convertTimeUtil';
+import { icons } from '@assets';
 
 const cx = classNames.bind(styles);
 
@@ -21,7 +22,7 @@ const AppliedJobComponent = ({ job }) => {
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
                 <div className={cx('logo-container')}>
-                    <img className={cx('logo')} src={job.company?.logo} alt="logo" />
+                    <img className={cx('logo')} src={job.company?.logo || icons.icon_default_logo_company} alt="logo" />
                 </div>
                 <div className={cx('info-container')}>
                     <div className={cx('title-block')}>

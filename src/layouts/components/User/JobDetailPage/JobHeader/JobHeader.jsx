@@ -148,7 +148,7 @@ const JobHeader = ({ job }) => {
                 </div>
                 <div className={cx('company')}>
                     <a href={job.company.url} target="_blank" rel="noreferrer" className={cx('logo-link')}>
-                        <img src={job.company.logo} alt="logo" className={cx('logo')} />
+                        <img src={job.company.logo || icons.icon_default_logo_company} alt="logo" className={cx('logo')} />
                     </a>
                     <div className={cx('detail')}>
                         <TippyText content={job.company.name} placement="top">

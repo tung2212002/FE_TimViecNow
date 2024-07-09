@@ -8,6 +8,7 @@ import DashboardPostJobPage from './DashboardPostJobPage/DashboardPostJobPage';
 import RecruitmentCampaignPage from './RecruitmentCampaignPage/RecruitmentCampaignPage';
 import DashboardSettingPage from './DashboardSettingPage/DashboardSettingPage';
 import DashboardVerifyPage from './DashboardVerifyPage/DashboardVerifyPage';
+import DashboardManagerBusinessPage from './DashboardManagerBusinessPage/DashboardManagerBusinessPage';
 import DashboardNotFound from './DashboardNotFound/DashboardNotFound';
 import DashboardForAdminPage from './DashboardForAdminPage/DashboardForAdminPage';
 export {
@@ -21,6 +22,7 @@ export {
     RecruitmentCampaignPage,
     DashboardSettingPage,
     DashboardVerifyPage,
+    DashboardManagerBusinessPage,
     DashboardNotFound,
     DashboardForAdminPage,
 };

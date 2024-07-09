@@ -44,198 +44,6 @@ const HeaderHidden = () => {
         });
     };
 
-    // const navItems = [
-    //     {
-    //         id: 1,
-    //         label: 'Việc làm',
-    //         to: route.JOB_SEARCH,
-    //         subItems: [
-    //             {
-    //                 icon: FaMagnifyingGlass,
-    //                 label: 'Tìm việc làm',
-    //                 to: route.JOB_SEARCH,
-    //                 size: 'lg',
-    //                 addHr: true,
-    //             },
-    //             {
-    //                 icon: IoBriefcaseOutline,
-    //                 label: 'Việc làm đã ứng tuyển',
-    //                 to: route.APPLIED_JOBS,
-    //             },
-    //             {
-    //                 icon: FaRegHeart,
-    //                 label: 'Việc làm đã lưu',
-    //                 to: route.SAVED_JOBS,
-    //                 addHr: true,
-    //             },
-    //             {
-    //                 icon: FaListCheck,
-    //                 label: 'Việc làm phù hợp',
-    //                 to: route.MATCHING_JOBS,
-    //                 badgeId: 2,
-    //                 size: 'lg',
-    //             },
-    //             // {
-    //             //     icon: FaLaptopCode,
-    //             //     label: 'Việc làm IT',
-    //             //     to: '/',
-    //             //     badgeId: 1,
-    //             //     size: 'lg',
-    //             // },
-    //             // {
-    //             //     icon: LiaMedalSolid,
-    //             //     label: 'Việc làm Senior',
-    //             //     to: '/',
-    //             //     badgeId: 1,
-    //             // },
-    //         ],
-    //     },
-    //     {
-    //         id: 2,
-    //         label: 'Hồ sơ & CV',
-    //         to: route.SUBPAGE,
-    //         subItems: [
-    //             {
-    //                 icon: RiFileUserLine,
-    //                 label: 'Quản lý CV',
-    //                 to: '/',
-    //             },
-    //             // {
-    //             //     icon: FaRegFileLines,
-    //             //     label: 'Quản lý Cover Letter',
-    //             //     to: '/',
-    //             //     addHr: true,
-    //             // },
-    //             // {
-    //             //     icon: RiFileUserLine,
-    //             //     label: 'Mẫu CV',
-    //             //     to: '/',
-    //             // },
-    //             // {
-    //             //     icon: FaRegFileLines,
-    //             //     label: 'Mẫu Cover Letter',
-    //             //     to: '/',
-    //             //     addHr: true,
-    //             // },
-    //             // {
-    //             //     icon: RiFileUserLine,
-    //             //     label: 'Dịch vụ tư vấn CV',
-    //             //     to: '/',
-    //             // },
-    //             {
-    //                 icon: TbFilePencil,
-    //                 label: 'Hướng dẫn viết CV theo ngành nghề',
-    //                 to: '/',
-    //                 badgeId: 1,
-    //             },
-    //             // {
-    //             //     icon: TbFileCheck,
-    //             //     label: 'Thư viện CV theo ngành nghề',
-    //             //     to: '/',
-    //             //     badgeId: 1,
-    //             //     addHr: true,
-    //             // },
-    //             // {
-    //             //     icon: TbUserSquare,
-    //             //     label: 'CVNow Profile',
-    //             //     to: '/',
-    //             //     badgeId: 1,
-    //             // },
-    //         ],
-    //     },
-    //     {
-    //         id: 3,
-    //         label: 'Công ty',
-    //         to: route.SUBPAGE,
-    //         subItems: [
-    //             {
-    //                 icon: BiBuildings,
-    //                 label: 'Danh sách công ty',
-    //                 to: '/',
-    //             },
-    //             {
-    //                 icon: FaStarOfDavid,
-    //                 label: 'Top công ty',
-    //                 to: '/',
-    //             },
-    //         ],
-    //     },
-    //     {
-    //         id: 4,
-    //         label: 'Phát triển sự nghiệp',
-    //         to: '/',
-    //         subItems: [
-    //             {
-    //                 icon: FaChalkboardUser,
-    //                 label: 'Trắc nghiệm tính cách MBTI',
-    //                 to: '/',
-    //                 size: 'lg',
-    //             },
-    //             {
-    //                 icon: FaChalkboardUser,
-    //                 label: 'Trắc nghiệm MI',
-    //                 to: '/',
-    //                 size: 'lg',
-    //                 addHr: true,
-    //             },
-    //             {
-    //                 icon: TbFileCertificate,
-    //                 label: 'TVNow Contest',
-    //                 to: '/',
-    //             },
-    //             {
-    //                 icon: TbFilePencil,
-    //                 label: 'TVNow Skills',
-    //                 to: '/',
-    //                 badgeId: 1,
-    //             },
-    //         ],
-    //     },
-    //     {
-    //         id: 5,
-    //         label: 'Công cụ',
-    //         to: '/',
-    //         subItems: [
-    //             {
-    //                 icon: FaScaleBalanced,
-    //                 label: 'Tính lương Gross/Net',
-    //                 to: '/',
-    //                 size: 'lg',
-    //             },
-    //             {
-    //                 icon: FaChartColumn,
-    //                 label: 'Tính thuế thu nhập cá nhân',
-    //                 to: '/',
-    //                 size: 'lg',
-    //                 addHr: true,
-    //             },
-    //             {
-    //                 icon: TbCoins,
-    //                 label: 'Tính lãi suất kép',
-    //                 to: '/',
-    //             },
-    //             {
-    //                 icon: TbPigMoney,
-    //                 label: 'Lập kế hoạch tiết kiệm',
-    //                 to: '/',
-    //                 addHr: true,
-    //             },
-    //             {
-    //                 icon: BiShieldX,
-    //                 label: 'Tính bảo hiểm thất nghiệp',
-    //                 to: '/',
-    //             },
-    //             {
-    //                 icon: IoShieldCheckmarkOutline,
-    //                 label: 'Tính bảo hiểm xã hội một lần',
-    //                 to: '/',
-    //             },
-    //         ],
-    //         icon: gifs.gift_menu,
-    //     },
-    //     // { id: 6, label: 'Mở quà - Đón lợi thế', to: '/', icon: gifs.gift_menu },
-    // ];
-
     const navItems = [
         {
             label: 'Việc làm',
@@ -266,19 +74,6 @@ const HeaderHidden = () => {
                     badgeId: 2,
                     size: 'lg',
                 },
-                // {
-                //     icon: FaLaptopCode,
-                //     label: 'Việc làm IT',
-                //     to: '/',
-                //     badgeId: 1,
-                //     size: 'lg',
-                // },
-                // {
-                //     icon: LiaMedalSolid,
-                //     label: 'Việc làm Senior',
-                //     to: '/',
-                //     badgeId: 1,
-                // },
             ],
         },
         {
@@ -290,47 +85,12 @@ const HeaderHidden = () => {
                     label: 'Quản lý CV',
                     to: route.MANAGER_CV,
                 },
-                // {
-                //     icon: FaRegFileLines,
-                //     label: 'Quản lý Cover Letter',
-                //     to: '/',
-                //     addHr: true,
-                // },
-                // {
-                //     icon: RiFileUserLine,
-                //     label: 'Mẫu CV',
-                //     to: '/',
-                // },
-                // {
-                //     icon: FaRegFileLines,
-                //     label: 'Mẫu Cover Letter',
-                //     to: '/',
-                //     addHr: true,
-                // },
-                // {
-                //     icon: RiFileUserLine,
-                //     label: 'Dịch vụ tư vấn CV',
-                //     to: '/',
-                // },
                 {
                     icon: TbFilePencil,
                     label: 'Hướng dẫn viết CV theo ngành nghề',
                     to: '/',
                     badgeId: 1,
                 },
-                // {
-                //     icon: TbFileCheck,
-                //     label: 'Thư viện CV theo ngành nghề',
-                //     to: '/',
-                //     badgeId: 1,
-                //     addHr: true,
-                // },
-                // {
-                //     icon: TbUserSquare,
-                //     label: 'CVNow Profile',
-                //     to: '/',
-                //     badgeId: 1,
-                // },
             ],
         },
         {
@@ -349,36 +109,6 @@ const HeaderHidden = () => {
                 },
             ],
         },
-        // {
-        //     label: 'Phát triển sự nghiệp',
-        //     to: '/',
-        //     subItems: [
-        //         {
-        //             icon: FaChalkboardUser,
-        //             label: 'Trắc nghiệm tính cách MBTI',
-        //             to: '/',
-        //             size: 'lg',
-        //         },
-        //         {
-        //             icon: FaChalkboardUser,
-        //             label: 'Trắc nghiệm MI',
-        //             to: '/',
-        //             size: 'lg',
-        //             addHr: true,
-        //         },
-        //         {
-        //             icon: TbFileCertificate,
-        //             label: 'TVNow Contest',
-        //             to: '/',
-        //         },
-        //         {
-        //             icon: TbFilePencil,
-        //             label: 'TVNow Skills',
-        //             to: '/',
-        //             badgeId: 1,
-        //         },
-        //     ],
-        // },
         {
             label: 'Công cụ',
             to: route.TOOL,
@@ -444,11 +174,6 @@ const HeaderHidden = () => {
             ],
             icon: gifs.gift_menu,
         },
-        // {
-        //     label: 'Mở quà - Đón lợi thế',
-        //     to: '/',
-        //     icon: gifs.gift_menu,
-        // },
     ];
 
     const accountItems = [

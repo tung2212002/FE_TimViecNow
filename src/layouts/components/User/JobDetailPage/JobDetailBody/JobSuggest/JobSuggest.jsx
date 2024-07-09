@@ -43,7 +43,7 @@ const JobSuggest = ({ job, numberStyle = 0, zoomOut = false, zoomOutId }) => {
             <div className={cx('container')}>
                 <div className={cx('logo-container')}>
                     <a href={`${path.JOB_SEARCH_DETAIL}/${job.id}/${slugConvert(job.title)}`} target="_blank" rel="noreferrer" className={cx('logo-link')}>
-                        <img className={cx('logo')} src={job.company?.logo} alt="logo" />
+                        <img className={cx('logo')} src={job.company?.logo || icons.icon_default_logo_company} alt="logo" />
                         {job.is_job_flash && (
                             <Tippy
                                 render={(attrs) => (
