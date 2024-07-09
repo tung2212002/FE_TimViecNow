@@ -122,6 +122,7 @@ const images = {
     empty_02: require('./images/empty_02.png'),
     company_billboard: require('./images/company-billBoard.png'),
     image_search_company: require('./images/img-search-company.png'),
+    company_cover_1: require('./images/company_cover_1.jpg'),
 };
 
 const gifs = {

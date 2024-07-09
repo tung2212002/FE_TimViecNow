@@ -11,6 +11,7 @@ import styles from './JobItemComponent.module.scss';
 import DetailCompanyTooltipComponent from '../DetailCompanyTooltipComponent/DetailCompanyTooltipComponent';
 import slugConvert from '@utils/convert/slugConvert';
 import { convertSalary } from '@utils/convert/convertSalary';
+import { icons } from '@assets';
 
 const cx = classNames.bind(styles);
 
@@ -38,7 +39,7 @@ const JobItemComponent = ({ job, reponsive = false }) => {
                         <div className={cx('avatar')}>
                             <img
                                 className={cx('img')}
-                                src={job.company.logo}
+                                src={job.company.logo || icons.icon_default_logo_company}
                                 alt={`${job.company.name} tuyển dụng tại Tìm Việc Now`}
                                 title={`${job.company.name} tuyển dụng tại Tìm Việc Now`}
                             />

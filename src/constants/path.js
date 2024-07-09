@@ -36,5 +36,6 @@ export default {
     DASHBOARD_SETTING_BUSINESS_LICENSE: '/tuyen-dung/app/account/settings/business-license',
     DASHBOARD_SETTING_COMPANY: '/tuyen-dung/app/account/settings/company',
     DASHBOARD_VERIFFY: '/tuyen-dung/app/account/verify',
+    DASHBOARD_MANAGER_BUSINESS: '/tuyen-dung/app/manager-business',
     URL_OAUTH2: URL_OAUTH2,
 };

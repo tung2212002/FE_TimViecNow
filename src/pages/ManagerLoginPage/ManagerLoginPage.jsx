@@ -107,7 +107,7 @@ const ManagerLoginPage = () => {
                     <div className={cx('auth-form')}>
                         <div className={cx('logo')}>
                             <div className={cx('logo-wrapper')}>
-                                <img src={icons.logo} alt="logo" className={cx('img')} />
+                                <img src={icons.logo || icons.icon_default_logo_company} alt="logo" className={cx('img')} />
                             </div>
                         </div>
                         <div className={cx('header')}>

@@ -7,6 +7,7 @@ import { FaPlus } from 'react-icons/fa6';
 import styles from './CompanyRelateComponent.module.scss';
 import path from '@constants/path';
 import slugConvert from '@utils/convert/slugConvert';
+import { icons } from '@assets';
 
 const cx = classNames.bind(styles);
 
@@ -17,7 +18,7 @@ const CompanyRelateComponent = ({ company }) => {
                 {company.label && <label className={cx('label')}>{company.label.name}</label>}
 
                 <a href={path.COMPANY_DETAIL + '/' + company.id + '/' + slugConvert(company.name)} target="_blank" rel="noreferrer" className={cx('logo-link')}>
-                    <img src={company.logo} alt="logo" className={cx('logo')} />
+                    <img src={company.logo || icons.icon_default_logo_company} alt="logo" className={cx('logo')} />
                 </a>
             </div>
 

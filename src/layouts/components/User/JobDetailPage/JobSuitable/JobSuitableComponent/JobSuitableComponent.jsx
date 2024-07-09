@@ -8,6 +8,7 @@ import styles from './JobSuitableComponent.module.scss';
 import path from '@constants/path';
 import slugConvert from '@utils/convert/slugConvert';
 import { convertSalary } from '@utils/convert/convertSalary';
+import { icons } from '@assets';
 
 const cx = classNames.bind(styles);
 
@@ -32,7 +33,7 @@ const JobSuitableComponent = ({ job }) => {
                             target="_blank"
                             rel="noreferrer"
                         >
-                            <img className={cx('logo')} src={job.company.logo} alt="logo" />
+                            <img className={cx('logo')} src={job.company.logo || icons.icon_default_logo_company} alt="logo" />
                         </a>
                     </div>
                     <div className={cx('detail')}>

@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { FaQuestionCircle, FaShieldAlt, FaRegFileAlt, FaRegUserCircle, FaUserCircle, FaChartBar, FaShoppingCart } from 'react-icons/fa';
 import { FaAnglesRight, FaRegGem, FaGem, FaClockRotateLeft, FaFileInvoice, FaGear } from 'react-icons/fa6';
 import { IoGridOutline, IoBriefcaseOutline, IoBriefcase, IoGrid, IoGiftSharp } from 'react-icons/io5';
-import { LuGift, LuShoppingCart, LuBadgePercent, LuUserSquare2 } from 'react-icons/lu';
+import { LuGift, LuShoppingCart, LuBadgePercent } from 'react-icons/lu';
 import { RiRobot2Line, RiRobot2Fill, RiAdvertisementLine, RiAdvertisementFill, RiShieldUserFill, RiShieldUserLine } from 'react-icons/ri';
 import { PiMagicWandBold, PiMagicWandFill } from 'react-icons/pi';
 import { TbFileInvoice, TbBellExclamation, TbBellFilled } from 'react-icons/tb';
@@ -151,9 +151,10 @@ const SideBar = () => {
         {
             id: 15,
             name: 'Quản lí người dùng',
-            path: path.DASHBOARD_HOME,
+            path: path.DASHBOARD_MANAGER_BUSINESS,
             icon: HiOutlineUserGroup,
             iconActive: HiUserGroup,
+            roles: groupRole.ADMIN,
         },
         {
             id: 16,

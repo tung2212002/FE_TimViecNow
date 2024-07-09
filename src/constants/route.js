@@ -29,6 +29,7 @@ export default {
     DASHBOARD_SETTING_COMPANY: '/tuyen-dung/app/account/settings/company',
     DASHBOARD_VERIFFY: '/tuyen-dung/app/account/verify',
     DASHBOARD_FOR_ADMIN: '/tuyen-dung/app/admin',
+    DASHBOARD_MANAGER_BUSINESS: '/tuyen-dung/app/manager-business',
     SUBPAGE: '/subpage',
     LOGIN: '/login',
     REGISTER: '/register',

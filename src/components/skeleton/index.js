@@ -5,5 +5,14 @@ import SkeletonRecruimentCampaignComponent from './SkeletonRecruimentCampaignCom
 import SkeletonCompanySquareComponent from './SkeletonCompanySquareComponent/SkeletonCompanySquareComponent';
 import SkeletonChartComponent from './SkeletonChartComponent/SkeletonChartComponent';
 import SkeletonChartLabelComponent from './SkeletonChartComponent/SkeletonChartLabelComponent';
-
-export { SkeletonJobSectionComponent, SkeletonCompanyComponent, SkeletonJobDetailPage, SkeletonRecruimentCampaignComponent, SkeletonCompanySquareComponent };
+import SkeletonManagerUsercomponent from './SkeletonManagerUsercomponent/SkeletonManagerUsercomponent';
+export {
+    SkeletonJobSectionComponent,
+    SkeletonCompanyComponent,
+    SkeletonJobDetailPage,
+    SkeletonRecruimentCampaignComponent,
+    SkeletonCompanySquareComponent,
+    SkeletonChartComponent,
+    SkeletonChartLabelComponent,
+    SkeletonManagerUsercomponent,
+};
