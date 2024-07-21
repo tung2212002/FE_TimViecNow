@@ -11,6 +11,7 @@ import { TiLocation } from 'react-icons/ti';
 import styles from './CompanySummary.module.scss';
 import path from '@constants/path';
 import slugConvert from '@utils/convert/slugConvert';
+import { icons } from '@assets';
 
 const cx = classNames.bind(styles);
 
@@ -21,7 +22,7 @@ const CompanySummary = ({ company }) => {
                 <div className={cx('company-info')}>
                     <div className={cx('info')}>
                         <a href={company.website} target="_blank" rel="noreferrer" className={cx('company-logo')}>
-                            <img src={company.logo} alt="logo" className={cx('logo')} />
+                            <img src={company.logo || icons.icon_default_logo_company} alt="logo" className={cx('logo')} />
                         </a>
                         <TippyText content={company.name} placement="top" zIndex={9999} maxWidth={300}>
                             <h2 className={cx('company-name')}>

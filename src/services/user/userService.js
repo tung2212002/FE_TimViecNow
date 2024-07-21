@@ -6,7 +6,7 @@ export const getInfoService = async () => {
 };
 
 export const getListUserService = async (params) => {
-    const response = await request.apiAuth.get('/user/users', { params });
+    const response = await request.apiBusinessAuth.get('/user/users', { params });
     return response;
 };
 

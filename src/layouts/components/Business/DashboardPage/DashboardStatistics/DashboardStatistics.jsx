@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import classNames from 'classnames/bind';
 import Tippy from '@tippyjs/react/headless';
 import 'tippy.js/dist/tippy.css';
@@ -34,7 +34,7 @@ const DashboardStatistics = () => {
             icon: CiBullhorn,
             color: '#2d7cf1',
             background: '#ebf3ff',
-            url: path.DASHBOARD_CAMPAIGN,
+            url: path.DASHBOARD_RECRUIREMENT_CAMPAIGNS,
         },
         {
             id: 2,
@@ -121,7 +121,7 @@ const DashboardStatistics = () => {
                 </div>
                 <div className={cx('content')}>
                     {statistics.map((item) => (
-                        <Link to={path.DASHBOARD_CAMPAIGN} key={item.id} className={cx('content-item')} style={{ background: item.background }}>
+                        <Link to={item.url} key={item.id} className={cx('content-item')} style={{ background: item.background }}>
                             <StatisticComponent title={item.title} value={item.value} icon={<item.icon />} color={item.color} background={item.background} />
                         </Link>
                     ))}

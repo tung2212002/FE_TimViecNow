@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import styles from './CompanyComponent.module.scss';
 import path from '@constants/path';
 import slugConvert from '@utils/convert/slugConvert';
+import { images } from '../../../../../assets';
 
 const cx = classNames.bind(styles);
 
@@ -14,7 +15,7 @@ const CompanyComponent = ({ company }) => {
                 <div className={cx('company-banner')}>
                     <a href={`${path.COMPANY_DETAIL}/${company.id}/${slugConvert(company.name)}`} className={cx('company-banner-link')}>
                         <div className={cx('company-banner-container')}>
-                            <img src={company.banner} alt={company.name} className={cx('company-banner-image')} />
+                            <img src={company.banner || images.company_cover_1} alt={company.name} className={cx('company-banner-image')} />
                         </div>
                         <div className={cx('company-logo-container')}>
                             <img src={company.logo} alt={company.name} className={cx('company-logo')} />

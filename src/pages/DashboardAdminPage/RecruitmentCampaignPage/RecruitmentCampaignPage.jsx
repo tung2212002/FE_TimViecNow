@@ -63,6 +63,34 @@ const RecruitmentCampaignPage = () => {
             filter_by: 'waitting_approve_job',
         },
     ];
+
+    const listTableHead = [
+        {
+            id: 1,
+            name: 'Chiến dịch',
+        },
+        {
+            id: 2,
+            name: 'Tối ưu',
+        },
+        {
+            id: 3,
+            name: 'Tin tuyển dụng',
+        },
+        {
+            id: 4,
+            name: 'CV từ hệ thống',
+        },
+        {
+            id: 5,
+            name: 'Lọc CV',
+        },
+        {
+            id: 6,
+            name: 'Dịch vụ đang chạy',
+        },
+    ];
+
     const [campaigns, setCampaigns] = useState(null);
 
     const [filterCampaign, setFilterCampaign] = useState({
@@ -98,7 +126,7 @@ const RecruitmentCampaignPage = () => {
             order_by: 'desc',
         };
 
-        filterCampaign.filter_by !== 1 && (params.filter_by = filterCampaign.filter_by);
+        filterCampaign.filter_by !== 1 && (params.filter_by = listFilterCampaign.find((item) => item.id === filterCampaign.filter_by)?.filter_by);
 
         filterCampaign.loading &&
             getListCampaignService(params)
@@ -191,12 +219,17 @@ const RecruitmentCampaignPage = () => {
                         <table className={cx('table')}>
                             <thead className={cx('table-head')}>
                                 <tr>
-                                    <th className={cx('table-head-item')}>Chiến dịch</th>
+                                    {/* <th className={cx('table-head-item')}>Chiến dịch</th>
                                     <th className={cx('table-head-item')}>Tối ưu</th>
                                     <th className={cx('table-head-item')}>Tin tuyển dụng</th>
                                     <th className={cx('table-head-item')}>CV từ hệ thống</th>
                                     <th className={cx('table-head-item')}>Lọc CV</th>
-                                    <th className={cx('table-head-item')}>Dịch vụ đang chạy</th>
+                                    <th className={cx('table-head-item')}>Dịch vụ đang chạy</th> */}
+                                    {listTableHead.map((item) => (
+                                        <th key={item.id} className={cx('table-head-item')}>
+                                            {item.name}
+                                        </th>
+                                    ))}
                                 </tr>
                             </thead>
                             <tbody className={cx('table-body')}>

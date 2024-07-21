@@ -9,6 +9,7 @@ import { CompanyDescription, CompanyHeader, CompanyRecruitment, CompanyRelate, C
 import CompanyLocation from '@layouts/components/User/CompanyDetailPage/CompanyLocation/CompanyLocation';
 import { getCompanyByIdSerivce } from '@services/user/companyService';
 import slugConvert from '@utils/convert/slugConvert';
+import route from '@constants/route';
 
 const cx = classNames.bind(styles);
 
@@ -39,7 +40,7 @@ const CompanyDetailPage = () => {
             {company && (
                 <div className={cx('container')}>
                     <div className={cx('company-path')}>
-                        <Link to="/">
+                        <Link to={route.COMPANY}>
                             <span className={cx('company-path-item')}>Danh sách Công ty</span>
                         </Link>
                         <FaChevronRight className={cx('company-path-icon')} />

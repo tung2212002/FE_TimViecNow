@@ -80,19 +80,6 @@ const Header = ({ positionHeader }) => {
                     badgeId: 2,
                     size: 'lg',
                 },
-                // {
-                //     icon: FaLaptopCode,
-                //     label: 'Việc làm IT',
-                //     to: '/',
-                //     badgeId: 1,
-                //     size: 'lg',
-                // },
-                // {
-                //     icon: LiaMedalSolid,
-                //     label: 'Việc làm Senior',
-                //     to: '/',
-                //     badgeId: 1,
-                // },
             ],
         },
         {
@@ -104,47 +91,12 @@ const Header = ({ positionHeader }) => {
                     label: 'Quản lý CV',
                     to: route.MANAGER_CV,
                 },
-                // {
-                //     icon: FaRegFileLines,
-                //     label: 'Quản lý Cover Letter',
-                //     to: '/',
-                //     addHr: true,
-                // },
-                // {
-                //     icon: RiFileUserLine,
-                //     label: 'Mẫu CV',
-                //     to: '/',
-                // },
-                // {
-                //     icon: FaRegFileLines,
-                //     label: 'Mẫu Cover Letter',
-                //     to: '/',
-                //     addHr: true,
-                // },
-                // {
-                //     icon: RiFileUserLine,
-                //     label: 'Dịch vụ tư vấn CV',
-                //     to: '/',
-                // },
                 {
                     icon: TbFilePencil,
                     label: 'Hướng dẫn viết CV theo ngành nghề',
                     to: '/1',
                     badgeId: 1,
                 },
-                // {
-                //     icon: TbFileCheck,
-                //     label: 'Thư viện CV theo ngành nghề',
-                //     to: '/',
-                //     badgeId: 1,
-                //     addHr: true,
-                // },
-                // {
-                //     icon: TbUserSquare,
-                //     label: 'CVNow Profile',
-                //     to: '/',
-                //     badgeId: 1,
-                // },
             ],
         },
         {
@@ -154,12 +106,12 @@ const Header = ({ positionHeader }) => {
                 {
                     icon: BiBuildings,
                     label: 'Danh sách công ty',
-                    to: '/1',
+                    to: route.COMPANY,
                 },
                 {
                     icon: FaStarOfDavid,
                     label: 'Top công ty',
-                    to: '/2',
+                    to: route.COMPANY,
                 },
             ],
         },
@@ -258,11 +210,6 @@ const Header = ({ positionHeader }) => {
             ],
             icon: gifs.gift_menu,
         },
-        // {
-        //     label: 'Mở quà - Đón lợi thế',
-        //     to: '/',
-        //     icon: gifs.gift_menu,
-        // },
     ];
 
     const accountItems = [

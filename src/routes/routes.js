@@ -30,8 +30,9 @@ import {
     DashboardVerifyPage,
     DashboardNotFound,
     DashboardForAdminPage,
+    DashboardManagerBusinessPage,
 } from '@pages/DashboardAdminPage';
-import { role } from '../constants';
+import { role, groupRole } from '../constants';
 
 export const publicRoutes = [
     {
@@ -203,6 +204,14 @@ export const privateRoutes = [
         verifyBusinessEmail: true,
     },
     {
+        path: route.DASHBOARD_MANAGER_BUSINESS,
+        component: DashboardManagerBusinessPage,
+        isPrivate: true,
+        restricted: false,
+        layout: DashboardLayout,
+        roles: groupRole.ADMIN,
+    },
+    {
         path: route.DASHBOARD_SETTING_PASSWORD,
         component: DashboardSettingPage,
         isPrivate: true,
@@ -247,7 +256,7 @@ export const privateRoutes = [
         isPrivate: true,
         restricted: false,
         layout: DashboardLayout,
-        roles: [role.ADMIN],
+        roles: groupRole.ADMIN,
     },
     {
         path: route.DASHBOARD_NOT_FOUND,

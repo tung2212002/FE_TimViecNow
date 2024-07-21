@@ -60,7 +60,7 @@ const ManagerRegisterPage = () => {
             <div className={cx('container')}>
                 <div className={cx('content')}>
                     <div className={cx('content-header')}>
-                        <img src={icons.logo} alt="logo" className={cx('content-header-logo')} />
+                        <img src={icons.logo || icons.icon_default_logo_company} alt="logo" className={cx('content-header-logo')} />
                         <h2 className={cx('content-header-title')}>Đăng ký tài khoản Nhà tuyển dụng</h2>
                         <span className={cx('content-header-subtitle')}>Cùng tạo dựng lợi thế cho doanh nghiệp!.</span>
                     </div>
