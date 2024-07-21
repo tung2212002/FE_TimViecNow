@@ -126,7 +126,7 @@ const RecruitmentCampaignPage = () => {
             order_by: 'desc',
         };
 
-        filterCampaign.filter_by !== 1 && (params.filter_by = filterCampaign.filter_by);
+        filterCampaign.filter_by !== 1 && (params.filter_by = listFilterCampaign.find((item) => item.id === filterCampaign.filter_by)?.filter_by);
 
         filterCampaign.loading &&
             getListCampaignService(params)
