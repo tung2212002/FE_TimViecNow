@@ -17,8 +17,8 @@ const GeneralJobFilter = ({ job }) => {
     const setProvince = [];
     const displayLocation = {};
 
-    job.locations?.forEach((location) => {
-        if (!setProvince.includes(location.province.name)) {
+    job?.locations?.forEach((location) => {
+        if (!setProvince.includes(location.province?.name)) {
             setProvince.push(location.province.name);
         }
     });
@@ -31,7 +31,7 @@ const GeneralJobFilter = ({ job }) => {
             <div className={cx('job-info')}>
                 <div className={cx('salary')}>
                     <BiSolidDollarCircle className={cx('icon')} />
-                    <span className={cx('text')}> {convertSalary(job.salary_type, job.min_salary, job.max_salary)}</span>
+                    <span className={cx('text')}> {convertSalary(job?.salary_type, job?.min_salary, job?.max_salary)}</span>
                 </div>
                 {setProvince.length > 0 && (
                     <div className={cx('address')}>

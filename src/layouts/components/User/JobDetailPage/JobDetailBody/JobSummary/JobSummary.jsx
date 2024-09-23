@@ -30,13 +30,13 @@ const JobSummary = ({ job }) => {
             id: 1,
             icon: icons.icon_award,
             title: 'Cấp bậc',
-            value: convertSalary(job.salary_type, job.min_salary, job.max_salary),
+            value: convertSalary(job?.salary_type, job?.min_salary, job?.max_salary),
         },
         {
             id: 2,
             icon: icons.icon_time,
             title: 'Kinh nghiệm',
-            value: Experience[job.job_experience_id - 1]?.name || null,
+            value: Experience[job.job_experience_id]?.name || null,
         },
         {
             id: 3,

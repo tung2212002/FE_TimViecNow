@@ -16,8 +16,8 @@ const DetailCompanyTooltipComponent = ({ job }) => {
     const displayLocation = {};
     const setProvince = [];
 
-    job.locations?.forEach((location) => {
-        if (!setProvince.includes(location.province.name)) {
+    job?.locations?.forEach((location) => {
+        if (!setProvince.includes(location.province?.name)) {
             setProvince.push(location.province.name);
         }
     });
@@ -30,17 +30,17 @@ const DetailCompanyTooltipComponent = ({ job }) => {
                         <div className={cx('company-logo')}>
                             <img
                                 className={cx('img')}
-                                src={job.company.logo}
-                                alt={`${job.company.name} tuyển dụng tại Tìm Việc Now`}
-                                title={`${job.company.name} tuyển dụng tại Tìm Việc Now`}
+                                src={job?.company.logo}
+                                alt={`${job?.company.name} tuyển dụng tại Tìm Việc Now`}
+                                title={`${job?.company.name} tuyển dụng tại Tìm Việc Now`}
                             />
                         </div>
                         <div className={cx('title-block')}>
-                            <h2 className={cx('title')}>{job.title}</h2>
-                            <a href={job.company.url} target="_blank" rel="noreferrer" className={cx('company-name')}>
-                                {job.company.name}
+                            <h2 className={cx('title')}>{job?.title}</h2>
+                            <a href={job?.company.url} target="_blank" rel="noreferrer" className={cx('company-name')}>
+                                {job?.company.name}
                             </a>
-                            <label className={cx('salary')}>{convertSalary(job.salary_type, job.min_salary, job.max_salary)}</label>
+                            <label className={cx('salary')}>{convertSalary(job?.salary_type, job?.min_salary, job?.max_salary)}</label>
                         </div>
                     </div>
                     <div className={cx('box-info')}>
@@ -52,11 +52,11 @@ const DetailCompanyTooltipComponent = ({ job }) => {
                         </div>
                         <div className={cx('company-exp')}>
                             <FaBusinessTime className={cx('icon')} />
-                            <span className={cx('text')}>{Experience[job.job_experience_id - 1]?.name}</span>
+                            <span className={cx('text')}>{Experience[job?.job_experience_id]?.name}</span>
                         </div>
                         <div className={cx('company-deadline')}>
                             <FaClock className={cx('icon')} />
-                            <span className={cx('text')}>Còn {convertDateFuture(job.deadline)}</span>
+                            <span className={cx('text')}>Còn {convertDateFuture(job?.deadline)}</span>
                         </div>
                     </div>
                 </div>
@@ -64,11 +64,11 @@ const DetailCompanyTooltipComponent = ({ job }) => {
                 <div className={cx('box-scroll')}>
                     <div className={cx('job-info')}>
                         <h3 className={cx('title')}>Mô tả công việc</h3>
-                        <div className={cx('content-tab')} dangerouslySetInnerHTML={{ __html: job.job_description }}></div>
+                        <div className={cx('content-tab')} dangerouslySetInnerHTML={{ __html: job?.job_description }}></div>
                         <h3 className={cx('title')}>Yêu cầu ứng viên</h3>
-                        <div className={cx('content-tab')} dangerouslySetInnerHTML={{ __html: job.job_requirement }}></div>
+                        <div className={cx('content-tab')} dangerouslySetInnerHTML={{ __html: job?.job_requirement }}></div>
                         <h3 className={cx('title')}>Quyền lợi</h3>
-                        <div className={cx('content-tab')} dangerouslySetInnerHTML={{ __html: job.job_benefit }}></div>
+                        <div className={cx('content-tab')} dangerouslySetInnerHTML={{ __html: job?.job_benefit }}></div>
                         <h3 className={cx('title')}>Địa điểm làm việc</h3>
                         <div className={cx('content-tab')}>
                             {job?.locations?.map((location, index) => {
@@ -86,24 +86,24 @@ const DetailCompanyTooltipComponent = ({ job }) => {
                             })}
                         </div>
                         <h3 className={cx('title')}>Thời gian làm việc</h3>
-                        {job.working_times.map((time, index) => (
+                        {job?.working_times?.map((time, index) => (
                             <div key={index} className={cx('content-tab')}>
                                 <div className={cx('text')}>
                                     - Thứ {time.date_from + 1} - Thứ {time.date_to + 1} (từ {time.start_time?.slice(0, 5)} - {time.end_time?.slice(0, 5)})
                                 </div>
                             </div>
                         ))}
-                        {job.working_time_text !== '""' && (
+                        {job?.working_time_text !== '""' && (
                             <div className={cx('content-tab')} dangerouslySetInnerHTML={{ __html: job.working_time_text }}></div>
                         )}
                     </div>
                 </div>
                 <div className={cx('box-footer')}>
-                    <a href={job.url} target="_blank" rel="noreferrer" className={cx('btn', 'btn-apply')}>
+                    <a href={job?.url} target="_blank" rel="noreferrer" className={cx('btn', 'btn-apply')}>
                         Ứng tuyển
                     </a>
                     <a
-                        href={path.JOB_SEARCH_DETAIL + '/' + job.id + '/' + slugConvert(job.title)}
+                        href={path.JOB_SEARCH_DETAIL + '/' + job?.id + '/' + slugConvert(job?.title)}
                         target="_blank"
                         rel="noreferrer"
                         className={cx('btn', 'btn-company')}

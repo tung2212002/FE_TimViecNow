@@ -1,4 +1,7 @@
 export default function slugConvert(str) {
+    if (!str) {
+        return '';
+    }
     return str
         .toLowerCase() // to lower case
         .trim() // remove space at start and end

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import classNames from 'classnames/bind';
 
 import styles from './HomePage.module.scss';
@@ -199,6 +199,10 @@ const HomePage = () => {
             url: 'https://www.topcv.vn/cong-ty/cong-ty-co-phan-tap-doan-merap/24524.html',
         },
     ];
+
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, []);
 
     return (
         <div className={cx('wrapper')}>

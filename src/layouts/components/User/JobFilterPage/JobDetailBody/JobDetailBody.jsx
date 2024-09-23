@@ -14,6 +14,9 @@ import slugConvert from '@utils/convert/slugConvert';
 const cx = classNames.bind(styles);
 
 const JobDetailBody = ({ job, handleCloseDetail }) => {
+    if (!job) {
+        handleCloseDetail();
+    }
     const displayLocation = {};
     const dispatch = useDispatch();
     const ref = useRef(null);
@@ -22,17 +25,17 @@ const JobDetailBody = ({ job, handleCloseDetail }) => {
         {
             id: 1,
             title: 'Mô tả công việc',
-            content: job.job_description,
+            content: job?.job_description,
         },
         {
             id: 2,
             title: 'Yêu cầu ứng viên',
-            content: job.job_requirement,
+            content: job?.job_requirement,
         },
         {
             id: 3,
             title: 'Quyền lợi',
-            content: job.job_benefit,
+            content: job?.job_benefit,
         },
     ];
 
@@ -85,14 +88,14 @@ const JobDetailBody = ({ job, handleCloseDetail }) => {
                             <div className={cx('description-item')}>
                                 <h3 className={cx('title-item')}>Thời gian làm việc</h3>
                                 <div className={cx('content-item')}>
-                                    {job.working_times.map((time, index) => (
+                                    {job?.working_times?.map((time, index) => (
                                         <p key={index}>
                                             - Thứ {time.date_from + 1} - Thứ {time.date_to + 1} (từ {time.start_time?.slice(0, 5)} -{' '}
                                             {time.end_time?.slice(0, 5)})
                                         </p>
                                     ))}
                                 </div>
-                                {job.working_time_text && job.working_time_text !== '""' && (
+                                {job?.working_time_text && job.working_time_text !== '""' && (
                                     <div className={cx('content-item')} dangerouslySetInnerHTML={{ __html: job.working_time_text }}></div>
                                 )}
                             </div>
@@ -111,7 +114,7 @@ const JobDetailBody = ({ job, handleCloseDetail }) => {
                         <div className={cx('action-item', 'apply')}>
                             <a
                                 className={cx('action-button')}
-                                href={path.JOB_SEARCH_DETAIL + '/' + job.id + '/' + slugConvert(job.title)}
+                                href={path.JOB_SEARCH_DETAIL + '/' + job?.id + '/' + slugConvert(job?.title)}
                                 target="_blank"
                                 rel="noreferrer"
                             >
@@ -122,7 +125,7 @@ const JobDetailBody = ({ job, handleCloseDetail }) => {
                         <div className={cx('action-item', 'applied', 'hidden')}>
                             <a
                                 className={cx('action-button')}
-                                href={path.JOB_SEARCH_DETAIL + '/' + job.id + '/' + slugConvert(job.title)}
+                                href={path.JOB_SEARCH_DETAIL + '/' + job?.id + '/' + slugConvert(job?.title)}
                                 target="_blank"
                                 rel="noreferrer"
                             >
@@ -130,7 +133,7 @@ const JobDetailBody = ({ job, handleCloseDetail }) => {
                             </a>
                             <button className={cx('action-button')}>Lưu tin</button>
                         </div>
-                        <div className={cx('deadline')}>Hạn nộp hồ sơ: {job.deadline}</div>
+                        <div className={cx('deadline')}>Hạn nộp hồ sơ: {job?.deadline}</div>
                         <div className={cx('quantity', 'disabled')}>
                             <div className={cx('quantity-icon')}>
                                 <FaLock className={cx('icon-lock')} />

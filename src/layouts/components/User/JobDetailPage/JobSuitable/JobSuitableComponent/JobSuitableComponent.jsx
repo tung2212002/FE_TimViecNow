@@ -16,8 +16,8 @@ const JobSuitableComponent = ({ job }) => {
     const setProvince = [];
     const displayLocation = {};
 
-    job.locations?.forEach((location) => {
-        if (!setProvince.includes(location.province.name)) {
+    job?.locations?.forEach((location) => {
+        if (!setProvince.includes(location.province?.name)) {
             setProvince.push(location.province.name);
         }
     });
@@ -51,7 +51,7 @@ const JobSuitableComponent = ({ job }) => {
                 </div>
                 <div className={cx('tags')}>
                     <div className={cx('list')}>
-                        <div className={cx('tag')}>{convertSalary(job.salary_type, job.min_salary, job.max_salary)}</div>
+                        <div className={cx('tag')}>{convertSalary(job?.salary_type, job?.min_salary, job?.max_salary)}</div>
                         <TippyText
                             content={job?.locations?.map((location, index) => {
                                 const shouldHide = displayLocation[location.province.name] && !location.description;

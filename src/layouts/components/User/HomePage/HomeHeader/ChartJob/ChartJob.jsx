@@ -176,7 +176,7 @@ const ChartJob = ({ stateId }) => {
         getCountJobBySalaryService()
             .then((res) => {
                 if (res.status === 200) {
-                    setDataNumber2(handleSalary(res.data.data));
+                    setDataNumber2(handleSalary(res.data.data.slice(0, 6)));
                     setLoadingSalary(false);
                 }
             })

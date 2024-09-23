@@ -19,7 +19,7 @@ const JobSuitable = ({ job }) => {
                 skip: 0,
                 limit: 3,
                 category_id: job.categories[0].id,
-                job_experience_id: job.job_experience_id,
+                job_experience_id: job?.job_experience_id,
             };
             searchJobService(params)
                 .then((res) => {
