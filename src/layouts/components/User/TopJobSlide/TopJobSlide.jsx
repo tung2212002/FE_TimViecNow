@@ -295,6 +295,8 @@ const TopJobSlide = () => {
             .then((res) => {
                 if (res.status == 200) {
                     setCategories(res.data.data);
+                    console.log(res.data.data);
+                    console.log('-------1---');
                 }
             })
             .catch((err) => {
@@ -325,23 +327,25 @@ const TopJobSlide = () => {
                         </span>
                     </div>
                 </div>
-                <Slider {...settings} ref={ref} className={cx('slider')}>
-                    {categories.map((item, index) => (
-                        <div key={index} className={cx('slide')}>
-                            <div className={cx('item')}>
-                                <a className={cx('content')} onClick={() => handleNavigate(item.id)}>
-                                    <img
-                                        src={listIcon.find((icon) => icon.slug === item.slug)?.icon || icons.icon_dots}
-                                        className={cx('icon')}
-                                        alt={item.name}
-                                    />
-                                    <label className={cx('label')}>{item.name}</label>
-                                    <h3 className={cx('title')}>{item.count} việc làm</h3>
-                                </a>
+                {categories.length !== 0 && (
+                    <Slider {...settings} ref={ref} className={cx('slider')}>
+                        {categories.map((item, index) => (
+                            <div key={index} className={cx('slide')}>
+                                <div className={cx('item')}>
+                                    <a className={cx('content')} onClick={() => handleNavigate(item.id)}>
+                                        <img
+                                            src={listIcon.find((icon) => icon.slug === item.slug)?.icon || icons.icon_dots}
+                                            className={cx('icon')}
+                                            alt={item.name}
+                                        />
+                                        <label className={cx('label')}>{item.name}</label>
+                                        <h3 className={cx('title')}>{item.count} việc làm</h3>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                    ))}
-                </Slider>
+                        ))}
+                    </Slider>
+                )}
             </div>
         </div>
     );

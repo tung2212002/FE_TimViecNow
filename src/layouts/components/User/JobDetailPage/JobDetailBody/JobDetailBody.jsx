@@ -38,17 +38,17 @@ const JobDetailBody = ({ job, state }) => {
         {
             id: 1,
             title: 'Mô tả công việc',
-            content: job.job_description,
+            content: job?.job_description,
         },
         {
             id: 2,
             title: 'Yêu cầu ứng viên',
-            content: job.job_requirement,
+            content: job?.job_requirement,
         },
         {
             id: 3,
             title: 'Quyền lợi',
-            content: job.job_benefit,
+            content: job?.job_benefit,
         },
     ];
 
@@ -129,13 +129,13 @@ const JobDetailBody = ({ job, state }) => {
                         <div className={cx('description-item')}>
                             <h3 className={cx('title-item')}>Thời gian làm việc</h3>
                             <div className={cx('content-item')}>
-                                {job.working_times.map((time, index) => (
+                                {job?.working_times?.map((time, index) => (
                                     <p key={index}>
                                         - Thứ {time.date_from + 1} - Thứ {time.date_to + 1} (từ {time.start_time?.slice(0, 5)} - {time.end_time?.slice(0, 5)})
                                     </p>
                                 ))}
                             </div>
-                            {job.working_time_text && job.working_time_text !== '""' && (
+                            {job?.working_time_text && job.working_time_text !== '""' && (
                                 <div className={cx('content-item')} dangerouslySetInnerHTML={{ __html: job.working_time_text }}></div>
                             )}
                         </div>

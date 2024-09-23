@@ -136,6 +136,10 @@ const FeatureJob = ({ reponsive = false, number = 12 }) => {
             location: id,
             reset: true,
         });
+        setListJobInfo({
+            ...listJobInfo,
+            currentPage: 1,
+        });
     };
 
     const handleScrollLeftLocation = () => {
@@ -217,6 +221,11 @@ const FeatureJob = ({ reponsive = false, number = 12 }) => {
             } else if (currentSearch.filter === 4) {
                 currentSearch.location !== 0 && (params.category_id = currentSearch.location);
             }
+
+            let prevDate = new Date();
+            prevDate.setDate(prevDate.getDate() - 7);
+            prevDate = prevDate.toISOString().split('T')[0];
+            params.updated_at = prevDate;
 
             searchJobService(params)
                 .then((res) => {

@@ -36,7 +36,7 @@ const JobSummary = ({ job }) => {
             id: 2,
             icon: icons.icon_time,
             title: 'Kinh nghiệm',
-            value: Experience[job.job_experience_id - 1]?.name || null,
+            value: Experience[job?.job_experience_id]?.name || null,
         },
         {
             id: 3,

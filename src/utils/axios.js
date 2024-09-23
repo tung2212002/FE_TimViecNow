@@ -29,7 +29,12 @@ const instance = (config = {}, auth = false, side = sideType.USER) => {
         },
         async (error) => {
             const originalRequest = error.config;
-            if (error.response && error.response.status === 401 && !originalRequest._retry) {
+            if (
+                error.response &&
+                error.response.status === 401 &&
+                !originalRequest._retry &&
+                error.response?.config?.url === `/${side == sideType.USER ? 'auth' : 'business'}/me`
+            ) {
                 originalRequest._retry = true;
                 const refreshToken = getLocalRefreshToken();
                 side = getSide();

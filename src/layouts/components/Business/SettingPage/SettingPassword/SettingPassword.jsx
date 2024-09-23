@@ -43,6 +43,7 @@ const SettingPassword = () => {
                     });
                 } else if (response.status === 401) {
                     handleAddToast('Thất bại', 'Mật khẩu cũ không chính xác', 'error');
+                    return;
                 } else if (response.status === 400) {
                     handleAddToast('Thất bại', 'Kiểm tra lại mật khẩu', 'error');
                 } else if (response.status === 409) {
