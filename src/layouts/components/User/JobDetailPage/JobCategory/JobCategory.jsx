@@ -8,8 +8,8 @@ const cx = classNames.bind(styles);
 const JobCategory = ({ job }) => {
     const setProvince = [];
 
-    job.locations?.forEach((location) => {
-        if (!setProvince.includes(location.province.name)) {
+    job?.locations?.forEach((location) => {
+        if (!setProvince.includes(location.province?.name)) {
             setProvince.push(location.province.name);
         }
     });

@@ -26,7 +26,7 @@ const JobItemComponent = ({ job, reponsive = false }) => {
     const displayLocation = {};
 
     job.locations?.forEach((location) => {
-        if (!setProvince.includes(location.province.name)) {
+        if (!setProvince.includes(location.province?.name)) {
             setProvince.push(location.province.name);
         }
     });
@@ -74,7 +74,7 @@ const JobItemComponent = ({ job, reponsive = false }) => {
                     <div className={cx('box-footer')}>
                         <div className={cx('job-info')}>
                             <div className={cx('salary')}>
-                                <span className={cx('text-salary')}>{convertSalary(job.salary_type, job.min_salary, job.max_salary)} </span>
+                                <span className={cx('text-salary')}>{convertSalary(job?.salary_type, job?.min_salary, job?.max_salary)} </span>
                             </div>
                             {setProvince.length > 0 && (
                                 <div className={cx('address')}>

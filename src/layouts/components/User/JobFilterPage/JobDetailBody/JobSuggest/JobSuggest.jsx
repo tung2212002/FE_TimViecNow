@@ -24,8 +24,8 @@ const JobSuggest = ({ job, numberStyle = 0, zoomOut = false, zoomOutId }) => {
     const [isSave, setIsSave] = useState(job.is_apply === 'false');
     const setProvince = [];
     const displayLocation = {};
-    job.locations?.forEach((location) => {
-        if (!setProvince.includes(location.province.name)) {
+    job?.locations?.forEach((location) => {
+        if (!setProvince.includes(location.province?.name)) {
             setProvince.push(location.province.name);
         }
     });
@@ -100,7 +100,7 @@ const JobSuggest = ({ job, numberStyle = 0, zoomOut = false, zoomOutId }) => {
                                 </TippyText>
                             </div>
                             <div className={cx('salary')}>
-                                <label className={cx('label')}>{convertSalary(job.salary_type, job.min_salary, job.max_salary)}</label>
+                                <label className={cx('label')}>{convertSalary(job?.salary_type, job?.min_salary, job?.max_salary)}</label>
                             </div>
                         </div>
                     </div>

@@ -26,8 +26,8 @@ const JobHeader = ({ job }) => {
     const dispatch = useDispatch();
     const setProvince = [];
 
-    job.locations?.forEach((location) => {
-        if (!setProvince.includes(location.province.name)) {
+    job?.locations?.forEach((location) => {
+        if (!setProvince.includes(location.province?.name)) {
             setProvince.push(location.province.name);
         }
     });
@@ -60,7 +60,7 @@ const JobHeader = ({ job }) => {
             id: 1,
             label: 'Mức lương',
             icon: icons.icon_money,
-            text: convertSalary(job.salary_type, job.min_salary, job.max_salary),
+            text: convertSalary(job?.salary_type, job?.min_salary, job?.max_salary),
         },
         {
             id: 2,
@@ -72,7 +72,7 @@ const JobHeader = ({ job }) => {
             id: 3,
             label: 'Kinh nghiệm',
             icon: icons.icon_time,
-            text: Experience[job.job_experience_id - 1]?.name,
+            text: Experience[job?.job_experience_id]?.name,
         },
     ];
 
@@ -80,7 +80,7 @@ const JobHeader = ({ job }) => {
         dispatch(showModal());
     };
 
-    useDocumentTitle(`${job.title} - ${job.company.name}`);
+    useDocumentTitle(`${job?.title} - ${job?.company.name}`);
     return (
         <div className={cx('wrapper')}>
             <Modal>
@@ -88,7 +88,7 @@ const JobHeader = ({ job }) => {
             </Modal>
             <div className={cx('container')}>
                 <h1 className={cx('title')}>
-                    {job.title}
+                    {job?.title}
                     <Tippy
                         render={(attrs) => (
                             <div {...attrs} className={cx('tooltip')}>
@@ -142,21 +142,21 @@ const JobHeader = ({ job }) => {
                         </div>
                         <div className={cx('text')}>
                             Hạn nộp hồ sơ:{' '}
-                            {job.deadline ? `${job.deadline.slice(8, 10)}/${job.deadline.slice(5, 7)}/${job.deadline.slice(0, 4)}` : 'Không xác định'}
+                            {job?.deadline ? `${job?.deadline.slice(8, 10)}/${job?.deadline.slice(5, 7)}/${job?.deadline.slice(0, 4)}` : 'Không xác định'}
                         </div>
                     </div>
                 </div>
                 <div className={cx('company')}>
-                    <a href={job.company.url} target="_blank" rel="noreferrer" className={cx('logo-link')}>
-                        <img src={job.company.logo || icons.icon_default_logo_company} alt="logo" className={cx('logo')} />
+                    <a href={job?.company.url} target="_blank" rel="noreferrer" className={cx('logo-link')}>
+                        <img src={job?.company.logo || icons.icon_default_logo_company} alt="logo" className={cx('logo')} />
                     </a>
                     <div className={cx('detail')}>
-                        <TippyText content={job.company.name} placement="top">
-                            <a href={job.company.url} target="_blank" rel="noreferrer" className={cx('company-link')}>
-                                {job.company.name}
+                        <TippyText content={job?.company.name} placement="top">
+                            <a href={job?.company.url} target="_blank" rel="noreferrer" className={cx('company-link')}>
+                                {job?.company.name}
                             </a>
                         </TippyText>
-                        <div className={cx('description')}>{job.company_short_description}</div>
+                        <div className={cx('description')}>{job?.company_short_description}</div>
                     </div>
                 </div>
                 <div className={cx('save-job')}>

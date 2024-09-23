@@ -40,7 +40,7 @@ export const listGender = [
     {
         id: 2,
         name: 'Nữ',
-        value: 'famale',
+        value: 'female',
     },
 ];
 

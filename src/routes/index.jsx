@@ -28,11 +28,7 @@ const AppRouter = () => {
                 console.log(err);
             });
 
-        let params = {
-            limit: 1000,
-        };
-
-        getListSkillService(params)
+        getListSkillService()
             .then((res) => {
                 if (res.status === 200) {
                     dispatch(setSkill(res.data.data));

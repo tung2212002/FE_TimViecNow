@@ -293,7 +293,7 @@ const JobGeneralRequirements = () => {
                                         <div className={cx('header-select')}>
                                             <div className={cx('container-select')}>
                                                 <span className={cx('result')}>
-                                                    {filterExp.find((item) => item.id === job.job_experience_id)?.name || '-- Chọn kinh nghiệm --'}
+                                                    {filterExp.find((item) => item.id === job?.job_experience_id)?.name || '-- Chọn kinh nghiệm --'}
                                                 </span>
                                             </div>
                                         </div>
@@ -303,17 +303,17 @@ const JobGeneralRequirements = () => {
                                             {filterExp.map((item) => (
                                                 <li
                                                     key={item.id}
-                                                    className={cx('item', { active: item.id === job.job_experience_id })}
+                                                    className={cx('item', { active: item.id === job?.job_experience_id })}
                                                     onClick={() => handleSetJobExpId(item.id)}
                                                 >
                                                     <span className={cx('text')}>{item.name}</span>
-                                                    {item.id === job.job_experience_id && <HiCheck className={cx('icon-check')} />}
+                                                    {item.id === job?.job_experience_id && <HiCheck className={cx('icon-check')} />}
                                                 </li>
                                             ))}
                                         </ul>
                                     )}
                                     icon={() => <FaCaretDown className={cx('icon-care')} />}
-                                    itemSelect={filterExp.find((item) => item.id === job.job_experience_id)?.name}
+                                    itemSelect={filterExp.find((item) => item.id === job?.job_experience_id)?.name}
                                     maxHeight={'230px'}
                                     styleDropdown={{ right: '0', left: 'auto', top: '37px' }}
                                     styleButton={{ marginRight: '10px' }}
