@@ -13,12 +13,15 @@ import styles from './ModalApplyComponent.module.scss';
 import { icons } from '@assets';
 import { hideModal } from '@redux/features/modal/modalSlice';
 import Modal2 from '@components/common/Modal2/Modal2';
+import { createCVApplicationService } from '../../services/user/cvApplicationsService';
+import { Spinner } from '@components/common';
 
 const cx = classNames.bind(styles);
 
 const ModalApplyComponent = ({ job }) => {
     const dispatch = useDispatch();
     const ref = useRef(null);
+    const [loading, setLoading] = useState(false);
 
     const [data, setData] = useState({
         cv: null,
@@ -67,7 +70,7 @@ const ModalApplyComponent = ({ job }) => {
 
     const handleChangeFile = (e) => {
         const file = e.target.files[0];
-        if (file.size > 5 * 1024 * 1024) {
+        if (file && file.size > 5 * 1024 * 1024) {
             setDialog({
                 show: true,
                 title: 'File quá lớn',
@@ -78,6 +81,15 @@ const ModalApplyComponent = ({ job }) => {
         setData({ ...data, cv: file });
     };
 
+    const handleClearForm = () => {
+        setData({
+            cv: null,
+            name: '',
+            email: '',
+            phone: '',
+            coverLetter: '',
+        });
+    };
     const handleSubmit = () => {
         if (!data.cv) {
             setDialog({
@@ -99,6 +111,63 @@ const ModalApplyComponent = ({ job }) => {
             setError({ ...error, phone: 'Số điện thoại không được để trống' });
             return;
         }
+
+        setLoading(true);
+
+        const formData = new FormData();
+        formData.append('cv', data.cv);
+        formData.append('full_name', data.name);
+        formData.append('email', data.email);
+        formData.append('phone_number', data.phone);
+        formData.append('cover_letter', data.coverLetter);
+        formData.append('job_id', job.id);
+
+        createCVApplicationService(formData)
+            .then((res) => {
+                if (res.status === 200) {
+                    setDialog({
+                        show: true,
+                        title: 'Thông báo',
+                        content: 'Nộp hồ sơ ứng tuyển thành công!',
+                    });
+                    handleHiddenModal();
+                    handleClearForm();
+                } else if (res.status === 400) {
+                    setDialog({
+                        show: true,
+                        title: 'Thông báo',
+                        content: 'Kiểm tra lại thông tin hồ sơ ứng tuyển!',
+                    });
+                } else if (res.status === 409) {
+                    setDialog({
+                        show: true,
+                        title: 'Thông báo',
+                        content: 'Bạn đã ứng tuyển cho công việc này!',
+                    });
+                } else if (res.status === 406) {
+                    setDialog({
+                        show: true,
+                        title: 'Thông báo',
+                        content: 'Công việc đã hết hạn ứng tuyển!',
+                    });
+                } else if (res.status === 403) {
+                    setDialog({
+                        show: true,
+                        title: 'Thông báo',
+                        content: 'Bạn cần đăng nhập để ứng tuyển!',
+                    });
+                }
+                setLoading(false);
+            })
+            .catch((err) => {
+                console.log(err);
+                setDialog({
+                    show: true,
+                    title: 'Thông báo',
+                    content: 'Nộp hồ sơ ứng tuyển thất bại!',
+                });
+                setLoading(false);
+            });
     };
 
     return (
@@ -318,11 +387,11 @@ const ModalApplyComponent = ({ job }) => {
                     </div>
                 </main>
                 <footer className={cx('footer')}>
-                    <button className={cx('btn-cancel')} onClick={handleHiddenModal}>
+                    <button className={cx('btn-cancel', { disable: loading })} onClick={handleHiddenModal} disabled={loading}>
                         Hủy
                     </button>
-                    <button className={cx('btn-apply')} onClick={handleSubmit}>
-                        Nộp hồ sơ ứng tuyển
+                    <button className={cx('btn-apply', { disable: loading })} onClick={handleSubmit} disabled={loading}>
+                        {loading ? <Spinner color="#fff" /> : 'Nộp hồ sơ ứng tuyển'}
                     </button>
                 </footer>
             </div>

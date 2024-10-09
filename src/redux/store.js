@@ -7,6 +7,7 @@ import campaignSilde from './features/campaign/campaignSilde';
 import configSilde from './features/config/configSilde';
 import authSlide from './features/authUser/authSlide';
 import businessJobSilde from './features/businessJob/businessJobSilde';
+import websocketSlide from './features/websocket/websocketSilde';
 
 const store = configureStore({
     reducer: {
@@ -17,6 +18,7 @@ const store = configureStore({
         campaign: campaignSilde,
         config: configSilde,
         businessJob: businessJobSilde,
+        websocket: websocketSlide,
     },
 });
 

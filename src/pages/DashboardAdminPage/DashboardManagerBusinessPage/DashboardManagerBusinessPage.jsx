@@ -22,6 +22,7 @@ import { getListUserService } from '../../../services/user/userService';
 import { SkeletonManagerUsercomponent } from '@components/skeleton';
 import { selectUser } from '@redux/features/authUser/authSlide';
 import { images } from '@assets';
+import { convertTimeAgo } from '@utils/convert/convertTimeUtil';
 
 const cx = classNames.bind(styles);
 
@@ -44,7 +45,7 @@ const DashboardManagerBusinessPage = () => {
     const [business, setBusiness] = useState(null);
 
     const [filterBusiness, setFilterBusiness] = useState({
-        filter_by: 1,
+        filter_by: 2,
         page: 1,
         loading: true,
         canLoadMore: true,
@@ -217,6 +218,18 @@ const DashboardManagerBusinessPage = () => {
                                                                 {item.full_name}
                                                             </a>
                                                         </span>
+                                                        {filterBusiness.filter_by === 1 && (
+                                                            <div>
+                                                                <div className={cx('id')}>Đã tham gia: {convertTimeAgo(item.created_at)}</div>
+                                                                <div className={cx('id')}>Cập nhật lần cuối: {convertTimeAgo(item.updated_at)}</div>
+                                                                <p className={cx('status', { active: item.is_verified })}>
+                                                                    {item.is_verified ? 'Đã xác thực' : 'Chưa xác thực'}
+                                                                </p>
+                                                                <p className={cx('status', { active: item.is_active })}>
+                                                                    {item.is_active ? 'Hoạt động' : 'Tạm khóa'}
+                                                                </p>
+                                                            </div>
+                                                        )}
                                                     </div>
                                                 </td>
                                                 <td className={cx('table-body-item')}>
@@ -276,7 +289,7 @@ const DashboardManagerBusinessPage = () => {
                                                                         <div className={cx('item-content-des')}>{item?.company?.address}</div>
                                                                     </div>
                                                                 </TippyText>
-                                                                <p className={cx('company-apply-number')}>
+                                                                <p className={cx('company-apply-number', { active: item?.is_verified })}>
                                                                     {item.is_verified ? 'Đã xác thực' : 'Chưa xác thực'}
                                                                 </p>
                                                                 <div className={cx('company-apply-view')}>

@@ -11,10 +11,11 @@ import AppliedJobPage from './AppliedJobPage/AppliedJobPage';
 import SavedJobPage from './SavedJobPage/SavedJobPage';
 import ListCompanyPage from './ListCompanyPage/ListCompanyPage';
 import SearchCompanyPage from './SearchCompanyPage/SearchCompanyPage';
+import ChatPage from './ChatPage/ChatPage';
 // Page for Manager
 import ManagerRegisterPage from './ManagerRegisterPage/ManagerRegisterPage';
 import ManagerLoginPage from './ManagerLoginPage/ManagerLoginPage';
-import { DashboardAdminPage, DashboardCardPage, DashboardSearchCVPage, DashboardPostPage } from './DashboardAdminPage';
+import { DashboardAdminPage, DashboardCardPage, DashboardSearchCVPage, DashboardPostPage, DashboardChatPage } from './DashboardAdminPage';
 
 export {
     HomePage,
@@ -36,4 +37,6 @@ export {
     SavedJobPage,
     ListCompanyPage,
     SearchCompanyPage,
+    ChatPage,
+    DashboardChatPage,
 };

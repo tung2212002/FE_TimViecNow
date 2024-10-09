@@ -1,5 +1,6 @@
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import { FaLocationArrow, FaInfo } from 'react-icons/fa';
 import { LuDot } from 'react-icons/lu';
@@ -14,25 +15,20 @@ const SearchCompanyComponent = ({ company }) => {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
-                <a
-                    href={`${path.COMPANY_DETAIL}/${company.id}/${slugConvert(company.name)}`}
+                <Link
+                    to={`${path.COMPANY_DETAIL}/${company.id}/${slugConvert(company.name)}`}
                     className={cx('company-logo-container')}
                     target="_blank"
                     rel="noreferrer"
                 >
                     <img src={company.logo} alt={company.name} className={cx('company-logo')} />
-                </a>
+                </Link>
                 <div className={cx('company-info')}>
                     <div className={cx('company-info-name')}>
                         <strong>
-                            <a
-                                className={cx('company-info-name-text')}
-                                href={`${path.COMPANY_DETAIL}/${company.id}/${slugConvert(company.name)}`}
-                                target="_blank"
-                                rel="noreferrer"
-                            >
+                            <Link className={cx('company-info-name-text')} to={`${path.COMPANY_DETAIL}/${company.id}/${slugConvert(company.name)}`}>
                                 {company.name}
-                            </a>
+                            </Link>
                         </strong>
                         <span className={cx('company-active-job')}>
                             <LuDot className={cx('company-active-job-icon')} />

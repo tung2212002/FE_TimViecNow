@@ -39,28 +39,18 @@ const RecruitmentCampaignPage = () => {
         },
         {
             id: 4,
-            name: 'Đã kích hoạt tính năng CV đề xuất',
-            filter_by: 'actived_cv_scout',
-        },
-        {
-            id: 5,
             name: 'Tin tuyển dụng đang hiển thị',
             filter_by: 'has_publishing_job',
         },
         {
-            id: 6,
-            name: 'Có dịch vụ đang chạy',
-            filter_by: 'has_running_service',
-        },
-        {
-            id: 7,
+            id: 5,
             name: 'Tin tuyển dụng hết hạn hiển thị',
             filter_by: 'expired_job',
         },
         {
-            id: 8,
+            id: 6,
             name: 'Tin tuyển dụng đang xét duyệt',
-            filter_by: 'waitting_approve_job',
+            filter_by: 'waiting_approval_job',
         },
     ];
 
@@ -69,10 +59,10 @@ const RecruitmentCampaignPage = () => {
             id: 1,
             name: 'Chiến dịch',
         },
-        {
-            id: 2,
-            name: 'Tối ưu',
-        },
+        // {
+        //     id: 2,
+        //     name: 'Tối ưu',
+        // },
         {
             id: 3,
             name: 'Tin tuyển dụng',
@@ -83,12 +73,12 @@ const RecruitmentCampaignPage = () => {
         },
         {
             id: 5,
-            name: 'Lọc CV',
+            name: 'CV ứng tuyển',
         },
-        {
-            id: 6,
-            name: 'Dịch vụ đang chạy',
-        },
+        // {
+        //     id: 6,
+        //     name: 'Dịch vụ đang chạy',
+        // },
     ];
 
     const [campaigns, setCampaigns] = useState(null);
@@ -282,7 +272,7 @@ const RecruitmentCampaignPage = () => {
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td className={cx('table-body-item')}>
+                                                {/* <td className={cx('table-body-item')}>
                                                     <div className={cx('item-optimal')}>
                                                         <span className={cx('optimal-percentage')}>
                                                             <a href={path.DASHBOARD_SUGGESTION} className={cx('optimal-percentage-link')}>
@@ -290,7 +280,7 @@ const RecruitmentCampaignPage = () => {
                                                             </a>
                                                         </span>
                                                     </div>
-                                                </td>
+                                                </td> */}
                                                 <td className={cx('table-body-item')}>
                                                     <div className={cx('table-body-item-info')}>
                                                         <div className={cx('info-job')}>
@@ -340,7 +330,7 @@ const RecruitmentCampaignPage = () => {
                                                 <td className={cx('table-body-item')}>
                                                     <div className={cx('table-body-item-title')}></div>
                                                 </td>
-                                                <td className={cx('table-body-item')}>
+                                                {/* <td className={cx('table-body-item')}>
                                                     <div className={cx('table-body-item-title')}>
                                                         {item.status === 'open' ? (
                                                             <div className={cx('item-status', 'item-status-active')}>Chiến dịch đang mở</div>
@@ -348,7 +338,7 @@ const RecruitmentCampaignPage = () => {
                                                             <div className={cx('item-status')}>Chiến dịch đang tắt</div>
                                                         )}
                                                     </div>
-                                                </td>
+                                                </td> */}
                                             </tr>
                                         ))
                                     ) : (

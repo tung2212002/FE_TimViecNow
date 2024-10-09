@@ -32,8 +32,9 @@ const instance = (config = {}, auth = false, side = sideType.USER) => {
             if (
                 error.response &&
                 error.response.status === 401 &&
-                !originalRequest._retry &&
-                error.response?.config?.url === `/${side == sideType.USER ? 'auth' : 'business'}/me`
+                !originalRequest._retry
+                // &&
+                // error.response?.config?.url === `/${side == sideType.USER ? 'auth' : 'business'}/me`
             ) {
                 originalRequest._retry = true;
                 const refreshToken = getLocalRefreshToken();

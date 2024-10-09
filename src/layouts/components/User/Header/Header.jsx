@@ -313,9 +313,9 @@ const Header = ({ positionHeader }) => {
                             </a>
                         </li>
                         <li className={cx('item')}>
-                            <a to="/login" className={cx('link')}>
+                            <Link to={route.CHAT} className={cx('link')}>
                                 <FaComments className={cx('icon', 'comments')} />
-                            </a>
+                            </Link>
                         </li>
                         <li className={cx('avatar-container')}>
                             <div className={cx('avatar-bg')}>

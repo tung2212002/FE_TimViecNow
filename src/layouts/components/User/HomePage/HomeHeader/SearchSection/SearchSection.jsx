@@ -100,6 +100,7 @@ const SearchSection = ({ handleSelectCity }) => {
                             onFocus={() => setFocus(true)}
                             value={searchValue}
                             onChange={(event) => setSearchValue(event.target.value)}
+                            onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
                         />
                     </div>
                     <div className={cx('location')} onClick={() => setDisplayDropdown(!displayDropdown)}>

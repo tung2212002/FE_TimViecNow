@@ -37,5 +37,6 @@ export default {
     DASHBOARD_SETTING_COMPANY: '/tuyen-dung/app/account/settings/company',
     DASHBOARD_VERIFFY: '/tuyen-dung/app/account/verify',
     DASHBOARD_MANAGER_BUSINESS: '/tuyen-dung/app/manager-business',
+    DASHBOARD_CHAT: '/tuyen-dung/app/chat',
     URL_OAUTH2: URL_OAUTH2,
 };

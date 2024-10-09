@@ -4,7 +4,6 @@ import { Navigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import route from '@constants/route';
-// import useSide from '@hooks/useSIde';
 import useSidePage from '../hooks/useSidePage';
 import functionLocal from '../utils/function/functionLocal';
 import functionService from '../utils/function/functionService';
@@ -13,6 +12,8 @@ import { role, sideType } from '../constants';
 import { DashboardNotFound } from '../pages/DashboardAdminPage';
 import { NotFoundPage } from '../pages';
 import { selectUser } from '../redux/features/authUser/authSlide';
+// import { connectWebSocket } from '../redux/features/websocket/websocketSilde';
+// import { WEBSOCKET_URL } from '../configs';
 
 const PrivateRoute = ({ component: Component, layout: Layout, positionHeader, verify, verifyBusinessEmail, restricted, roles, ...rest }) => {
     const dispatch = useDispatch();
@@ -55,6 +56,12 @@ const PrivateRoute = ({ component: Component, layout: Layout, positionHeader, ve
             setIsLoading({ loading: false, valid: false });
         }
     }, [side, token]);
+
+    // useEffect(() => {
+    //     console.log('connect websocket---------');
+    //     const url = `${WEBSOCKET_URL}?token=${getLocalAccessToken()}`;
+    //     dispatch(connectWebSocket(url));
+    // }, [dispatch, getLocalAccessToken]);
 
     if (!user && isLoading.loading) {
         return <div className="loading">...</div>;

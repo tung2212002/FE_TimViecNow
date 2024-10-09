@@ -39,5 +39,6 @@ export const selectJobPosition = (state) => state.config.job_position;
 export const selectCategory = (state) => state.config.category;
 export const selectSkill = (state) => state.config.skill;
 export const selectField = (state) => state.config.field;
+export const selectConfig = (state) => state.config;
 
 export const { setProvince, setJobPosition, setCategory, setSkill, setField } = configSilde.actions;

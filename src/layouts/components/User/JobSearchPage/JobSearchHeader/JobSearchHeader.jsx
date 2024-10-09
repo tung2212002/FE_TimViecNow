@@ -129,15 +129,15 @@ const JobSearchHeader = () => {
                 <div className={cx('box-work')}>
                     <div className={cx('work')}>
                         <span className={cx('label')}>Vị trí chờ bạn khám phá</span>
-                        <span className={cx('quantity')}>{jobDemand.number_of_job_active}</span>
+                        <span className={cx('quantity')}>{jobDemand?.number_of_job_active}</span>
                     </div>
                     <div className={cx('work')}>
                         <span className={cx('label')}>Việc làm mới nhất</span>
-                        <span className={cx('quantity')}>{jobDemand.number_of_job_24h}</span>
+                        <span className={cx('quantity')}>{jobDemand?.number_of_job_24h}</span>
                     </div>
                     <div className={cx('work')}>
                         <span className={cx('label')}>Cập nhật lúc</span>
-                        <span className={cx('quantity')}>{jobDemand.time_scan && convertDateTime(jobDemand.time_scan)}</span>
+                        <span className={cx('quantity')}>{jobDemand?.time_scan && convertDateTime(jobDemand.time_scan)}</span>
                     </div>
                 </div>
                 <BannerSlide />
