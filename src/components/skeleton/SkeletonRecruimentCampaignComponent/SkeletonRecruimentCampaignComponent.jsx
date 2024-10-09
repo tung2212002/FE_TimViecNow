@@ -12,18 +12,18 @@ const SkeletonRecruimentCampaignComponent = () => {
             <div className={cx('col-1')}>
                 <Skeleton count={1} height={160} />
             </div>
-            <div className={cx('col-2')}>
+            {/* <div className={cx('col-2')}>
                 <Skeleton count={1} height={160} />
-            </div>
+            </div> */}
             <div className={cx('col-3')}>
                 <Skeleton count={1} height={160} />
             </div>
             <div className={cx('col-4')}>
                 <Skeleton count={1} height={160} />
             </div>
-            <div className={cx('col-5')}>
+            {/* <div className={cx('col-5')}>
                 <Skeleton count={1} height={160} />
-            </div>
+            </div> */}
             <div className={cx('col-6')}>
                 <Skeleton count={1} height={160} />
             </div>

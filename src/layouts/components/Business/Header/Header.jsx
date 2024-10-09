@@ -2,9 +2,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import { Link, useLocation } from 'react-router-dom';
+import { PropTypes } from 'prop-types';
 
 import { FaBookmark, FaCartShopping, FaPencil } from 'react-icons/fa6';
-import { FaCommentDots, FaQuestionCircle, FaBell, FaCaretDown, FaRegUser } from 'react-icons/fa';
+import { FaCommentDots, FaQuestionCircle, FaBell, FaCaretDown } from 'react-icons/fa';
 import { FaBars } from 'react-icons/fa6';
 
 import styles from './Header.module.scss';
@@ -17,7 +18,7 @@ import { groupRole } from '../../../../constants';
 
 const cx = classNames.bind(styles);
 
-const Header = () => {
+const Header = ({ setZoomSidebar, zoomSidebar }) => {
     const dispatch = useDispatch();
     const location = useLocation();
 
@@ -33,9 +34,9 @@ const Header = () => {
 
     const listItem = [
         { to: path.DASHBOARD_ADMIN, icon: FaBookmark, text: 'HR Insider', roles: groupRole.BUSINESS, classIcon: 'icon-bookmark' },
-        { to: path.DASHBOARD_POST, icon: FaPencil, text: 'Đăng tin', roles: groupRole.BUSINESS, classIcon: 'icon-pencil' },
+        { to: path.DASHBOARD_POST_JOB, icon: FaPencil, text: 'Đăng tin', roles: groupRole.BUSINESS, classIcon: 'icon-pencil' },
         { to: path.DASHBOARD_SEARCH, icon: FaPencil, text: 'Tìm CV', roles: groupRole.BUSINESS_ADMIN, classIcon: 'icon-pencil' },
-        { to: path.DASHBOARD_ADMIN, icon: FaCommentDots, text: 'Connect', roles: groupRole.BUSINESS_ADMIN, classIcon: 'icon-comment' },
+        { to: path.DASHBOARD_CHAT, icon: FaCommentDots, text: 'Connect', roles: groupRole.BUSINESS, classIcon: 'icon-comment' },
         { to: path.DASHBOARD_ADMIN, icon: FaQuestionCircle, text: 'Trợ giúp', roles: groupRole.BUSINESS_ADMIN, classIcon: 'icon-question' },
         {
             to: path.DASHBOARD_ADMIN,
@@ -118,7 +119,7 @@ const Header = () => {
         <div className={cx('wrapper')}>
             <nav className={cx('navbar')}>
                 {process.process > 0 && process.process < 100 && <div className={cx('process-bar')} style={{ width: `${process.process}%` }}></div>}
-                <button className={cx('btn-menu')}>
+                <button className={cx('btn-menu')} onClick={() => setZoomSidebar(!zoomSidebar)}>
                     <FaBars className={cx('icon', 'icon-menu')} />
                 </button>
                 <Link to={path.DASHBOARD_HOME} className={cx('logo-link')}>
@@ -171,6 +172,11 @@ const Header = () => {
             </nav>
         </div>
     );
+};
+
+Header.propTypes = {
+    setZoomSidebar: PropTypes.func,
+    zoomSidebar: PropTypes.bool,
 };
 
 export default Header;

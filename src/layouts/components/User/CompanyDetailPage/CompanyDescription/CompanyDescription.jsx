@@ -11,7 +11,7 @@ const CompanyDescription = ({ company }) => {
             <div className={cx('container')}>
                 <h2 className={cx('title')}>Giới thiệu về công ty</h2>
                 <div className={cx('body')}>
-                    <div className={cx('content')} dangerouslySetInnerHTML={{ __html: company.company_short_description }} />
+                    <p className={cx('content')} dangerouslySetInnerHTML={{ __html: company.company_short_description }} />
                 </div>
             </div>
         </div>

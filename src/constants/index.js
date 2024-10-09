@@ -208,7 +208,7 @@ export const settingBusinessState = {
 };
 
 export const cVAppliedStatus = [
-    { id: 0, value: 'none', name: 'Trạng thái' },
+    { id: 0, value: 'all', name: 'Tất cả' },
     { id: 1, value: 'pending', name: 'Đã ứng tuyển' },
     { id: 2, value: 'viewed', name: 'NTD đã xem hồ sơ' },
     { id: 3, value: 'approved', name: 'Hồ sơ phù hợp' },
@@ -234,4 +234,13 @@ export const groupRole = {
     SUPER_USER: [role.SUPER_USER],
     BUSINESS_USER: [role.BUSINESS, role.USER],
     BUSINESS_ADMIN: [role.BUSINESS, role.ADMIN, role.SUPER_USER],
+};
+
+export const websocketType = {
+    NEW_MESSAGE: 'new_message',
+    USER_TYPING: 'user_typing',
+    NEW_CONVERSATION: 'new_conversation',
+    ADD_MEMBER: 'add_member',
+    UPDATE_CONVERSATION: 'update_conversation',
+    UPDATE_AVATAR_CONVERSATION: 'update_avatar_conversation',
 };

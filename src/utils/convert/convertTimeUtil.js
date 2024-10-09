@@ -115,4 +115,46 @@ function convertDateTime(datetime) {
     return `${hours}:${minutes} ${day}/${month}/${year}`;
 }
 
-export { convertTimeAgo, convertTimeFuture, convertDateFuture, convertDateAgo, convertDateTime };
+function formatTimeSeparator(dateString) {
+    const date = new Date(dateString);
+    const today = new Date();
+    if (date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear()) {
+        const delta = (today.getTime() - date.getTime()) / 1000;
+        if (delta < 60) {
+            return 'Vừa xong';
+        } else if (delta < 3600) {
+            return `${Math.floor(delta / 60)} phút trước`;
+        } else {
+            return `${('0' + date.getHours()).slice(-2)}:${('0' + date.getMinutes()).slice(-2)}`;
+        }
+    }
+
+    return `${date.getHours()}:${('0' + date.getMinutes()).slice(-2)} ${date.getDate()} Tháng ${date.getMonth() + 1}, ${date.getFullYear()}`;
+}
+
+function formatTimeMessage(dateString) {
+    const date = new Date(dateString);
+    const today = new Date();
+    if (date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear()) {
+        const delta = (today.getTime() - date.getTime()) / 1000;
+        if (delta < 60) {
+            return 'Vừa xong';
+        } else if (delta < 3600) {
+            return `${Math.floor(delta / 60)} phút trước`;
+        } else {
+            return `${('0' + date.getHours()).slice(-2)}:${('0' + date.getMinutes()).slice(-2)}`;
+        }
+    }
+
+    return `${Math.floor((today.getTime() - date.getTime()) / (1000 * 60 * 60 * 24))} ngày trước`;
+}
+
+function compareTimeString(nextTimeStr, prevTimeStr, timeLimit = 5) {
+    const nextTime = new Date(nextTimeStr).getTime();
+    const prevTime = new Date(prevTimeStr).getTime();
+
+    const diffInMinutes = (nextTime - prevTime) / (1000 * 60);
+    return diffInMinutes > timeLimit;
+}
+
+export { convertTimeAgo, convertTimeFuture, convertDateFuture, convertDateAgo, convertDateTime, formatTimeSeparator, formatTimeMessage, compareTimeString };

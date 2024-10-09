@@ -182,6 +182,7 @@ const JobFilterPage = () => {
             ...prev,
             loading: true,
             category_id: value,
+            page: 1,
             numberActive:
                 value === 0 && prev.category_id !== 0
                     ? prev.numberActive - 1
@@ -202,6 +203,7 @@ const JobFilterPage = () => {
             ...prev,
             loading: true,
             fields: [value],
+            page: 1,
             numberActive:
                 value === 0 && prev.fields[0] !== 0
                     ? prev.numberActive - 1
@@ -222,6 +224,7 @@ const JobFilterPage = () => {
             ...prev,
             loading: true,
             employment_type: value,
+            page: 1,
             numberActive:
                 value === 0 && prev.employment_type !== 0
                     ? prev.numberActive - 1
@@ -242,6 +245,7 @@ const JobFilterPage = () => {
             ...prev,
             loading: true,
             job_position_id: value,
+            page: 1,
             numberActive:
                 value === 0 && prev.job_position_id !== 0
                     ? prev.numberActive - 1
@@ -281,6 +285,11 @@ const JobFilterPage = () => {
             jobs: [],
             total: 0,
             loading: true,
+        });
+        setActiveFilter({
+            ...activeFilter,
+            loading: true,
+            page: 1,
         });
 
         navigate(path.JOB_FILTER, {
@@ -488,6 +497,14 @@ const JobFilterPage = () => {
                                         filter={activeFilter.fields[0]}
                                         active={activeFilter.fields[0] !== 0}
                                     />
+                                    {/* {fields?.length > 0 && (
+                                        <SearchFieldComponent
+                                            handleSetFilter={handleSetFields}
+                                            filter={activeFilter.fields[0]}
+                                            active={activeFilter.fields[0] !== 0}
+                                            fields={fields}
+                                        />
+                                    )} */}
                                 </div>
                                 <div className={cx('filter-item')}>
                                     <SearchEmploymentTypeComponent

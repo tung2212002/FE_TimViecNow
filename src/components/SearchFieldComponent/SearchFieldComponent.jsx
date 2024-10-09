@@ -7,12 +7,13 @@ import styles from './SearchFieldComponent.module.scss';
 import { PiCubeFocus } from 'react-icons/pi';
 
 import SelectSearchComponent from '@components/common/SelectSearchComponent/SelectSearchComponent';
-import { selectField } from '@redux/features/config/configSilde';
+import { selectField, selectConfig } from '@redux/features/config/configSilde';
 
 const cx = classNames.bind(styles);
 
 const SearchFieldComponent = ({ canSearch = true, handleSetFilter, filter, active = false }) => {
     const field = useSelector(selectField);
+    const config = useSelector(selectConfig);
     const [fields, setFields] = useState(null);
 
     useState(() => {
@@ -21,9 +22,9 @@ const SearchFieldComponent = ({ canSearch = true, handleSetFilter, filter, activ
 
     return (
         <div className={cx('wrapper')} style={{ width: '100%' }}>
-            {fields && (
+            {config?.field?.length > 0 && (
                 <SelectSearchComponent
-                    list={fields}
+                    list={config.field}
                     canSearch={canSearch}
                     icon={<PiCubeFocus />}
                     title="Chọn lĩnh vực"

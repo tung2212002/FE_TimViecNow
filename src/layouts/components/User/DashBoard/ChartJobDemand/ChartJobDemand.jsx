@@ -73,9 +73,9 @@ const ChartJobDemand = ({ stateId }) => {
         const generateGradient = (context, index) => {
             const canvas = context.chart.ctx;
             const gradient = canvas.createLinearGradient(0, 0, 0, 300);
-            gradient.addColorStop(1, listItem[index].colorRgba2);
-            gradient.addColorStop(0.2, listItem[index].colorRgba1);
-            gradient.addColorStop(0, listItem[index].color);
+            gradient.addColorStop(1, listItem[index]?.colorRgba2 || 'rgba(255, 255, 255, 0.1)');
+            gradient.addColorStop(0.2, listItem[index]?.colorRgba1 || 'rgba(255, 255, 255, 0.4)');
+            gradient.addColorStop(0, listItem[index]?.color || 'rgba(255, 255, 255, 1)');
             return gradient;
         };
 
@@ -192,7 +192,7 @@ const ChartJobDemand = ({ stateId }) => {
         getCountJobBySalaryService()
             .then((res) => {
                 if (res.status === 200) {
-                    setDataNumber2(handleSalary(res.data.data));
+                    setDataNumber2(handleSalary(res.data.data.slice(0, 6)));
                     setLoadingSalary(false);
                 }
             })

@@ -45,15 +45,38 @@ const CompanyRecruitment = ({ company }) => {
         element.scrollIntoView({ behavior: 'smooth' });
     };
 
+    const handleGetJob = (params) => {
+        getListJobSerivce(params)
+            .then((res) => {
+                if (res.status === 200) {
+                    setTimeout(() => {
+                        setJobInfo((prev) => ({
+                            ...prev,
+                            job: [...prev.job, ...res.data.data.jobs],
+                            total: Math.ceil(res.data.data.count / 6),
+                            fetchPage: prev.fetchPage + 1,
+                            currentJob: res.data.data.jobs,
+                            loading: false,
+                        }));
+                    }, 1000);
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
+
+    const handleSetPrevPage = () => {
+        setJobInfo((prev) => ({
+            ...prev,
+            currentJob: jobInfo.job.slice((jobInfo.page - 1) * 6, jobInfo.page * 6),
+            loading: false,
+        }));
+    };
+
     useEffect(() => {
         if (jobInfo.page < jobInfo.fetchPage) {
-            setTimeout(() => {
-                setJobInfo((prev) => ({
-                    ...prev,
-                    currentJob: jobInfo.job.slice((jobInfo.page - 1) * 6, jobInfo.page * 6),
-                    loading: false,
-                }));
-            }, 1000);
+            handleSetPrevPage();
         } else {
             const params = {
                 limit: 6,
@@ -62,24 +85,7 @@ const CompanyRecruitment = ({ company }) => {
                 sort_by: 'deadline',
             };
 
-            getListJobSerivce(params)
-                .then((res) => {
-                    if (res.status === 200) {
-                        setTimeout(() => {
-                            setJobInfo((prev) => ({
-                                ...prev,
-                                job: [...prev.job, ...res.data.data.jobs],
-                                total: Math.ceil(res.data.data.count / 6),
-                                fetchPage: prev.fetchPage + 1,
-                                currentJob: res.data.data.jobs,
-                                loading: false,
-                            }));
-                        }, 1000);
-                    }
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
+            handleGetJob(params);
         }
     }, [jobInfo.page]);
 
