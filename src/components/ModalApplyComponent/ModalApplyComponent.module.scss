@@ -686,6 +686,20 @@
             background: #028d40;
         }
     }
+
+    .disable{
+        cursor: unset !important;
+
+        &.btn-apply{
+            background: #f2f4f5 !important;
+            color: #263a4d !important;
+        }
+
+        &.btn-cancel{
+            background: #f2f4f5 !important;
+            color: #263a4d !important;
+        }
+    }
 }
 
 .title-dialog {

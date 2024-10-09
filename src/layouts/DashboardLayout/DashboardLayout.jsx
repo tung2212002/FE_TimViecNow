@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
@@ -12,6 +13,8 @@ const cx = classNames.bind(styles);
 
 const DashboardLayout = ({ children }) => {
     const listToast = useSelector(selectToastList);
+    const [zoomSidebar, setZoomSidebar] = useState(true);
+
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
     return (
@@ -25,10 +28,10 @@ const DashboardLayout = ({ children }) => {
                     </div>
                 </div>
             )}
-            <Header />
-            <SideBar />
+            <Header setZoomSidebar={setZoomSidebar} zoomSidebar={zoomSidebar} />
+            <SideBar zoomSidebar={zoomSidebar} />
             <BackTopAdminComponent />
-            {children}
+            <div className={cx('content', zoomSidebar ? 'sidebar-zoom' : 'sidebar-unzoom')}>{children}</div>
         </div>
     );
 };

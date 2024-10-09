@@ -8,3 +8,23 @@
     min-width: 170px;
     transition: all 1s ease-in-out;
 }
+
+.content{
+    transition: margin-left 0.3s ease-in-out;
+}
+
+@media screen and (min-width: 1361px) {
+    .content.sidebar-unzoom {
+        margin-left: 64px !important;
+    }
+
+    .content.sidebar-zoom {
+        margin-left: 260px !important;
+    }
+}
+
+@media screen and (max-width: 1360px) {
+    .content {
+        margin-left: 64px !important;
+    }
+}

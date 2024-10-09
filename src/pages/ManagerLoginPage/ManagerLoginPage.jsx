@@ -56,16 +56,19 @@ const ManagerLoginPage = () => {
     const handleLogin = () => {
         if (!account.email || !account.password) {
             setMessage('Vui lòng nhập đầy đủ thông tin');
+            setLoading(false);
             return;
         }
 
         if (!regexValidator.EMAIL.test(account.email)) {
             setMessage('Email không hợp lệ');
+            setLoading(false);
             return;
         }
 
         if (!regexValidator.PASSWORD.test(account.password)) {
             setMessage('Mật khẩu không hợp lệ');
+            setLoading(false);
             return;
         }
 

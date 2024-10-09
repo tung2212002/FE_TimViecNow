@@ -13,7 +13,7 @@ import { icons } from '@assets';
 
 const cx = classNames.bind(styles);
 
-const AppliedJobComponent = ({ job }) => {
+const AppliedJobComponent = ({ cv }) => {
     const statusItem = {
         published: 'Đã ứng tuyển',
         pending: 'Chờ phản hồi',
@@ -22,65 +22,55 @@ const AppliedJobComponent = ({ job }) => {
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
                 <div className={cx('logo-container')}>
-                    <img className={cx('logo')} src={job.company?.logo || icons.icon_default_logo_company} alt="logo" />
+                    <img className={cx('logo')} src={cv.company?.logo || icons.icon_default_logo_company} alt="logo" />
                 </div>
                 <div className={cx('info-container')}>
                     <div className={cx('title-block')}>
                         <div className={cx('title')}>
                             <a
-                                href={`${path.JOB_SEARCH_DETAIL}/${job.id}/${slugConvert(job.title)}`}
+                                href={`${path.JOB_SEARCH_DETAIL}/${cv.job.id}/${slugConvert(cv.job.title)}`}
                                 target="_blank"
                                 rel="noreferrer"
                                 className={cx('title-link')}
                             >
-                                {job.title}
+                                {cv.job.title}
                             </a>
                         </div>
                         <div className={cx('salary')}>
-                            <label className={cx('label')}>{convertSalary(job.salary_type, job.min_salary, job.max_salary)}</label>
+                            <label className={cx('label')}>{convertSalary(cv.job.salary_type, cv.job.min_salary, cv.job.max_salary)}</label>
                         </div>
                     </div>
                     <div className={cx('company-name')}>
                         <a
-                            href={path.COMPANY_DETAIL + '/' + job.company.id + '/' + slugConvert(job.company.name)}
+                            href={path.COMPANY_DETAIL + '/' + cv.company.id + '/' + slugConvert(cv.company.name)}
                             target="_blank"
                             rel="noreferrer"
                             className={cx('company-link')}
                         >
-                            {job.company?.name.toUpperCase()}
+                            {cv.company?.name.toUpperCase()}
                         </a>
                     </div>
                     <div className={cx('job-applied-date')}>
-                        <span className={cx('date')}>Thời gian ứng tuyển: {convertDateTime(job.created_at)}</span>
+                        <span className={cx('date')}>Thời gian ứng tuyển: {convertDateTime(cv.job.created_at)}</span>
                     </div>
                     <div className={cx('box-footer')}>
                         <div className={cx('job-applied-date')}>
                             CV đã ứng tuyển:{' '}
-                            <a
-                                href={`${path.JOB_SEARCH_DETAIL}/${job.id}/${slugConvert(job.title)}`}
-                                target="_blank"
-                                rel="noreferrer"
-                                className={cx('cv-link')}
-                            >
+                            <a href={cv.cv} target="_blank" rel="noreferrer" className={cx('cv-link')}>
                                 CV tải lên
                             </a>
                         </div>
                         <div className={cx('action-block')}>
                             <a
                                 className={cx('btn', 'apply')}
-                                href={`${path.JOB_SEARCH_DETAIL}/${job.id}/${slugConvert(job.title)}`}
+                                href={`${path.JOB_SEARCH_DETAIL}/${cv.job.id}/${slugConvert(cv.job.title)}`}
                                 target="_blank"
                                 rel="noreferrer"
                             >
                                 <FaMessage className={cx('icon')} />
                                 <span className={cx('text')}>Nhắn tin</span>
                             </a>
-                            <a
-                                className={cx('btn', 'apply')}
-                                href={`${path.JOB_SEARCH_DETAIL}/${job.id}/${slugConvert(job.title)}`}
-                                target="_blank"
-                                rel="noreferrer"
-                            >
+                            <a className={cx('btn', 'apply')} href={cv.cv} target="_blank" rel="noreferrer">
                                 <FaEye className={cx('icon')} />
                                 <span className={cx('text')}>Xem CV</span>
                             </a>
@@ -88,9 +78,9 @@ const AppliedJobComponent = ({ job }) => {
                     </div>
                     <div className={cx('box-cv-status')}>
                         <div className={cx('cv-status-text')}>
-                            Trạng thái: <span className={cx('applied')}>{statusItem[job.status]}</span>
+                            Trạng thái: <span className={cx('applied')}>{statusItem[cv.status]}</span>
                         </div>
-                        <div className={cx('cv-status-time')}>Vào lúc: {convertDateTime(job.created_at)}</div>
+                        <div className={cx('cv-status-time')}>Vào lúc: {convertDateTime(cv.created_at)}</div>
                     </div>
                 </div>
             </div>
@@ -99,7 +89,7 @@ const AppliedJobComponent = ({ job }) => {
 };
 
 AppliedJobComponent.propTypes = {
-    job: PropTypes.object.isRequired,
+    cv: PropTypes.object.isRequired,
 };
 
 export default AppliedJobComponent;

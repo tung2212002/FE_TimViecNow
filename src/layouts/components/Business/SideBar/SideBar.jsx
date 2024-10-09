@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { PropTypes } from 'prop-types';
 
 import { FaQuestionCircle, FaShieldAlt, FaRegFileAlt, FaRegUserCircle, FaUserCircle, FaChartBar, FaShoppingCart } from 'react-icons/fa';
 import { FaAnglesRight, FaRegGem, FaGem, FaClockRotateLeft, FaFileInvoice, FaGear } from 'react-icons/fa6';
@@ -24,7 +25,7 @@ import { groupRole, role } from '@constants';
 
 const cx = classNames.bind(styles);
 
-const SideBar = () => {
+const SideBar = ({ zoomSidebar }) => {
     const location = useLocation();
     const user = useSelector(selectUser);
     const userRole = useSelector(selectUserRole);
@@ -226,7 +227,7 @@ const SideBar = () => {
     }, [location]);
 
     return (
-        <div className={cx('wrapper')}>
+        <div className={cx('wrapper', zoomSidebar ? 'show' : 'hide')}>
             <div className={cx('container')}>
                 <div className={cx('sidebar__header')}>
                     <div className={cx('sidebar__header-content')}>
@@ -315,6 +316,10 @@ const SideBar = () => {
             </div>
         </div>
     );
+};
+
+SideBar.propTypes = {
+    zoomSidebar: PropTypes.bool,
 };
 
 export default SideBar;

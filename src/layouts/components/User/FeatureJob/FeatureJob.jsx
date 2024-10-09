@@ -223,7 +223,7 @@ const FeatureJob = ({ reponsive = false, number = 12 }) => {
             }
 
             let prevDate = new Date();
-            prevDate.setDate(prevDate.getDate() - 7);
+            prevDate.setDate(prevDate.getDate() - 30);
             prevDate = prevDate.toISOString().split('T')[0];
             params.updated_at = prevDate;
 

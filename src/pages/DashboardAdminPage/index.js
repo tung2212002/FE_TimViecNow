@@ -11,6 +11,7 @@ import DashboardVerifyPage from './DashboardVerifyPage/DashboardVerifyPage';
 import DashboardManagerBusinessPage from './DashboardManagerBusinessPage/DashboardManagerBusinessPage';
 import DashboardNotFound from './DashboardNotFound/DashboardNotFound';
 import DashboardForAdminPage from './DashboardForAdminPage/DashboardForAdminPage';
+import DashboardChatPage from './DashboardChatPage/DashboardChatPage';
 export {
     DashboardCardPage,
     DashboardAdminPage,
@@ -25,4 +26,5 @@ export {
     DashboardManagerBusinessPage,
     DashboardNotFound,
     DashboardForAdminPage,
+    DashboardChatPage,
 };

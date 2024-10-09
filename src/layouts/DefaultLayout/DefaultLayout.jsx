@@ -1,14 +1,16 @@
-import styles from './DefaultLayout.module.scss';
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 
+import styles from './DefaultLayout.module.scss';
 import { BackTopComponent } from '@components';
 import { Footer, Header, HeaderHidden } from '../components/User';
+import useScrollToTop from '../../hooks/useScrollToTop';
 
 const cx = classNames.bind(styles);
 
 function DefaultLayout({ children, positionHeader = '' }) {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // window.scrollTo({ top: 0, behavior: 'smooth' });
+    useScrollToTop();
 
     return (
         <div className={cx('wrapper')}>

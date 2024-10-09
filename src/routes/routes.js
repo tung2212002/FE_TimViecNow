@@ -15,6 +15,7 @@ import {
     SavedJobPage,
     ListCompanyPage,
     SearchCompanyPage,
+    ChatPage,
 } from '@pages';
 import route from '@constants/route';
 import { ContentOnlyLayout, DashboardHeader, DashboardLayout } from '@layouts';
@@ -31,6 +32,7 @@ import {
     DashboardNotFound,
     DashboardForAdminPage,
     DashboardManagerBusinessPage,
+    DashboardChatPage,
 } from '@pages/DashboardAdminPage';
 import { role, groupRole } from '../constants';
 
@@ -121,6 +123,12 @@ export const publicRoutes = [
 ];
 
 export const privateRoutes = [
+    {
+        path: route.CHAT,
+        component: ChatPage,
+        isPrivate: true,
+        restricted: false,
+    },
     {
         path: route.MATCHING_JOBS,
         component: MatchingJobsPage,
@@ -265,5 +273,12 @@ export const privateRoutes = [
         restricted: false,
         layout: DashboardHeader,
         verifyBusinessEmail: true,
+    },
+    {
+        path: route.DASHBOARD_CHAT,
+        component: DashboardChatPage,
+        isPrivate: true,
+        restricted: false,
+        layout: DashboardLayout,
     },
 ];
