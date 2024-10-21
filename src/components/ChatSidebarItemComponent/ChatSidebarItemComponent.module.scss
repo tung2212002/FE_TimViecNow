@@ -1,0 +1,47 @@
+.wrapper{
+    position: relative;
+}
+
+.wrapper * {
+    text-transform: none !important;
+}
+
+.job-name{
+    color: rgb(52, 58, 64);
+    font-size: 13px;
+    line-height: 20px;
+    font-weight: 700;
+    max-width: 120px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+
+    &:hover {
+         text-decoration: underline;
+    }
+
+}
+
+.btn-message{
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #00b14f !important;
+    background: #e4f6ec !important;
+    border-radius: 25px;
+    font-size: 13px;
+    padding: 3px 10px;
+}
+
+.company-name{
+    color: rgb(108, 117, 125);
+    font-size: 12px;
+    line-height: 18px;
+    font-weight: 400;
+    max-width: 120px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

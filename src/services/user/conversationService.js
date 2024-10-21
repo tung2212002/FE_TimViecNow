@@ -10,6 +10,16 @@ export const getListContactableService = async (params) => {
     return response;
 };
 
+export const getConversationExistService = async (params) => {
+    const response = await request.apiAuth.get('/conversation/existing', {
+        params,
+        paramsSerializer: {
+            indexes: null,
+        },
+    });
+    return response;
+};
+
 export const createConversationService = async (body) => {
     const response = await request.apiAuth.post('/conversation', body);
     return response;

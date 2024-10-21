@@ -129,7 +129,7 @@ function formatTimeSeparator(dateString) {
         }
     }
 
-    return `${date.getHours()}:${('0' + date.getMinutes()).slice(-2)} ${date.getDate()} Tháng ${date.getMonth() + 1}, ${date.getFullYear()}`;
+    return `${('0' + date.getHours()).slice(-2)}:${('0' + date.getMinutes()).slice(-2)} ${date.getDate()} Tháng ${date.getMonth() + 1}, ${date.getFullYear()}`;
 }
 
 function formatTimeMessage(dateString) {

@@ -5,7 +5,7 @@ import SearchCategoryComponent from './SearchCategoryComponent/SearchCategoryCom
 import SearchEmploymentTypeComponent from './SearchEmploymentTypeComponent/SearchEmploymentTypeComponent';
 import SearchFieldComponent from './SearchFieldComponent/SearchFieldComponent';
 import SearchLevelTypeComponent from './SearchLevelTypeComponent/SearchLevelTypeComponent';
-
+import ChatSidebarItemComponent from './ChatSidebarItemComponent/ChatSidebarItemComponent';
 import BackTopAdminComponent from './BackTopAdminComponent/BackTopAdminComponent';
 import BackTopComponent from './BackTopComponent/BackTopComponent';
 import ModalApplyComponent from './ModalApplyComponent/ModalApplyComponent';
@@ -26,4 +26,5 @@ export {
     NavBarMenuItemComponent,
     JobItemComponent,
     DetailCompanyTooltipComponent,
+    ChatSidebarItemComponent,
 };

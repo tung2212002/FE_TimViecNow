@@ -1,4 +1,3 @@
-import { useDispatch, useSelector } from 'react-redux';
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import {
     MainContainer,
@@ -19,22 +18,24 @@ import {
     Search,
     ExpansionPanel,
 } from '@chatscope/chat-ui-kit-react';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import React from 'react';
 import { useRef } from 'react';
+import { debounce } from 'lodash';
 
-import { getListConversationService } from '../../services/user/conversationService';
-import { selectUser } from '../../redux/features/authUser/authSlide';
-import { useWebSocket } from '../../context/WebSocketContext';
-import { compareTimeString, formatTimeMessage, formatTimeSeparator } from '../../utils/convert/convertTimeUtil';
-import { websocketType } from '../../constants';
-import { getListMessageService } from '../../services/user/chatService';
+// import { sendMessage, selectWs, selectMessages, registerListener } from '../../../redux/features/websocket/websocketSilde';
+import { useDispatch, useSelector } from 'react-redux';
+import { useWebSocket } from '../../../context/WebSocketContext';
+import { selectUser } from '../../../redux/features/authUser/authSlide';
+import { getListConversationService } from '../../../services/business/conversationService';
+import { getListMessageService } from '../../../services/business/chatService';
+import { formatTimeMessage, formatTimeSeparator, compareTimeString } from '../../../utils/convert/convertTimeUtil';
+import { websocketType } from '../../../constants';
 
-const ChatPage = () => {
+const DashboardChatPage = () => {
     const dispatch = useDispatch();
     const user = useSelector(selectUser);
     const ref = useRef();
-    const conversationId = useRef(null);
     let typingIntervalRef = null;
     let typingTimeoutRef = null;
     const userTyping = useRef(false);
@@ -54,6 +55,7 @@ const ChatPage = () => {
         data: [],
         firstLoad: true,
     });
+    const conversationId = useRef(null);
 
     const separatorComponent = (created_at) => ({
         type: 'separator',
@@ -128,8 +130,6 @@ const ChatPage = () => {
 
         return result;
     };
-
-    const [conversation, setConversation] = useState([]);
 
     const handleTyping = () => {
         setMessage(ref.current.value);
@@ -213,6 +213,7 @@ const ChatPage = () => {
             firstLoad: true,
             data: [],
         }));
+
         conversationId.current = id;
     };
 
@@ -229,6 +230,18 @@ const ChatPage = () => {
         if (isTyping) {
             setIsTyping(false);
         }
+        setConversitionData((prev) => {
+            const newConversations = [...prev.data];
+            const conversationIndex = newConversations.findIndex((c) => c.id === newData.conversation_id);
+            if (conversationIndex !== -1) {
+                newConversations[conversationIndex].last_message = newData;
+                return {
+                    ...prev,
+                    data: newConversations,
+                };
+            }
+            return prev;
+        });
     };
 
     const handleGetConversation = (params) => {
@@ -341,20 +354,14 @@ const ChatPage = () => {
         setGroupedMessages(groupMessages(messagesData.data));
     }, [messagesData.data]);
 
-    const handCheckAllState = () => {
-        console.log('conversationData', conversationData);
-        console.log('messagesData', messagesData);
-        console.log('groupedMessages', groupedMessages);
-    };
-
     return (
         <MainContainer
             responsive
             style={{
-                height: 'calc(100vh - 75px)',
+                marginTop: '65px',
+                height: 'calc(100vh - 65px)',
             }}
         >
-            <button onClick={handCheckAllState}>Check all state</button>
             <Sidebar position="left">
                 <Search placeholder="Search..." />
                 <ConversationList>
@@ -362,7 +369,13 @@ const ChatPage = () => {
                         <Conversation
                             key={index}
                             name={item.type === 'group' ? item.name : item.members[0].full_name}
-                            info="Last message"
+                            info={
+                                item?.last_message?.content
+                                    ? item.last_message.account_id === user.id
+                                        ? 'Bạn: ' + item.last_message.content
+                                        : item.last_message.content
+                                    : 'Tin nhắn mới'
+                            }
                             active={conversationId.current === item.id}
                             onClick={() => handleActiveConversation(item.id)}
                         >
@@ -377,19 +390,11 @@ const ChatPage = () => {
             </Sidebar>
             <ChatContainer>
                 <ConversationHeader>
-                    <Avatar
-                        name={
-                            conversation.find((c) => c.id === conversationId.current)?.name ||
-                            conversation.find((c) => c.id === conversationId.current)?.members[0].full_name ||
-                            'Chat'
-                        }
-                        src="https://chatscope.io/storybook/react/assets/zoe-E7ZdmXF0.svg"
-                    />
+                    <Avatar src="https://chatscope.io/storybook/react/assets/zoe-E7ZdmXF0.svg" />
                     <ConversationHeader.Content
                         userName={
-                            conversation.find((c) => c.id === conversationId.current)?.name ||
-                            conversation.find((c) => c.id === conversationId.current)?.members[0].full_name ||
-                            'Chat'
+                            conversationData.data.find((c) => c.id === conversationId.current)?.name ||
+                            conversationData.data.find((c) => c.id === conversationId.current)?.members[0].full_name
                         }
                         info="Online"
                     />
@@ -450,4 +455,4 @@ const ChatPage = () => {
     );
 };
 
-export default ChatPage;
+export default DashboardChatPage;

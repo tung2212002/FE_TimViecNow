@@ -1,0 +1,42 @@
+.wrapper *{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.wrapper {
+    height: calc(100vh - 75px);
+}
+
+.conversation-name{
+    font-size: 15px;
+    font-weight: 500;
+    color: rgb(5, 5, 5);
+    line-height: 20px;
+}
+
+.conversation-info{
+    font-size: 13px;
+    font-weight: 400;
+    color: rgb(101, 103, 107);
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.conversation-info-icon{
+    font-size: 2px;
+    color: rgb(101, 103, 107);
+    margin: 0 4px;
+}
+
+.sidebar {
+    max-width: 440px !important;
+}
+
+.expansion-panel {
+    font-size: 18px;
+    color: rgb(52, 58, 64);
+    font-weight: 700;
+    margin: 8px 0;
+    text-transform: uppercase;
+}
+
