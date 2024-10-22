@@ -54,7 +54,11 @@ const ChatSidebarItemComponent = ({ contact, onClick }) => {
                 </TippyText>
             }
         >
-            <Avatar src={company.logo || icons.icon_default_logo_company} name={company.name} />
+            <Avatar
+                src={company.logo || icons.icon_default_logo_company}
+                name={company.name}
+                onError={(e) => (e.target.src = icons.icon_default_logo_company)}
+            />
         </Conversation>
     );
 };

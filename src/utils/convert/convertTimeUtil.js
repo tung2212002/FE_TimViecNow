@@ -146,7 +146,15 @@ function formatTimeMessage(dateString) {
         }
     }
 
-    return `${Math.floor((today.getTime() - date.getTime()) / (1000 * 60 * 60 * 24))} ngày trước`;
+    const delta = (today.getTime() - date.getTime()) / 1000;
+    if (delta < 86400) {
+        if (delta < 3600) {
+            return `${Math.floor(delta / 60)} phút trước`;
+        }
+        return `${Math.floor(delta / 3600)} giờ trước`;
+    } else {
+        return `${date.getDate()} Tháng ${date.getMonth() + 1}`;
+    }
 }
 
 function compareTimeString(nextTimeStr, prevTimeStr, timeLimit = 5) {

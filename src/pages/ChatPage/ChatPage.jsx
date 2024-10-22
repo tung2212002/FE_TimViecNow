@@ -18,6 +18,7 @@ import {
     ConversationList,
     Search,
     ExpansionPanel,
+    AvatarGroup,
 } from '@chatscope/chat-ui-kit-react';
 import { FaCircle } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
@@ -32,7 +33,7 @@ import { compareTimeString, formatTimeMessage, formatTimeSeparator } from '../..
 import { websocketType } from '../../constants';
 import { getListMessageService } from '../../services/user/chatService';
 import { ChatSidebarItemComponent } from '../../components';
-import { getListCVApplicationsService } from '../../services/user/cvApplicationsService';
+import { icons, images } from '../../assets';
 import styles from './ChatPage.module.scss';
 
 const cx = classNames.bind(styles);
@@ -205,14 +206,20 @@ const ChatPage = () => {
     };
 
     const handleSendMessage = (content) => {
+        const messageData = {
+            content,
+            type: 'text',
+        };
+        if (conversationId.current === 0) {
+            messageData.members = conversationData.data[0].members.map((m) => m.id);
+        } else {
+            messageData.conversation_id = conversationId.current;
+        }
         const data = {
-            data: {
-                content: content,
-                conversation_id: conversationId.current,
-                type: 'text',
-            },
+            data: messageData,
             type: websocketType.NEW_MESSAGE,
         };
+
         sendMessage(data);
         if (typingIntervalRef) {
             clearInterval(typingIntervalRef);
@@ -259,14 +266,28 @@ const ChatPage = () => {
 
     const handleNewMessageInComming = (data) => {
         let newData = JSON.parse(JSON.stringify(data));
-        if (newData.conversation_id !== conversationId.current) {
-            return;
-        }
         newData.type = 'text';
-        setMessagesData((prev) => ({
-            ...prev,
-            data: [newData, ...prev.data],
-        }));
+
+        if (newData.conversation_id === conversationId.current) {
+            setMessagesData((prev) => ({
+                ...prev,
+                data: [newData, ...prev.data],
+            }));
+
+            if (isTyping) {
+                setIsTyping(false);
+            }
+            updateNewMessage(newData);
+        } else {
+            updateNewMessage(newData);
+            setMessagesData((prev) => ({
+                ...prev,
+                firstLoad: false,
+            }));
+        }
+    };
+
+    const updateNewMessage = (newData) => {
         setConversationData((prev) => {
             const matchedConversation = prev.data.find((c) => c.id === newData.conversation_id);
             const updatedConversation = { ...matchedConversation, last_message: newData };
@@ -278,10 +299,6 @@ const ChatPage = () => {
                 data: [updatedConversation, ...otherConversations],
             };
         });
-
-        if (isTyping) {
-            setIsTyping(false);
-        }
     };
 
     const handleNewConversationInComming = (data) => {
@@ -291,7 +308,7 @@ const ChatPage = () => {
 
         setConversationData((prev) => ({
             ...prev,
-            data: [newData, ...prev.data],
+            data: [newData, ...prev.data.filter((c) => c.id !== 0)],
         }));
     };
 
@@ -431,16 +448,6 @@ const ChatPage = () => {
         handleGetMessages(params);
     };
 
-    // const fakeConversation = (item) => () => {
-    //     return {
-    //         id: 0,
-    //         name: item.full_name,
-    //         type: 'single',
-    //         members: [item],
-    //         last_message: null,
-    //     };
-    // };
-
     const checkExistConversation = (item) => () => {
         const members = [item.id];
         const params = {
@@ -471,6 +478,47 @@ const ChatPage = () => {
             .catch((err) => {
                 console.log(err);
             });
+    };
+
+    const getAvatarConversation = (members) => {
+        if (!members) {
+            return images.avatar_default;
+        }
+        const business = members.find((m) => m.role === 'business');
+        return business?.avatar || business?.company?.logo || images.avatar_default;
+    };
+
+    const getAvatar = (member) => {
+        if (!member) {
+            return images.avatar_default;
+        }
+        if (member.role === 'business') {
+            return member.avatar || member.company?.logo || images.avatar_default;
+        } else {
+            return member.avatar || images.avatar_default;
+        }
+    };
+
+    const getDefaultAvatar = (e) => {
+        e.target.src = images.avatar_default;
+    };
+
+    const getMessageContent = (item) => {
+        if (item?.last_message?.content) {
+            if (item.last_message.account_id === user.id) {
+                return 'Bạn: ' + item.last_message.content;
+            } else {
+                return item.last_message.content;
+            }
+        } else if (item.id === 0) {
+            return '';
+        } else {
+            return 'Tin nhắn mới';
+        }
+    };
+
+    const getCurrentConversation = () => {
+        return conversationData.data.find((c) => c.id === conversationId.current);
     };
 
     useEffect(() => {
@@ -541,17 +589,19 @@ const ChatPage = () => {
                 <ConversationList>
                     {conversationData.data.map((item, index) => (
                         <Conversation
+                            style={{
+                                height: '90px',
+                                alignItems: 'center',
+                            }}
                             key={index}
-                            name={<span className={cx('conversation-name')}>{item.type === 'group' ? item.name : item.members[0].full_name}</span>}
+                            name={
+                                <span className={cx('conversation-name')}>
+                                    {item.type === 'group' ? item.name : item.members.filter((m) => m.id !== user.id)[0].full_name}
+                                </span>
+                            }
                             info={
                                 <span className={cx('conversation-info')}>
-                                    {item?.last_message?.content
-                                        ? item.last_message.account_id === user.id
-                                            ? 'Bạn: ' + item.last_message.content
-                                            : item.last_message.content
-                                        : item.id === 0
-                                        ? ''
-                                        : 'Tin nhắn mới'}
+                                    {getMessageContent(item)}
                                     {item.id === 0 ? '' : <FaCircle className={cx('conversation-info-icon')} />}
                                     {item?.last_message?.created_at ? formatTimeMessage(item?.last_message?.created_at) : item.id === 0 ? '' : 'Tin nhắn mới'}
                                 </span>
@@ -559,30 +609,49 @@ const ChatPage = () => {
                             active={conversationId.current === item.id}
                             onClick={() => handleActiveConversation(item.id)}
                         >
-                            <Avatar
-                                name={item.type === 'group' ? item.name : item.members[0].full_name}
-                                src="https://chatscope.io/storybook/react/assets/zoe-E7ZdmXF0.svg"
-                                status="available"
-                            />
+                            {item.type === 'group' ? (
+                                <AvatarGroup max={4} size="md" className={cx('avatar-group-conversation')}>
+                                    {item.members.map((m, i) => (
+                                        <Avatar className={cx('avatar')} key={i} src={getAvatar(m)} name={m.full_name} onError={(e) => getDefaultAvatar(e)} />
+                                    ))}
+                                </AvatarGroup>
+                            ) : (
+                                <Avatar
+                                    className={cx('avatar')}
+                                    size="lg"
+                                    src={getAvatarConversation(item.members)}
+                                    name={item.members.filter((m) => m.id !== user.id)[0].full_name}
+                                    onError={(e) => getDefaultAvatar(e)}
+                                />
+                            )}
                         </Conversation>
                     ))}
                 </ConversationList>
             </Sidebar>
             <ChatContainer>
                 <ConversationHeader>
-                    <Avatar src="https://chatscope.io/storybook/react/assets/zoe-E7ZdmXF0.svg" />
+                    {getCurrentConversation()?.type === 'group' ? (
+                        <AvatarGroup max={4} size="sm" style={{ width: '43px' }}>
+                            {getCurrentConversation()?.members.map((m, i) => (
+                                <Avatar className={cx('avatar')} key={i} src={getAvatar(m)} name={m.full_name} onError={(e) => getDefaultAvatar(e)} />
+                            ))}
+                        </AvatarGroup>
+                    ) : (
+                        <Avatar
+                            className={cx('avatar')}
+                            src={getAvatarConversation(getCurrentConversation()?.members)}
+                            name={getCurrentConversation()?.members.filter((m) => m.id !== user.id)[0].full_name}
+                            onError={(e) => getDefaultAvatar(e)}
+                        />
+                    )}
                     <ConversationHeader.Content
-                        userName={
-                            conversationData.data.find((c) => c.id === conversationId.current)?.name ||
-                            conversationData.data.find((c) => c.id === conversationId.current)?.members[0].full_name
-                        }
+                        userName={getCurrentConversation()?.name || getCurrentConversation()?.members.filter((m) => m.id !== user.id)[0].full_name}
                         info="Online"
                     />
                 </ConversationHeader>
                 <MessageList
                     typingIndicator={isTyping ? <TypingIndicator content="Đang nhập..." /> : null}
                     ref={listMessageRef}
-                    loading={messagesData.firstLoad && ![0, null].includes(conversationId.current)}
                     loadingMore={messagesData.isLoading}
                     loadingMorePosition="top"
                     onYReachStart={messagesData.isTop ? null : handleScrollListMessage}
@@ -607,11 +676,14 @@ const ChatPage = () => {
                                     }}
                                 >
                                     <Avatar
-                                        src={message.data.user.avatar || 'https://chatscope.io/storybook/react/assets/zoe-E7ZdmXF0.svg'}
+                                        className={cx('avatar')}
+                                        // src={message.data.user.avatar || 'https://chatscope.io/storybook/react/assets/zoe-E7ZdmXF0.svg'}
+                                        src={getAvatar(message.data.user)}
                                         name={message.data.user.full_name}
                                         style={{
                                             visibility: message.position === 'normal' ? 'hidden' : 'visible',
                                         }}
+                                        onError={(e) => getDefaultAvatar(e)}
                                     />
                                     {((message.type !== 'separator' &&
                                         message.data.account_id !== user.id &&

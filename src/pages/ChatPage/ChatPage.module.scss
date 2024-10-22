@@ -28,6 +28,17 @@
     margin: 0 4px;
 }
 
+.avatar-group-conversation{
+    width: 68px !important;
+    align-items: center;
+    justify-content: center;
+    padding-top: 0 !important;
+}
+
+.avatar {
+    border: solid 1px rgb(189, 189, 189);
+}
+
 .sidebar {
     max-width: 440px !important;
 }

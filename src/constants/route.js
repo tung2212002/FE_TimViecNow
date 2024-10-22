@@ -11,7 +11,7 @@ export default {
     COMPANY: '/cong-ty',
     COMPANY_SEARCH: '/cong-ty/tim-kiem',
     TOOL: '/cong-cu',
-    CHAT: '/chat:roomId',
+    CHAT: '/chat',
     MANAGER_REGISTER: '/tuyen-dung/app/register',
     MANAGER_LOGIN: '/tuyen-dung/app/login',
     DASHBOARD_ADMIN: '/tuyen-dung/app/dashboard',
